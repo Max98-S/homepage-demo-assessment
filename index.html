@@ -836,6 +836,69 @@ nav{
   .how-grid{grid-template-columns:1fr 1fr}
   .ai-mockup-grid{grid-template-columns:1fr}
 }
+
+
+/* --- OTTIMIZZAZIONE NAVIGAZIONE MOBILE --- */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+@media (max-width: 960px) {
+    .menu-toggle { display: flex; }
+
+    .nav-center {
+        display: none; /* Nascondiamo il menu orizzontale */
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: var(--blue-deep);
+        flex-direction: column;
+        padding: 20px;
+        gap: 15px;
+        border-bottom: 1px solid var(--glass-b);
+    }
+
+    .nav-center.mobile-open {
+        display: flex; /* Appare quando clicchi il toggle */
+    }
+
+    .nav-right {
+        gap: 10px;
+    }
+
+    .btn-contact-nav {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    .btn-ghost { display: none; } /* Nascondiamo il tasto login duplicato nella nav */
+}
+
+/* --- OTTIMIZZAZIONE CONTENUTI --- */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2.5rem; }
+    .hero p { font-size: 1.1rem; }
+    .grid-features { grid-template-columns: 1fr; } /* Le card diventano una colonna sola */
+    
+    .contact-strip {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+}
 </style>
 </head>
 <body>
