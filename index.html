@@ -835,6 +835,56 @@ nav{
 .lb-close{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;background:rgba(6,14,31,.85);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;transition:background .2s}
 .lb-close:hover{background:#e00}
 
+/* NUOVI STILI MOCKUP UPLOAD & AUTOFILL */
+.upload-zone {
+  border: 1.5px dashed rgba(56,189,248,.3);
+  border-radius: 12px;
+  padding: 30px 20px;
+  text-align: center;
+  background: rgba(56,189,248,.04);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.upload-zone:hover {
+  border-color: var(--accent);
+  background: rgba(56,189,248,.1);
+}
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(34,197,94,.08);
+  border: 1px solid rgba(34,197,94,.2);
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 8px;
+  animation: slideIn 0.3s ease forwards;
+  opacity: 0;
+  transform: translateY(10px);
+}
+.file-item:nth-child(2) { animation-delay: 0.15s; }
+@keyframes slideIn { to { opacity: 1; transform: translateY(0); } }
+
+.ai-overlay {
+  position: absolute; inset: 0; top: 38px;
+  background: rgba(6,14,31,.85);
+  backdrop-filter: blur(6px);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  z-index: 10;
+  transition: opacity 0.5s ease;
+}
+.ai-overlay-icon {
+  font-size: 38px; margin-bottom: 14px;
+}
+.ai-overlay-text {
+  font-size: 14px; font-weight: 600; color: rgba(255,255,255,.6);
+  letter-spacing: 0.5px;
+}
+
 /* ─── HELPERS ─── */
 .sec-eyebrow{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
 .sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.5vw,48px);font-weight:800;letter-spacing:-1px;line-height:1.1;color:#fff;margin-bottom:14px}
@@ -1358,8 +1408,8 @@ nav{
   <section class="ai-mockup-section">
     <div class="ai-mockup-header">
       <div class="sec-eyebrow">Demo interattiva</div>
-      <h2>L'AI in azione:<br><em>valutazione istantanea.</em></h2>
-      <p>Simula la compilazione di un questionario Cyber Risk e guarda come l'AI di 3AuditFlow analizza e valida ogni risposta in tempo reale — senza aspettare settimane.</p>
+      <h2>L'AI in azione:<br><em>Auto-compilazione dai documenti.</em></h2>
+      <p>Simula l'esperienza dell'Owner: carica la documentazione aziendale e guarda come l'AI estrapola le informazioni per compilare automaticamente il questionario NIS2 in pochi secondi.</p>
     </div>
 
     <div class="ai-mockup-grid">
@@ -1369,9 +1419,55 @@ nav{
           <div class="mdot" style="background:#ff5f57"></div>
           <div class="mdot" style="background:#febc2e"></div>
           <div class="mdot" style="background:#28c840"></div>
-          <span class="mpanel-title">Questionario — Cyber Risk Assessment</span>
+          <span class="mpanel-title">Fase 1: Caricamento Documentazione (Owner)</span>
         </div>
         <div class="mockup-panel-body">
+          <div class="q-header">
+            <span class="q-badge" style="background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.2); color:#fff;">Workspace</span>
+            <span class="q-title">Fornisci le evidenze per l'assessment</span>
+          </div>
+
+          <p style="font-size:13px; color:rgba(255,255,255,.5); margin-bottom:16px; line-height:1.6;">
+            Invece di rispondere manualmente a centinaia di domande, carica le tue policy. L'AI leggerà i documenti e compilerà il framework per te.
+          </p>
+
+          <div class="upload-zone" id="upload-zone" onclick="simulateUpload()">
+            <div id="uz-icon" style="font-size:32px; margin-bottom:10px;">📄</div>
+            <div id="uz-text" style="font-size:14px; font-weight:600; color:var(--accent);">Clicca qui per simulare il caricamento</div>
+            <div id="uz-sub" style="font-size:11px; color:rgba(255,255,255,.4); margin-top:6px;">Supporta PDF, DOCX, TXT</div>
+          </div>
+
+          <div id="file-list" style="display:none; margin-top:15px; margin-bottom:20px;">
+            <div class="file-item">
+              <span class="file-icon">✅</span>
+              <span>Incident_Response_Plan_2025.pdf</span>
+            </div>
+            <div class="file-item">
+              <span class="file-icon">✅</span>
+              <span>Policy_Sicurezza_IT_v3.docx</span>
+            </div>
+          </div>
+
+          <button class="q-send-btn" id="mockup-generate-btn" onclick="startAIAutoFill()" disabled>
+            🤖 Avvia Compilazione Automatica AI
+          </button>
+        </div>
+      </div>
+
+      <div class="mockup-panel" style="position:relative;">
+        <div class="mockup-panel-bar">
+          <div class="mdot" style="background:#ff5f57"></div>
+          <div class="mdot" style="background:#febc2e"></div>
+          <div class="mdot" style="background:#28c840"></div>
+          <span class="mpanel-title">Fase 2: Questionario NIS2 Auto-compilato</span>
+        </div>
+        
+        <div id="ai-overlay" class="ai-overlay">
+          <div id="ai-overlay-icon" class="ai-overlay-icon">⏳</div>
+          <div id="ai-overlay-text" class="ai-overlay-text">In attesa dei documenti...</div>
+        </div>
+
+        <div class="mockup-panel-body" style="pointer-events:none;">
           <div class="q-header">
             <span class="q-badge">NIS2 · Sezione 4</span>
             <span class="q-title">Gestione degli incidenti di sicurezza</span>
@@ -1379,82 +1475,22 @@ nav{
 
           <div class="q-item">
             <label>4.1 — Politica di risposta agli incidenti</label>
-            <textarea class="q-textarea" id="q1" rows="3"
-              placeholder="Descrivere la procedura formale adottata per la gestione e il reporting degli incidenti di sicurezza…"
-              oninput="mockupInput(this,'q1')"></textarea>
+            <textarea class="q-textarea" id="auto-q1" rows="4" style="background:rgba(255,255,255,.02);"
+              placeholder="In attesa dei dati dall'AI..."></textarea>
           </div>
 
           <div class="q-item">
-            <label>4.2 — Livello di maturità del processo</label>
-            <select class="q-select" id="q2" onchange="mockupSelect(this,'q2')">
-              <option value="">— Seleziona livello CMMI —</option>
-              <option value="1">Livello 1 — Iniziale (processi ad hoc)</option>
-              <option value="2">Livello 2 — Gestito (processi pianificati)</option>
-              <option value="3">Livello 3 — Definito (processi standardizzati)</option>
-              <option value="4">Livello 4 — Quantitativamente gestito</option>
-              <option value="5">Livello 5 — In ottimizzazione continua</option>
-            </select>
+            <label>4.2 — Livello di maturità del processo (Stimato)</label>
+            <input class="fi" id="auto-q2" type="text" style="background:rgba(255,255,255,.02); font-size:13px; color:rgba(255,255,255,.6);" placeholder="In attesa dei dati dall'AI..." readonly>
           </div>
 
-          <div class="q-item">
-            <label>4.3 — Evidenza documentale allegata</label>
-            <select class="q-select" id="q3" onchange="mockupSelect(this,'q3')">
-              <option value="">— Seleziona tipo evidenza —</option>
-              <option value="none">Nessuna evidenza disponibile</option>
-              <option value="partial">Documentazione parziale</option>
-              <option value="full">Documentazione completa e aggiornata</option>
-              <option value="certified">Certificazione / audit esterno</option>
-            </select>
-          </div>
-
-          <button class="q-send-btn" id="mockup-send-btn" onclick="sendToAI()" disabled>
-            🤖 Invia all'AI per la valutazione
-          </button>
-          <div class="q-hint" id="mockup-hint">Compila almeno un campo per abilitare la valutazione AI</div>
-        </div>
-      </div>
-
-      <div class="mockup-panel">
-        <div class="mockup-panel-bar">
-          <div class="mdot" style="background:#ff5f57"></div>
-          <div class="mdot" style="background:#febc2e"></div>
-          <div class="mdot" style="background:#28c840"></div>
-          <span class="mpanel-title">3AuditFlow AI — Analisi in tempo reale</span>
-        </div>
-        <div class="ai-panel-body">
-          <div class="ai-intro">
-            <div class="ai-avatar">🤖</div>
-            <div class="ai-intro-text">
-              <strong>3AF Intelligence Engine</strong><br>
-              Analisi automatica di conformità NIS2 · CMMI · Rischio
-            </div>
-          </div>
-
-          <div class="ai-log" id="ai-log">
-            <div class="ai-msg info">
-              <div class="ai-msg-icon">ℹ️</div>
-              <div class="ai-msg-bubble">
-                <div class="ai-msg-status">In attesa</div>
-                <div class="ai-msg-text">Sono pronto ad analizzare le tue risposte. Compila il questionario e premi il pulsante di valutazione.</div>
-                <div class="ai-msg-time">Adesso</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="ai-typing" id="ai-typing">
-            <div class="ai-typing-dots">
-              <span></span><span></span><span></span>
-            </div>
-            <span class="ai-typing-text">AI in analisi…</span>
-          </div>
-
-          <div class="ai-status-bar">
+          <div class="ai-status-bar" style="margin-top:20px;">
             <div class="ai-status-left">
-              <div class="ai-active-dot"></div>
-              <span class="ai-status-text">Engine attivo · NIS2 v2.0</span>
+              <div class="ai-active-dot" id="final-dot" style="background:rgba(255,255,255,.2); animation:none;"></div>
+              <span class="ai-status-text" id="final-status">Motore AI inattivo</span>
             </div>
-            <div class="ai-score-badge" id="ai-score-badge">
-              📊 Risk Score: —
+            <div class="ai-score-badge" id="ai-conf-badge" style="display:none; color:#22c55e; border-color:rgba(34,197,94,.3); background:rgba(34,197,94,.1);">
+              ✨ Confidenza: 94%
             </div>
           </div>
         </div>
@@ -1462,6 +1498,8 @@ nav{
 
     </div>
   </section>
+
+  
 
   <footer class="site-footer">
     <div class="foot-inner">
@@ -1624,158 +1662,152 @@ function p3Tab(t){
 }
 
 /* ═══════════════════════════════════════
-   MOCKUP AI INTERATTIVO
+   NUOVO MOCKUP AI INTERATTIVO (UPLOAD -> AUTOFILL)
 ═══════════════════════════════════════ */
-let mockupState = { q1: '', q2: '', q3: '' };
-let aiMsgCount = 0;
-let isAnalyzing = false;
+let isMockupRunning = false;
+let docsUploaded = false;
 
-function checkMockupReady(){
-  const hasInput = mockupState.q1.trim().length > 10 || mockupState.q2 !== '' || mockupState.q3 !== '';
-  const btn = document.getElementById('mockup-send-btn');
-  const hint = document.getElementById('mockup-hint');
-  btn.disabled = !hasInput || isAnalyzing;
-  if(hasInput){
-    hint.textContent = 'Premi il pulsante per avviare l\'analisi AI';
-    hint.style.color = 'rgba(56,189,248,.5)';
-  } else {
-    hint.textContent = 'Compila almeno un campo per abilitare la valutazione AI';
-    hint.style.color = 'rgba(255,255,255,.25)';
-  }
+function simulateUpload() {
+  if (docsUploaded || isMockupRunning) return;
+  
+  const uzIcon = document.getElementById('uz-icon');
+  const uzText = document.getElementById('uz-text');
+  const uzSub = document.getElementById('uz-sub');
+  
+  uzIcon.textContent = '⏳';
+  uzIcon.style.animation = 'pulse 1.5s infinite';
+  uzText.textContent = 'Caricamento in corso...';
+  uzText.style.color = 'rgba(255,255,255,.6)';
+  uzSub.style.display = 'none';
+
+  setTimeout(() => {
+    document.getElementById('upload-zone').style.display = 'none';
+    document.getElementById('file-list').style.display = 'block';
+    
+    const btn = document.getElementById('mockup-generate-btn');
+    btn.disabled = false;
+    btn.style.boxShadow = '0 0 20px rgba(56,189,248,.5)';
+    
+    docsUploaded = true;
+  }, 1200);
 }
 
-function mockupInput(el, field){
-  mockupState[field] = el.value;
-  const isWarn = el.value.length > 5 && (
-    el.value.toLowerCase().includes('non abbiamo') ||
-    el.value.toLowerCase().includes('nessuna') ||
-    el.value.toLowerCase().includes('non definit') ||
-    el.value.toLowerCase().includes('ad hoc') ||
-    el.value.toLowerCase().includes('non è stato') ||
-    el.value.toLowerCase().includes('non disponiamo') ||
-    el.value.toLowerCase().includes('non è presente')
-  );
-  const isOk = el.value.length > 20 && !isWarn;
-  el.classList.toggle('warning', isWarn);
-  el.classList.toggle('ok', isOk);
-  checkMockupReady();
+function startAIAutoFill() {
+  if (isMockupRunning || !docsUploaded) return;
+  isMockupRunning = true;
+
+  const btn = document.getElementById('mockup-generate-btn');
+  btn.disabled = true;
+  btn.textContent = '🤖 Elaborazione documenti in corso...';
+  btn.style.boxShadow = 'none';
+
+  const overlayIcon = document.getElementById('ai-overlay-icon');
+  const overlayText = document.getElementById('ai-overlay-text');
+  
+  // Fase 1: Lettura
+  overlayIcon.textContent = '🧠';
+  overlayIcon.style.animation = 'pulse 1s infinite';
+  overlayText.textContent = 'Analisi semantica dei file PDF/DOCX...';
+  overlayText.style.color = 'var(--accent)';
+
+  // Fase 2: Estrazione
+  setTimeout(() => {
+    overlayIcon.textContent = '✍️';
+    overlayText.textContent = 'Estrazione risposte per framework NIS2...';
+  }, 2000);
+
+  // Fase 3: Compilazione (Overlay scompare)
+  setTimeout(() => {
+    document.getElementById('ai-overlay').style.opacity = '0';
+    setTimeout(() => { document.getElementById('ai-overlay').style.display = 'none'; }, 500);
+    
+    // Testo da "digitare" automaticamente
+    const responseText = "Secondo l'Incident Response Plan 2025 (Sez. 3.2) e la Policy IT v3, l'azienda adotta una procedura formale documentata. Prevede l'identificazione, il contenimento e l'eradicazione delle minacce entro 4 ore dalla rilevazione. È presente un registro incidenti aggiornato e un team dedicato (CSIRT interno).";
+    const q1 = document.getElementById('auto-q1');
+    
+    typeText(q1, responseText, 20, () => {
+      q1.classList.add('ok'); // Bordo verde
+      
+      // Popola la seconda risposta di colpo dopo la digitazione
+      setTimeout(() => {
+        const q2 = document.getElementById('auto-q2');
+        q2.value = "Livello 3 — Definito (Processi standardizzati e documentati)";
+        q2.classList.add('ok');
+        q2.style.color = "#fff";
+        
+        // Aggiorna lo status bar
+        document.getElementById('final-dot').style.background = '#22c55e';
+        document.getElementById('final-status').textContent = 'Analisi completata con successo';
+        document.getElementById('final-status').style.color = '#22c55e';
+        document.getElementById('ai-conf-badge').style.display = 'flex';
+        
+        // Reset pulsante
+        btn.textContent = '🔄 Ripristina Demo';
+        btn.disabled = false;
+        btn.onclick = resetMockup;
+      }, 500);
+    });
+
+  }, 4000);
 }
 
-function mockupSelect(el, field){
-  mockupState[field] = el.value;
-  const isWarn = el.value === '1' || el.value === 'none';
-  const isOk   = el.value === '4' || el.value === '5' || el.value === 'full' || el.value === 'certified';
-  el.classList.toggle('warning', isWarn);
-  el.classList.toggle('ok', isOk);
-  checkMockupReady();
+// Funzione di utilità per l'effetto macchina da scrivere
+function typeText(element, text, speed, callback) {
+  let i = 0;
+  element.value = '';
+  let timer = setInterval(function() {
+    if (i < text.length) {
+      element.value += text.charAt(i);
+      i++;
+    } else {
+      clearInterval(timer);
+      if (callback) callback();
+    }
+  }, speed);
 }
 
-function addAIMessage(type, status, text, delay){
-  setTimeout(()=>{
-    const log = document.getElementById('ai-log');
-    const iconMap = { accepted:'✅', rejected:'❌', pending:'⏳', info:'ℹ️' };
-    const time = new Date().toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});
-    const msg = document.createElement('div');
-    msg.className = 'ai-msg ' + type;
-    msg.innerHTML = `
-      <div class="ai-msg-icon">${iconMap[type]||'ℹ️'}</div>
-      <div class="ai-msg-bubble">
-        <div class="ai-msg-status">${status}</div>
-        <div class="ai-msg-text">${text}</div>
-        <div class="ai-msg-time">${time}</div>
-      </div>`;
-    log.appendChild(msg);
-    log.scrollTop = log.scrollHeight;
-    aiMsgCount++;
-  }, delay);
+function resetMockup() {
+  isMockupRunning = false;
+  docsUploaded = false;
+  
+  // Reset Left Panel
+  document.getElementById('upload-zone').style.display = 'block';
+  const uzIcon = document.getElementById('uz-icon');
+  uzIcon.textContent = '📄';
+  uzIcon.style.animation = 'none';
+  document.getElementById('uz-text').textContent = 'Clicca qui per simulare il caricamento';
+  document.getElementById('uz-text').style.color = 'var(--accent)';
+  document.getElementById('uz-sub').style.display = 'block';
+  document.getElementById('file-list').style.display = 'none';
+  
+  const btn = document.getElementById('mockup-generate-btn');
+  btn.textContent = '🤖 Avvia Compilazione Automatica AI';
+  btn.disabled = true;
+  btn.onclick = startAIAutoFill;
+  
+  // Reset Right Panel
+  const overlay = document.getElementById('ai-overlay');
+  overlay.style.display = 'flex';
+  setTimeout(() => { overlay.style.opacity = '1'; }, 50);
+  document.getElementById('ai-overlay-icon').textContent = '⏳';
+  document.getElementById('ai-overlay-icon').style.animation = 'none';
+  document.getElementById('ai-overlay-text').textContent = 'In attesa dei documenti...';
+  document.getElementById('ai-overlay-text').style.color = 'rgba(255,255,255,.6)';
+  
+  const q1 = document.getElementById('auto-q1');
+  q1.value = '';
+  q1.classList.remove('ok');
+  
+  const q2 = document.getElementById('auto-q2');
+  q2.value = '';
+  q2.classList.remove('ok');
+  
+  document.getElementById('final-dot').style.background = 'rgba(255,255,255,.2)';
+  document.getElementById('final-status').textContent = 'Motore AI inattivo';
+  document.getElementById('final-status').style.color = 'rgba(255,255,255,.3)';
+  document.getElementById('ai-conf-badge').style.display = 'none';
 }
 
-function sendToAI(){
-  if(isAnalyzing) return;
-  isAnalyzing = true;
-  document.getElementById('mockup-send-btn').disabled = true;
-  document.getElementById('mockup-send-btn').textContent = '⏳ Analisi in corso…';
-
-  const log = document.getElementById('ai-log');
-  log.innerHTML = '';
-
-  const typing = document.getElementById('ai-typing');
-  typing.classList.add('visible');
-
-  const q1 = mockupState.q1.toLowerCase();
-  const q2 = mockupState.q2;
-  const q3 = mockupState.q3;
-
-  const q1Bad  = q1.includes('non abbiamo') || q1.includes('nessuna') || q1.includes('non definit') || q1.includes('ad hoc') || q1.includes('non è stato') || q1.includes('non disponiamo') || q1.includes('non è presente') || (q1.length > 0 && q1.length < 15);
-  const q1Good = q1.length > 25 && !q1Bad;
-  const q2Bad  = q2 === '1' || q2 === '';
-  const q2Good = q2 === '4' || q2 === '5';
-  const q3Bad  = q3 === 'none' || q3 === '';
-  const q3Good = q3 === 'full' || q3 === 'certified';
-
-  let riskScore = 75;
-  if(q1Good)  riskScore -= 20;
-  if(q1Bad)   riskScore += 10;
-  if(q2Good)  riskScore -= 15;
-  if(q2Bad)   riskScore += 12;
-  if(q3Good)  riskScore -= 18;
-  if(q3Bad)   riskScore += 8;
-  riskScore = Math.max(10, Math.min(98, riskScore));
-
-  const messages = [];
-
-  messages.push({ type:'info', status:'Analisi avviata', text:'Elaborazione in corso per la sezione 4 — Gestione degli incidenti. Verifica di conformità NIS2 e livello CMMI.', delay:800 });
-
-  if(q1.length === 0){
-    messages.push({ type:'pending', status:'Risposta mancante', text:'<strong>4.1 Politica di risposta:</strong> Campo non compilato. La normativa NIS2 richiede una procedura formale documentata. Stato: ⚠️ Non valutabile.', delay:1600 });
-  } else if(q1Bad){
-    messages.push({ type:'rejected', status:'Documento non accettato', text:'<strong>4.1 Politica di risposta:</strong> La descrizione indica l\'assenza di procedure formalizzate o processi ad hoc. Non conforme ai requisiti NIS2 Art. 21. Richiesta revisione.', delay:1600 });
-  } else {
-    messages.push({ type:'accepted', status:'Documento accettato', text:'<strong>4.1 Politica di risposta:</strong> Procedura descritta in modo adeguato. Riscontrata strutturazione formale del processo. Conforme ai requisiti NIS2.', delay:1600 });
-  }
-
-  if(q2 === ''){
-    messages.push({ type:'pending', status:'Livello CMMI mancante', text:'<strong>4.2 Maturità del processo:</strong> Nessun livello selezionato. Impossibile calcolare il risk score per questa dimensione.', delay:2500 });
-  } else if(q2Bad){
-    messages.push({ type:'rejected', status:'Livello CMMI critico', text:`<strong>4.2 Maturità del processo:</strong> Livello CMMI ${q2} (Iniziale) rilevato. I processi ad hoc comportano un rischio operativo elevato. Raccomandato piano di miglioramento verso CMMI 3.`, delay:2500 });
-  } else if(q2Good){
-    messages.push({ type:'accepted', status:'Livello CMMI ottimale', text:`<strong>4.2 Maturità del processo:</strong> Livello CMMI ${q2} rilevato. Processi maturi e quantitativamente gestiti. Conformità elevata.`, delay:2500 });
-  } else {
-    messages.push({ type:'accepted', status:'Livello CMMI accettabile', text:`<strong>4.2 Maturità del processo:</strong> Livello CMMI ${q2} rilevato. Processi standardizzati. Conformità sufficiente, miglioramenti raccomandati.`, delay:2500 });
-  }
-
-  if(q3 === '' || q3 === 'none'){
-    messages.push({ type:'rejected', status:'Evidenza non disponibile', text:'<strong>4.3 Evidenza documentale:</strong> Nessuna evidenza allegata. L\'assenza di documentazione a supporto comporta un gap significativo nella conformità NIS2. Azione correttiva necessaria.', delay:3400 });
-  } else if(q3 === 'partial'){
-    messages.push({ type:'pending', status:'Documentazione parziale', text:'<strong>4.3 Evidenza documentale:</strong> Documentazione parziale rilevata. Accettabile come punto di partenza, ma richiesta integrazione entro 30 giorni per conformità completa.', delay:3400 });
-  } else {
-    messages.push({ type:'accepted', status:'Documento accettato', text:'<strong>4.3 Evidenza documentale:</strong> Documentazione completa o certificata presente. Evidenza verificabile. Conforme ai requisiti di audit.', delay:3400 });
-  }
-
-  const riskLabel = riskScore >= 70 ? '🔴 Alto' : riskScore >= 40 ? '🟡 Medio' : '🟢 Basso';
-  messages.push({
-    type: riskScore >= 70 ? 'rejected' : riskScore >= 40 ? 'pending' : 'accepted',
-    status: 'Valutazione completata',
-    text: `<strong>Riepilogo sezione 4:</strong> Cyber Risk Score stimato: <strong>${riskScore}/100</strong> — Rischio ${riskLabel}.<br><br>${riskScore >= 70 ? 'Sono stati rilevati gap significativi. Il sistema ha generato automaticamente 3 azioni di remediation. Consulta il piano di remediation nella sezione Post-Assessment.' : riskScore >= 40 ? 'Conformità parziale rilevata. Il sistema raccomanda 1 azione correttiva. Monitoraggio trimestrale suggerito.' : 'Ottima conformità rilevata. Nessuna azione urgente richiesta. Il report finale può essere generato.'}`,
-    delay: 4400
-  });
-
-  messages.forEach(m => addAIMessage(m.type, m.status, m.text, m.delay));
-
-  setTimeout(()=>{
-    typing.classList.remove('visible');
-    const badge = document.getElementById('ai-score-badge');
-    const color = riskScore >= 70 ? '#ef4444' : riskScore >= 40 ? '#eab308' : '#22c55e';
-    badge.style.color = color;
-    badge.style.borderColor = color + '44';
-    badge.style.background = color + '11';
-    badge.textContent = `📊 Risk Score: ${riskScore}/100`;
-
-    document.getElementById('mockup-send-btn').textContent = '🤖 Nuova valutazione';
-    document.getElementById('mockup-send-btn').disabled = false;
-    isAnalyzing = false;
-  }, 5000);
-}
 </script>
 </body>
 </html>
