@@ -14,13 +14,13 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:#fff;overflow-x:
 
 /* ─── NAV ─── */
 nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
+  position:fixed;top:0;left:0;right:0;z-index:1000;
   display:flex;align-items:center;justify-content:space-between;
   padding:13px 48px;
   background:rgba(6,14,31,.88);backdrop-filter:blur(20px);
   border-bottom:1px solid rgba(255,255,255,.06)
 }
-.nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+.nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer; z-index: 1001;}
 .nav-logo .logo-icon{height:36px;object-fit:contain}
 .nav-logo .logo-text{height:56px;object-fit:contain}
 .nav-center{
@@ -30,6 +30,7 @@ nav{
   border:1px solid rgba(255,255,255,.09);
   border-radius:99px;
   padding:4px;
+  transition: all 0.3s ease;
 }
 .nav-tab{
   padding:9px 36px;
@@ -50,6 +51,28 @@ nav{
 .btn-contact-nav{padding:8px 18px;border-radius:8px;font-size:13px;font-weight:500;background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.22);color:var(--accent);cursor:pointer;transition:all .2s;font-family:'Outfit',sans-serif}
 .btn-contact-nav:hover{background:rgba(56,189,248,.18)}
 
+/* ─── MENU TOGGLE MOBILE ─── */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    z-index: 1001;
+}
+.menu-toggle span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background: var(--white);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+.menu-toggle.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.menu-toggle.open span:nth-child(2) { opacity: 0; }
+.menu-toggle.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
 /* ─── PAGES ─── */
 .page{display:none;padding-top:68px}
 .page.active{display:block}
@@ -64,7 +87,7 @@ nav{
 .slide.active .slide-bg{transform:scale(1)}
 .slide-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(6,14,31,.92) 0%,rgba(13,27,62,.65) 55%,rgba(6,14,31,.35) 100%)}
 .slide-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(56,189,248,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,.04) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
-.slide-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 70px;max-width:720px}
+.slide-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 70px;max-width:720px; z-index: 10;}
 .slide-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.25);color:var(--accent);padding:5px 14px;border-radius:99px;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px;width:fit-content;opacity:0;transform:translateY(16px);transition:all .6s .1s ease}
 .slide.active .slide-eyebrow{opacity:1;transform:none}
 .slide-title{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,5.8vw,76px);font-weight:800;line-height:1.02;letter-spacing:-2px;color:#fff;margin-bottom:18px;opacity:0;transform:translateY(24px);transition:all .7s .25s ease}
@@ -78,20 +101,20 @@ nav{
 .btn-hl:hover{transform:translateY(-2px);box-shadow:0 6px 30px rgba(56,189,248,.55)}
 .btn-out{padding:14px 30px;border-radius:10px;font-size:15px;font-weight:500;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.2);color:#fff;cursor:pointer;transition:all .2s;font-family:'Outfit',sans-serif;backdrop-filter:blur(8px)}
 .btn-out:hover{background:rgba(255,255,255,.14)}
-.slide-badge{position:absolute;right:80px;bottom:110px;background:rgba(255,255,255,.07);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:20px 28px;opacity:0;transform:translateY(20px) scale(.97);transition:all .7s .7s ease}
+.slide-badge{position:absolute;right:80px;bottom:110px;background:rgba(255,255,255,.07);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:20px 28px;opacity:0;transform:translateY(20px) scale(.97);transition:all .7s .7s ease; z-index: 10;}
 .slide.active .slide-badge{opacity:1;transform:none}
 .badge-num{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:800;color:var(--accent);line-height:1}
 .badge-lbl{font-size:13px;color:rgba(255,255,255,.5);margin-top:4px}
-.ai-chip{position:absolute;right:80px;top:50%;background:linear-gradient(135deg,rgba(37,99,235,.3),rgba(56,189,248,.2));border:1px solid rgba(56,189,248,.3);border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:12px;backdrop-filter:blur(12px);opacity:0;transform:translateY(-50%) translateX(20px);transition:all .7s .8s ease}
+.ai-chip{position:absolute;right:80px;top:50%;background:linear-gradient(135deg,rgba(37,99,235,.3),rgba(56,189,248,.2));border:1px solid rgba(56,189,248,.3);border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:12px;backdrop-filter:blur(12px);opacity:0;transform:translateY(-50%) translateX(20px);transition:all .7s .8s ease; z-index: 10;}
 .slide.active .ai-chip{opacity:1;transform:translateY(-50%) translateX(0)}
 .ai-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.4);opacity:.7}}
 .ai-chip-text{font-size:13px;font-weight:500}
 .ai-chip-text span{color:var(--accent)}
-.carousel-dots{position:absolute;bottom:32px;left:70px;display:flex;gap:10px;z-index:10}
+.carousel-dots{position:absolute;bottom:32px;left:70px;display:flex;gap:10px;z-index:20}
 .dot{width:28px;height:4px;border-radius:2px;background:rgba(255,255,255,.25);cursor:pointer;transition:all .3s}
 .dot.active{background:var(--accent);width:44px}
-.carousel-arrows{position:absolute;right:60px;bottom:24px;display:flex;gap:8px;z-index:10}
+.carousel-arrows{position:absolute;right:60px;bottom:24px;display:flex;gap:8px;z-index:20}
 .arrow{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;backdrop-filter:blur(8px)}
 .arrow:hover{background:rgba(56,189,248,.2);border-color:var(--accent)}
 
@@ -270,7 +293,15 @@ nav{
   font-weight:800;letter-spacing:-1px;line-height:1.1;
 }
 .vant-header h2 em{color:var(--accent);font-style:italic}
-.vant-table{width:100%;border-collapse:separate;border-spacing:0}
+
+/* Table Responsive Wrapper */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.vant-table{width:100%;border-collapse:separate;border-spacing:0; min-width: 600px;}
 .vant-table thead tr th{
   padding:14px 20px;font-size:11px;font-weight:700;
   letter-spacing:2px;text-transform:uppercase;
@@ -456,11 +487,11 @@ nav{
 .cs-text h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;margin-bottom:6px}
 .cs-text p{font-size:14px;color:rgba(255,255,255,.5)}
 .cs-btns{display:flex;gap:10px;flex-wrap:wrap}
-.btn-wa{display:flex;align-items:center;gap:8px;padding:11px 22px;border-radius:9px;font-size:13px;font-weight:600;background:#25D366;color:#fff;border:none;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s;text-decoration:none}
+.btn-wa{display:flex;align-items:center;gap:8px;padding:11px 22px;border-radius:9px;font-size:13px;font-weight:600;background:#25D366;color:#fff;border:none;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s;text-decoration:none; justify-content:center;}
 .btn-wa:hover{background:#1ebe5a;transform:translateY(-1px)}
-.btn-mail{display:flex;align-items:center;gap:8px;padding:11px 22px;border-radius:9px;font-size:13px;font-weight:600;background:var(--blue-mid);color:#fff;border:none;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s;text-decoration:none}
+.btn-mail{display:flex;align-items:center;gap:8px;padding:11px 22px;border-radius:9px;font-size:13px;font-weight:600;background:var(--blue-mid);color:#fff;border:none;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s;text-decoration:none; justify-content:center;}
 .btn-mail:hover{background:var(--blue-bright);transform:translateY(-1px)}
-.btn-phone{display:flex;align-items:center;gap:8px;padding:11px 22px;border-radius:9px;font-size:13px;font-weight:600;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s;text-decoration:none}
+.btn-phone{display:flex;align-items:center;gap:8px;padding:11px 22px;border-radius:9px;font-size:13px;font-weight:600;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s;text-decoration:none; justify-content:center;}
 .btn-phone:hover{background:rgba(255,255,255,.14);transform:translateY(-1px)}
 
 /* FOOTER */
@@ -809,123 +840,109 @@ nav{
 .sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.5vw,48px);font-weight:800;letter-spacing:-1px;line-height:1.1;color:#fff;margin-bottom:14px}
 .sec-title em{color:var(--accent);font-style:italic}
 
-/* ─── RESPONSIVE ─── */
+/* ─── RESPONSIVE E OTTIMIZZAZIONI MOBILE ─── */
 @media(max-width:960px){
   nav{padding:11px 22px}
-  .nav-center{display:none}
+  .menu-toggle { display: flex; } /* Mostra l'hamburger */
+
+  .nav-center {
+      display: none; 
+      position: fixed;
+      top: 60px; /* Altezza media della nav */
+      left: 0;
+      width: 100%;
+      background: var(--blue-deep);
+      flex-direction: column;
+      padding: 20px;
+      gap: 15px;
+      border-radius: 0;
+      border: none;
+      border-bottom: 1px solid var(--glass-b);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+
+  .nav-center.mobile-open {
+      display: flex; 
+  }
+
+  /* Sposta le call-to-action dentro il menu su mobile */
+  .nav-right {
+      display: none;
+  }
+  
+  .nav-center.mobile-open .nav-tab {
+      width: 100%;
+      text-align: center;
+  }
+
+  /* Riadattamenti layout generali per mobile */
   .slide-content{padding:0 26px}
   .slide-badge,.ai-chip{display:none}
-  .stats-strip{padding:18px 24px;grid-template-columns:repeat(2,1fr)}
+  .slide-btns { flex-direction: column; width: 100%; }
+  .slide-btns button { width: 100%; }
+  
+  .stats-strip{padding:18px 24px;grid-template-columns:repeat(2,1fr); gap: 15px;}
   .intro-section,.soluzione-section,.audit-section,.vantaggi-section,.processo-section{padding:50px 22px}
   .intro-body{grid-template-columns:1fr}
   .sol-cards{grid-template-columns:1fr}
   .audit-inner{grid-template-columns:1fr}
   .audit-cols{grid-template-columns:1fr}
-  .proc-steps,.proc-steps-b{grid-template-columns:1fr 1fr}
+  
+  /* Formatta i grid delle step */
+  .proc-steps,.proc-steps-b{grid-template-columns:1fr; gap: 10px;}
   .proc-bottom{grid-template-columns:1fr}
+  
   .p2-hero,.p2-how,.p2-media,.p2-feats,.p2-process,.ai-mockup-section{padding:44px 22px}
   .fd-grid{grid-template-columns:1fr}
   .timeline{flex-direction:column;gap:18px}.timeline::before{display:none}
   .tl-step{flex-direction:row;text-align:left;gap:14px}
   .tl-circle{flex-shrink:0}
-  .contact-strip{margin:0 22px 48px;padding:24px 22px;flex-direction:column}
+  
+  .contact-strip{margin:0 22px 48px;padding:24px 22px;flex-direction:column; text-align: center;}
+  .cs-btns { flex-direction: column; width: 100%; }
+  .cs-btns a { width: 100%; }
+  
   .site-footer{padding:36px 22px 18px}
   .foot-inner{flex-direction:column}
+  
   .p2-hero-inner{grid-template-columns:1fr}
-  .media-grid{grid-template-columns:1fr 1fr}
-  .how-grid{grid-template-columns:1fr 1fr}
+  .p2-hero-inner button { width: 100%; margin-bottom: 10px; }
+  
+  .media-grid{grid-template-columns:1fr}
+  .how-grid{grid-template-columns:1fr}
   .ai-mockup-grid{grid-template-columns:1fr}
-}
-
-
-/* --- OTTIMIZZAZIONE NAVIGAZIONE MOBILE --- */
-.menu-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    z-index: 1001;
-}
-
-.menu-toggle span {
-    width: 25px;
-    height: 3px;
-    background: var(--white);
-    border-radius: 2px;
-    transition: 0.3s;
-}
-
-@media (max-width: 960px) {
-    .menu-toggle { display: flex; }
-
-    .nav-center {
-        display: none; /* Nascondiamo il menu orizzontale */
-        position: fixed;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background: var(--blue-deep);
-        flex-direction: column;
-        padding: 20px;
-        gap: 15px;
-        border-bottom: 1px solid var(--glass-b);
-    }
-
-    .nav-center.mobile-open {
-        display: flex; /* Appare quando clicchi il toggle */
-    }
-
-    .nav-right {
-        gap: 10px;
-    }
-
-    .btn-contact-nav {
-        padding: 8px 12px;
-        font-size: 13px;
-    }
-
-    .btn-ghost { display: none; } /* Nascondiamo il tasto login duplicato nella nav */
-}
-
-/* --- OTTIMIZZAZIONE CONTENUTI --- */
-@media (max-width: 768px) {
-    .hero h1 { font-size: 2.5rem; }
-    .hero p { font-size: 1.1rem; }
-    .grid-features { grid-template-columns: 1fr; } /* Le card diventano una colonna sola */
-    
-    .contact-strip {
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-    }
 }
 </style>
 </head>
 <body>
 
-<!-- ══ NAV ══ -->
 <nav>
   <div class="nav-logo" onclick="showPage('vetrina')">
     <img class="logo-icon" src="logo.png" alt="Logo 3A">
     <img class="logo-text" src="logo-text.png" alt="3AuditFlow">
   </div>
-  <div class="nav-center">
+  
+  <div class="menu-toggle" onclick="toggleMobileMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="nav-center" id="nav-center">
     <button class="nav-tab active" id="tab-vetrina"  onclick="showPage('vetrina')">◇ Home</button>
     <button class="nav-tab"        id="tab-prodotto" onclick="showPage('prodotto')">◲ L'Applicativo</button>
     <button class="nav-tab"        id="tab-accesso"  onclick="showPage('accesso')">⊙ Accedi</button>
+    <button class="btn-cta" style="display: none; width: 100%; margin-top: 10px;" id="mobile-cta" onclick="showPage('accesso')">Accedi →</button>
   </div>
-  <div class="nav-right">
+  
+  <div class="nav-right" id="nav-right">
     <button class="btn-contact-nav" onclick="scrollContact()">✉ Contattaci</button>
     <button class="btn-cta" onclick="showPage('accesso')">Accedi →</button>
   </div>
 </nav>
 
-<!-- ══════════════════════════════
-     PAGE 1 – VETRINA
-══════════════════════════════ -->
 <div id="page-vetrina" class="page active">
 
-  <!-- CAROSELLO – intervallo rallentato a 12 secondi -->
   <section class="hero">
     <div class="slides" id="slides">
       <div class="slide active" id="s0">
@@ -989,7 +1006,6 @@ nav{
     <div class="stat-it"><div class="stat-num">AI</div><div class="stat-lbl">Engine integrato</div></div>
   </div>
 
-  <!-- ══ INTRODUZIONE ══ -->
   <section class="intro-section">
     <div class="intro-inner">
       <div class="intro-eyebrow">Perché 3AuditFlow</div>
@@ -1021,13 +1037,11 @@ nav{
         <div class="intro-pill"><span class="ip">🔔</span> Notifiche automatiche</div>
         <div class="intro-pill"><span class="ip">📁</span> Hub documentale centralizzato</div>
         <div class="intro-pill"><span class="ip">📄</span> Remediation plan automatico</div>
-        <!-- MODIFICA 2: rimosso GDPR, aggiunto Generazione relazione / Cyber Risk -->
         <div class="intro-pill"><span class="ip">📊</span> Generazione relazione automatica / Cyber Risk</div>
       </div>
     </div>
   </section>
 
-  <!-- ══ SOLUZIONE UNICA ══ -->
   <section class="soluzione-section">
     <div class="sol-eyebrow">La Soluzione</div>
     <h2 class="sol-kicker">Processi integrati, flessibili<br>e <em>configurabili.</em></h2>
@@ -1047,14 +1061,13 @@ nav{
       </div>
       <div class="sol-card">
         <div class="sol-card-ic">🚫</div>
-        <h3>Zero riunioni e zero e-mail centrali e impattanti</h3>
+        <h3>Zero riunioni e zero e-mail centrali</h3>
         <p>La comunicazione avviene tramite chatbot integrato e SMS di alert direttamente sulla piattaforma. Meno meeting, più produttività, tracciabilità totale.</p>
         <div class="sol-card-badge">✓ Chatbot + SMS integrati</div>
       </div>
     </div>
   </section>
 
-  <!-- ══ ASSESSMENT TERZE PARTI (MODIFICA 3) ══ -->
   <section class="audit-section">
     <div class="audit-inner">
       <div class="audit-left">
@@ -1110,47 +1123,49 @@ nav{
     </div>
   </section>
 
-  <!-- ══ VANTAGGI ══ -->
   <section class="vantaggi-section">
     <div class="vant-inner">
       <div class="vant-header">
         <div class="sec-eyebrow">Vantaggi</div>
         <h2>Come cambia il tuo lavoro<br><em>con 3AuditFlow.</em></h2>
       </div>
-      <table class="vant-table">
-        <thead>
-          <tr>
-            <th>AS IS — Senza 3AuditFlow</th>
-            <th>CON 3AuditFlow</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><div class="vant-asis"><span class="v-icon">⏳</span>Self-assessment in 3 mesi</div></td>
-            <td><div class="vant-good"><span class="v-icon">⚡</span>Self-assessment in 15 giorni</div></td>
-          </tr>
-          <tr>
-            <td><div class="vant-asis"><span class="v-icon">📋</span>Checklist manuali e disperse</div></td>
-            <td><div class="vant-good"><span class="v-icon">🛡️</span>Cyber Risk Posture certificata</div></td>
-          </tr>
-          <tr>
-            <td><div class="vant-asis"><span class="v-icon">📧</span>Mail e meeting continui</div></td>
-            <td><div class="vant-good"><span class="v-icon">🤖</span>Chatbot integrata — zero riunioni</div></td>
-          </tr>
-          <tr>
-            <td><div class="vant-asis"><span class="v-icon">🔀</span>Informazioni frammentate</div></td>
-            <td><div class="vant-good"><span class="v-icon">🗂️</span>Hub documentale unico</div></td>
-          </tr>
-          <tr>
-            <td><div class="vant-asis"><span class="v-icon">⚙️</span>Processi manuali</div></td>
-            <td><div class="vant-good"><span class="v-icon">📊</span>Automatismi e dashboard in tempo reale</div></td>
-          </tr>
-        </tbody>
-      </table>
+      
+      <div class="table-responsive">
+        <table class="vant-table">
+          <thead>
+            <tr>
+              <th>AS IS — Senza 3AuditFlow</th>
+              <th>CON 3AuditFlow</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="vant-asis"><span class="v-icon">⏳</span>Self-assessment in 3 mesi</div></td>
+              <td><div class="vant-good"><span class="v-icon">⚡</span>Self-assessment in 15 giorni</div></td>
+            </tr>
+            <tr>
+              <td><div class="vant-asis"><span class="v-icon">📋</span>Checklist manuali e disperse</div></td>
+              <td><div class="vant-good"><span class="v-icon">🛡️</span>Cyber Risk Posture certificata</div></td>
+            </tr>
+            <tr>
+              <td><div class="vant-asis"><span class="v-icon">📧</span>Mail e meeting continui</div></td>
+              <td><div class="vant-good"><span class="v-icon">🤖</span>Chatbot integrata — zero riunioni</div></td>
+            </tr>
+            <tr>
+              <td><div class="vant-asis"><span class="v-icon">🔀</span>Informazioni frammentate</div></td>
+              <td><div class="vant-good"><span class="v-icon">🗂️</span>Hub documentale unico</div></td>
+            </tr>
+            <tr>
+              <td><div class="vant-asis"><span class="v-icon">⚙️</span>Processi manuali</div></td>
+              <td><div class="vant-good"><span class="v-icon">📊</span>Automatismi e dashboard in tempo reale</div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
   </section>
 
-  <!-- ══ PROCESSO ══ -->
   <section class="processo-section">
     <div class="proc-header">
       <div class="sec-eyebrow">Il Processo di 3AuditFlow</div>
@@ -1194,7 +1209,6 @@ nav{
     </div>
   </section>
 
-  <!-- CONTACT – solo in page 1 (MODIFICA 1) -->
   <div class="contact-strip" id="contact-vetrina">
     <div class="cs-text">
       <h3>Vuoi saperne di più?</h3>
@@ -1221,9 +1235,6 @@ nav{
   </footer>
 </div>
 
-<!-- ══════════════════════════════
-     PAGE 2 – L'APPLICATIVO
-══════════════════════════════ -->
 <div id="page-prodotto" class="page">
   <section class="p2-hero">
     <div class="p2-hero-inner">
@@ -1318,12 +1329,10 @@ nav{
     </div>
   </section>
 
-  <!-- ══ 6 FASI CON AI (MODIFICA 6) ══ -->
   <section class="p2-process">
     <div class="sec-eyebrow">Il ciclo completo</div>
     <h2 class="sec-title">6 fasi, <em>un'unica piattaforma.</em></h2>
 
-    <!-- AI callout ispirato al testo della Home -->
     <div class="ai-phase-block">
       <span class="aipb-icon">🤖</span>
       <div class="aipb-content">
@@ -1346,7 +1355,6 @@ nav{
     </div>
   </section>
 
-  <!-- ══ MOCKUP AI INTERATTIVO (MODIFICA 4) ══ -->
   <section class="ai-mockup-section">
     <div class="ai-mockup-header">
       <div class="sec-eyebrow">Demo interattiva</div>
@@ -1356,7 +1364,6 @@ nav{
 
     <div class="ai-mockup-grid">
 
-      <!-- PANNELLO SINISTRA: Questionario -->
       <div class="mockup-panel">
         <div class="mockup-panel-bar">
           <div class="mdot" style="background:#ff5f57"></div>
@@ -1407,7 +1414,6 @@ nav{
         </div>
       </div>
 
-      <!-- PANNELLO DESTRA: AI -->
       <div class="mockup-panel">
         <div class="mockup-panel-bar">
           <div class="mdot" style="background:#ff5f57"></div>
@@ -1425,7 +1431,6 @@ nav{
           </div>
 
           <div class="ai-log" id="ai-log">
-            <!-- messaggio iniziale -->
             <div class="ai-msg info">
               <div class="ai-msg-icon">ℹ️</div>
               <div class="ai-msg-bubble">
@@ -1458,7 +1463,6 @@ nav{
     </div>
   </section>
 
-  <!-- FOOTER PAGE 2 – senza contact strip (MODIFICA 1) -->
   <footer class="site-footer">
     <div class="foot-inner">
       <div class="foot-brand">
@@ -1473,11 +1477,7 @@ nav{
   </footer>
 </div>
 
-<!-- ══════════════════════════════
-     PAGE 3 – ACCESSO
-══════════════════════════════ -->
 <div id="page-accesso" class="page">
-  <!-- SOLO il form di login, nessuna contact strip (MODIFICA 1) -->
   <div class="p3-wrap">
     <div class="p3-grid-bg"></div>
     <div class="p3-card">
@@ -1520,7 +1520,6 @@ nav{
   </div>
 </div>
 
-<!-- LIGHTBOX -->
 <div id="lightbox" onclick="closeLightbox()">
   <div class="lb-wrap" onclick="event.stopPropagation()">
     <video id="lb-video" controls style="width:100%;height:auto;display:none;max-height:80vh"></video>
@@ -1530,7 +1529,22 @@ nav{
 </div>
 
 <script>
-/* ─── NAVIGAZIONE ─── */
+/* ─── NAVIGAZIONE MOBILE ─── */
+function toggleMobileMenu() {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navCenter = document.getElementById('nav-center');
+    const mobileCTA = document.getElementById('mobile-cta');
+    
+    menuToggle.classList.toggle('open');
+    navCenter.classList.toggle('mobile-open');
+    
+    // Mostra CTA nel menu solo se siamo da mobile
+    if (window.innerWidth <= 960) {
+        mobileCTA.style.display = navCenter.classList.contains('mobile-open') ? 'block' : 'none';
+    }
+}
+
+/* ─── NAVIGAZIONE PAGINE ─── */
 const PAGES=['vetrina','prodotto','accesso'];
 function showPage(n){
   PAGES.forEach(p=>{
@@ -1538,6 +1552,11 @@ function showPage(n){
     const t=document.getElementById('tab-'+p);
     if(t)t.classList.toggle('active',p===n);
   });
+  
+  // Chiude il menu mobile se aperto
+  document.querySelector('.menu-toggle').classList.remove('open');
+  document.getElementById('nav-center').classList.remove('mobile-open');
+  
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function scrollContact(){
@@ -1548,7 +1567,7 @@ function scrollContact(){
   },300);
 }
 
-/* ─── CAROSELLO – 12 secondi (MODIFICA 5) ─── */
+/* ─── CAROSELLO ─── */
 let cur=0,total=3,timer;
 function goTo(n){
   document.getElementById('s'+cur).classList.remove('active');
@@ -1605,9 +1624,8 @@ function p3Tab(t){
 }
 
 /* ═══════════════════════════════════════
-   MOCKUP AI INTERATTIVO (MODIFICA 4)
+   MOCKUP AI INTERATTIVO
 ═══════════════════════════════════════ */
-
 let mockupState = { q1: '', q2: '', q3: '' };
 let aiMsgCount = 0;
 let isAnalyzing = false;
@@ -1678,15 +1696,12 @@ function sendToAI(){
   document.getElementById('mockup-send-btn').disabled = true;
   document.getElementById('mockup-send-btn').textContent = '⏳ Analisi in corso…';
 
-  // Svuota log precedente (tranne il primo msg)
   const log = document.getElementById('ai-log');
   log.innerHTML = '';
 
-  // Mostra typing
   const typing = document.getElementById('ai-typing');
   typing.classList.add('visible');
 
-  // Analizza le risposte
   const q1 = mockupState.q1.toLowerCase();
   const q2 = mockupState.q2;
   const q3 = mockupState.q3;
@@ -1709,10 +1724,8 @@ function sendToAI(){
 
   const messages = [];
 
-  // Messaggio 1: avvio
   messages.push({ type:'info', status:'Analisi avviata', text:'Elaborazione in corso per la sezione 4 — Gestione degli incidenti. Verifica di conformità NIS2 e livello CMMI.', delay:800 });
 
-  // Messaggio 2: valutazione q1
   if(q1.length === 0){
     messages.push({ type:'pending', status:'Risposta mancante', text:'<strong>4.1 Politica di risposta:</strong> Campo non compilato. La normativa NIS2 richiede una procedura formale documentata. Stato: ⚠️ Non valutabile.', delay:1600 });
   } else if(q1Bad){
@@ -1721,7 +1734,6 @@ function sendToAI(){
     messages.push({ type:'accepted', status:'Documento accettato', text:'<strong>4.1 Politica di risposta:</strong> Procedura descritta in modo adeguato. Riscontrata strutturazione formale del processo. Conforme ai requisiti NIS2.', delay:1600 });
   }
 
-  // Messaggio 3: valutazione q2
   if(q2 === ''){
     messages.push({ type:'pending', status:'Livello CMMI mancante', text:'<strong>4.2 Maturità del processo:</strong> Nessun livello selezionato. Impossibile calcolare il risk score per questa dimensione.', delay:2500 });
   } else if(q2Bad){
@@ -1732,7 +1744,6 @@ function sendToAI(){
     messages.push({ type:'accepted', status:'Livello CMMI accettabile', text:`<strong>4.2 Maturità del processo:</strong> Livello CMMI ${q2} rilevato. Processi standardizzati. Conformità sufficiente, miglioramenti raccomandati.`, delay:2500 });
   }
 
-  // Messaggio 4: valutazione q3
   if(q3 === '' || q3 === 'none'){
     messages.push({ type:'rejected', status:'Evidenza non disponibile', text:'<strong>4.3 Evidenza documentale:</strong> Nessuna evidenza allegata. L\'assenza di documentazione a supporto comporta un gap significativo nella conformità NIS2. Azione correttiva necessaria.', delay:3400 });
   } else if(q3 === 'partial'){
@@ -1741,7 +1752,6 @@ function sendToAI(){
     messages.push({ type:'accepted', status:'Documento accettato', text:'<strong>4.3 Evidenza documentale:</strong> Documentazione completa o certificata presente. Evidenza verificabile. Conforme ai requisiti di audit.', delay:3400 });
   }
 
-  // Messaggio finale: riepilogo
   const riskLabel = riskScore >= 70 ? '🔴 Alto' : riskScore >= 40 ? '🟡 Medio' : '🟢 Basso';
   messages.push({
     type: riskScore >= 70 ? 'rejected' : riskScore >= 40 ? 'pending' : 'accepted',
@@ -1752,7 +1762,6 @@ function sendToAI(){
 
   messages.forEach(m => addAIMessage(m.type, m.status, m.text, m.delay));
 
-  // Nascondi typing e aggiorna score badge
   setTimeout(()=>{
     typing.classList.remove('visible');
     const badge = document.getElementById('ai-score-badge');
@@ -1762,7 +1771,6 @@ function sendToAI(){
     badge.style.background = color + '11';
     badge.textContent = `📊 Risk Score: ${riskScore}/100`;
 
-    // Ripristina bottone
     document.getElementById('mockup-send-btn').textContent = '🤖 Nuova valutazione';
     document.getElementById('mockup-send-btn').disabled = false;
     isAnalyzing = false;
