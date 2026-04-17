@@ -2,210 +2,442 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>3AuditFlow – Demo Interattiva</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
+/* ═══════════════════════════════════════════
+   ROOT
+═══════════════════════════════════════════ */
 :root{
-  --bg:#f0f2f7;--surface:#ffffff;--border:#e2e5ee;
-  --text:#1a2a6c;--text-muted:#7b8ab8;
-  --accent:#00c6ff;--gradient:linear-gradient(135deg,#00c6ff,#1a2a6c);
+  --bg:#f0f2f7;
+  --surface:#ffffff;
+  --border:#e2e5ee;
+  --text:#1a2a6c;
+  --text-muted:#7b8ab8;
+  --accent:#00c6ff;
+  --gradient:linear-gradient(135deg,#00c6ff,#1a2a6c);
   --sidebar-bg:linear-gradient(180deg,#0d0d1a 0%,#1a2a6c 100%);
   --topbar-bg:linear-gradient(90deg,#0d1a3e 0%,#1a2a6c 100%);
-  --sidebar-w:230px;--sidebar-w-col:56px;--topbar-h:62px;
-  --green:#1D9E75;--red:#D85A30;--yellow:#D4A017;
+  --sidebar-w:230px;
+  --sidebar-w-col:56px;
+  --topbar-h:58px;
+  --green:#1D9E75;
+  --red:#D85A30;
+  --yellow:#D4A017;
   --shadow:0 4px 20px rgba(26,42,108,.08);
+  --radius:12px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow:hidden}
+html{font-size:16px}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  height:100%;
+  overflow:hidden;
+  -webkit-tap-highlight-color:transparent;
+}
 
-/*  OVERLAY  */
-.demo-overlay{position:fixed;inset:0;z-index:9999;background:rgba(6,14,31,.97);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:22px;animation:fadeIn .4s ease}
+/* ═══════════════════════════════════════════
+   OVERLAY INTRO
+═══════════════════════════════════════════ */
+.demo-overlay{
+  position:fixed;inset:0;z-index:9999;
+  background:rgba(6,14,31,.97);
+  backdrop-filter:blur(10px);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:20px;
+  padding:24px 20px;
+  animation:fadeIn .4s ease;
+}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.demo-overlay-title{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:700;color:#fff;text-align:center;letter-spacing:-1px;line-height:1.15}
-.demo-overlay-title em{color:#00c6ff;font-style:italic}
-.demo-overlay-sub{font-size:14px;color:rgba(255,255,255,.5);text-align:center;max-width:520px;line-height:1.75}
-.demo-overlay-btns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:8px}
-.demo-start-btn{padding:14px 38px;border-radius:10px;font-size:15px;font-weight:700;background:linear-gradient(135deg,#00c6ff,#1a2a6c);color:#fff;border:none;cursor:pointer;box-shadow:0 0 28px rgba(0,198,255,.4);transition:all .2s;font-family:'Inter',sans-serif;display:inline-flex;align-items:center;gap:9px}
-.demo-start-btn:hover{transform:translateY(-2px);box-shadow:0 6px 32px rgba(0,198,255,.6)}
-.demo-back-btn{padding:14px 26px;border-radius:10px;font-size:14px;font-weight:500;background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.15);cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
-.demo-back-btn:hover{background:rgba(255,255,255,.13);color:#fff}
-.overlay-badge{display:flex;align-items:center;gap:8px;background:rgba(0,198,255,.1);border:1px solid rgba(0,198,255,.25);border-radius:99px;padding:6px 16px;font-size:12px;color:#00c6ff;font-weight:600;letter-spacing:.5px}
+.overlay-badge{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(0,198,255,.1);border:1px solid rgba(0,198,255,.25);
+  border-radius:99px;padding:6px 16px;
+  font-size:12px;color:#00c6ff;font-weight:600;letter-spacing:.5px;
+}
 .overlay-dot{width:8px;height:8px;border-radius:50%;background:#00c6ff;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.4);opacity:.6}}
-.app-shell{display:flex;height:100vh;overflow:hidden}
+.demo-overlay-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(26px,6vw,40px);
+  font-weight:700;color:#fff;text-align:center;
+  letter-spacing:-1px;line-height:1.15;
+}
+.demo-overlay-title em{color:#00c6ff;font-style:italic}
+.demo-overlay-sub{
+  font-size:clamp(13px,3.5vw,15px);
+  color:rgba(255,255,255,.5);
+  text-align:center;max-width:480px;line-height:1.75;
+}
+.demo-overlay-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:4px}
+.demo-start-btn{
+  padding:13px 32px;border-radius:10px;
+  font-size:15px;font-weight:700;
+  background:linear-gradient(135deg,#00c6ff,#1a2a6c);
+  color:#fff;border:none;cursor:pointer;
+  box-shadow:0 0 28px rgba(0,198,255,.4);
+  transition:all .2s;font-family:'Inter',sans-serif;
+  display:inline-flex;align-items:center;gap:9px;
+}
+.demo-start-btn:hover,.demo-start-btn:active{transform:translateY(-2px);box-shadow:0 6px 32px rgba(0,198,255,.6)}
+.demo-back-btn{
+  padding:13px 22px;border-radius:10px;font-size:14px;font-weight:500;
+  background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);
+  border:1px solid rgba(255,255,255,.15);cursor:pointer;
+  font-family:'Inter',sans-serif;transition:all .2s;
+  text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+}
+.demo-back-btn:hover{background:rgba(255,255,255,.13);color:#fff}
+
+/* ═══════════════════════════════════════════
+   APP SHELL
+═══════════════════════════════════════════ */
+.app-shell{display:flex;height:100dvh;overflow:hidden;position:relative}
+
+/* ═══════════════════════════════════════════
+   SIDEBAR OVERLAY (mobile)
+═══════════════════════════════════════════ */
+.sidebar-overlay{
+  display:none;
+  position:fixed;inset:0;z-index:89;
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(2px);
+  animation:fadeIn .25s ease;
+}
+.sidebar-overlay.open{display:block}
+
+/* ═══════════════════════════════════════════
+   SIDEBAR
+═══════════════════════════════════════════ */
+.sidebar{
+  position:fixed;top:var(--topbar-h);left:0;
+  width:var(--sidebar-w);min-width:var(--sidebar-w);
+  height:calc(100dvh - var(--topbar-h));
+  background:var(--sidebar-bg);
+  display:flex;flex-direction:column;
+  overflow-y:auto;overflow-x:hidden;
+  z-index:90;
+  transition:transform .28s cubic-bezier(.4,0,.2,1),width .25s cubic-bezier(.4,0,.2,1);
+  scrollbar-width:thin;scrollbar-color:rgba(0,198,255,.3) transparent;
+}
+.sidebar::-webkit-scrollbar{width:3px}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(0,198,255,.3);border-radius:3px}
+
+/* Desktop collapsed */
+.sidebar.collapsed{width:var(--sidebar-w-col);min-width:var(--sidebar-w-col)}
+
+/* Mobile: hidden off-screen by default, slides in */
+@media(max-width:767px){
+  .sidebar{
+    transform:translateX(-100%);
+    width:var(--sidebar-w) !important;
+    min-width:var(--sidebar-w) !important;
+    box-shadow:4px 0 24px rgba(0,0,0,.4);
+  }
+  .sidebar.mobile-open{transform:translateX(0)}
+}
+
+.sidebar-burger{
+  width:100%;display:flex;align-items:center;justify-content:flex-end;
+  padding:12px 16px;
+  background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.08);
+  color:rgba(255,255,255,.4);font-size:13px;cursor:pointer;
+  transition:color .2s,background .2s;min-height:44px;
+}
+.sidebar-burger:hover,.sidebar-burger:active{color:#00c6ff;background:rgba(0,198,255,.08)}
+.sidebar.collapsed .sidebar-burger{justify-content:center;padding:12px 0}
+@media(max-width:767px){.sidebar-burger{justify-content:flex-end !important;padding:12px 16px !important}}
+
+.sidebar-nav{list-style:none;padding:8px 0 80px;flex:1}
+.sidebar-section{margin-bottom:4px}
+.sidebar-label{
+  display:block;padding:14px 20px 5px;
+  font-size:9px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;
+  color:rgba(255,255,255,.3);white-space:nowrap;overflow:hidden;
+  transition:opacity .2s,padding .25s;
+}
+.sidebar.collapsed .sidebar-label{opacity:0;height:0;padding:0;pointer-events:none}
+@media(max-width:767px){.sidebar-label{opacity:1 !important;height:auto !important;padding:14px 20px 5px !important;pointer-events:auto !important}}
+
+.sidebar-submenu{list-style:none;padding:0}
+.sidebar-submenu li .sb-link{
+  display:flex;align-items:center;gap:11px;
+  padding:11px 20px 11px 22px;
+  font-size:13px;font-weight:500;color:rgba(255,255,255,.65);
+  text-decoration:none;cursor:pointer;
+  border-left:3px solid transparent;transition:all .2s;
+  white-space:nowrap;overflow:hidden;min-height:44px;
+}
+.sidebar-submenu li .sb-link i{font-size:13px;color:rgba(255,255,255,.4);flex-shrink:0;width:16px;text-align:center}
+.sidebar-submenu li .sb-link:hover,.sidebar-submenu li .sb-link:active{color:#fff;background:rgba(255,255,255,.07);border-left-color:rgba(0,198,255,.5)}
+.sidebar-submenu li .sb-link:hover i,.sidebar-submenu li .sb-link:active i{color:#00c6ff}
+.sidebar-submenu li .sb-link.active{color:#00c6ff;background:rgba(0,198,255,.1);border-left-color:#00c6ff;font-weight:700}
+.sidebar-submenu li .sb-link.active i{color:#00c6ff}
+
+.sidebar.collapsed .sidebar-submenu li .sb-link{padding:12px 0;justify-content:center;border-left:3px solid transparent;margin:2px 6px;border-radius:8px;gap:0}
+.sidebar.collapsed .sidebar-submenu li .sb-link i{font-size:16px;width:auto}
+.sidebar.collapsed .sidebar-submenu li .sb-link span{display:none}
+.sidebar.collapsed .sidebar-submenu li .sb-link:hover,.sidebar.collapsed .sidebar-submenu li .sb-link.active{border-left-color:transparent}
+
+@media(max-width:767px){
+  .sidebar-submenu li .sb-link{padding:11px 20px 11px 22px !important;justify-content:flex-start !important;border-radius:0 !important;margin:0 !important;gap:11px !important}
+  .sidebar-submenu li .sb-link i{font-size:13px !important;width:16px !important}
+  .sidebar-submenu li .sb-link span{display:inline !important}
+  .sidebar-submenu li .sb-link:hover{border-left-color:rgba(0,198,255,.5) !important}
+  .sidebar-submenu li .sb-link.active{border-left-color:#00c6ff !important}
+}
+
+/* ═══════════════════════════════════════════
+   TOPBAR
+═══════════════════════════════════════════ */
 .topbar{
   position:fixed;top:0;left:0;right:0;
   height:var(--topbar-h);
   background:var(--topbar-bg);
   border-bottom:1px solid rgba(255,255,255,.06);
   display:flex;align-items:center;
-  padding:0 20px;
+  padding:0 16px;
   z-index:100;
   box-shadow:0 2px 16px rgba(0,0,0,.5);
-  gap:16px;
+  gap:12px;
 }
 
-/* Logo area */
+/* Hamburger mobile (sostituisce burger sidebar su mobile) */
+.topbar-hamburger{
+  display:none;
+  width:40px;height:40px;border-radius:8px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  align-items:center;justify-content:center;
+  color:rgba(255,255,255,.7);font-size:16px;
+  cursor:pointer;flex-shrink:0;transition:all .2s;
+}
+.topbar-hamburger:hover{background:rgba(0,198,255,.2);color:#00c6ff}
+@media(max-width:767px){.topbar-hamburger{display:flex}}
+
+/* Logo */
 .topbar-logo{
-  display:flex;align-items:center;gap:10px;
+  display:flex;align-items:center;gap:8px;
   flex-shrink:0;cursor:pointer;
-  width:200px;
 }
-.topbar-logo-img{height:28px;object-fit:contain;flex-shrink:0}
-.topbar-logo-txt{height:36px;object-fit:contain;overflow:hidden;transition:opacity .2s,width .25s;white-space:nowrap}
-.topbar-logo.collapsed .topbar-logo-txt{opacity:0;width:0}
+.topbar-logo-img{height:26px;object-fit:contain;flex-shrink:0}
+.topbar-logo-txt{height:32px;object-fit:contain;overflow:hidden;transition:opacity .2s,width .25s;white-space:nowrap}
+@media(max-width:400px){.topbar-logo-txt{display:none}}
 
-/* SEARCH BAR*/
+/* Search – nascosta su mobile piccolo */
 .topbar-search{
-  flex:1;
-  display:flex;align-items:center;gap:10px;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:8px;
-  padding:8px 16px;
-  max-width:520px;
-  cursor:text;
-  transition:all .2s;
+  flex:1;display:flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);
+  border-radius:8px;padding:8px 14px;max-width:460px;cursor:text;transition:all .2s;
 }
 .topbar-search:hover{background:rgba(255,255,255,.12);border-color:rgba(0,198,255,.3)}
-.topbar-search i{font-size:13px;color:rgba(255,255,255,.4);flex-shrink:0}
-.topbar-search span{font-size:13px;color:rgba(255,255,255,.35);font-weight:400}
-.topbar-spacer{flex:1}
-.topbar-icons{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.tb-icon{
-  width:38px;height:38px;border-radius:50%;
-  background:rgba(0,198,255,.18);
-  border:none;
-  display:flex;align-items:center;justify-content:center;
-  color:#00c6ff;font-size:15px;
-  cursor:pointer;transition:all .2s;position:relative;
-  flex-shrink:0;
-}
-.tb-icon:hover{background:rgba(0,198,255,.32);transform:scale(1.07)}
-.tb-icon.neutral{background:transparent;color:rgba(255,255,255,.7);border:none}
-.tb-icon.neutral:hover{background:rgba(255,255,255,.1);color:#fff}
-.tb-notif-dot{
-  position:absolute;top:4px;right:4px;
-  width:9px;height:9px;border-radius:50%;
-  background:#ef4444;border:2px solid #1a2a6c;
-}
+.topbar-search i{font-size:12px;color:rgba(255,255,255,.4);flex-shrink:0}
+.topbar-search span{font-size:12px;color:rgba(255,255,255,.35);font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:900px){.topbar-search{max-width:260px}}
+@media(max-width:640px){.topbar-search{display:none}}
 
-/* USER */
-.topbar-user{
-  display:flex;align-items:center;gap:10px;
-  background:rgba(0,198,255,.15);
-  border:1.5px solid rgba(0,198,255,.3);
-  border-radius:99px;
-  padding:4px 16px 4px 4px;
-  cursor:pointer;transition:all .2s;flex-shrink:0;margin-left:6px;
+/* Spacer */
+.topbar-spacer{flex:1}
+
+/* Icons */
+.topbar-icons{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.tb-icon{
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(0,198,255,.18);border:none;
+  display:flex;align-items:center;justify-content:center;
+  color:#00c6ff;font-size:14px;cursor:pointer;
+  transition:all .2s;position:relative;flex-shrink:0;
 }
-.topbar-user:hover{background:rgba(0,198,255,.25);border-color:rgba(0,198,255,.5)}
+.tb-icon:hover,.tb-icon:active{background:rgba(0,198,255,.32);transform:scale(1.07)}
+.tb-icon.neutral{background:transparent;color:rgba(255,255,255,.7)}
+.tb-icon.neutral:hover{background:rgba(255,255,255,.1);color:#fff}
+.tb-notif-dot{position:absolute;top:3px;right:3px;width:9px;height:9px;border-radius:50%;background:#ef4444;border:2px solid #1a2a6c}
+/* Nascondi alcune icone su mobile piccolo */
+@media(max-width:480px){.tb-icon.hide-xs{display:none}}
+
+/* User badge */
+.topbar-user{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(0,198,255,.15);border:1.5px solid rgba(0,198,255,.3);
+  border-radius:99px;padding:3px 12px 3px 3px;
+  cursor:pointer;transition:all .2s;flex-shrink:0;margin-left:4px;
+}
+.topbar-user:hover{background:rgba(0,198,255,.25)}
 .topbar-user-av{
-  width:32px;height:32px;border-radius:50%;
+  width:30px;height:30px;border-radius:50%;
   background:linear-gradient(135deg,#00c6ff,#1a2a6c);
   display:flex;align-items:center;justify-content:center;
-  font-size:12px;font-weight:800;color:#fff;
-  flex-shrink:0;letter-spacing:.5px;
+  font-size:11px;font-weight:800;color:#fff;flex-shrink:0;
 }
-.topbar-user-name{font-size:13px;font-weight:600;color:#fff;white-space:nowrap}
+.topbar-user-name{font-size:12px;font-weight:600;color:#fff;white-space:nowrap}
+@media(max-width:480px){.topbar-user-name{display:none}}
+@media(max-width:480px){.topbar-user{padding:3px 3px}}
 
-/* SIDEBAR  */
-.sidebar{position:fixed;top:var(--topbar-h);left:0;width:var(--sidebar-w);min-width:var(--sidebar-w);height:calc(100vh - var(--topbar-h));background:var(--sidebar-bg);display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;z-index:90;transition:width .25s cubic-bezier(.4,0,.2,1),min-width .25s cubic-bezier(.4,0,.2,1);scrollbar-width:thin;scrollbar-color:rgba(0,198,255,.3) transparent}
-.sidebar::-webkit-scrollbar{width:3px}
-.sidebar::-webkit-scrollbar-thumb{background:rgba(0,198,255,.3);border-radius:3px}
-.sidebar.collapsed{width:var(--sidebar-w-col);min-width:var(--sidebar-w-col)}
-.sidebar-burger{width:100%;display:flex;align-items:center;justify-content:flex-end;padding:12px 16px;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.4);font-size:13px;cursor:pointer;transition:color .2s,background .2s}
-.sidebar-burger:hover{color:#00c6ff;background:rgba(0,198,255,.08)}
-.sidebar.collapsed .sidebar-burger{justify-content:center;padding:12px 0}
-.sidebar-nav{list-style:none;padding:8px 0 24px;flex:1}
-.sidebar-section{margin-bottom:4px}
-.sidebar-label{display:block;padding:14px 20px 5px;font-size:9px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:rgba(255,255,255,.3);white-space:nowrap;overflow:hidden;transition:opacity .2s,padding .25s}
-.sidebar.collapsed .sidebar-label{opacity:0;height:0;padding:0;pointer-events:none}
-.sidebar-submenu{list-style:none;padding:0}
-.sidebar-submenu li .sb-link{display:flex;align-items:center;gap:11px;padding:9px 20px 9px 22px;font-size:13px;font-weight:500;color:rgba(255,255,255,.65);text-decoration:none;cursor:pointer;border-left:3px solid transparent;transition:all .2s;white-space:nowrap;overflow:hidden}
-.sidebar-submenu li .sb-link i{font-size:13px;color:rgba(255,255,255,.4);flex-shrink:0;width:16px;text-align:center}
-.sidebar-submenu li .sb-link:hover{color:#fff;background:rgba(255,255,255,.07);border-left-color:rgba(0,198,255,.5)}
-.sidebar-submenu li .sb-link:hover i{color:#00c6ff}
-.sidebar-submenu li .sb-link.active{color:#00c6ff;background:rgba(0,198,255,.1);border-left-color:#00c6ff;font-weight:700}
-.sidebar-submenu li .sb-link.active i{color:#00c6ff}
-.sidebar.collapsed .sidebar-submenu li .sb-link{padding:10px 0;justify-content:center;border-left:3px solid transparent;margin:2px 6px;border-radius:8px;gap:0}
-.sidebar.collapsed .sidebar-submenu li .sb-link i{font-size:16px;width:auto}
-.sidebar.collapsed .sidebar-submenu li .sb-link span{display:none}
-.sidebar.collapsed .sidebar-submenu li .sb-link:hover,.sidebar.collapsed .sidebar-submenu li .sb-link.active{border-left-color:transparent}
-
-/*  MAIN  */
-.main-content{margin-left:var(--sidebar-w);margin-top:var(--topbar-h);flex:1;height:calc(100vh - var(--topbar-h));overflow-y:auto;padding:22px 22px 60px;transition:margin-left .25s cubic-bezier(.4,0,.2,1);background:var(--bg)}
+/* ═══════════════════════════════════════════
+   MAIN CONTENT
+═══════════════════════════════════════════ */
+.main-content{
+  margin-left:var(--sidebar-w);
+  margin-top:var(--topbar-h);
+  flex:1;
+  height:calc(100dvh - var(--topbar-h));
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding:20px 20px 100px;
+  transition:margin-left .25s cubic-bezier(.4,0,.2,1);
+  background:var(--bg);
+  -webkit-overflow-scrolling:touch;
+}
 .main-content.collapsed{margin-left:var(--sidebar-w-col)}
-
-.back-to-site{
-  position:fixed;
-  bottom:22px;left:22px;
-  z-index:200;
-  display:flex;align-items:center;gap:7px;
-  padding:7px 16px;
-  background:rgba(13,26,62,.92);backdrop-filter:blur(10px);
-  color:rgba(255,255,255,.75);
-  border:1px solid rgba(255,255,255,.18);
-  border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;
-  font-family:'Inter',sans-serif;text-decoration:none;transition:all .2s;
+@media(max-width:767px){
+  .main-content{margin-left:0 !important;padding:14px 14px 120px}
 }
-.back-to-site:hover{background:rgba(0,198,255,.2);border-color:#00c6ff;color:#fff}
+@media(max-width:400px){
+  .main-content{padding:10px 10px 120px}
+}
 
-.page-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;flex-wrap:wrap;gap:10px}
-.page-title-group{display:flex;align-items:center;gap:14px}
-.page-title-bar{width:4px;height:36px;border-radius:2px;background:var(--gradient);flex-shrink:0}
-.page-title{font-size:20px;font-weight:700;color:var(--text)}
-.page-subtitle{font-size:13px;color:var(--text-muted);margin-top:2px}
+/* ═══════════════════════════════════════════
+   PAGE HEADER
+═══════════════════════════════════════════ */
+.page-header{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  margin-bottom:14px;gap:10px;flex-wrap:wrap;
+}
+.page-title-group{display:flex;align-items:center;gap:12px}
+.page-title-bar{width:4px;height:34px;border-radius:2px;background:var(--gradient);flex-shrink:0}
+.page-title{font-size:clamp(15px,4vw,20px);font-weight:700;color:var(--text)}
+.page-subtitle{font-size:clamp(11px,3vw,13px);color:var(--text-muted);margin-top:2px}
+.examples-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;
+  background:rgba(26,42,108,.07);color:var(--text);border:1.5px solid var(--border);
+  cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;white-space:nowrap;
+  min-height:38px;
+}
+.examples-btn:hover,.examples-btn:active{border-color:var(--accent);color:var(--accent);background:rgba(0,198,255,.06)}
 
-/* INFO CARD */
-.info-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 18px;display:flex;align-items:center;flex-wrap:wrap;margin-bottom:14px;box-shadow:var(--shadow);overflow-x:auto;gap:0}
-.info-field{display:flex;flex-direction:column;gap:2px;padding:0 16px}
+/* ═══════════════════════════════════════════
+   INFO CARD
+═══════════════════════════════════════════ */
+.info-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:12px 16px;display:flex;align-items:center;flex-wrap:wrap;
+  margin-bottom:12px;box-shadow:var(--shadow);gap:10px 0;overflow-x:auto;
+}
+.info-field{display:flex;flex-direction:column;gap:2px;padding:0 14px}
 .info-field:first-child{padding-left:0}
-.info-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text-muted)}
-.info-value{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap}
-.info-div{width:1px;height:32px;background:var(--border);flex-shrink:0}
-.tag-fase{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:600;background:rgba(0,198,255,.1);color:#00c6ff;border:1px solid rgba(0,198,255,.2)}
-.tag-stato{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:600;background:rgba(29,158,117,.1);color:var(--green);border:1px solid rgba(29,158,117,.2)}
+.info-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text-muted)}
+.info-value{font-size:12px;font-weight:600;color:var(--text);white-space:nowrap}
+.info-div{width:1px;height:28px;background:var(--border);flex-shrink:0}
+.tag-fase{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:99px;font-size:10px;font-weight:600;background:rgba(0,198,255,.1);color:#00c6ff;border:1px solid rgba(0,198,255,.2)}
+.tag-stato{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:99px;font-size:10px;font-weight:600;background:rgba(29,158,117,.1);color:var(--green);border:1px solid rgba(29,158,117,.2)}
+@media(max-width:600px){
+  .info-card{gap:8px}
+  .info-div{display:none}
+  .info-field{padding:0;flex-direction:row;align-items:center;gap:6px;width:calc(50% - 4px)}
+  .info-label{min-width:70px}
+}
 
-/* STEP PROGRESS */
-.step-progress{display:flex;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 20px;margin-bottom:14px;box-shadow:var(--shadow)}
-.sp-step{display:flex;align-items:center;gap:9px;flex:1}
-.sp-circle{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;background:var(--bg);border:2px solid var(--border);color:var(--text-muted);transition:all .3s}
+/* ═══════════════════════════════════════════
+   STEP PROGRESS (scrollabile su mobile)
+═══════════════════════════════════════════ */
+.step-progress{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:12px 16px;margin-bottom:12px;box-shadow:var(--shadow);
+  display:flex;align-items:center;
+  overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
+}
+.step-progress::-webkit-scrollbar{display:none}
+.sp-step{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.sp-circle{
+  width:28px;height:28px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;
+  background:var(--bg);border:2px solid var(--border);color:var(--text-muted);
+  transition:all .3s;
+}
 .sp-step.done .sp-circle{background:rgba(29,158,117,.12);border-color:var(--green);color:var(--green)}
 .sp-step.active .sp-circle{background:rgba(0,198,255,.12);border-color:var(--accent);color:var(--accent);box-shadow:0 0 0 3px rgba(0,198,255,.1)}
-.sp-info{flex:1}
-.sp-label{font-size:11px;font-weight:700;color:var(--text)}
-.sp-sub{font-size:10px;color:var(--text-muted)}
+.sp-info{flex-shrink:0}
+.sp-label{font-size:10px;font-weight:700;color:var(--text);white-space:nowrap}
+.sp-sub{font-size:9px;color:var(--text-muted);white-space:nowrap}
 .sp-step.active .sp-label{color:var(--accent)}
-.sp-line{flex:0 0 32px;height:2px;background:var(--border);margin:0 3px;transition:background .3s}
+.sp-line{flex:0 0 24px;height:2px;background:var(--border);margin:0 2px;flex-shrink:0}
 .sp-line.done{background:var(--green)}
-.progress-summary{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 18px;margin-bottom:14px;display:flex;align-items:center;gap:16px;box-shadow:var(--shadow);flex-wrap:wrap}
-.ps-stat{display:flex;flex-direction:column}
-.ps-val{font-size:22px;font-weight:800;color:var(--text)}
-.ps-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-top:1px}
-.ps-div{width:1px;height:36px;background:var(--border)}
-.ps-progress-wrap{flex:1;min-width:120px}
-.ps-progress-label{font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:5px;display:flex;justify-content:space-between}
-.ps-progress-track{height:8px;border-radius:99px;background:var(--bg);border:1px solid var(--border);overflow:hidden}
-.ps-progress-fill{height:100%;border-radius:99px;background:var(--gradient);transition:width .5s ease}
-.examples-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:8px;font-size:12px;font-weight:700;background:rgba(26,42,108,.07);color:var(--text);border:1.5px solid var(--border);cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif}
-.examples-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(0,198,255,.06)}
-.qa-layout{display:grid;grid-template-columns:285px 1fr;gap:16px;align-items:start}
+@media(max-width:600px){
+  .sp-info{display:none}
+  .sp-line{flex:0 0 16px}
+  .sp-circle{width:26px;height:26px;font-size:10px}
+}
 
-/* QUESTION PANEL */
-.q-panel{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);position:sticky;top:14px}
-.q-panel-header{padding:12px 14px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(26,42,108,.05),rgba(0,198,255,.03))}
-.q-panel-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted)}
-.q-panel-subtitle{font-size:13px;font-weight:600;color:var(--text);margin-top:3px}
-.q-list{list-style:none;max-height:440px;overflow-y:auto}
+/* ═══════════════════════════════════════════
+   PROGRESS SUMMARY
+═══════════════════════════════════════════ */
+.progress-summary{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:12px 16px;margin-bottom:14px;
+  display:flex;align-items:center;gap:14px;
+  box-shadow:var(--shadow);flex-wrap:wrap;
+}
+.ps-stat{display:flex;flex-direction:column}
+.ps-val{font-size:20px;font-weight:800;color:var(--text)}
+.ps-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-top:1px}
+.ps-div{width:1px;height:32px;background:var(--border)}
+.ps-progress-wrap{flex:1;min-width:100px}
+.ps-progress-label{font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:5px;display:flex;justify-content:space-between}
+.ps-progress-track{height:7px;border-radius:99px;background:var(--bg);border:1px solid var(--border);overflow:hidden}
+.ps-progress-fill{height:100%;border-radius:99px;background:var(--gradient);transition:width .5s ease}
+@media(max-width:480px){
+  .ps-div{display:none}
+  .ps-stat{flex-direction:row;align-items:baseline;gap:6px}
+  .ps-val{font-size:18px}
+  .ps-label{font-size:9px}
+  .progress-summary{gap:8px}
+}
+
+/* ═══════════════════════════════════════════
+   Q&A LAYOUT
+═══════════════════════════════════════════ */
+.qa-layout{
+  display:grid;
+  grid-template-columns:275px 1fr;
+  gap:14px;
+  align-items:start;
+}
+@media(max-width:1024px){.qa-layout{grid-template-columns:240px 1fr}}
+@media(max-width:767px){.qa-layout{grid-template-columns:1fr}}
+
+/* ═══════════════════════════════════════════
+   QUESTION PANEL
+═══════════════════════════════════════════ */
+.q-panel{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:14px;overflow:hidden;box-shadow:var(--shadow);
+  position:sticky;top:14px;
+}
+@media(max-width:767px){.q-panel{position:static}}
+.q-panel-header{
+  padding:11px 13px;border-bottom:1px solid var(--border);
+  background:linear-gradient(135deg,rgba(26,42,108,.05),rgba(0,198,255,.03));
+}
+.q-panel-title{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted)}
+.q-panel-subtitle{font-size:12px;font-weight:600;color:var(--text);margin-top:2px}
+.q-list{list-style:none;max-height:420px;overflow-y:auto}
+@media(max-width:767px){.q-list{max-height:none;overflow-y:visible}}
 .q-list::-webkit-scrollbar{width:3px}
 .q-list::-webkit-scrollbar-thumb{background:rgba(0,198,255,.2);border-radius:2px}
-.q-item{display:flex;align-items:flex-start;gap:8px;padding:10px 13px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .2s}
+
+.q-item{
+  display:flex;align-items:flex-start;gap:8px;
+  padding:11px 12px;border-bottom:1px solid var(--border);
+  cursor:pointer;transition:background .2s;min-height:52px;
+}
 .q-item:last-child{border-bottom:none}
-.q-item:hover{background:rgba(0,198,255,.04)}
+.q-item:hover,.q-item:active{background:rgba(0,198,255,.04)}
 .q-item.selected{background:rgba(0,198,255,.08);border-left:3px solid var(--accent)}
 .q-item.answered.acc{background:rgba(29,158,117,.06)}
 .q-item.answered.acc.selected{background:rgba(29,158,117,.12);border-left-color:var(--green)}
@@ -213,83 +445,134 @@ html,body{height:100%;font-family:'Inter',sans-serif;background:var(--bg);color:
 .q-item.answered.rej.selected{background:rgba(216,90,48,.1);border-left-color:var(--red)}
 .q-item.answered.wrn{background:rgba(212,160,23,.05)}
 .q-item.answered.wrn.selected{background:rgba(212,160,23,.1);border-left-color:var(--yellow)}
-.q-item-num{width:21px;height:21px;border-radius:50%;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--text-muted);flex-shrink:0;margin-top:1px}
+.q-item-num{
+  width:20px;height:20px;border-radius:50%;flex-shrink:0;margin-top:1px;
+  background:var(--bg);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:9px;font-weight:700;color:var(--text-muted);
+}
 .q-item.selected .q-item-num{background:rgba(0,198,255,.15);border-color:var(--accent);color:var(--accent)}
 .q-item.answered.acc .q-item-num{background:rgba(29,158,117,.15);border-color:var(--green);color:var(--green)}
 .q-item.answered.rej .q-item-num{background:rgba(216,90,48,.15);border-color:var(--red);color:var(--red)}
 .q-item.answered.wrn .q-item-num{background:rgba(212,160,23,.15);border-color:var(--yellow);color:var(--yellow)}
 .q-item-body{flex:1;min-width:0}
-.q-item-text{font-size:11.5px;color:var(--text);line-height:1.5}
+.q-item-text{font-size:11px;color:var(--text);line-height:1.5}
 .q-item-meta{display:flex;align-items:center;gap:5px;margin-top:3px;flex-wrap:wrap}
 .q-item-id{font-size:9px;font-weight:700;color:var(--text-muted);letter-spacing:.5px}
-.q-item-badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:99px;white-space:nowrap;background:var(--bg);color:var(--text-muted);border:1px solid var(--border)}
+.q-item-badge{font-size:9px;font-weight:700;padding:2px 6px;border-radius:99px;white-space:nowrap;background:var(--bg);color:var(--text-muted);border:1px solid var(--border)}
 .q-item.answered.acc .q-item-badge{background:rgba(29,158,117,.1);color:var(--green);border-color:rgba(29,158,117,.2)}
 .q-item.answered.rej .q-item-badge{background:rgba(216,90,48,.1);color:var(--red);border-color:rgba(216,90,48,.2)}
 .q-item.answered.wrn .q-item-badge{background:rgba(212,160,23,.1);color:var(--yellow);border-color:rgba(212,160,23,.2)}
 
-/* ANSWER PANEL */
+/* ═══════════════════════════════════════════
+   ANSWER PANEL
+═══════════════════════════════════════════ */
 .a-panel{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
-.a-panel-header{padding:14px 18px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(26,42,108,.04),rgba(0,198,255,.03));display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.a-panel-header{
+  padding:13px 16px;border-bottom:1px solid var(--border);
+  background:linear-gradient(135deg,rgba(26,42,108,.04),rgba(0,198,255,.03));
+  display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
+}
 .a-question-id{font-size:10px;font-weight:700;letter-spacing:1px;color:var(--accent);text-transform:uppercase}
-.a-question-text{font-size:14px;font-weight:600;color:var(--text);line-height:1.55;margin-top:4px;max-width:580px}
+.a-question-text{font-size:clamp(13px,3.5vw,14px);font-weight:600;color:var(--text);line-height:1.55;margin-top:4px}
 .a-nav-btns{display:flex;gap:5px;flex-shrink:0}
-.a-nav-btn{width:28px;height:28px;border-radius:6px;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text-muted);cursor:pointer;transition:all .2s}
+.a-nav-btn{
+  width:30px;height:30px;border-radius:7px;
+  background:var(--bg);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:var(--text-muted);cursor:pointer;transition:all .2s;
+}
 .a-nav-btn:hover{border-color:var(--accent);color:var(--accent)}
 .a-nav-btn:disabled{opacity:.35;cursor:default}
-.a-body{padding:18px}
-.a-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--text-muted);margin-bottom:7px;display:flex;align-items:center;gap:6px}
 
-/* RISPOSTA PRE-COMPILATA */
-.a-answer-block{width:100%;background:#f8faff;border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;font-family:'Inter',sans-serif;font-size:13px;color:var(--text);line-height:1.75;min-height:110px;position:relative;white-space:pre-wrap;word-break:break-word;transition:border .25s,background .25s,box-shadow .25s}
+.a-body{padding:16px}
+.a-label{
+  font-size:9px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.7px;color:var(--text-muted);margin-bottom:7px;
+  display:flex;align-items:center;gap:6px;
+}
+
+/* Risposta precompilata */
+.a-answer-block{
+  width:100%;background:#f8faff;border:1.5px solid var(--border);
+  border-radius:10px;padding:12px 14px;
+  font-family:'Inter',sans-serif;font-size:clamp(12px,3vw,13px);
+  color:var(--text);line-height:1.75;
+  min-height:100px;position:relative;
+  white-space:pre-wrap;word-break:break-word;
+  transition:border .25s,background .25s,box-shadow .25s;
+}
 .a-answer-block.valid{border-color:var(--green);box-shadow:0 0 0 3px rgba(29,158,117,.08);background:#f6fffe}
 .a-answer-block.invalid{border-color:var(--red);box-shadow:0 0 0 3px rgba(216,90,48,.08);background:#fff8f6}
 .a-answer-block.warn-b{border-color:var(--yellow);box-shadow:0 0 0 3px rgba(212,160,23,.08);background:#fffdf0}
-.precomp-badge{position:absolute;top:9px;right:10px;display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:99px;font-size:9px;font-weight:700;letter-spacing:.5px;background:rgba(0,198,255,.1);color:var(--accent);border:1px solid rgba(0,198,255,.2)}
+.precomp-badge{
+  position:absolute;top:8px;right:10px;
+  display:inline-flex;align-items:center;gap:4px;padding:2px 8px;
+  border-radius:99px;font-size:9px;font-weight:700;letter-spacing:.5px;
+  background:rgba(0,198,255,.1);color:var(--accent);border:1px solid rgba(0,198,255,.2);
+}
 
-/* VALIDATE */
-.validate-row{margin-top:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.btn-validate{padding:11px 22px;border-radius:10px;font-size:13px;font-weight:700;background:var(--gradient);color:#fff;border:none;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;box-shadow:0 0 16px rgba(0,198,255,.3);display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
-.btn-validate:hover{transform:translateY(-1px);box-shadow:0 4px 22px rgba(0,198,255,.5)}
+/* Validate row */
+.validate-row{margin-top:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.btn-validate{
+  padding:11px 20px;border-radius:10px;font-size:13px;font-weight:700;
+  background:var(--gradient);color:#fff;border:none;cursor:pointer;
+  transition:all .2s;font-family:'Inter',sans-serif;
+  box-shadow:0 0 16px rgba(0,198,255,.3);
+  display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
+  min-height:44px;
+}
+.btn-validate:hover,.btn-validate:active{transform:translateY(-1px);box-shadow:0 4px 22px rgba(0,198,255,.5)}
 .btn-validate:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
-.file-info{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text-muted);padding:8px 13px;background:var(--bg);border:1px solid var(--border);border-radius:8px}
+.file-info{
+  display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text-muted);
+  padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;
+  flex-wrap:wrap;
+}
 
-/* AI */
-.ai-vp{margin-top:16px;border-radius:14px;overflow:hidden;border:1.5px solid var(--border);transition:all .4s ease}
+/* ═══════════════════════════════════════════
+   AI VALIDATION PANEL
+═══════════════════════════════════════════ */
+.ai-vp{margin-top:14px;border-radius:14px;overflow:hidden;border:1.5px solid var(--border);transition:all .4s ease}
 .ai-vp.hidden{display:none}
 .ai-vp.thinking{border-color:rgba(0,198,255,.25);box-shadow:0 4px 24px rgba(0,198,255,.1)}
 .ai-vp.accepted{border-color:rgba(29,158,117,.35);box-shadow:0 4px 24px rgba(29,158,117,.12)}
 .ai-vp.rejected{border-color:rgba(216,90,48,.35);box-shadow:0 4px 24px rgba(216,90,48,.12)}
 .ai-vp.warning{border-color:rgba(212,160,23,.35);box-shadow:0 4px 24px rgba(212,160,23,.12)}
-.ai-vp-hd{padding:12px 16px;display:flex;align-items:center;gap:12px}
+.ai-vp-hd{padding:12px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .ai-vp-hd.thinking{background:linear-gradient(135deg,rgba(0,198,255,.08),rgba(26,42,108,.06))}
 .ai-vp-hd.accepted{background:linear-gradient(135deg,rgba(29,158,117,.08),rgba(29,158,117,.04))}
 .ai-vp-hd.rejected{background:linear-gradient(135deg,rgba(216,90,48,.08),rgba(216,90,48,.04))}
 .ai-vp-hd.warning{background:linear-gradient(135deg,rgba(212,160,23,.08),rgba(212,160,23,.04))}
-.ai-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.ai-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
 .thinking .ai-avatar{background:rgba(0,198,255,.12);border:1.5px solid rgba(0,198,255,.25)}
 .accepted .ai-avatar{background:rgba(29,158,117,.12);border:1.5px solid rgba(29,158,117,.3)}
 .rejected .ai-avatar{background:rgba(216,90,48,.12);border:1.5px solid rgba(216,90,48,.3)}
 .warning .ai-avatar{background:rgba(212,160,23,.12);border:1.5px solid rgba(212,160,23,.3)}
-.ai-meta{flex:1}
-.ai-status{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.ai-meta{flex:1;min-width:120px}
+.ai-status{font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
 .thinking .ai-status{color:#00c6ff}
 .accepted .ai-status{color:var(--green)}
 .rejected .ai-status{color:var(--red)}
 .warning .ai-status{color:var(--yellow)}
-.ai-title{font-size:13px;font-weight:700;color:var(--text);margin-top:2px}
-.ai-score{display:flex;align-items:center;gap:6px;padding:5px 13px;border-radius:99px;font-size:12px;font-weight:700}
+.ai-title{font-size:clamp(11px,3vw,13px);font-weight:700;color:var(--text);margin-top:2px;line-height:1.4}
+.ai-score{display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:99px;font-size:11px;font-weight:700;flex-shrink:0}
 .accepted .ai-score{background:rgba(29,158,117,.1);color:var(--green);border:1px solid rgba(29,158,117,.2)}
 .rejected .ai-score{background:rgba(216,90,48,.1);color:var(--red);border:1px solid rgba(216,90,48,.2)}
 .warning .ai-score{background:rgba(212,160,23,.1);color:var(--yellow);border:1px solid rgba(212,160,23,.2)}
 .thinking .ai-score{background:rgba(0,198,255,.1);color:#00c6ff;border:1px solid rgba(0,198,255,.2)}
-.ai-body{padding:14px 16px 16px;background:var(--surface)}
+.ai-body{padding:13px 14px 15px;background:var(--surface)}
 .typing-dots{display:flex;gap:5px;align-items:center;padding:8px 0}
 .typing-dots span{width:8px;height:8px;border-radius:50%;background:var(--accent);opacity:.3;animation:dot-b 1.2s infinite}
 .typing-dots span:nth-child(2){animation-delay:.2s}
 .typing-dots span:nth-child(3){animation-delay:.4s}
 @keyframes dot-b{0%,80%,100%{opacity:.2;transform:translateY(0)}40%{opacity:1;transform:translateY(-5px)}}
 .fb-list{list-style:none;display:flex;flex-direction:column;gap:7px}
-.fb-item{display:flex;gap:9px;align-items:flex-start;padding:9px 12px;border-radius:8px;background:var(--bg);border:1px solid var(--border);font-size:12.5px;line-height:1.6;animation:su .35s ease both}
+.fb-item{
+  display:flex;gap:8px;align-items:flex-start;padding:9px 11px;
+  border-radius:8px;background:var(--bg);border:1px solid var(--border);
+  font-size:clamp(11.5px,3vw,12.5px);line-height:1.6;animation:su .35s ease both;
+}
 @keyframes su{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .fb-item:nth-child(2){animation-delay:.1s}
 .fb-item:nth-child(3){animation-delay:.2s}
@@ -297,36 +580,68 @@ html,body{height:100%;font-family:'Inter',sans-serif;background:var(--bg);color:
 .fb-item.ok{border-color:rgba(29,158,117,.2);background:rgba(29,158,117,.04)}
 .fb-item.ko{border-color:rgba(216,90,48,.2);background:rgba(216,90,48,.04)}
 .fb-item.warn{border-color:rgba(212,160,23,.2);background:rgba(212,160,23,.04)}
-.fi-ico{font-size:14px;flex-shrink:0;margin-top:1px}
+.fi-ico{font-size:13px;flex-shrink:0;margin-top:1px}
 .fi-txt{color:var(--text)}
 .fi-dim{font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:2px}
-.risk-wrap{margin-top:14px;padding-top:12px;border-top:1px solid var(--border)}
-.risk-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--text-muted);margin-bottom:7px;display:flex;justify-content:space-between}
-.risk-lbl span{font-size:14px;font-weight:800}
+
+.risk-wrap{margin-top:13px;padding-top:11px;border-top:1px solid var(--border)}
+.risk-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--text-muted);margin-bottom:7px;display:flex;justify-content:space-between}
+.risk-lbl span{font-size:13px;font-weight:800}
 .accepted .risk-lbl span{color:var(--green)}
 .rejected .risk-lbl span{color:var(--red)}
 .warning .risk-lbl span{color:var(--yellow)}
 .risk-track{height:8px;border-radius:99px;background:linear-gradient(90deg,#22c55e 0%,#eab308 50%,#ef4444 100%);position:relative;overflow:visible}
 .risk-needle{position:absolute;top:-5px;width:6px;height:18px;border-radius:3px;background:#fff;border:2px solid var(--text);box-shadow:0 2px 6px rgba(0,0,0,.25);transform:translateX(-50%);transition:left .6s cubic-bezier(.68,-.55,.27,1.55)}
 .risk-scale{display:flex;justify-content:space-between;font-size:9px;color:var(--text-muted);margin-top:4px}
-.ai-actions{display:flex;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);flex-wrap:wrap}
-.btn-a{padding:7px 16px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:6px}
-.btn-a.primary{background:var(--gradient);color:#fff;border:none;box-shadow:0 0 12px rgba(0,198,255,.2)}
-.btn-a.primary:hover{transform:translateY(-1px)}
-.btn-a.secondary{background:transparent;color:var(--text-muted);border:1px solid var(--border)}
-.btn-a.secondary:hover{border-color:var(--accent);color:var(--accent)}
-.btn-a.danger{background:rgba(216,90,48,.08);color:var(--red);border:1px solid rgba(216,90,48,.2)}
-.btn-a.danger:hover{background:rgba(216,90,48,.15)}
-.demo-hint{position:fixed;bottom:22px;right:22px;background:#1a2a6c;color:#fff;padding:11px 16px;border-radius:12px;font-size:12.5px;box-shadow:0 8px 30px rgba(26,42,108,.4);display:flex;align-items:center;gap:10px;z-index:50;max-width:300px;line-height:1.5}
-.demo-hint i{color:#00c6ff;flex-shrink:0}
-.dhc{margin-left:6px;cursor:pointer;color:rgba(255,255,255,.4);font-size:12px;flex-shrink:0;background:none;border:none;padding:0}
-.dhc:hover{color:#fff}
 
-@media(max-width:900px){
-  .qa-layout{grid-template-columns:1fr}
-  .q-panel{position:static}
-  .q-list{max-height:200px}
-  .topbar-search{display:none}
+.ai-actions{display:flex;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);flex-wrap:wrap}
+.btn-a{
+  padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;
+  cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;
+  display:flex;align-items:center;gap:6px;min-height:38px;
+}
+.btn-a.primary{background:var(--gradient);color:#fff;border:none;box-shadow:0 0 12px rgba(0,198,255,.2)}
+.btn-a.primary:hover,.btn-a.primary:active{transform:translateY(-1px)}
+.btn-a.secondary{background:transparent;color:var(--text-muted);border:1px solid var(--border)}
+.btn-a.secondary:hover,.btn-a.secondary:active{border-color:var(--accent);color:var(--accent)}
+.btn-a.danger{background:rgba(216,90,48,.08);color:var(--red);border:1px solid rgba(216,90,48,.2)}
+.btn-a.danger:hover,.btn-a.danger:active{background:rgba(216,90,48,.15)}
+
+/* ═══════════════════════════════════════════
+   BACK TO SITE – basso sinistra
+═══════════════════════════════════════════ */
+.back-to-site{
+  position:fixed;bottom:22px;left:22px;
+  z-index:200;
+  display:flex;align-items:center;gap:7px;
+  padding:8px 16px;
+  background:rgba(13,26,62,.92);backdrop-filter:blur(10px);
+  color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.18);
+  border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;
+  font-family:'Inter',sans-serif;text-decoration:none;transition:all .2s;
+  min-height:40px;
+}
+.back-to-site:hover,.back-to-site:active{background:rgba(0,198,255,.2);border-color:#00c6ff;color:#fff}
+@media(max-width:480px){
+  .back-to-site{bottom:14px;left:14px;font-size:11px;padding:7px 12px}
+}
+
+/* ═══════════════════════════════════════════
+   DEMO HINT – basso destra
+═══════════════════════════════════════════ */
+.demo-hint{
+  position:fixed;bottom:22px;right:22px;
+  background:#1a2a6c;color:#fff;
+  padding:11px 15px;border-radius:12px;font-size:12px;
+  box-shadow:0 8px 30px rgba(26,42,108,.4);
+  display:flex;align-items:center;gap:9px;z-index:50;
+  max-width:280px;line-height:1.5;
+}
+.demo-hint i{color:#00c6ff;flex-shrink:0}
+.dhc{margin-left:5px;cursor:pointer;color:rgba(255,255,255,.4);font-size:12px;flex-shrink:0;background:none;border:none;padding:0}
+.dhc:hover{color:#fff}
+@media(max-width:480px){
+  .demo-hint{bottom:70px;right:10px;left:10px;max-width:none;font-size:11px}
 }
 </style>
 </head>
@@ -337,7 +652,7 @@ html,body{height:100%;font-family:'Inter',sans-serif;background:var(--bg);color:
   <i class="fa-solid fa-arrow-left"></i> Torna al sito
 </a>
 
-<!-- OVERLAY -->
+<!-- OVERLAY INTRO -->
 <div class="demo-overlay" id="demo-overlay">
   <div class="overlay-badge"><div class="overlay-dot"></div>Demo interattiva — AI Assessment Engine</div>
   <div class="demo-overlay-title">Questionario NIS2<br><em>Validazione AI in tempo reale</em></div>
@@ -348,66 +663,90 @@ html,body{height:100%;font-family:'Inter',sans-serif;background:var(--bg);color:
   </div>
 </div>
 
+<!-- APP SHELL -->
 <div class="app-shell" id="app-shell" style="display:none">
 
-  <!--  TOPBAR -->
-  <header class="topbar">
+  <!-- Overlay sfondo sidebar mobile -->
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeMobileSidebar()"></div>
 
-    <!-- LOGO + TESTO -->
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <!-- Hamburger mobile -->
+    <button class="topbar-hamburger" onclick="toggleMobileSidebar()" aria-label="Menu">
+      <i class="fa-solid fa-bars" id="hamburger-icon"></i>
+    </button>
+
+    <!-- Logo -->
     <div class="topbar-logo" id="topbar-logo">
       <img src="logo.png" alt="Logo 3A" class="topbar-logo-img">
       <img src="logo-text.png" alt="3AuditFlow" class="topbar-logo-txt">
     </div>
 
-    <!-- BARRA DI RICERCA -->
+    <!-- Search -->
     <div class="topbar-search">
       <i class="fa-solid fa-magnifying-glass"></i>
       <span>Cerca assessment, aziende, utenti...</span>
     </div>
+
     <div class="topbar-spacer"></div>
 
-    <!-- ICONE DESTRA -->
+    <!-- Icons destra -->
     <div class="topbar-icons">
-
-      <!-- Chat barrata (rimuovi chat) -->
-      <button class="tb-icon" title="Rimuovi chat">
+      <button class="tb-icon hide-xs" title="Rimuovi chat">
         <i class="fa-solid fa-comment-slash"></i>
       </button>
-
-      <!-- Robot AI -->
-      <button class="tb-icon" title="AI Engine attivo">
+      <button class="tb-icon hide-xs" title="AI Engine attivo">
         <i class="fa-solid fa-robot"></i>
       </button>
-
-      <!-- Campanella notifiche -->
       <button class="tb-icon neutral" title="Notifiche">
         <i class="fa-solid fa-bell"></i>
         <span class="tb-notif-dot"></span>
       </button>
-
-      <!-- Ingranaggio impostazioni -->
-      <button class="tb-icon neutral" title="Impostazioni">
+      <button class="tb-icon neutral hide-xs" title="Impostazioni">
         <i class="fa-solid fa-gear"></i>
       </button>
-
-      <!-- USER BADGE -->
       <div class="topbar-user">
         <div class="topbar-user-av">MR</div>
         <span class="topbar-user-name">Mario Rossi</span>
       </div>
-
     </div>
-
   </header>
 
   <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
-    <button class="sidebar-burger" onclick="toggleSidebar()"><i class="fa-solid fa-angles-left" id="burger-icon"></i></button>
+    <button class="sidebar-burger" onclick="toggleDesktopSidebar()" aria-label="Comprimi">
+      <i class="fa-solid fa-angles-left" id="burger-icon"></i>
+    </button>
     <ul class="sidebar-nav">
-      <li class="sidebar-section"><strong class="sidebar-label">Gestione Aziende</strong><ul class="sidebar-submenu"><li><span class="sb-link"><i class="fa-solid fa-eye"></i><span>Reviewers</span></span></li><li><span class="sb-link"><i class="fa-solid fa-city"></i><span>Owners</span></span></li></ul></li>
-      <li class="sidebar-section"><strong class="sidebar-label">Gestione Questionari</strong><ul class="sidebar-submenu"><li><span class="sb-link"><i class="fa-solid fa-clipboard-list"></i><span>Questionari</span></span></li></ul></li>
-      <li class="sidebar-section"><strong class="sidebar-label">Gestione Utenza</strong><ul class="sidebar-submenu"><li><span class="sb-link"><i class="fa-solid fa-user-shield"></i><span>Super Admin</span></span></li><li><span class="sb-link"><i class="fa-solid fa-shield-halved"></i><span>Admin</span></span></li><li><span class="sb-link"><i class="fa-solid fa-user-check"></i><span>Auditor</span></span></li><li><span class="sb-link"><i class="fa-solid fa-clipboard-check"></i><span>Reviewer</span></span></li><li><span class="sb-link"><i class="fa-solid fa-user-tie"></i><span>Owner</span></span></li></ul></li>
-      <li class="sidebar-section"><strong class="sidebar-label">Assessment</strong><ul class="sidebar-submenu"><li><span class="sb-link active"><i class="fa-solid fa-chart-gantt"></i><span>Dashboard</span></span></li></ul></li>
+      <li class="sidebar-section">
+        <strong class="sidebar-label">Gestione Aziende</strong>
+        <ul class="sidebar-submenu">
+          <li><span class="sb-link"><i class="fa-solid fa-eye"></i><span>Reviewers</span></span></li>
+          <li><span class="sb-link"><i class="fa-solid fa-city"></i><span>Owners</span></span></li>
+        </ul>
+      </li>
+      <li class="sidebar-section">
+        <strong class="sidebar-label">Gestione Questionari</strong>
+        <ul class="sidebar-submenu">
+          <li><span class="sb-link"><i class="fa-solid fa-clipboard-list"></i><span>Questionari</span></span></li>
+        </ul>
+      </li>
+      <li class="sidebar-section">
+        <strong class="sidebar-label">Gestione Utenza</strong>
+        <ul class="sidebar-submenu">
+          <li><span class="sb-link"><i class="fa-solid fa-user-shield"></i><span>Super Admin</span></span></li>
+          <li><span class="sb-link"><i class="fa-solid fa-shield-halved"></i><span>Admin</span></span></li>
+          <li><span class="sb-link"><i class="fa-solid fa-user-check"></i><span>Auditor</span></span></li>
+          <li><span class="sb-link"><i class="fa-solid fa-clipboard-check"></i><span>Reviewer</span></span></li>
+          <li><span class="sb-link"><i class="fa-solid fa-user-tie"></i><span>Owner</span></span></li>
+        </ul>
+      </li>
+      <li class="sidebar-section">
+        <strong class="sidebar-label">Assessment</strong>
+        <ul class="sidebar-submenu">
+          <li><span class="sb-link active"><i class="fa-solid fa-chart-gantt"></i><span>Dashboard</span></span></li>
+        </ul>
+      </li>
     </ul>
   </aside>
 
@@ -417,43 +756,51 @@ html,body{height:100%;font-family:'Inter',sans-serif;background:var(--bg);color:
     <div class="page-header">
       <div class="page-title-group">
         <div class="page-title-bar"></div>
-        <div><div class="page-title">Compilazione Questionario — NIS2</div><div class="page-subtitle" id="page-sub">Fase: Assessment · Sezione 4 — Gestione degli Incidenti</div></div>
+        <div>
+          <div class="page-title">Compilazione Questionario — NIS2</div>
+          <div class="page-subtitle" id="page-sub">Fase: Assessment · Gestione degli Incidenti</div>
+        </div>
       </div>
-      <button class="examples-btn" id="examples-btn" onclick="cycleSet()"><i class="fa-solid fa-rotate"></i> Vedi altri esempi</button>
+      <button class="examples-btn" id="examples-btn" onclick="cycleSet()">
+        <i class="fa-solid fa-rotate"></i> Vedi altri esempi
+      </button>
     </div>
 
+    <!-- Info card -->
     <div class="info-card">
       <div class="info-field"><span class="info-label">Assessment</span><span class="info-value">Assessment Cybersecurity Q2-2025</span></div>
       <div class="info-div"></div>
-      <div class="info-field"><span class="info-label">Azienda Owner</span><span class="info-value">Vantea SMART S.p.A.</span></div>
+      <div class="info-field"><span class="info-label">Azienda</span><span class="info-value">Vantea SMART S.p.A.</span></div>
       <div class="info-div"></div>
-      <div class="info-field"><span class="info-label">Fase corrente</span><span class="info-value"><span class="tag-fase"><i class="fa-solid fa-circle-dot"></i> Assessment</span></span></div>
+      <div class="info-field"><span class="info-label">Fase</span><span class="info-value"><span class="tag-fase"><i class="fa-solid fa-circle-dot"></i> Assessment</span></span></div>
       <div class="info-div"></div>
       <div class="info-field"><span class="info-label">Stato</span><span class="info-value"><span class="tag-stato">In lavorazione</span></span></div>
       <div class="info-div"></div>
       <div class="info-field"><span class="info-label">Questionario</span><span class="info-value" style="color:var(--accent);font-weight:700">NIS2 / Deloitte</span></div>
     </div>
 
+    <!-- Step progress -->
     <div class="step-progress">
       <div class="sp-step done"><div class="sp-circle"><i class="fa-solid fa-check"></i></div><div class="sp-info"><div class="sp-label">Preparazione</div><div class="sp-sub">Completata</div></div></div>
       <div class="sp-line done"></div>
-      <div class="sp-step done"><div class="sp-circle"><i class="fa-solid fa-check"></i></div><div class="sp-info"><div class="sp-label">Pre-Assessment</div><div class="sp-sub">Piano approvato</div></div></div>
+      <div class="sp-step done"><div class="sp-circle"><i class="fa-solid fa-check"></i></div><div class="sp-info"><div class="sp-label">Pre-Assessment</div><div class="sp-sub">Approvato</div></div></div>
       <div class="sp-line done"></div>
-      <div class="sp-step active"><div class="sp-circle">3</div><div class="sp-info"><div class="sp-label">Assessment</div><div class="sp-sub">In compilazione</div></div></div>
+      <div class="sp-step active"><div class="sp-circle">3</div><div class="sp-info"><div class="sp-label">Assessment</div><div class="sp-sub">In corso</div></div></div>
       <div class="sp-line"></div>
-      <div class="sp-step"><div class="sp-circle">4</div><div class="sp-info"><div class="sp-label">Post-Assessment</div><div class="sp-sub">Remediation plan</div></div></div>
+      <div class="sp-step"><div class="sp-circle">4</div><div class="sp-info"><div class="sp-label">Post-Assessment</div><div class="sp-sub">Remediation</div></div></div>
       <div class="sp-line"></div>
       <div class="sp-step"><div class="sp-circle">5</div><div class="sp-info"><div class="sp-label">Monitoraggio</div><div class="sp-sub">Tracking</div></div></div>
       <div class="sp-line"></div>
-      <div class="sp-step"><div class="sp-circle"><i class="fa-solid fa-flag-checkered"></i></div><div class="sp-info"><div class="sp-label">Chiusura</div><div class="sp-sub">Report certificato</div></div></div>
+      <div class="sp-step"><div class="sp-circle"><i class="fa-solid fa-flag-checkered"></i></div><div class="sp-info"><div class="sp-label">Chiusura</div><div class="sp-sub">Certificato</div></div></div>
     </div>
 
+    <!-- Progress summary -->
     <div class="progress-summary">
-      <div class="ps-stat"><div class="ps-val" id="ps-a">0</div><div class="ps-label">Risposte date</div></div>
+      <div class="ps-stat"><div class="ps-val" id="ps-a">0</div><div class="ps-label">Risposte</div></div>
       <div class="ps-div"></div>
-      <div class="ps-stat"><div class="ps-val" id="ps-t">5</div><div class="ps-label">Totale domande</div></div>
+      <div class="ps-stat"><div class="ps-val" id="ps-t">5</div><div class="ps-label">Totale</div></div>
       <div class="ps-div"></div>
-      <div class="ps-stat"><div class="ps-val" id="ps-v">0</div><div class="ps-label">Validate AI ✓</div></div>
+      <div class="ps-stat"><div class="ps-val" id="ps-v">0</div><div class="ps-label">Validate AI</div></div>
       <div class="ps-div"></div>
       <div class="ps-progress-wrap">
         <div class="ps-progress-label"><span>Progresso sezione</span><span id="ps-pct">0%</span></div>
@@ -461,14 +808,22 @@ html,body{height:100%;font-family:'Inter',sans-serif;background:var(--bg);color:
       </div>
     </div>
 
+    <!-- QA -->
     <div class="qa-layout">
+
+      <!-- Lista domande -->
       <div class="q-panel">
-        <div class="q-panel-header"><div class="q-panel-title">NIS2 · Sezione corrente</div><div class="q-panel-subtitle" id="q-subtitle">Gestione degli Incidenti</div></div>
+        <div class="q-panel-header">
+          <div class="q-panel-title">NIS2 · Sezione corrente</div>
+          <div class="q-panel-subtitle" id="q-subtitle">Gestione degli Incidenti</div>
+        </div>
         <ul class="q-list" id="q-list"></ul>
       </div>
+
+      <!-- Risposta + AI -->
       <div class="a-panel">
         <div class="a-panel-header">
-          <div style="flex:1">
+          <div style="flex:1;min-width:0">
             <div class="a-question-id" id="a-qid">—</div>
             <div class="a-question-text" id="a-qtext">Seleziona una domanda dalla lista per iniziare.</div>
           </div>
@@ -481,8 +836,9 @@ html,body{height:100%;font-family:'Inter',sans-serif;background:var(--bg);color:
           <div class="a-label"><i class="fa-solid fa-pen"></i> Risposta compilata dall'Owner</div>
           <div class="a-answer-block" id="a-block">
             <span class="precomp-badge"><i class="fa-solid fa-robot"></i> Pre-compilata</span>
-            <span id="a-text" style="display:block;margin-top:6px;color:var(--text-muted);font-style:italic">Seleziona una domanda dalla lista per visualizzare la risposta.</span>
+            <span id="a-text" style="display:block;margin-top:6px;color:var(--text-muted);font-style:italic">Seleziona una domanda per visualizzare la risposta.</span>
           </div>
+
           <div class="validate-row">
             <button class="btn-validate" id="btn-val" onclick="doValidate()" disabled>
               <i class="fa-solid fa-robot"></i> Avvia Validazione AI
@@ -492,6 +848,8 @@ html,body{height:100%;font-family:'Inter',sans-serif;background:var(--bg);color:
               <span id="file-txt">—</span>
             </div>
           </div>
+
+          <!-- AI Panel -->
           <div class="ai-vp hidden" id="ai-vp">
             <div class="ai-vp-hd thinking" id="ai-hd">
               <div class="ai-avatar" id="ai-av">🤖</div>
@@ -499,73 +857,122 @@ html,body{height:100%;font-family:'Inter',sans-serif;background:var(--bg);color:
                 <div class="ai-status" id="ai-st">ANALISI IN CORSO</div>
                 <div class="ai-title" id="ai-ti">L'AI sta elaborando la risposta...</div>
               </div>
-              <div class="ai-score thinking" id="ai-sc"><i class="fa-solid fa-circle-notch fa-spin"></i> Processing</div>
+              <div class="ai-score thinking" id="ai-sc">
+                <i class="fa-solid fa-circle-notch fa-spin"></i> Processing
+              </div>
             </div>
-            <div class="ai-body" id="ai-body"><div class="typing-dots"><span></span><span></span><span></span></div></div>
+            <div class="ai-body" id="ai-body">
+              <div class="typing-dots"><span></span><span></span><span></span></div>
+            </div>
           </div>
+
         </div>
       </div>
     </div>
 
   </main>
 </div>
+
+<!-- DEMO HINT -->
 <div class="demo-hint" id="demo-hint">
   <i class="fa-solid fa-circle-info fa-lg"></i>
-  <span>Clicca su una domanda poi premi <strong>Avvia Validazione AI</strong>. Usa <strong>"Vedi altri esempi"</strong> per cambiare set.</span>
+  <span>Seleziona una domanda poi premi <strong>Avvia Validazione AI</strong>. Usa <strong>"Vedi altri esempi"</strong> per cambiare set.</span>
   <button class="dhc" onclick="document.getElementById('demo-hint').style.display='none'">✕</button>
 </div>
 
 <script>
+/* ═══════════════════════════════
+   DATA
+═══════════════════════════════ */
 const SETS=[
   {
     label:'Gestione degli Incidenti',
     questions:[
-      {id:'RS.MA-01',area:'Incident Management',text:'È definito, attuato, aggiornato e documentato un piano per la gestione degli incidenti di sicurezza informatica e la notifica verso le autorità competenti.',answer:'Disponiamo di un Incident Response Plan (IRP) formale, approvato dal CDA nel 2024 e aggiornato annualmente. Il documento include procedura di notifica NIS2 entro 72 ore, escalation verso il CSIRT Italia e comunicazione agli stakeholder. Il team CSIRT interno è composto da 4 figure specializzate con responsabilità chiaramente definite. Nel corso del 2024 sono state svolte 2 esercitazioni tabletop con documentazione degli esiti e piano di miglioramento.',file:'IRP_v2024_approvato_CDA.pdf',status:'accepted'},
-      {id:'DE.AE-02',area:'Adverse Event Analysis',text:'Gli eventi potenzialmente avversi sono analizzati per meglio comprenderne le attività associate.',answer:'Gli eventi vengono raccolti dal SIEM aziendale (Splunk Enterprise) e analizzati dal SOC interno attivo 8/5. Sono definite soglie di alerting per criticità alta, media e bassa con SLA di risposta. La correlazione degli eventi avviene in tempo reale con regole personalizzate. I report mensili vengono consegnati al CISO e archiviati nel repository documentale con tracciatura completa.',file:'SOC_Procedure_Analisi_2024.pdf',status:'accepted'},
-      {id:'DE.CM-01',area:'Continuous Monitoring',text:'Sono presenti, aggiornati, mantenuti e ben configurati sistemi di rilevamento dei possibili incidenti significativi.',answer:'Abbiamo implementato un IDS/IPS su tutti i perimetri di rete, aggiornato settimanalmente. Tuttavia non disponiamo ancora di un processo di revisione formale delle configurazioni e la copertura degli endpoint remoti non è completa. Stiamo pianificando un\'estensione entro Q3 2025 con budget approvato.',file:null,status:'warning'},
-      {id:'RC.RP-01',area:'Incident Recovery',text:'Sono adottate e documentate procedure per il ripristino del normale funzionamento dei sistemi coinvolti da incidenti di sicurezza informatica.',answer:'Non abbiamo procedure documentate per il ripristino post-incidente. In caso di problemi ci affidiamo all\'esperienza del personale IT. Non sono definiti RTO/RPO e non sono stati eseguiti test di ripristino formali negli ultimi 3 anni.',file:null,status:'rejected'},
-      {id:'RS.AN-03',area:'Incident Analysis',text:'È eseguita un\'analisi per stabilire cosa è avvenuto durante un incidente e la causa principale dell\'incidente.',answer:'Per gli incidenti di maggiore impatto eseguiamo analisi post-mortem con template Word condiviso. Il processo non è però integrato nel sistema di ticketing e la root cause analysis non segue una metodologia standardizzata (es. 5 Whys). I risultati non vengono sempre comunicati al management in modo strutturato.',file:'Template_PostMortem_v1.docx',status:'warning'}
+      {id:'RS.MA-01',text:'È definito, attuato, aggiornato e documentato un piano per la gestione degli incidenti di sicurezza informatica e la notifica verso le autorità competenti.',answer:'Disponiamo di un Incident Response Plan (IRP) formale, approvato dal CDA nel 2024 e aggiornato annualmente. Il documento include procedura di notifica NIS2 entro 72 ore, escalation verso il CSIRT Italia e comunicazione agli stakeholder. Il team CSIRT interno è composto da 4 figure specializzate con responsabilità chiaramente definite. Nel corso del 2024 sono state svolte 2 esercitazioni tabletop con documentazione degli esiti e piano di miglioramento.',file:'IRP_v2024_approvato_CDA.pdf',status:'accepted'},
+      {id:'DE.AE-02',text:'Gli eventi potenzialmente avversi sono analizzati per meglio comprenderne le attività associate.',answer:'Gli eventi vengono raccolti dal SIEM aziendale (Splunk Enterprise) e analizzati dal SOC interno attivo 8/5. Sono definite soglie di alerting per criticità alta, media e bassa con SLA di risposta. La correlazione degli eventi avviene in tempo reale con regole personalizzate. I report mensili vengono consegnati al CISO e archiviati nel repository documentale con tracciatura completa.',file:'SOC_Procedure_Analisi_2024.pdf',status:'accepted'},
+      {id:'DE.CM-01',text:'Sono presenti, aggiornati, mantenuti e ben configurati sistemi di rilevamento dei possibili incidenti significativi.',answer:'Abbiamo implementato un IDS/IPS su tutti i perimetri di rete, aggiornato settimanalmente. Tuttavia non disponiamo ancora di un processo di revisione formale delle configurazioni e la copertura degli endpoint remoti non è completa. Stiamo pianificando un\'estensione entro Q3 2025 con budget approvato.',file:null,status:'warning'},
+      {id:'RC.RP-01',text:'Sono adottate e documentate procedure per il ripristino del normale funzionamento dei sistemi coinvolti da incidenti di sicurezza informatica.',answer:'Non abbiamo procedure documentate per il ripristino post-incidente. In caso di problemi ci affidiamo all\'esperienza del personale IT. Non sono definiti RTO/RPO e non sono stati eseguiti test di ripristino formali negli ultimi 3 anni.',file:null,status:'rejected'},
+      {id:'RS.AN-03',text:'È eseguita un\'analisi per stabilire cosa è avvenuto durante un incidente e la causa principale dell\'incidente.',answer:'Per gli incidenti di maggiore impatto eseguiamo analisi post-mortem con template Word condiviso. Il processo non è però integrato nel sistema di ticketing e la root cause analysis non segue una metodologia standardizzata (es. 5 Whys). I risultati non vengono sempre comunicati al management in modo strutturato.',file:'Template_PostMortem_v1.docx',status:'warning'}
     ]
   },
   {
     label:'Governance e Supply Chain',
     questions:[
-      {id:'GV.SC-01',area:'Supply Chain Risk',text:'In merito all\'affidamento di forniture di sistemi informativi, sono previsti requisiti di sicurezza coerenti con le misure del soggetto.',answer:'Disponiamo di una procedura formalizzata di vendor assessment per tutti i fornitori IT critici. I contratti includono clausole di sicurezza (GDPR, NIS2, ISO 27001) e SLA di risposta agli incidenti. Eseguiamo audit annuali sui fornitori tier-1 e questionari di autovalutazione per il tier-2. Il registro fornitori viene aggiornato trimestralmente. L\'ultimo audit completo (novembre 2024) ha avuto esito positivo.',file:'Vendor_Assessment_Policy_2024.pdf',status:'accepted'},
-      {id:'GV.PO-01',area:'Policy',text:'Sono adottate e documentate politiche di cybersecurity, approvate dagli organi di amministrazione.',answer:'Le politiche di sicurezza informatica sono documentate e pubblicate sul portale intranet aziendale. L\'ultima revisione risale a marzo 2024 con approvazione formale del CDA. Include: Acceptable Use Policy, Password Policy, Incident Response Policy, Patch Management Policy e Data Classification Policy. Piano di revisione annuale programmato per marzo 2025.',file:'Security_Policies_Suite_2024_CDA.pdf',status:'accepted'},
-      {id:'GV.RR-02',area:'Roles & Responsibilities',text:'È definita e resa nota all\'interno del soggetto l\'organizzazione di cybersecurity con ruoli e responsabilità.',answer:'Esiste un organigramma della sicurezza aggiornato: il CISO riporta direttamente al CEO. Sono definiti responsabili per ogni asset critico. La comunicazione avviene tramite intranet. Le responsabilità vengono riviste in caso di cambiamenti organizzativi, ma non esiste un processo formale di revisione periodica né una data definita per il riesame annuale.',file:'Organigramma_Security_2024.pdf',status:'warning'},
-      {id:'GV-RM-03',area:'Risk Management',text:'È definito, attuato, aggiornato e documentato un piano di gestione del rischio di cybersecurity.',answer:'Non disponiamo di un piano di risk management formale. La valutazione dei rischi avviene in modo informale quando si verifica un problema. Non utilizziamo metodologie standardizzate (ISO 31000, FAIR). Non abbiamo un registro rischi aggiornato né un piano di trattamento approvato dagli organi di governance.',file:null,status:'rejected'},
-      {id:'GV.SC-07',area:'Supply Chain Risk',text:'È valutato il rischio associato alle forniture considerando accesso del fornitore, impatto di interruzione e tempi di ripristino.',answer:'Effettuiamo una valutazione preliminare del rischio prima di attivare nuovi fornitori. La classificazione avviene su tre livelli (critico, rilevante, standard). Per i fornitori critici abbiamo analizzato scenari di interruzione e identificato alternative. I tempi di ripristino stimati sono documentati nei contratti. La procedura è parzialmente supportata dal portale GRC aziendale.',file:'Risk_Fornitori_Framework_2024.pdf',status:'warning'}
+      {id:'GV.SC-01',text:'In merito all\'affidamento di forniture di sistemi informativi, sono previsti requisiti di sicurezza coerenti con le misure del soggetto.',answer:'Disponiamo di una procedura formalizzata di vendor assessment per tutti i fornitori IT critici. I contratti includono clausole di sicurezza (GDPR, NIS2, ISO 27001) e SLA di risposta agli incidenti. Eseguiamo audit annuali sui fornitori tier-1 e questionari di autovalutazione per il tier-2. Il registro fornitori viene aggiornato trimestralmente. L\'ultimo audit completo (novembre 2024) ha avuto esito positivo.',file:'Vendor_Assessment_Policy_2024.pdf',status:'accepted'},
+      {id:'GV.PO-01',text:'Sono adottate e documentate politiche di cybersecurity, approvate dagli organi di amministrazione.',answer:'Le politiche di sicurezza informatica sono documentate e pubblicate sul portale intranet aziendale. L\'ultima revisione risale a marzo 2024 con approvazione formale del CDA. Include: Acceptable Use Policy, Password Policy, Incident Response Policy, Patch Management Policy e Data Classification Policy. Piano di revisione annuale programmato per marzo 2025.',file:'Security_Policies_Suite_2024_CDA.pdf',status:'accepted'},
+      {id:'GV.RR-02',text:'È definita e resa nota all\'interno del soggetto l\'organizzazione di cybersecurity con ruoli e responsabilità.',answer:'Esiste un organigramma della sicurezza aggiornato: il CISO riporta direttamente al CEO. Sono definiti responsabili per ogni asset critico. La comunicazione avviene tramite intranet. Le responsabilità vengono riviste in caso di cambiamenti organizzativi, ma non esiste un processo formale di revisione periodica né una data definita per il riesame annuale.',file:'Organigramma_Security_2024.pdf',status:'warning'},
+      {id:'GV-RM-03',text:'È definito, attuato, aggiornato e documentato un piano di gestione del rischio di cybersecurity.',answer:'Non disponiamo di un piano di risk management formale. La valutazione dei rischi avviene in modo informale quando si verifica un problema. Non utilizziamo metodologie standardizzate (ISO 31000, FAIR). Non abbiamo un registro rischi aggiornato né un piano di trattamento approvato dagli organi di governance.',file:null,status:'rejected'},
+      {id:'GV.SC-07',text:'È valutato il rischio associato alle forniture considerando accesso del fornitore, impatto di interruzione e tempi di ripristino.',answer:'Effettuiamo una valutazione preliminare del rischio prima di attivare nuovi fornitori. La classificazione avviene su tre livelli (critico, rilevante, standard). Per i fornitori critici abbiamo analizzato scenari di interruzione e identificato alternative. I tempi di ripristino stimati sono documentati nei contratti. La procedura è parzialmente supportata dal portale GRC aziendale.',file:'Risk_Fornitori_Framework_2024.pdf',status:'warning'}
     ]
   },
   {
     label:'Protezione Dati e Continuità',
     questions:[
-      {id:'PR.DS-11',area:'Data Security',text:'Sono effettuati periodicamente backup dei dati e delle configurazioni. È verificata periodicamente l\'utilizzabilità dei backup mediante test di ripristino.',answer:'I backup vengono eseguiti giornalmente (incrementale) e settimanalmente (full) su storage ridondato in due datacenter geograficamente separati. I backup sono cifrati con AES-256. Ogni trimestre eseguiamo test di ripristino documentati: l\'ultimo (dicembre 2024) ha confermato RTO di 4 ore e RPO di 24 ore per i sistemi critici. Conservazione garantita per 90 giorni.',file:'Backup_Policy_e_Test_Q4_2024.pdf',status:'accepted'},
-      {id:'PR.AA-03',area:'Identity & Access',text:'Le modalità di autenticazione sono commisurate al rischio connesso ai privilegi delle utenze. Sono impiegate modalità di autenticazione multifattore.',answer:'Abbiamo implementato MFA (Microsoft Authenticator) per tutti gli accessi ai sistemi critici e per il lavoro remoto dal 2023. Gli amministratori usano account privilegiati separati con MFA obbligatorio. Per gli accessi interni standard è ancora in uso solo la password. Il progetto di estensione MFA a tutti gli utenti è in corso (completamento Q2 2025).',file:'MFA_Deployment_Status_2024.pdf',status:'warning'},
-      {id:'PR.PS-04',area:'Platform Security',text:'Sono conservati in modo sicuro e centralizzato i log necessari al monitoraggio. Sono definite e documentate le tempistiche di conservazione dei log.',answer:'I log di sistema vengono raccolti da un SIEM centralizzato (Microsoft Sentinel). La retention è di 12 mesi per i log di sicurezza e 6 mesi per quelli operativi, in linea con i requisiti NIS2. L\'accesso è ristretto agli amministratori di sicurezza con tracciatura degli accessi. L\'integrità dei log è garantita tramite hash chain. Le procedure sono documentate e revisionate annualmente.',file:'Log_Management_Policy_2024.pdf',status:'accepted'},
-      {id:'ID.IM-04',area:'Improvement',text:'Sono definiti, attuati, aggiornati e documentati piani di continuità operativa e disaster recovery.',answer:'Non abbiamo un Business Continuity Plan (BCP) formale. In caso di disastro ci affidiamo alle procedure verbali del personale senior. Nessun test di continuità è stato eseguito negli ultimi 3 anni. Il management ha pianificato un progetto BCP per il 2025 ma non è ancora stato avviato né sono state allocate risorse.',file:null,status:'rejected'},
-      {id:'ID.RA-05',area:'Risk Assessment',text:'È eseguita e documentata la valutazione del rischio con identificazione, analisi e ponderazione, a intervalli pianificati.',answer:'La valutazione del rischio viene eseguita annualmente con metodologia ISO 27005. L\'ultima valutazione (ottobre 2024) ha identificato 47 rischi, di cui 8 ad alta criticità. Per ciascun rischio è definito un owner e un piano di trattamento con scadenze. Il risk register è aggiornato trimestralmente sulla piattaforma GRC. I risultati vengono presentati al CDA semestralmente.',file:'Risk_Assessment_ISO27005_Q4_2024.pdf',status:'accepted'}
+      {id:'PR.DS-11',text:'Sono effettuati periodicamente backup dei dati e delle configurazioni. È verificata periodicamente l\'utilizzabilità dei backup mediante test di ripristino.',answer:'I backup vengono eseguiti giornalmente (incrementale) e settimanalmente (full) su storage ridondato in due datacenter geograficamente separati. I backup sono cifrati con AES-256. Ogni trimestre eseguiamo test di ripristino documentati: l\'ultimo (dicembre 2024) ha confermato RTO di 4 ore e RPO di 24 ore per i sistemi critici. Conservazione garantita per 90 giorni.',file:'Backup_Policy_e_Test_Q4_2024.pdf',status:'accepted'},
+      {id:'PR.AA-03',text:'Le modalità di autenticazione sono commisurate al rischio connesso ai privilegi delle utenze. Sono impiegate modalità di autenticazione multifattore.',answer:'Abbiamo implementato MFA (Microsoft Authenticator) per tutti gli accessi ai sistemi critici e per il lavoro remoto dal 2023. Gli amministratori usano account privilegiati separati con MFA obbligatorio. Per gli accessi interni standard è ancora in uso solo la password. Il progetto di estensione MFA a tutti gli utenti è in corso (completamento Q2 2025).',file:'MFA_Deployment_Status_2024.pdf',status:'warning'},
+      {id:'PR.PS-04',text:'Sono conservati in modo sicuro e centralizzato i log necessari al monitoraggio. Sono definite e documentate le tempistiche di conservazione dei log.',answer:'I log di sistema vengono raccolti da un SIEM centralizzato (Microsoft Sentinel). La retention è di 12 mesi per i log di sicurezza e 6 mesi per quelli operativi, in linea con i requisiti NIS2. L\'accesso è ristretto agli amministratori di sicurezza con tracciatura degli accessi. L\'integrità dei log è garantita tramite hash chain. Le procedure sono documentate e revisionate annualmente.',file:'Log_Management_Policy_2024.pdf',status:'accepted'},
+      {id:'ID.IM-04',text:'Sono definiti, attuati, aggiornati e documentati piani di continuità operativa e disaster recovery.',answer:'Non abbiamo un Business Continuity Plan (BCP) formale. In caso di disastro ci affidiamo alle procedure verbali del personale senior. Nessun test di continuità è stato eseguito negli ultimi 3 anni. Il management ha pianificato un progetto BCP per il 2025 ma non è ancora stato avviato né sono state allocate risorse.',file:null,status:'rejected'},
+      {id:'ID.RA-05',text:'È eseguita e documentata la valutazione del rischio con identificazione, analisi e ponderazione, a intervalli pianificati.',answer:'La valutazione del rischio viene eseguita annualmente con metodologia ISO 27005. L\'ultima valutazione (ottobre 2024) ha identificato 47 rischi, di cui 8 ad alta criticità. Per ciascun rischio è definito un owner e un piano di trattamento con scadenze. Il risk register è aggiornato trimestralmente sulla piattaforma GRC. I risultati vengono presentati al CDA semestralmente.',file:'Risk_Assessment_ISO27005_Q4_2024.pdf',status:'accepted'}
     ]
   }
 ];
 
-let curSet=0,curQ=0,sidebarC=false,validated={};
+/* STATE */
+let curSet=0,curQ=0,validated={};
+let desktopCollapsed=false;
 
+/* ═══════════════════════════════
+   INIT
+═══════════════════════════════ */
 function startDemo(){
   document.getElementById('demo-overlay').style.display='none';
   document.getElementById('app-shell').style.display='flex';
+  // Su mobile la sidebar parte chiusa
+  if(window.innerWidth<=767){
+    document.getElementById('sidebar').classList.remove('mobile-open');
+  }
   loadSet(0);
 }
+
 function loadSet(idx){
   curSet=idx;curQ=0;validated={};
   const s=SETS[idx];
   document.getElementById('ps-t').textContent=s.questions.length;
   document.getElementById('q-subtitle').textContent=s.label;
   document.getElementById('page-sub').textContent='Fase: Assessment · '+s.label;
-  document.getElementById('examples-btn').innerHTML=`<i class="fa-solid fa-rotate"></i> Vedi altri esempi <span style="font-size:10px;opacity:.55;margin-left:3px">(${idx+1}/${SETS.length})</span>`;
+  document.getElementById('examples-btn').innerHTML=
+    `<i class="fa-solid fa-rotate"></i> Vedi altri esempi <span style="font-size:10px;opacity:.55;margin-left:2px">(${idx+1}/${SETS.length})</span>`;
   renderList();selectQ(0);updateProg();
 }
 function cycleSet(){loadSet((curSet+1)%SETS.length);}
+
+/* ═══════════════════════════════
+   SIDEBAR CONTROLS
+═══════════════════════════════ */
+function toggleDesktopSidebar(){
+  desktopCollapsed=!desktopCollapsed;
+  document.getElementById('sidebar').classList.toggle('collapsed',desktopCollapsed);
+  document.getElementById('main-content').classList.toggle('collapsed',desktopCollapsed);
+  document.getElementById('topbar-logo').classList.toggle('collapsed',desktopCollapsed);
+  document.getElementById('burger-icon').className=desktopCollapsed?'fa-solid fa-bars':'fa-solid fa-angles-left';
+}
+function toggleMobileSidebar(){
+  const sb=document.getElementById('sidebar');
+  const ov=document.getElementById('sidebar-overlay');
+  const ic=document.getElementById('hamburger-icon');
+  const open=sb.classList.toggle('mobile-open');
+  ov.classList.toggle('open',open);
+  ic.className=open?'fa-solid fa-xmark':'fa-solid fa-bars';
+}
+function closeMobileSidebar(){
+  document.getElementById('sidebar').classList.remove('mobile-open');
+  document.getElementById('sidebar-overlay').classList.remove('open');
+  document.getElementById('hamburger-icon').className='fa-solid fa-bars';
+}
+
+/* ═══════════════════════════════
+   Q LIST
+═══════════════════════════════ */
 function renderList(){
   const list=document.getElementById('q-list');
   const qs=SETS[curSet].questions;
@@ -577,11 +984,12 @@ function renderList(){
     const badge=v==='accepted'?'✅ Conforme':v==='rejected'?'❌ Non conforme':v==='warning'?'⚠️ Parziale':q.id;
     const li=document.createElement('li');
     li.className=`q-item${sel?' selected':''}${v?' answered '+cls:''}`;
-    li.onclick=()=>selectQ(i);
-    li.innerHTML=`<div class="q-item-num">${num}</div><div class="q-item-body"><div class="q-item-text">${q.text.length>78?q.text.slice(0,78)+'…':q.text}</div><div class="q-item-meta"><span class="q-item-id">${q.id}</span><span class="q-item-badge">${badge}</span></div></div>`;
+    li.onclick=()=>{selectQ(i);if(window.innerWidth<=767)document.querySelector('.a-panel').scrollIntoView({behavior:'smooth',block:'start'});};
+    li.innerHTML=`<div class="q-item-num">${num}</div><div class="q-item-body"><div class="q-item-text">${q.text.length>80?q.text.slice(0,80)+'…':q.text}</div><div class="q-item-meta"><span class="q-item-id">${q.id}</span><span class="q-item-badge">${badge}</span></div></div>`;
     list.appendChild(li);
   });
 }
+
 function selectQ(idx){
   curQ=idx;
   const q=SETS[curSet].questions[idx];
@@ -592,20 +1000,34 @@ function selectQ(idx){
   document.getElementById('a-text').style.color='var(--text)';
   const blk=document.getElementById('a-block');blk.className='a-answer-block';
   const ft=document.getElementById('file-txt');const fi=document.getElementById('file-info');
-  if(q.file){ft.innerHTML=`<i class="fa-solid fa-file-pdf" style="color:var(--red)"></i> ${q.file}`;fi.style.borderColor='rgba(29,158,117,.3)';fi.style.background='rgba(29,158,117,.04)';}
-  else{ft.innerHTML=`<i class="fa-solid fa-paperclip"></i> Nessun documento allegato`;fi.style.borderColor='';fi.style.background='';}
+  if(q.file){
+    ft.innerHTML=`<i class="fa-solid fa-file-pdf" style="color:var(--red)"></i> ${q.file}`;
+    fi.style.borderColor='rgba(29,158,117,.3)';fi.style.background='rgba(29,158,117,.04)';
+  } else {
+    ft.innerHTML=`<i class="fa-solid fa-paperclip"></i> Nessun documento allegato`;
+    fi.style.borderColor='';fi.style.background='';
+  }
   document.getElementById('btn-prev').disabled=idx===0;
   document.getElementById('btn-next').disabled=idx===SETS[curSet].questions.length-1;
-  const btn=document.getElementById('btn-val');btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-robot"></i> Avvia Validazione AI';
-  if(validated[idx]){showResult(q.status,sc(q),fb(q),false);applyBorder(blk,q.status);}
+  const btn=document.getElementById('btn-val');
+  btn.disabled=false;
+  btn.innerHTML='<i class="fa-solid fa-robot"></i> Avvia Validazione AI';
+  if(validated[idx]){showResult(q.status,getScore(q),buildFeedback(q),false);applyBorder(blk,q.status);}
   else{document.getElementById('ai-vp').className='ai-vp hidden';}
   renderList();
 }
 function navQ(d){const qs=SETS[curSet].questions;selectQ(Math.max(0,Math.min(qs.length-1,curQ+d)));}
+
+/* ═══════════════════════════════
+   VALIDATION
+═══════════════════════════════ */
 function doValidate(){
   const q=SETS[curSet].questions[curQ];
-  const btn=document.getElementById('btn-val');btn.disabled=true;btn.innerHTML='<i class="fa-solid fa-circle-notch fa-spin"></i> Analisi in corso...';
-  const vp=document.getElementById('ai-vp');vp.className='ai-vp thinking';
+  const btn=document.getElementById('btn-val');
+  btn.disabled=true;
+  btn.innerHTML='<i class="fa-solid fa-circle-notch fa-spin"></i> Analisi in corso...';
+  const vp=document.getElementById('ai-vp');
+  vp.className='ai-vp thinking';
   document.getElementById('ai-hd').className='ai-vp-hd thinking';
   document.getElementById('ai-av').textContent='🤖';
   document.getElementById('ai-st').textContent='ANALISI IN CORSO';
@@ -614,40 +1036,59 @@ function doValidate(){
   document.getElementById('ai-sc').innerHTML='<i class="fa-solid fa-circle-notch fa-spin"></i> Processing';
   document.getElementById('ai-body').innerHTML='<div class="typing-dots"><span></span><span></span><span></span></div>';
   setTimeout(()=>{
-    const s=sc(q);const f=fb(q);
+    const s=getScore(q);const f=buildFeedback(q);
     showResult(q.status,s,f,true);
     applyBorder(document.getElementById('a-block'),q.status);
     validated[curQ]=q.status;updateProg();renderList();
     btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-rotate-left"></i> Rivalida';
+    // Scroll al pannello AI su mobile
+    if(window.innerWidth<=767){
+      setTimeout(()=>document.getElementById('ai-vp').scrollIntoView({behavior:'smooth',block:'nearest'}),100);
+    }
   },2000);
 }
-function sc(q){const base={accepted:84,warning:55,rejected:20};let s=base[q.status]||50;if(q.file&&q.status!=='rejected')s=Math.min(97,s+7);return s;}
-function fb(q){
+
+function getScore(q){
+  const base={accepted:84,warning:55,rejected:20};
+  let s=base[q.status]||50;
+  if(q.file&&q.status!=='rejected')s=Math.min(97,s+7);
+  return s;
+}
+function buildFeedback(q){
   const f=[];
   if(q.status==='accepted'){
     f.push({t:'ok',d:'Completezza',m:'Risposta dettagliata e strutturata con riferimenti concreti a processi, ruoli e strumenti. Dimostra piena consapevolezza dei requisiti.'});
     const kw=['procedura','piano','approvato','csirt','soc','annuale','test','rto','rpo','documentat'];
     const found=kw.filter(k=>q.answer.toLowerCase().includes(k)).slice(0,3);
-    if(found.length) f.push({t:'ok',d:'Terminologia NIS2',m:`Rilevati indicatori di maturità: <strong>${found.join(', ')}</strong>. Conforme agli art. 20-21 NIS2.`});
-    if(q.file) f.push({t:'ok',d:'Evidenza Documentale',m:`Documento allegato: <strong>${q.file}</strong>. L'evidenza supporta la risposta e facilita la verifica dell'Auditor.`});
+    if(found.length)f.push({t:'ok',d:'Terminologia NIS2',m:`Rilevati indicatori di maturità: <strong>${found.join(', ')}</strong>. Conforme agli art. 20-21 NIS2.`});
+    if(q.file)f.push({t:'ok',d:'Evidenza Documentale',m:`Documento allegato: <strong>${q.file}</strong>. Supporta la risposta e facilita la verifica dell'Auditor.`});
     else f.push({t:'warn',d:'Evidenza Documentale',m:'Nessun allegato. Si consiglia di allegare la policy di riferimento per rafforzare la conformità.'});
   } else if(q.status==='warning'){
-    f.push({t:'warn',d:'Conformità parziale',m:'Misure parzialmente adeguate. Mancano elementi chiave richiesti dalla normativa NIS2.'});
-    f.push({t:'warn',d:'Copertura NIS2',m:'Conformità parziale rispetto all\'art. 21 NIS2. Si raccomanda un piano di miglioramento con scadenza definita.'});
-    if(q.file) f.push({t:'ok',d:'Evidenza Documentale',m:`Documento allegato: <strong>${q.file}</strong>. Supporta la risposta nonostante la parzialità.`});
+    f.push({t:'warn',d:'Conformità parziale',m:'Misure parzialmente adeguate. Mancano elementi chiave richiesti dalla normativa NIS2. Integrazioni necessarie.'});
+    f.push({t:'warn',d:'Copertura NIS2',m:'Conformità parziale rispetto all\'art. 21 NIS2. Raccomandato un piano di miglioramento con scadenza definita.'});
+    if(q.file)f.push({t:'ok',d:'Evidenza Documentale',m:`Documento allegato: <strong>${q.file}</strong>. Supporta la risposta nonostante la parzialità.`});
     else f.push({t:'ko',d:'Evidenza Documentale',m:"Assenza di documentazione. L'Auditor non può verificare le misure dichiarate."});
   } else {
     f.push({t:'ko',d:'Gap Critico',m:'Assenza di misure adeguate. Gap significativi rispetto ai requisiti obbligatori NIS2.'});
     const bw=['non abbiamo','non disponiamo','non documentat','nessun','informale','verbale'];
     const bf=bw.filter(k=>q.answer.toLowerCase().includes(k)).slice(0,2);
-    if(bf.length) f.push({t:'ko',d:'Indicatori di non conformità',m:`Rilevate criticità: "<strong>${bf.join('</strong>", "<strong>')}</strong>". Non soddisfa i requisiti NIS2 Art. 21.`});
-    f.push({t:'ko',d:'Azione correttiva obbligatoria',m:"Azione correttiva richiesta prima della chiusura. Inserire nel piano di remediation con priorità alta."});
+    if(bf.length)f.push({t:'ko',d:'Indicatori di non conformità',m:`Criticità rilevate: "<strong>${bf.join('</strong>", "<strong>')}</strong>". Non soddisfa i requisiti NIS2 Art. 21.`});
+    f.push({t:'ko',d:'Azione correttiva obbligatoria',m:"Azione correttiva richiesta prima della chiusura. Da inserire nel piano di remediation con priorità alta."});
   }
   return f;
 }
-function applyBorder(el,st){el.className='a-answer-block';if(st==='accepted')el.classList.add('valid');else if(st==='rejected')el.classList.add('invalid');else el.classList.add('warn-b');}
-function showResult(status,score,fbs,anim){
-  const cfg={accepted:{emoji:'✅',st:'DOCUMENTO ACCETTATO',ti:'Risposta conforme ai requisiti NIS2 — Nessuna azione correttiva richiesta.',ic:'fa-circle-check'},warning:{emoji:'⚠️',st:'CONFORMITÀ PARZIALE',ti:'Risposta parzialmente adeguata — Sono raccomandate integrazioni.',ic:'fa-triangle-exclamation'},rejected:{emoji:'❌',st:'DOCUMENTO NON ACCETTATO',ti:"Risposta non conforme — Azione correttiva obbligatoria.",ic:'fa-circle-xmark'}};
+function applyBorder(el,st){
+  el.className='a-answer-block';
+  if(st==='accepted')el.classList.add('valid');
+  else if(st==='rejected')el.classList.add('invalid');
+  else el.classList.add('warn-b');
+}
+function showResult(status,score,fbs){
+  const cfg={
+    accepted:{emoji:'✅',st:'DOCUMENTO ACCETTATO',ti:'Risposta conforme ai requisiti NIS2 — Nessuna azione correttiva richiesta.',ic:'fa-circle-check'},
+    warning:{emoji:'⚠️',st:'CONFORMITÀ PARZIALE',ti:'Risposta parzialmente adeguata — Integrazioni raccomandate.',ic:'fa-triangle-exclamation'},
+    rejected:{emoji:'❌',st:'DOCUMENTO NON ACCETTATO',ti:"Risposta non conforme — Azione correttiva obbligatoria.",ic:'fa-circle-xmark'}
+  };
   const c=cfg[status];
   document.getElementById('ai-vp').className='ai-vp '+status;
   document.getElementById('ai-hd').className='ai-vp-hd '+status;
@@ -657,20 +1098,36 @@ function showResult(status,score,fbs,anim){
   document.getElementById('ai-sc').className='ai-score '+status;
   document.getElementById('ai-sc').innerHTML=`<i class="fa-solid ${c.ic}"></i> Score: ${score}/100`;
   const fbHTML=fbs.map((f,i)=>`<li class="fb-item ${f.t}" style="animation-delay:${i*.1}s"><span class="fi-ico">${f.t==='ok'?'✅':f.t==='ko'?'❌':'⚠️'}</span><div class="fi-txt"><span class="fi-dim">${f.d}</span>${f.m}</div></li>`).join('');
-  const actHTML=status==='accepted'?`<button class="btn-a primary" onclick="navQ(1)"><i class="fa-solid fa-check"></i> Salva e prossima</button><button class="btn-a secondary" onclick="navQ(1)"><i class="fa-solid fa-forward"></i> Vai alla prossima</button>`:status==='warning'?`<button class="btn-a primary" onclick="navQ(1)"><i class="fa-solid fa-floppy-disk"></i> Salva con riserva</button><button class="btn-a secondary" onclick="resetQ()"><i class="fa-solid fa-pencil"></i> Torna alla risposta</button>`:`<button class="btn-a danger" onclick="resetQ()"><i class="fa-solid fa-rotate-left"></i> Segna per revisione</button><button class="btn-a secondary" onclick="navQ(1)"><i class="fa-solid fa-forward"></i> Prossima domanda</button>`;
-  document.getElementById('ai-body').innerHTML=`<ul class="fb-list">${fbHTML}</ul><div class="risk-wrap"><div class="risk-lbl"><span>Indice di Conformità NIS2</span><span>${score}/100</span></div><div class="risk-track"><div class="risk-needle" style="left:${Math.max(3,Math.min(97,score))}%"></div></div><div class="risk-scale"><span>0 — Critico</span><span>50 — Parziale</span><span>100 — Ottimale</span></div></div><div class="ai-actions">${actHTML}</div>`;
+  const actHTML=status==='accepted'
+    ?`<button class="btn-a primary" onclick="navQ(1)"><i class="fa-solid fa-check"></i> Salva e prossima</button><button class="btn-a secondary" onclick="navQ(1)"><i class="fa-solid fa-forward"></i> Vai alla prossima</button>`
+    :status==='warning'
+    ?`<button class="btn-a primary" onclick="navQ(1)"><i class="fa-solid fa-floppy-disk"></i> Salva con riserva</button><button class="btn-a secondary" onclick="resetQ()"><i class="fa-solid fa-pencil"></i> Modifica</button>`
+    :`<button class="btn-a danger" onclick="resetQ()"><i class="fa-solid fa-rotate-left"></i> Segna per revisione</button><button class="btn-a secondary" onclick="navQ(1)"><i class="fa-solid fa-forward"></i> Prossima</button>`;
+  document.getElementById('ai-body').innerHTML=`
+    <ul class="fb-list">${fbHTML}</ul>
+    <div class="risk-wrap">
+      <div class="risk-lbl"><span>Indice di Conformità NIS2</span><span>${score}/100</span></div>
+      <div class="risk-track"><div class="risk-needle" style="left:${Math.max(3,Math.min(97,score))}%"></div></div>
+      <div class="risk-scale"><span>0 — Critico</span><span>50 — Parziale</span><span>100 — Ottimale</span></div>
+    </div>
+    <div class="ai-actions">${actHTML}</div>`;
 }
-function resetQ(){delete validated[curQ];document.getElementById('a-block').className='a-answer-block';document.getElementById('ai-vp').className='ai-vp hidden';document.getElementById('btn-val').innerHTML='<i class="fa-solid fa-robot"></i> Avvia Validazione AI';updateProg();renderList();}
+function resetQ(){
+  delete validated[curQ];
+  document.getElementById('a-block').className='a-answer-block';
+  document.getElementById('ai-vp').className='ai-vp hidden';
+  document.getElementById('btn-val').innerHTML='<i class="fa-solid fa-robot"></i> Avvia Validazione AI';
+  updateProg();renderList();
+}
 function updateProg(){
-  const qs=SETS[curSet].questions;const done=Object.values(validated).filter(Boolean);const acc=done.filter(s=>s==='accepted').length;const pct=Math.round(done.length/qs.length*100);
-  document.getElementById('ps-a').textContent=done.length;document.getElementById('ps-v').textContent=acc;document.getElementById('ps-pct').textContent=pct+'%';document.getElementById('ps-fill').style.width=pct+'%';
-}
-function toggleSidebar(){
-  sidebarC=!sidebarC;
-  document.getElementById('sidebar').classList.toggle('collapsed',sidebarC);
-  document.getElementById('main-content').classList.toggle('collapsed',sidebarC);
-  document.getElementById('topbar-logo').classList.toggle('collapsed',sidebarC);
-  document.getElementById('burger-icon').className=sidebarC?'fa-solid fa-bars':'fa-solid fa-angles-left';
+  const qs=SETS[curSet].questions;
+  const done=Object.values(validated).filter(Boolean);
+  const acc=done.filter(s=>s==='accepted').length;
+  const pct=Math.round(done.length/qs.length*100);
+  document.getElementById('ps-a').textContent=done.length;
+  document.getElementById('ps-v').textContent=acc;
+  document.getElementById('ps-pct').textContent=pct+'%';
+  document.getElementById('ps-fill').style.width=pct+'%';
 }
 </script>
 </body>
