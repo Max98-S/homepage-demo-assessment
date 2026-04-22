@@ -8,326 +8,111 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-/* ═══════════════════════════════════════════
-   ROOT
-═══════════════════════════════════════════ */
 :root{
-  --bg:#f0f2f7;
-  --surface:#ffffff;
-  --border:#e2e5ee;
-  --text:#1a2a6c;
-  --text-muted:#7b8ab8;
-  --accent:#00c6ff;
+  --bg:#f0f2f7;--surface:#ffffff;--border:#e2e5ee;
+  --text:#1a2a6c;--text-muted:#7b8ab8;--accent:#00c6ff;
   --gradient:linear-gradient(135deg,#00c6ff,#1a2a6c);
   --sidebar-bg:linear-gradient(180deg,#0d0d1a 0%,#1a2a6c 100%);
   --topbar-bg:linear-gradient(90deg,#0d1a3e 0%,#1a2a6c 100%);
-  --sidebar-w:230px;
-  --sidebar-w-col:56px;
-  --topbar-h:58px;
-  --green:#1D9E75;
-  --red:#D85A30;
-  --yellow:#D4A017;
-  --shadow:0 4px 20px rgba(26,42,108,.08);
-  --radius:12px;
+  --sidebar-w:230px;--sidebar-w-col:56px;--topbar-h:58px;
+  --green:#1D9E75;--red:#D85A30;--yellow:#D4A017;
+  --shadow:0 4px 20px rgba(26,42,108,.08);--radius:12px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px}
-body{
-  font-family:'Inter',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  height:100%;
-  overflow:hidden;
-  -webkit-tap-highlight-color:transparent;
-}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);height:100%;overflow:hidden;-webkit-tap-highlight-color:transparent}
 
-/* ═══════════════════════════════════════════
-   OVERLAY INTRO
-═══════════════════════════════════════════ */
-.demo-overlay{
-  position:fixed;inset:0;z-index:9999;
-  background:rgba(6,14,31,.97);
-  backdrop-filter:blur(10px);
-  display:flex;align-items:center;justify-content:center;
-  flex-direction:column;gap:20px;
-  padding:24px 20px;
-  animation:fadeIn .4s ease;
-}
+/* OVERLAY INTRO */
+.demo-overlay{position:fixed;inset:0;z-index:9999;background:rgba(6,14,31,.97);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;padding:24px 20px;animation:fadeIn .4s ease}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.overlay-badge{
-  display:flex;align-items:center;gap:8px;
-  background:rgba(0,198,255,.1);border:1px solid rgba(0,198,255,.25);
-  border-radius:99px;padding:6px 16px;
-  font-size:12px;color:#00c6ff;font-weight:600;letter-spacing:.5px;
-}
+.overlay-badge{display:flex;align-items:center;gap:8px;background:rgba(0,198,255,.1);border:1px solid rgba(0,198,255,.25);border-radius:99px;padding:6px 16px;font-size:12px;color:#00c6ff;font-weight:600;letter-spacing:.5px}
 .overlay-dot{width:8px;height:8px;border-radius:50%;background:#00c6ff;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.4);opacity:.6}}
-.demo-overlay-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(26px,6vw,40px);
-  font-weight:700;color:#fff;text-align:center;
-  letter-spacing:-1px;line-height:1.15;
-}
+.demo-overlay-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,6vw,40px);font-weight:700;color:#fff;text-align:center;letter-spacing:-1px;line-height:1.15}
 .demo-overlay-title em{color:#00c6ff;font-style:italic}
-.demo-overlay-sub{
-  font-size:clamp(13px,3.5vw,15px);
-  color:rgba(255,255,255,.5);
-  text-align:center;max-width:480px;line-height:1.75;
-}
+.demo-overlay-sub{font-size:clamp(13px,3.5vw,15px);color:rgba(255,255,255,.5);text-align:center;max-width:500px;line-height:1.75}
 .demo-overlay-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:4px}
-.demo-start-btn{
-  padding:13px 32px;border-radius:10px;
-  font-size:15px;font-weight:700;
-  background:linear-gradient(135deg,#00c6ff,#1a2a6c);
-  color:#fff;border:none;cursor:pointer;
-  box-shadow:0 0 28px rgba(0,198,255,.4);
-  transition:all .2s;font-family:'Inter',sans-serif;
-  display:inline-flex;align-items:center;gap:9px;
-}
-.demo-start-btn:hover,.demo-start-btn:active{transform:translateY(-2px);box-shadow:0 6px 32px rgba(0,198,255,.6)}
-.demo-back-btn{
-  padding:13px 22px;border-radius:10px;font-size:14px;font-weight:500;
-  background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);
-  border:1px solid rgba(255,255,255,.15);cursor:pointer;
-  font-family:'Inter',sans-serif;transition:all .2s;
-  text-decoration:none;display:inline-flex;align-items:center;gap:8px;
-}
+.demo-start-btn{padding:13px 32px;border-radius:10px;font-size:15px;font-weight:700;background:linear-gradient(135deg,#00c6ff,#1a2a6c);color:#fff;border:none;cursor:pointer;box-shadow:0 0 28px rgba(0,198,255,.4);transition:all .2s;font-family:'Inter',sans-serif;display:inline-flex;align-items:center;gap:9px}
+.demo-start-btn:hover{transform:translateY(-2px);box-shadow:0 6px 32px rgba(0,198,255,.6)}
+.demo-back-btn{padding:13px 22px;border-radius:10px;font-size:14px;font-weight:500;background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.15);cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
 .demo-back-btn:hover{background:rgba(255,255,255,.13);color:#fff}
 
-/* ═══════════════════════════════════════════
-   APP SHELL
-═══════════════════════════════════════════ */
+/* APP SHELL */
 .app-shell{display:flex;height:100dvh;overflow:hidden;position:relative}
-
-/* ═══════════════════════════════════════════
-   SIDEBAR OVERLAY (mobile)
-═══════════════════════════════════════════ */
-.sidebar-overlay{
-  display:none;
-  position:fixed;inset:0;z-index:89;
-  background:rgba(0,0,0,.55);
-  backdrop-filter:blur(2px);
-  animation:fadeIn .25s ease;
-}
+.sidebar-overlay{display:none;position:fixed;inset:0;z-index:89;background:rgba(0,0,0,.55);backdrop-filter:blur(2px);animation:fadeIn .25s ease}
 .sidebar-overlay.open{display:block}
 
-/* ═══════════════════════════════════════════
-   SIDEBAR
-═══════════════════════════════════════════ */
-.sidebar{
-  position:fixed;top:var(--topbar-h);left:0;
-  width:var(--sidebar-w);min-width:var(--sidebar-w);
-  height:calc(100dvh - var(--topbar-h));
-  background:var(--sidebar-bg);
-  display:flex;flex-direction:column;
-  overflow-y:auto;overflow-x:hidden;
-  z-index:90;
-  transition:transform .28s cubic-bezier(.4,0,.2,1),width .25s cubic-bezier(.4,0,.2,1);
-  scrollbar-width:thin;scrollbar-color:rgba(0,198,255,.3) transparent;
-}
+/* SIDEBAR */
+.sidebar{position:fixed;top:var(--topbar-h);left:0;width:var(--sidebar-w);min-width:var(--sidebar-w);height:calc(100dvh - var(--topbar-h));background:var(--sidebar-bg);display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;z-index:90;transition:transform .28s cubic-bezier(.4,0,.2,1),width .25s cubic-bezier(.4,0,.2,1);scrollbar-width:thin;scrollbar-color:rgba(0,198,255,.3) transparent}
 .sidebar::-webkit-scrollbar{width:3px}
 .sidebar::-webkit-scrollbar-thumb{background:rgba(0,198,255,.3);border-radius:3px}
-
-/* Desktop collapsed */
 .sidebar.collapsed{width:var(--sidebar-w-col);min-width:var(--sidebar-w-col)}
-
-/* Mobile: hidden off-screen by default, slides in */
-@media(max-width:767px){
-  .sidebar{
-    transform:translateX(-100%);
-    width:var(--sidebar-w) !important;
-    min-width:var(--sidebar-w) !important;
-    box-shadow:4px 0 24px rgba(0,0,0,.4);
-  }
-  .sidebar.mobile-open{transform:translateX(0)}
-}
-
-.sidebar-burger{
-  width:100%;display:flex;align-items:center;justify-content:flex-end;
-  padding:12px 16px;
-  background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.08);
-  color:rgba(255,255,255,.4);font-size:13px;cursor:pointer;
-  transition:color .2s,background .2s;min-height:44px;
-}
-.sidebar-burger:hover,.sidebar-burger:active{color:#00c6ff;background:rgba(0,198,255,.08)}
+@media(max-width:767px){.sidebar{transform:translateX(-100%);width:var(--sidebar-w)!important;min-width:var(--sidebar-w)!important;box-shadow:4px 0 24px rgba(0,0,0,.4)}.sidebar.mobile-open{transform:translateX(0)}}
+.sidebar-burger{width:100%;display:flex;align-items:center;justify-content:flex-end;padding:12px 16px;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.4);font-size:13px;cursor:pointer;transition:color .2s,background .2s;min-height:44px}
+.sidebar-burger:hover{color:#00c6ff;background:rgba(0,198,255,.08)}
 .sidebar.collapsed .sidebar-burger{justify-content:center;padding:12px 0}
-@media(max-width:767px){.sidebar-burger{justify-content:flex-end !important;padding:12px 16px !important}}
-
+@media(max-width:767px){.sidebar-burger{justify-content:flex-end!important;padding:12px 16px!important}}
 .sidebar-nav{list-style:none;padding:8px 0 80px;flex:1}
 .sidebar-section{margin-bottom:4px}
-.sidebar-label{
-  display:block;padding:14px 20px 5px;
-  font-size:9px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;
-  color:rgba(255,255,255,.3);white-space:nowrap;overflow:hidden;
-  transition:opacity .2s,padding .25s;
-}
+.sidebar-label{display:block;padding:14px 20px 5px;font-size:9px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:rgba(255,255,255,.3);white-space:nowrap;overflow:hidden;transition:opacity .2s,padding .25s}
 .sidebar.collapsed .sidebar-label{opacity:0;height:0;padding:0;pointer-events:none}
-@media(max-width:767px){.sidebar-label{opacity:1 !important;height:auto !important;padding:14px 20px 5px !important;pointer-events:auto !important}}
-
+@media(max-width:767px){.sidebar-label{opacity:1!important;height:auto!important;padding:14px 20px 5px!important;pointer-events:auto!important}}
 .sidebar-submenu{list-style:none;padding:0}
-.sidebar-submenu li .sb-link{
-  display:flex;align-items:center;gap:11px;
-  padding:11px 20px 11px 22px;
-  font-size:13px;font-weight:500;color:rgba(255,255,255,.65);
-  text-decoration:none;cursor:pointer;
-  border-left:3px solid transparent;transition:all .2s;
-  white-space:nowrap;overflow:hidden;min-height:44px;
-}
+.sidebar-submenu li .sb-link{display:flex;align-items:center;gap:11px;padding:11px 20px 11px 22px;font-size:13px;font-weight:500;color:rgba(255,255,255,.65);text-decoration:none;cursor:pointer;border-left:3px solid transparent;transition:all .2s;white-space:nowrap;overflow:hidden;min-height:44px}
 .sidebar-submenu li .sb-link i{font-size:13px;color:rgba(255,255,255,.4);flex-shrink:0;width:16px;text-align:center}
-.sidebar-submenu li .sb-link:hover,.sidebar-submenu li .sb-link:active{color:#fff;background:rgba(255,255,255,.07);border-left-color:rgba(0,198,255,.5)}
-.sidebar-submenu li .sb-link:hover i,.sidebar-submenu li .sb-link:active i{color:#00c6ff}
+.sidebar-submenu li .sb-link:hover{color:#fff;background:rgba(255,255,255,.07);border-left-color:rgba(0,198,255,.5)}
+.sidebar-submenu li .sb-link:hover i{color:#00c6ff}
 .sidebar-submenu li .sb-link.active{color:#00c6ff;background:rgba(0,198,255,.1);border-left-color:#00c6ff;font-weight:700}
 .sidebar-submenu li .sb-link.active i{color:#00c6ff}
-
 .sidebar.collapsed .sidebar-submenu li .sb-link{padding:12px 0;justify-content:center;border-left:3px solid transparent;margin:2px 6px;border-radius:8px;gap:0}
 .sidebar.collapsed .sidebar-submenu li .sb-link i{font-size:16px;width:auto}
 .sidebar.collapsed .sidebar-submenu li .sb-link span{display:none}
-.sidebar.collapsed .sidebar-submenu li .sb-link:hover,.sidebar.collapsed .sidebar-submenu li .sb-link.active{border-left-color:transparent}
+@media(max-width:767px){.sidebar-submenu li .sb-link{padding:11px 20px 11px 22px!important;justify-content:flex-start!important;border-radius:0!important;margin:0!important;gap:11px!important}.sidebar-submenu li .sb-link i{font-size:13px!important;width:16px!important}.sidebar-submenu li .sb-link span{display:inline!important}}
 
-@media(max-width:767px){
-  .sidebar-submenu li .sb-link{padding:11px 20px 11px 22px !important;justify-content:flex-start !important;border-radius:0 !important;margin:0 !important;gap:11px !important}
-  .sidebar-submenu li .sb-link i{font-size:13px !important;width:16px !important}
-  .sidebar-submenu li .sb-link span{display:inline !important}
-  .sidebar-submenu li .sb-link:hover{border-left-color:rgba(0,198,255,.5) !important}
-  .sidebar-submenu li .sb-link.active{border-left-color:#00c6ff !important}
-}
-
-/* ═══════════════════════════════════════════
-   TOPBAR
-═══════════════════════════════════════════ */
-.topbar{
-  position:fixed;top:0;left:0;right:0;
-  height:var(--topbar-h);
-  background:var(--topbar-bg);
-  border-bottom:1px solid rgba(255,255,255,.06);
-  display:flex;align-items:center;
-  padding:0 16px;
-  z-index:100;
-  box-shadow:0 2px 16px rgba(0,0,0,.5);
-  gap:12px;
-}
-
-/* Hamburger mobile (sostituisce burger sidebar su mobile) */
-.topbar-hamburger{
-  display:none;
-  width:40px;height:40px;border-radius:8px;
-  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
-  align-items:center;justify-content:center;
-  color:rgba(255,255,255,.7);font-size:16px;
-  cursor:pointer;flex-shrink:0;transition:all .2s;
-}
+/* TOPBAR */
+.topbar{position:fixed;top:0;left:0;right:0;height:var(--topbar-h);background:var(--topbar-bg);border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;padding:0 16px;z-index:100;box-shadow:0 2px 16px rgba(0,0,0,.5);gap:12px}
+.topbar-hamburger{display:none;width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);align-items:center;justify-content:center;color:rgba(255,255,255,.7);font-size:16px;cursor:pointer;flex-shrink:0;transition:all .2s}
 .topbar-hamburger:hover{background:rgba(0,198,255,.2);color:#00c6ff}
 @media(max-width:767px){.topbar-hamburger{display:flex}}
-
-/* Logo */
-.topbar-logo{
-  display:flex;align-items:center;gap:8px;
-  flex-shrink:0;cursor:pointer;
-}
+.topbar-logo{display:flex;align-items:center;gap:8px;flex-shrink:0;cursor:pointer}
 .topbar-logo-img{height:26px;object-fit:contain;flex-shrink:0}
 .topbar-logo-txt{height:32px;object-fit:contain;overflow:hidden;transition:opacity .2s,width .25s;white-space:nowrap}
 @media(max-width:400px){.topbar-logo-txt{display:none}}
-
-/* Search – nascosta su mobile piccolo */
-.topbar-search{
-  flex:1;display:flex;align-items:center;gap:10px;
-  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);
-  border-radius:8px;padding:8px 14px;max-width:460px;cursor:text;transition:all .2s;
-}
+.topbar-search{flex:1;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 14px;max-width:460px;cursor:text;transition:all .2s}
 .topbar-search:hover{background:rgba(255,255,255,.12);border-color:rgba(0,198,255,.3)}
 .topbar-search i{font-size:12px;color:rgba(255,255,255,.4);flex-shrink:0}
 .topbar-search span{font-size:12px;color:rgba(255,255,255,.35);font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @media(max-width:900px){.topbar-search{max-width:260px}}
 @media(max-width:640px){.topbar-search{display:none}}
-
-/* Spacer */
 .topbar-spacer{flex:1}
-
-/* Icons */
 .topbar-icons{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.tb-icon{
-  width:36px;height:36px;border-radius:50%;
-  background:rgba(0,198,255,.18);border:none;
-  display:flex;align-items:center;justify-content:center;
-  color:#00c6ff;font-size:14px;cursor:pointer;
-  transition:all .2s;position:relative;flex-shrink:0;
-}
-.tb-icon:hover,.tb-icon:active{background:rgba(0,198,255,.32);transform:scale(1.07)}
+.tb-icon{width:36px;height:36px;border-radius:50%;background:rgba(0,198,255,.18);border:none;display:flex;align-items:center;justify-content:center;color:#00c6ff;font-size:14px;cursor:pointer;transition:all .2s;position:relative;flex-shrink:0}
+.tb-icon:hover{background:rgba(0,198,255,.32);transform:scale(1.07)}
 .tb-icon.neutral{background:transparent;color:rgba(255,255,255,.7)}
 .tb-icon.neutral:hover{background:rgba(255,255,255,.1);color:#fff}
 .tb-notif-dot{position:absolute;top:3px;right:3px;width:9px;height:9px;border-radius:50%;background:#ef4444;border:2px solid #1a2a6c}
-/* Nascondi alcune icone su mobile piccolo */
 @media(max-width:480px){.tb-icon.hide-xs{display:none}}
-
-/* User badge */
-.topbar-user{
-  display:flex;align-items:center;gap:8px;
-  background:rgba(0,198,255,.15);border:1.5px solid rgba(0,198,255,.3);
-  border-radius:99px;padding:3px 12px 3px 3px;
-  cursor:pointer;transition:all .2s;flex-shrink:0;margin-left:4px;
-}
+.topbar-user{display:flex;align-items:center;gap:8px;background:rgba(0,198,255,.15);border:1.5px solid rgba(0,198,255,.3);border-radius:99px;padding:3px 12px 3px 3px;cursor:pointer;transition:all .2s;flex-shrink:0;margin-left:4px}
 .topbar-user:hover{background:rgba(0,198,255,.25)}
-.topbar-user-av{
-  width:30px;height:30px;border-radius:50%;
-  background:linear-gradient(135deg,#00c6ff,#1a2a6c);
-  display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:800;color:#fff;flex-shrink:0;
-}
+.topbar-user-av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#00c6ff,#1a2a6c);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;flex-shrink:0}
 .topbar-user-name{font-size:12px;font-weight:600;color:#fff;white-space:nowrap}
-@media(max-width:480px){.topbar-user-name{display:none}}
-@media(max-width:480px){.topbar-user{padding:3px 3px}}
+@media(max-width:480px){.topbar-user-name{display:none}.topbar-user{padding:3px 3px}}
 
-/* ═══════════════════════════════════════════
-   MAIN CONTENT
-═══════════════════════════════════════════ */
-.main-content{
-  margin-left:var(--sidebar-w);
-  margin-top:var(--topbar-h);
-  flex:1;
-  height:calc(100dvh - var(--topbar-h));
-  overflow-y:auto;
-  overflow-x:hidden;
-  padding:20px 20px 100px;
-  transition:margin-left .25s cubic-bezier(.4,0,.2,1);
-  background:var(--bg);
-  -webkit-overflow-scrolling:touch;
-}
+/* MAIN CONTENT */
+.main-content{margin-left:var(--sidebar-w);margin-top:var(--topbar-h);flex:1;height:calc(100dvh - var(--topbar-h));overflow-y:auto;overflow-x:hidden;padding:20px 20px 100px;transition:margin-left .25s cubic-bezier(.4,0,.2,1);background:var(--bg);-webkit-overflow-scrolling:touch}
 .main-content.collapsed{margin-left:var(--sidebar-w-col)}
-@media(max-width:767px){
-  .main-content{margin-left:0 !important;padding:14px 14px 120px}
-}
-@media(max-width:400px){
-  .main-content{padding:10px 10px 120px}
-}
+@media(max-width:767px){.main-content{margin-left:0!important;padding:14px 14px 120px}}
+@media(max-width:400px){.main-content{padding:10px 10px 120px}}
 
-/* ═══════════════════════════════════════════
-   PAGE HEADER
-═══════════════════════════════════════════ */
-.page-header{
-  display:flex;justify-content:space-between;align-items:flex-start;
-  margin-bottom:14px;gap:10px;flex-wrap:wrap;
-}
+/* PAGE HEADER */
+.page-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;gap:10px;flex-wrap:wrap}
 .page-title-group{display:flex;align-items:center;gap:12px}
 .page-title-bar{width:4px;height:34px;border-radius:2px;background:var(--gradient);flex-shrink:0}
 .page-title{font-size:clamp(15px,4vw,20px);font-weight:700;color:var(--text)}
 .page-subtitle{font-size:clamp(11px,3vw,13px);color:var(--text-muted);margin-top:2px}
-.examples-btn{
-  display:inline-flex;align-items:center;gap:7px;
-  padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;
-  background:rgba(26,42,108,.07);color:var(--text);border:1.5px solid var(--border);
-  cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;white-space:nowrap;
-  min-height:38px;
-}
-.examples-btn:hover,.examples-btn:active{border-color:var(--accent);color:var(--accent);background:rgba(0,198,255,.06)}
 
-/* ═══════════════════════════════════════════
-   INFO CARD
-═══════════════════════════════════════════ */
-.info-card{
-  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  padding:12px 16px;display:flex;align-items:center;flex-wrap:wrap;
-  margin-bottom:12px;box-shadow:var(--shadow);gap:10px 0;overflow-x:auto;
-}
+/* INFO CARD */
+.info-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;display:flex;align-items:center;flex-wrap:wrap;margin-bottom:12px;box-shadow:var(--shadow);gap:10px 0;overflow-x:auto}
 .info-field{display:flex;flex-direction:column;gap:2px;padding:0 14px}
 .info-field:first-child{padding-left:0}
 .info-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text-muted)}
@@ -335,31 +120,13 @@ body{
 .info-div{width:1px;height:28px;background:var(--border);flex-shrink:0}
 .tag-fase{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:99px;font-size:10px;font-weight:600;background:rgba(0,198,255,.1);color:#00c6ff;border:1px solid rgba(0,198,255,.2)}
 .tag-stato{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:99px;font-size:10px;font-weight:600;background:rgba(29,158,117,.1);color:var(--green);border:1px solid rgba(29,158,117,.2)}
-@media(max-width:600px){
-  .info-card{gap:8px}
-  .info-div{display:none}
-  .info-field{padding:0;flex-direction:row;align-items:center;gap:6px;width:calc(50% - 4px)}
-  .info-label{min-width:70px}
-}
+@media(max-width:600px){.info-card{gap:8px}.info-div{display:none}.info-field{padding:0;flex-direction:row;align-items:center;gap:6px;width:calc(50% - 4px)}.info-label{min-width:70px}}
 
-/* ═══════════════════════════════════════════
-   STEP PROGRESS (scrollabile su mobile)
-═══════════════════════════════════════════ */
-.step-progress{
-  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  padding:12px 16px;margin-bottom:12px;box-shadow:var(--shadow);
-  display:flex;align-items:center;
-  overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
-}
+/* STEP PROGRESS */
+.step-progress{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;margin-bottom:12px;box-shadow:var(--shadow);display:flex;align-items:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
 .step-progress::-webkit-scrollbar{display:none}
 .sp-step{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.sp-circle{
-  width:28px;height:28px;border-radius:50%;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:700;
-  background:var(--bg);border:2px solid var(--border);color:var(--text-muted);
-  transition:all .3s;
-}
+.sp-circle{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;background:var(--bg);border:2px solid var(--border);color:var(--text-muted);transition:all .3s}
 .sp-step.done .sp-circle{background:rgba(29,158,117,.12);border-color:var(--green);color:var(--green)}
 .sp-step.active .sp-circle{background:rgba(0,198,255,.12);border-color:var(--accent);color:var(--accent);box-shadow:0 0 0 3px rgba(0,198,255,.1)}
 .sp-info{flex-shrink:0}
@@ -368,76 +135,160 @@ body{
 .sp-step.active .sp-label{color:var(--accent)}
 .sp-line{flex:0 0 24px;height:2px;background:var(--border);margin:0 2px;flex-shrink:0}
 .sp-line.done{background:var(--green)}
-@media(max-width:600px){
-  .sp-info{display:none}
-  .sp-line{flex:0 0 16px}
-  .sp-circle{width:26px;height:26px;font-size:10px}
-}
+@media(max-width:600px){.sp-info{display:none}.sp-line{flex:0 0 16px}.sp-circle{width:26px;height:26px;font-size:10px}}
 
-/* ═══════════════════════════════════════════
-   PROGRESS SUMMARY
-═══════════════════════════════════════════ */
-.progress-summary{
-  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  padding:12px 16px;margin-bottom:14px;
-  display:flex;align-items:center;gap:14px;
-  box-shadow:var(--shadow);flex-wrap:wrap;
-}
-.ps-stat{display:flex;flex-direction:column}
-.ps-val{font-size:20px;font-weight:800;color:var(--text)}
-.ps-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-top:1px}
-.ps-div{width:1px;height:32px;background:var(--border)}
-.ps-progress-wrap{flex:1;min-width:100px}
-.ps-progress-label{font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:5px;display:flex;justify-content:space-between}
-.ps-progress-track{height:7px;border-radius:99px;background:var(--bg);border:1px solid var(--border);overflow:hidden}
-.ps-progress-fill{height:100%;border-radius:99px;background:var(--gradient);transition:width .5s ease}
-@media(max-width:480px){
-  .ps-div{display:none}
-  .ps-stat{flex-direction:row;align-items:baseline;gap:6px}
-  .ps-val{font-size:18px}
-  .ps-label{font-size:9px}
-  .progress-summary{gap:8px}
-}
+/* STEPPER DEMO */
+.demo-stepper-bar{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:10px 16px;margin-bottom:14px;box-shadow:var(--shadow);display:flex;align-items:center;gap:0;overflow-x:auto}
+.ds-step{display:flex;align-items:center;gap:8px;padding:6px 14px;border-radius:8px;cursor:pointer;transition:all .2s;flex-shrink:0;border:1px solid transparent}
+.ds-step:hover{background:rgba(0,198,255,.05);border-color:rgba(0,198,255,.15)}
+.ds-step.active{background:rgba(0,198,255,.1);border-color:rgba(0,198,255,.25)}
+.ds-step.done{opacity:.7}
+.ds-num{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;background:var(--bg);border:1.5px solid var(--border);color:var(--text-muted);flex-shrink:0}
+.ds-step.active .ds-num{background:rgba(0,198,255,.15);border-color:var(--accent);color:var(--accent)}
+.ds-step.done .ds-num{background:rgba(29,158,117,.15);border-color:var(--green);color:var(--green)}
+.ds-label{font-size:12px;font-weight:600;color:var(--text-muted);white-space:nowrap}
+.ds-step.active .ds-label{color:var(--accent)}
+.ds-sep{flex:0 0 20px;height:1px;background:var(--border);margin:0 4px}
 
-/* ═══════════════════════════════════════════
-   Q&A LAYOUT
-═══════════════════════════════════════════ */
-.qa-layout{
-  display:grid;
-  grid-template-columns:275px 1fr;
-  gap:14px;
-  align-items:start;
-}
+/* REVIEWER SELECTION  */
+.sel-layout{display:grid;grid-template-columns:260px 1fr;gap:14px;align-items:start}
+@media(max-width:900px){.sel-layout{grid-template-columns:220px 1fr}}
+@media(max-width:650px){.sel-layout{grid-template-columns:1fr}}
+
+/* Sidebar selezione */
+.sel-sidebar{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);position:sticky;top:14px}
+@media(max-width:650px){.sel-sidebar{position:static}}
+.sel-sb-head{padding:11px 13px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(26,42,108,.06),rgba(0,198,255,.03))}
+.sel-sb-role{display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:99px;font-size:9px;font-weight:700;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.25);color:#6d28d9;margin-bottom:5px}
+.sel-sb-title{font-size:12px;font-weight:700;color:var(--text)}
+.sel-sb-sub{font-size:10px;color:var(--text-muted);margin-top:2px;line-height:1.4}
+.sel-sb-count{display:flex;justify-content:space-between;padding:7px 12px;background:rgba(0,198,255,.03);border-bottom:1px solid var(--border);font-size:11px;color:var(--text-muted)}
+.sel-sb-count strong{color:var(--text);font-weight:700}
+.sel-q-list{max-height:380px;overflow-y:auto;padding:6px}
+.sel-q-list::-webkit-scrollbar{width:3px}
+.sel-q-list::-webkit-scrollbar-thumb{background:rgba(0,198,255,.2);border-radius:2px}
+.sel-area-lbl{font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--text-muted);padding:7px 8px 3px;display:flex;align-items:center;gap:5px}
+.sel-area-lbl::after{content:'';flex:1;height:1px;background:var(--border)}
+.sel-qrow{display:flex;align-items:flex-start;gap:6px;padding:7px 8px;border-radius:7px;cursor:pointer;border:1px solid transparent;transition:all .15s;margin-bottom:2px}
+.sel-qrow:hover{background:rgba(0,198,255,.04);border-color:rgba(0,198,255,.1)}
+.sel-qrow.sel{background:rgba(0,198,255,.07);border-color:rgba(0,198,255,.2)}
+.sel-chk{width:13px;height:13px;border-radius:3px;border:1.5px solid var(--border);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:8px;transition:all .15s;color:var(--text-muted)}
+.sel-chk.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.sel-qid{font-size:9px;font-weight:700;color:var(--accent);font-family:monospace}
+.sel-qtxt{font-size:10px;color:var(--text);line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+/* Main selezione */
+.sel-main{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.sel-main-head{padding:12px 16px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(26,42,108,.05),rgba(0,198,255,.03));display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.sel-main-head h3{font-size:13px;font-weight:700;color:var(--text)}
+.sel-main-head p{font-size:11px;color:var(--text-muted);margin-top:2px}
+.sel-main-body{padding:14px 16px;overflow-y:auto;max-height:420px}
+@media(max-width:650px){.sel-main-body{max-height:none}}
+
+/* Blocco questionario */
+.qb-wrap{margin-bottom:12px}
+.qb-header{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#0d0d1a,#1a2a6c);border-radius:9px 9px 0 0;padding:9px 13px}
+.qb-hdr-l{display:flex;align-items:center;gap:9px}
+.qb-chk{width:14px;height:14px;border-radius:3px;border:1.5px solid rgba(0,198,255,.5);display:flex;align-items:center;justify-content:center;font-size:9px;cursor:pointer;transition:all .15s;flex-shrink:0;color:transparent}
+.qb-chk.all{background:var(--accent);border-color:var(--accent);color:#fff}
+.qb-chk.ind{background:rgba(0,198,255,.3);border-color:var(--accent);color:#fff}
+.qb-title{font-size:11px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.6px;margin:0}
+.qb-badge{font-size:10px;color:rgba(255,255,255,.5);background:rgba(255,255,255,.08);padding:2px 9px;border-radius:99px}
+
+/* Grid aree */
+.aree-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;background:rgba(26,42,108,.04);border:1px solid var(--border);border-top:none;border-radius:0 0 9px 9px;padding:10px}
+@media(max-width:1100px){.aree-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.aree-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Area card */
+.area-card{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:11px;cursor:pointer;transition:all .18s;position:relative;overflow:hidden}
+.area-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,198,255,.12)}
+.area-card.has-sel{border-color:rgba(0,198,255,.4);background:rgba(0,198,255,.03)}
+.area-card.locked{cursor:default;opacity:.45}
+.area-card.locked:hover{transform:none;border-color:var(--border);box-shadow:none}
+.ac-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:6px;font-size:13px;flex-shrink:0}
+.ac-name{font-size:11px;font-weight:600;line-height:1.3;margin-bottom:4px}
+.ac-meta{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.ac-pill{font-size:9px;font-weight:600;padding:2px 6px;border-radius:99px}
+.ac-count{font-size:9px;color:var(--text-muted)}
+.ac-progress{height:3px;background:var(--bg);border:1px solid var(--border);border-radius:2px;margin-top:6px;overflow:hidden}
+.ac-progress-fill{height:100%;border-radius:2px;transition:width .4s}
+.ac-sel-badge{position:absolute;top:6px;right:6px;background:var(--accent);color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:99px}
+.lock-ov{position:absolute;inset:0;background:rgba(240,242,247,.82);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:10px}
+.lock-ov-icon{font-size:16px;color:var(--text-muted)}
+.lock-ov-txt{font-size:9px;color:var(--text-muted);text-align:center}
+
+/* Procedi bar */
+.procedi-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-top:1px solid var(--border);background:rgba(26,42,108,.02)}
+.procedi-txt{font-size:12px;color:var(--text-muted)}
+.procedi-txt strong{color:var(--text)}
+.btn-procedi{padding:9px 22px;border-radius:8px;font-size:13px;font-weight:700;border:none;background:var(--gradient);color:#fff;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;opacity:.35;pointer-events:none;display:inline-flex;align-items:center;gap:7px}
+.btn-procedi.on{opacity:1;pointer-events:all}
+.btn-procedi.on:hover{transform:translateY(-1px);box-shadow:0 4px 18px rgba(0,198,255,.4)}
+.btn-back-step{padding:9px 16px;border-radius:8px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--surface);color:var(--text-muted);cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.btn-back-step:hover{border-color:var(--accent);color:var(--accent)}
+
+/*  MODAL DOMANDE  */
+.modal-ov{display:none;position:fixed;inset:0;z-index:500;background:rgba(13,26,62,.65);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:16px;animation:fadeIn .2s ease}
+.modal-ov.open{display:flex}
+.modal-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;width:100%;max-width:800px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(13,26,62,.3)}
+.modal-hdr{padding:13px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0;border-bottom:1px solid var(--border)}
+.modal-hdr-info{flex:1}
+.modal-hdr-qname{font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:2px}
+.modal-hdr-title{font-size:15px;font-weight:700;color:var(--text)}
+.modal-hdr-acts{display:flex;gap:5px}
+.modal-act-btn{width:30px;height:30px;border-radius:7px;border:1px solid var(--border);background:var(--bg);color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .15s}
+.modal-act-btn:hover{border-color:var(--accent);color:var(--accent)}
+.modal-body-inner{display:flex;flex:1;overflow:hidden;min-height:0}
+.modal-sub-sb{width:180px;flex-shrink:0;border-right:1px solid var(--border);overflow-y:auto;padding:6px;background:rgba(26,42,108,.02)}
+.modal-sub-item{padding:8px 9px;border-radius:7px;cursor:pointer;margin-bottom:2px;transition:background .15s;border:1px solid transparent}
+.modal-sub-item:hover{background:rgba(0,198,255,.06)}
+.modal-sub-item.active{background:rgba(0,198,255,.1);border-color:rgba(0,198,255,.2)}
+.modal-sub-name{font-size:11px;font-weight:600;color:var(--text);line-height:1.35;margin-bottom:2px}
+.modal-sub-meta{display:flex;gap:6px;font-size:9px;color:var(--text-muted)}
+.modal-sub-sel{color:var(--green);font-weight:700}
+.modal-domande{flex:1;overflow-y:auto;padding:12px}
+.modal-sub-title{font-size:12px;font-weight:700;color:var(--text);margin-bottom:9px;padding-bottom:7px;border-bottom:1px solid var(--border)}
+.dom-item{display:flex;gap:8px;padding:9px 10px;border:1px solid var(--border);border-radius:8px;margin-bottom:6px;cursor:pointer;transition:all .15s}
+.dom-item:hover{border-color:rgba(0,198,255,.3);background:rgba(0,198,255,.04)}
+.dom-item.sel{border-color:rgba(0,198,255,.4);background:rgba(0,198,255,.07)}
+.dom-chk{width:15px;height:15px;border-radius:3px;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .15s;font-size:9px;color:transparent}
+.dom-chk.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.dom-num{font-size:10px;font-weight:700;color:var(--text-muted);min-width:16px;flex-shrink:0;margin-top:1px}
+.dom-content{flex:1}
+.dom-tags{display:flex;gap:4px;margin-bottom:3px;flex-wrap:wrap}
+.dom-tag-id{font-size:9px;padding:1px 6px;border-radius:99px;background:rgba(0,198,255,.08);border:1px solid rgba(0,198,255,.18);color:var(--accent);font-family:monospace;font-weight:700}
+.dom-tag-sub{font-size:9px;padding:1px 6px;border-radius:99px;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.18);color:#6d28d9;font-weight:600}
+.dom-crit{font-size:9px;color:var(--text-muted)}
+.dom-text{font-size:11px;color:var(--text);line-height:1.5;margin-bottom:5px}
+.dom-livelli{display:flex;gap:4px;flex-wrap:wrap}
+.liv-btn{font-size:9px;padding:2px 7px;border-radius:99px;border:1px solid var(--border);background:var(--bg);color:var(--text-muted);cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif}
+.liv-btn:hover{border-color:var(--accent);color:var(--accent)}
+.liv-btn.on{background:var(--gradient);border-color:transparent;color:#fff}
+.modal-ftr{padding:10px 14px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:rgba(26,42,108,.02);flex-shrink:0}
+.modal-ftr-info{font-size:11px;color:var(--text-muted)}
+.modal-ftr-info strong{color:var(--text);font-weight:700}
+.btn-modal-close{padding:7px 16px;border-radius:7px;border:1px solid var(--border);background:var(--surface);color:var(--text-muted);font-size:12px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s}
+.btn-modal-close:hover{border-color:var(--accent);color:var(--accent)}
+
+/* OWNER Q&A ì */
+.qa-layout{display:grid;grid-template-columns:275px 1fr;gap:14px;align-items:start}
 @media(max-width:1024px){.qa-layout{grid-template-columns:240px 1fr}}
 @media(max-width:767px){.qa-layout{grid-template-columns:1fr}}
 
-/* ═══════════════════════════════════════════
-   QUESTION PANEL
-═══════════════════════════════════════════ */
-.q-panel{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:14px;overflow:hidden;box-shadow:var(--shadow);
-  position:sticky;top:14px;
-}
+/* Q panel */
+.q-panel{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);position:sticky;top:14px}
 @media(max-width:767px){.q-panel{position:static}}
-.q-panel-header{
-  padding:11px 13px;border-bottom:1px solid var(--border);
-  background:linear-gradient(135deg,rgba(26,42,108,.05),rgba(0,198,255,.03));
-}
+.q-panel-header{padding:11px 13px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(26,42,108,.05),rgba(0,198,255,.03))}
 .q-panel-title{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted)}
 .q-panel-subtitle{font-size:12px;font-weight:600;color:var(--text);margin-top:2px}
 .q-list{list-style:none;max-height:420px;overflow-y:auto}
 @media(max-width:767px){.q-list{max-height:none;overflow-y:visible}}
 .q-list::-webkit-scrollbar{width:3px}
 .q-list::-webkit-scrollbar-thumb{background:rgba(0,198,255,.2);border-radius:2px}
-
-.q-item{
-  display:flex;align-items:flex-start;gap:8px;
-  padding:11px 12px;border-bottom:1px solid var(--border);
-  cursor:pointer;transition:background .2s;min-height:52px;
-}
+.q-item{display:flex;align-items:flex-start;gap:8px;padding:11px 12px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .2s;min-height:52px}
 .q-item:last-child{border-bottom:none}
-.q-item:hover,.q-item:active{background:rgba(0,198,255,.04)}
+.q-item:hover{background:rgba(0,198,255,.04)}
 .q-item.selected{background:rgba(0,198,255,.08);border-left:3px solid var(--accent)}
 .q-item.answered.acc{background:rgba(29,158,117,.06)}
 .q-item.answered.acc.selected{background:rgba(29,158,117,.12);border-left-color:var(--green)}
@@ -445,12 +296,7 @@ body{
 .q-item.answered.rej.selected{background:rgba(216,90,48,.1);border-left-color:var(--red)}
 .q-item.answered.wrn{background:rgba(212,160,23,.05)}
 .q-item.answered.wrn.selected{background:rgba(212,160,23,.1);border-left-color:var(--yellow)}
-.q-item-num{
-  width:20px;height:20px;border-radius:50%;flex-shrink:0;margin-top:1px;
-  background:var(--bg);border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  font-size:9px;font-weight:700;color:var(--text-muted);
-}
+.q-item-num{width:20px;height:20px;border-radius:50%;flex-shrink:0;margin-top:1px;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--text-muted)}
 .q-item.selected .q-item-num{background:rgba(0,198,255,.15);border-color:var(--accent);color:var(--accent)}
 .q-item.answered.acc .q-item-num{background:rgba(29,158,117,.15);border-color:var(--green);color:var(--green)}
 .q-item.answered.rej .q-item-num{background:rgba(216,90,48,.15);border-color:var(--red);color:var(--red)}
@@ -464,75 +310,31 @@ body{
 .q-item.answered.rej .q-item-badge{background:rgba(216,90,48,.1);color:var(--red);border-color:rgba(216,90,48,.2)}
 .q-item.answered.wrn .q-item-badge{background:rgba(212,160,23,.1);color:var(--yellow);border-color:rgba(212,160,23,.2)}
 
-/* ═══════════════════════════════════════════
-   ANSWER PANEL
-═══════════════════════════════════════════ */
+/* Answer panel */
 .a-panel{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
-.a-panel-header{
-  padding:13px 16px;border-bottom:1px solid var(--border);
-  background:linear-gradient(135deg,rgba(26,42,108,.04),rgba(0,198,255,.03));
-  display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
-}
+.a-panel-header{padding:13px 16px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(26,42,108,.04),rgba(0,198,255,.03));display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
 .a-question-id{font-size:10px;font-weight:700;letter-spacing:1px;color:var(--accent);text-transform:uppercase}
 .a-question-text{font-size:clamp(13px,3.5vw,14px);font-weight:600;color:var(--text);line-height:1.55;margin-top:4px}
 .a-nav-btns{display:flex;gap:5px;flex-shrink:0}
-.a-nav-btn{
-  width:30px;height:30px;border-radius:7px;
-  background:var(--bg);border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  font-size:11px;color:var(--text-muted);cursor:pointer;transition:all .2s;
-}
+.a-nav-btn{width:30px;height:30px;border-radius:7px;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text-muted);cursor:pointer;transition:all .2s}
 .a-nav-btn:hover{border-color:var(--accent);color:var(--accent)}
 .a-nav-btn:disabled{opacity:.35;cursor:default}
-
 .a-body{padding:16px}
-.a-label{
-  font-size:9px;font-weight:700;text-transform:uppercase;
-  letter-spacing:.7px;color:var(--text-muted);margin-bottom:7px;
-  display:flex;align-items:center;gap:6px;
-}
-
-/* Risposta precompilata */
-.a-answer-block{
-  width:100%;background:#f8faff;border:1.5px solid var(--border);
-  border-radius:10px;padding:12px 14px;
-  font-family:'Inter',sans-serif;font-size:clamp(12px,3vw,13px);
-  color:var(--text);line-height:1.75;
-  min-height:100px;position:relative;
-  white-space:pre-wrap;word-break:break-word;
-  transition:border .25s,background .25s,box-shadow .25s;
-}
+.a-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--text-muted);margin-bottom:7px;display:flex;align-items:center;gap:6px}
+.a-answer-block{width:100%;background:#f8faff;border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;font-family:'Inter',sans-serif;font-size:clamp(12px,3vw,13px);color:var(--text);line-height:1.75;min-height:100px;position:relative;white-space:pre-wrap;word-break:break-word;transition:border .25s,background .25s,box-shadow .25s}
 .a-answer-block.valid{border-color:var(--green);box-shadow:0 0 0 3px rgba(29,158,117,.08);background:#f6fffe}
 .a-answer-block.invalid{border-color:var(--red);box-shadow:0 0 0 3px rgba(216,90,48,.08);background:#fff8f6}
 .a-answer-block.warn-b{border-color:var(--yellow);box-shadow:0 0 0 3px rgba(212,160,23,.08);background:#fffdf0}
-.precomp-badge{
-  position:absolute;top:8px;right:10px;
-  display:inline-flex;align-items:center;gap:4px;padding:2px 8px;
-  border-radius:99px;font-size:9px;font-weight:700;letter-spacing:.5px;
-  background:rgba(0,198,255,.1);color:var(--accent);border:1px solid rgba(0,198,255,.2);
-}
-
-/* Validate row */
+.precomp-badge{position:absolute;top:8px;right:10px;display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:99px;font-size:9px;font-weight:700;letter-spacing:.5px;background:rgba(0,198,255,.1);color:var(--accent);border:1px solid rgba(0,198,255,.2)}
+.pdf-row{margin-top:10px;display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;font-size:11px;color:var(--text-muted)}
+.pdf-row i{font-size:14px;color:var(--red);flex-shrink:0}
+.pdf-row strong{color:var(--text);font-size:11px;font-weight:600}
 .validate-row{margin-top:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.btn-validate{
-  padding:11px 20px;border-radius:10px;font-size:13px;font-weight:700;
-  background:var(--gradient);color:#fff;border:none;cursor:pointer;
-  transition:all .2s;font-family:'Inter',sans-serif;
-  box-shadow:0 0 16px rgba(0,198,255,.3);
-  display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
-  min-height:44px;
-}
-.btn-validate:hover,.btn-validate:active{transform:translateY(-1px);box-shadow:0 4px 22px rgba(0,198,255,.5)}
+.btn-validate{padding:11px 20px;border-radius:10px;font-size:13px;font-weight:700;background:var(--gradient);color:#fff;border:none;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;box-shadow:0 0 16px rgba(0,198,255,.3);display:inline-flex;align-items:center;gap:8px;white-space:nowrap;min-height:44px}
+.btn-validate:hover{transform:translateY(-1px);box-shadow:0 4px 22px rgba(0,198,255,.5)}
 .btn-validate:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
-.file-info{
-  display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text-muted);
-  padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;
-  flex-wrap:wrap;
-}
 
-/* ═══════════════════════════════════════════
-   AI VALIDATION PANEL
-═══════════════════════════════════════════ */
+/* AI Validation Panel */
 .ai-vp{margin-top:14px;border-radius:14px;overflow:hidden;border:1.5px solid var(--border);transition:all .4s ease}
 .ai-vp.hidden{display:none}
 .ai-vp.thinking{border-color:rgba(0,198,255,.25);box-shadow:0 4px 24px rgba(0,198,255,.1)}
@@ -568,11 +370,7 @@ body{
 .typing-dots span:nth-child(3){animation-delay:.4s}
 @keyframes dot-b{0%,80%,100%{opacity:.2;transform:translateY(0)}40%{opacity:1;transform:translateY(-5px)}}
 .fb-list{list-style:none;display:flex;flex-direction:column;gap:7px}
-.fb-item{
-  display:flex;gap:8px;align-items:flex-start;padding:9px 11px;
-  border-radius:8px;background:var(--bg);border:1px solid var(--border);
-  font-size:clamp(11.5px,3vw,12.5px);line-height:1.6;animation:su .35s ease both;
-}
+.fb-item{display:flex;gap:8px;align-items:flex-start;padding:9px 11px;border-radius:8px;background:var(--bg);border:1px solid var(--border);font-size:clamp(11.5px,3vw,12.5px);line-height:1.6;animation:su .35s ease both}
 @keyframes su{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .fb-item:nth-child(2){animation-delay:.1s}
 .fb-item:nth-child(3){animation-delay:.2s}
@@ -583,7 +381,6 @@ body{
 .fi-ico{font-size:13px;flex-shrink:0;margin-top:1px}
 .fi-txt{color:var(--text)}
 .fi-dim{font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:2px}
-
 .risk-wrap{margin-top:13px;padding-top:11px;border-top:1px solid var(--border)}
 .risk-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--text-muted);margin-bottom:7px;display:flex;justify-content:space-between}
 .risk-lbl span{font-size:13px;font-weight:800}
@@ -593,176 +390,92 @@ body{
 .risk-track{height:8px;border-radius:99px;background:linear-gradient(90deg,#22c55e 0%,#eab308 50%,#ef4444 100%);position:relative;overflow:visible}
 .risk-needle{position:absolute;top:-5px;width:6px;height:18px;border-radius:3px;background:#fff;border:2px solid var(--text);box-shadow:0 2px 6px rgba(0,0,0,.25);transform:translateX(-50%);transition:left .6s cubic-bezier(.68,-.55,.27,1.55)}
 .risk-scale{display:flex;justify-content:space-between;font-size:9px;color:var(--text-muted);margin-top:4px}
-
 .ai-actions{display:flex;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);flex-wrap:wrap}
-.btn-a{
-  padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;
-  cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;
-  display:flex;align-items:center;gap:6px;min-height:38px;
-}
+.btn-a{padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:6px;min-height:38px}
 .btn-a.primary{background:var(--gradient);color:#fff;border:none;box-shadow:0 0 12px rgba(0,198,255,.2)}
-.btn-a.primary:hover,.btn-a.primary:active{transform:translateY(-1px)}
+.btn-a.primary:hover{transform:translateY(-1px)}
 .btn-a.secondary{background:transparent;color:var(--text-muted);border:1px solid var(--border)}
-.btn-a.secondary:hover,.btn-a.secondary:active{border-color:var(--accent);color:var(--accent)}
+.btn-a.secondary:hover{border-color:var(--accent);color:var(--accent)}
 .btn-a.danger{background:rgba(216,90,48,.08);color:var(--red);border:1px solid rgba(216,90,48,.2)}
-.btn-a.danger:hover,.btn-a.danger:active{background:rgba(216,90,48,.15)}
+.btn-a.danger:hover{background:rgba(216,90,48,.15)}
 
-/* ═══════════════════════════════════════════
-   BACK TO SITE – basso sinistra
-═══════════════════════════════════════════ */
-.back-to-site{
-  position:fixed;bottom:22px;left:22px;
-  z-index:200;
-  display:flex;align-items:center;gap:7px;
-  padding:8px 16px;
-  background:rgba(13,26,62,.92);backdrop-filter:blur(10px);
-  color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.18);
-  border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;
-  font-family:'Inter',sans-serif;text-decoration:none;transition:all .2s;
-  min-height:40px;
-}
-.back-to-site:hover,.back-to-site:active{background:rgba(0,198,255,.2);border-color:#00c6ff;color:#fff}
-@media(max-width:480px){
-  .back-to-site{bottom:14px;left:14px;font-size:11px;padding:7px 12px}
-}
+/* PROGRESS SUMMARY */
+.progress-summary{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;margin-bottom:14px;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow);flex-wrap:wrap}
+.ps-stat{display:flex;flex-direction:column}
+.ps-val{font-size:20px;font-weight:800;color:var(--text)}
+.ps-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-top:1px}
+.ps-div{width:1px;height:32px;background:var(--border)}
+.ps-progress-wrap{flex:1;min-width:100px}
+.ps-progress-label{font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:5px;display:flex;justify-content:space-between}
+.ps-progress-track{height:7px;border-radius:99px;background:var(--bg);border:1px solid var(--border);overflow:hidden}
+.ps-progress-fill{height:100%;border-radius:99px;background:var(--gradient);transition:width .5s ease}
+@media(max-width:480px){.ps-div{display:none}.ps-stat{flex-direction:row;align-items:baseline;gap:6px}.ps-val{font-size:18px}.progress-summary{gap:8px}}
 
-/* ═══════════════════════════════════════════
-   DEMO HINT – basso destra
-═══════════════════════════════════════════ */
-.demo-hint{
-  position:fixed;bottom:22px;right:22px;
-  background:#1a2a6c;color:#fff;
-  padding:11px 15px;border-radius:12px;font-size:12px;
-  box-shadow:0 8px 30px rgba(26,42,108,.4);
-  display:flex;align-items:center;gap:9px;z-index:50;
-  max-width:280px;line-height:1.5;
-}
-.demo-hint i{color:#00c6ff;flex-shrink:0}
-.dhc{margin-left:5px;cursor:pointer;color:rgba(255,255,255,.4);font-size:12px;flex-shrink:0;background:none;border:none;padding:0}
-.dhc:hover{color:#fff}
-@media(max-width:480px){
-  .demo-hint{bottom:70px;right:10px;left:10px;max-width:none;font-size:11px}
-}
+/* BACK TO SITE */
+.back-to-site{position:fixed;bottom:22px;left:22px;z-index:200;display:flex;align-items:center;gap:7px;padding:8px 16px;background:rgba(13,26,62,.92);backdrop-filter:blur(10px);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.18);border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;font-family:'Inter',sans-serif;text-decoration:none;transition:all .2s;min-height:40px}
+.back-to-site:hover{background:rgba(0,198,255,.2);border-color:#00c6ff;color:#fff}
+@media(max-width:480px){.back-to-site{bottom:14px;left:14px;font-size:11px;padding:7px 12px}}
 </style>
 </head>
 <body>
 
 <!-- BACK TO SITE -->
-<a href="index.html" class="back-to-site">
-  <i class="fa-solid fa-arrow-left"></i> Torna al sito
-</a>
+<a href="index.html" class="back-to-site"><i class="fa-solid fa-arrow-left"></i> Torna al sito</a>
 
 <!-- OVERLAY INTRO -->
 <div class="demo-overlay" id="demo-overlay">
-  <div class="overlay-badge"><div class="overlay-dot"></div>Demo interattiva — AI Assessment Engine</div>
-  <div class="demo-overlay-title">Questionario NIS2<br><em>Validazione AI in tempo reale</em></div>
-  <div class="demo-overlay-sub">Scopri come l'Owner compila le risposte al questionario NIS2 e l'AI di 3AuditFlow le valida istantaneamente — risposte conformi, parziali e non conformi, tutte già precompilate.</div>
+  <div class="overlay-badge"><div class="overlay-dot"></div>Demo interattiva — Workflow completo NIS2</div>
+  <div class="demo-overlay-title">Reviewer &amp; Owner<br><em>Assessment NIS2 in tempo reale</em></div>
+  <div class="demo-overlay-sub">Simula il workflow completo: il <strong style="color:#fff">Reviewer</strong> seleziona le domande per aree, poi l'<strong style="color:#fff">Owner</strong> compila le risposte con documenti allegati e l'<strong style="color:#00c6ff">AI</strong> valida tutto istantaneamente.</div>
   <div class="demo-overlay-btns">
     <button class="demo-start-btn" onclick="startDemo()"><i class="fa-solid fa-play"></i> Avvia la Demo</button>
     <a href="index.html" class="demo-back-btn"><i class="fa-solid fa-arrow-left"></i> Torna al sito</a>
   </div>
 </div>
 
-<!-- APP SHELL -->
 <div class="app-shell" id="app-shell" style="display:none">
-
-  <!-- Overlay sfondo sidebar mobile -->
   <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeMobileSidebar()"></div>
 
   <!-- TOPBAR -->
   <header class="topbar">
-    <!-- Hamburger mobile -->
-    <button class="topbar-hamburger" onclick="toggleMobileSidebar()" aria-label="Menu">
-      <i class="fa-solid fa-bars" id="hamburger-icon"></i>
-    </button>
-
-    <!-- Logo -->
-    <div class="topbar-logo" id="topbar-logo">
-      <img src="logo.png" alt="Logo 3A" class="topbar-logo-img">
-      <img src="logo-text.png" alt="3AuditFlow" class="topbar-logo-txt">
-    </div>
-
-    <!-- Search -->
-    <div class="topbar-search">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <span>Cerca assessment, aziende, utenti...</span>
-    </div>
-
+    <button class="topbar-hamburger" onclick="toggleMobileSidebar()"><i class="fa-solid fa-bars" id="hamburger-icon"></i></button>
+    <div class="topbar-logo"><img src="logo.png" alt="Logo 3A" class="topbar-logo-img"><img src="logo-text.png" alt="3AuditFlow" class="topbar-logo-txt"></div>
+    <div class="topbar-search"><i class="fa-solid fa-magnifying-glass"></i><span>Cerca assessment, aziende, utenti...</span></div>
     <div class="topbar-spacer"></div>
-
-    <!-- Icons destra -->
     <div class="topbar-icons">
-      <button class="tb-icon hide-xs" title="Rimuovi chat">
-        <i class="fa-solid fa-comment-slash"></i>
-      </button>
-      <button class="tb-icon hide-xs" title="AI Engine attivo">
-        <i class="fa-solid fa-robot"></i>
-      </button>
-      <button class="tb-icon neutral" title="Notifiche">
-        <i class="fa-solid fa-bell"></i>
-        <span class="tb-notif-dot"></span>
-      </button>
-      <button class="tb-icon neutral hide-xs" title="Impostazioni">
-        <i class="fa-solid fa-gear"></i>
-      </button>
-      <div class="topbar-user">
-        <div class="topbar-user-av">MR</div>
-        <span class="topbar-user-name">Mario Rossi</span>
-      </div>
+      <button class="tb-icon hide-xs"><i class="fa-solid fa-comment-slash"></i></button>
+      <button class="tb-icon hide-xs"><i class="fa-solid fa-robot"></i></button>
+      <button class="tb-icon neutral"><i class="fa-solid fa-bell"></i><span class="tb-notif-dot"></span></button>
+      <button class="tb-icon neutral hide-xs"><i class="fa-solid fa-gear"></i></button>
+      <div class="topbar-user"><div class="topbar-user-av">MR</div><span class="topbar-user-name">Mario Rossi</span></div>
     </div>
   </header>
 
   <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
-    <button class="sidebar-burger" onclick="toggleDesktopSidebar()" aria-label="Comprimi">
-      <i class="fa-solid fa-angles-left" id="burger-icon"></i>
-    </button>
+    <button class="sidebar-burger" onclick="toggleDesktopSidebar()"><i class="fa-solid fa-angles-left" id="burger-icon"></i></button>
     <ul class="sidebar-nav">
-      <li class="sidebar-section">
-        <strong class="sidebar-label">Gestione Aziende</strong>
-        <ul class="sidebar-submenu">
-          <li><span class="sb-link"><i class="fa-solid fa-eye"></i><span>Reviewers</span></span></li>
-          <li><span class="sb-link"><i class="fa-solid fa-city"></i><span>Owners</span></span></li>
-        </ul>
-      </li>
-      <li class="sidebar-section">
-        <strong class="sidebar-label">Gestione Questionari</strong>
-        <ul class="sidebar-submenu">
-          <li><span class="sb-link"><i class="fa-solid fa-clipboard-list"></i><span>Questionari</span></span></li>
-        </ul>
-      </li>
-      <li class="sidebar-section">
-        <strong class="sidebar-label">Gestione Utenza</strong>
-        <ul class="sidebar-submenu">
-          <li><span class="sb-link"><i class="fa-solid fa-user-shield"></i><span>Super Admin</span></span></li>
-          <li><span class="sb-link"><i class="fa-solid fa-shield-halved"></i><span>Admin</span></span></li>
-          <li><span class="sb-link"><i class="fa-solid fa-user-check"></i><span>Auditor</span></span></li>
-          <li><span class="sb-link"><i class="fa-solid fa-clipboard-check"></i><span>Reviewer</span></span></li>
-          <li><span class="sb-link"><i class="fa-solid fa-user-tie"></i><span>Owner</span></span></li>
-        </ul>
-      </li>
-      <li class="sidebar-section">
-        <strong class="sidebar-label">Assessment</strong>
-        <ul class="sidebar-submenu">
-          <li><span class="sb-link active"><i class="fa-solid fa-chart-gantt"></i><span>Dashboard</span></span></li>
-        </ul>
-      </li>
+      <li class="sidebar-section"><strong class="sidebar-label">Gestione Aziende</strong><ul class="sidebar-submenu"><li><span class="sb-link"><i class="fa-solid fa-eye"></i><span>Reviewers</span></span></li><li><span class="sb-link"><i class="fa-solid fa-city"></i><span>Owners</span></span></li></ul></li>
+      <li class="sidebar-section"><strong class="sidebar-label">Gestione Questionari</strong><ul class="sidebar-submenu"><li><span class="sb-link"><i class="fa-solid fa-clipboard-list"></i><span>Questionari</span></span></li></ul></li>
+      <li class="sidebar-section"><strong class="sidebar-label">Gestione Utenza</strong><ul class="sidebar-submenu"><li><span class="sb-link"><i class="fa-solid fa-user-shield"></i><span>Super Admin</span></span></li><li><span class="sb-link"><i class="fa-solid fa-shield-halved"></i><span>Admin</span></span></li><li><span class="sb-link"><i class="fa-solid fa-user-check"></i><span>Auditor</span></span></li><li><span class="sb-link"><i class="fa-solid fa-clipboard-check"></i><span>Reviewer</span></span></li><li><span class="sb-link"><i class="fa-solid fa-user-tie"></i><span>Owner</span></span></li></ul></li>
+      <li class="sidebar-section"><strong class="sidebar-label">Assessment</strong><ul class="sidebar-submenu"><li><span class="sb-link active"><i class="fa-solid fa-chart-gantt"></i><span>Dashboard</span></span></li></ul></li>
     </ul>
   </aside>
 
   <!-- MAIN -->
   <main class="main-content" id="main-content">
 
+    <!-- Page header -->
     <div class="page-header">
       <div class="page-title-group">
         <div class="page-title-bar"></div>
         <div>
-          <div class="page-title">Compilazione Questionario — NIS2</div>
-          <div class="page-subtitle" id="page-sub">Fase: Assessment · Gestione degli Incidenti</div>
+          <div class="page-title" id="page-title-txt">Selezione Questionario — NIS2</div>
+          <div class="page-subtitle" id="page-sub">Fase: Preparazione · Def. Questionario &amp; Upload Doc.</div>
         </div>
       </div>
-      <button class="examples-btn" id="examples-btn" onclick="cycleSet()">
-        <i class="fa-solid fa-rotate"></i> Vedi altri esempi
+      <button class="btn-a secondary" id="btn-header-action" onclick="headerAction()" style="min-height:36px;font-size:12px;padding:7px 14px">
+        <i class="fa-solid fa-rotate"></i> <span id="btn-header-lbl">Cambia set</span>
       </button>
     </div>
 
@@ -770,22 +483,22 @@ body{
     <div class="info-card">
       <div class="info-field"><span class="info-label">Assessment</span><span class="info-value">Assessment Cybersecurity Q2-2025</span></div>
       <div class="info-div"></div>
-      <div class="info-field"><span class="info-label">Azienda</span><span class="info-value">Vantea SMART S.p.A.</span></div>
+      <div class="info-field"><span class="info-label">Azienda Owner</span><span class="info-value">Pippo Baudo S.r.l.</span></div>
       <div class="info-div"></div>
-      <div class="info-field"><span class="info-label">Fase</span><span class="info-value"><span class="tag-fase"><i class="fa-solid fa-circle-dot"></i> Assessment</span></span></div>
+      <div class="info-field"><span class="info-label">Fase</span><span class="info-value"><span class="tag-fase"><i class="fa-solid fa-circle-dot"></i> <span id="info-fase">Def. Questionario</span></span></span></div>
       <div class="info-div"></div>
       <div class="info-field"><span class="info-label">Stato</span><span class="info-value"><span class="tag-stato">In lavorazione</span></span></div>
       <div class="info-div"></div>
       <div class="info-field"><span class="info-label">Questionario</span><span class="info-value" style="color:var(--accent);font-weight:700">NIS2 / Deloitte</span></div>
     </div>
 
-    <!-- Step progress -->
+    <!-- NIS2 process -->
     <div class="step-progress">
-      <div class="sp-step done"><div class="sp-circle"><i class="fa-solid fa-check"></i></div><div class="sp-info"><div class="sp-label">Preparazione</div><div class="sp-sub">Completata</div></div></div>
+      <div class="sp-step done"><div class="sp-circle"><i class="fa-solid fa-check"></i></div><div class="sp-info"><div class="sp-label">Preparazione</div><div class="sp-sub">Config.</div></div></div>
       <div class="sp-line done"></div>
-      <div class="sp-step done"><div class="sp-circle"><i class="fa-solid fa-check"></i></div><div class="sp-info"><div class="sp-label">Pre-Assessment</div><div class="sp-sub">Approvato</div></div></div>
-      <div class="sp-line done"></div>
-      <div class="sp-step active"><div class="sp-circle">3</div><div class="sp-info"><div class="sp-label">Assessment</div><div class="sp-sub">In corso</div></div></div>
+      <div class="sp-step active" id="sp2"><div class="sp-circle" id="sp2c">2</div><div class="sp-info"><div class="sp-label" id="sp2l">Def. Questionario</div><div class="sp-sub" id="sp2s">In corso</div></div></div>
+      <div class="sp-line" id="sp-line3"></div>
+      <div class="sp-step" id="sp3"><div class="sp-circle" id="sp3c">3</div><div class="sp-info"><div class="sp-label">Assessment</div><div class="sp-sub">Compilazione AI</div></div></div>
       <div class="sp-line"></div>
       <div class="sp-step"><div class="sp-circle">4</div><div class="sp-info"><div class="sp-label">Post-Assessment</div><div class="sp-sub">Remediation</div></div></div>
       <div class="sp-line"></div>
@@ -794,78 +507,109 @@ body{
       <div class="sp-step"><div class="sp-circle"><i class="fa-solid fa-flag-checkered"></i></div><div class="sp-info"><div class="sp-label">Chiusura</div><div class="sp-sub">Certificato</div></div></div>
     </div>
 
-    <!-- Progress summary -->
-    <div class="progress-summary">
-      <div class="ps-stat"><div class="ps-val" id="ps-a">0</div><div class="ps-label">Risposte</div></div>
-      <div class="ps-div"></div>
-      <div class="ps-stat"><div class="ps-val" id="ps-t">5</div><div class="ps-label">Totale</div></div>
-      <div class="ps-div"></div>
-      <div class="ps-stat"><div class="ps-val" id="ps-v">0</div><div class="ps-label">Validate AI</div></div>
-      <div class="ps-div"></div>
-      <div class="ps-progress-wrap">
-        <div class="ps-progress-label"><span>Progresso sezione</span><span id="ps-pct">0%</span></div>
-        <div class="ps-progress-track"><div class="ps-progress-fill" id="ps-fill" style="width:0%"></div></div>
+    <!-- Demo stepper -->
+    <div class="demo-stepper-bar">
+      <div class="ds-step active" id="dsi-1" onclick="goStep(1)"><div class="ds-num" id="dsn1">1</div><span class="ds-label">Reviewer — Seleziona domande</span></div>
+      <div class="ds-sep"></div>
+      <div class="ds-step" id="dsi-2" onclick="goStep(2)"><div class="ds-num" id="dsn2">2</div><span class="ds-label">Owner — Risposte e validazione AI</span></div>
+    </div>
+
+    <!--  REVIEWER -->
+    <div id="step1-wrap">
+      <div class="sel-layout">
+        <!-- Sidebar domande selezionate -->
+        <div class="sel-sidebar">
+          <div class="sel-sb-head">
+            <div class="sel-sb-role"><i class="fa-solid fa-eye"></i> Reviewer</div>
+            <div class="sel-sb-title">Domande selezionate</div>
+            <div class="sel-sb-sub">Clicca un'area nella griglia per aprire le domande</div>
+          </div>
+          <div class="sel-sb-count"><span><strong id="sel-n">0</strong> selezionate</span><span id="sel-areas" style="font-size:10px">0 aree</span></div>
+          <div class="sel-q-list" id="sel-q-list"><div style="padding:20px 10px;text-align:center;font-size:11px;color:var(--text-muted);line-height:1.7">Seleziona le domande<br>dalla griglia →</div></div>
+        </div>
+
+        <!-- Main grid aree -->
+        <div class="sel-main">
+          <div class="sel-main-head">
+            <div><h3>Questionario NIS2 — Deloitte</h3><p>Seleziona aree di controllo e domande da includere nell'assessment</p></div>
+          </div>
+          <div class="sel-main-body" id="sel-main-body"></div>
+          <div class="procedi-bar">
+            <span class="procedi-txt" id="procedi-txt">Seleziona almeno una domanda per procedere</span>
+            <button class="btn-procedi" id="btn-procedi" onclick="goStep(2)"><i class="fa-solid fa-arrow-right"></i> Assegna all'Owner</button>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- QA -->
-    <div class="qa-layout">
+    <!-- OWNER  -->
+    <div id="step2-wrap" style="display:none">
 
-      <!-- Lista domande -->
-      <div class="q-panel">
-        <div class="q-panel-header">
-          <div class="q-panel-title">NIS2 · Sezione corrente</div>
-          <div class="q-panel-subtitle" id="q-subtitle">Gestione degli Incidenti</div>
+      <div class="progress-summary">
+        <div class="ps-stat"><div class="ps-val" id="ps-a">0</div><div class="ps-label">Risposte</div></div>
+        <div class="ps-div"></div>
+        <div class="ps-stat"><div class="ps-val" id="ps-t">0</div><div class="ps-label">Totale</div></div>
+        <div class="ps-div"></div>
+        <div class="ps-stat"><div class="ps-val" id="ps-v">0</div><div class="ps-label">Validate AI</div></div>
+        <div class="ps-div"></div>
+        <div class="ps-progress-wrap">
+          <div class="ps-progress-label"><span>Progresso sezione</span><span id="ps-pct">0%</span></div>
+          <div class="ps-progress-track"><div class="ps-progress-fill" id="ps-fill" style="width:0%"></div></div>
         </div>
-        <ul class="q-list" id="q-list"></ul>
       </div>
 
-      <!-- Risposta + AI -->
-      <div class="a-panel">
-        <div class="a-panel-header">
-          <div style="flex:1;min-width:0">
-            <div class="a-question-id" id="a-qid">—</div>
-            <div class="a-question-text" id="a-qtext">Seleziona una domanda dalla lista per iniziare.</div>
+      <div class="qa-layout">
+        <!-- Lista domande -->
+        <div class="q-panel">
+          <div class="q-panel-header">
+            <div class="q-panel-title">NIS2 · Domande assegnate</div>
+            <div class="q-panel-subtitle" id="q-subtitle-o">Domande selezionate dal Reviewer</div>
           </div>
-          <div class="a-nav-btns">
-            <button class="a-nav-btn" id="btn-prev" onclick="navQ(-1)" disabled><i class="fa-solid fa-chevron-left"></i></button>
-            <button class="a-nav-btn" id="btn-next" onclick="navQ(1)" disabled><i class="fa-solid fa-chevron-right"></i></button>
+          <ul class="q-list" id="q-list-o"></ul>
+          <div style="padding:10px 12px;border-top:1px solid var(--border)">
+            <button class="btn-back-step" onclick="goStep(1)" style="width:100%;justify-content:center"><i class="fa-solid fa-arrow-left"></i> Modifica selezione</button>
           </div>
         </div>
-        <div class="a-body">
-          <div class="a-label"><i class="fa-solid fa-pen"></i> Risposta compilata dall'Owner</div>
-          <div class="a-answer-block" id="a-block">
-            <span class="precomp-badge"><i class="fa-solid fa-robot"></i> Pre-compilata</span>
-            <span id="a-text" style="display:block;margin-top:6px;color:var(--text-muted);font-style:italic">Seleziona una domanda per visualizzare la risposta.</span>
-          </div>
 
-          <div class="validate-row">
-            <button class="btn-validate" id="btn-val" onclick="doValidate()" disabled>
-              <i class="fa-solid fa-robot"></i> Avvia Validazione AI
-            </button>
-            <div class="file-info" id="file-info">
-              <i class="fa-solid fa-paperclip"></i>
-              <span id="file-txt">—</span>
+        <!-- Risposta + AI -->
+        <div class="a-panel">
+          <div class="a-panel-header">
+            <div style="flex:1;min-width:0">
+              <div class="a-question-id" id="a-qid">—</div>
+              <div class="a-question-text" id="a-qtext">Seleziona una domanda dalla lista per visualizzare la risposta.</div>
+            </div>
+            <div class="a-nav-btns">
+              <button class="a-nav-btn" id="btn-prev" onclick="navQ(-1)" disabled><i class="fa-solid fa-chevron-left"></i></button>
+              <button class="a-nav-btn" id="btn-next" onclick="navQ(1)" disabled><i class="fa-solid fa-chevron-right"></i></button>
             </div>
           </div>
-
-          <!-- AI Panel -->
-          <div class="ai-vp hidden" id="ai-vp">
-            <div class="ai-vp-hd thinking" id="ai-hd">
-              <div class="ai-avatar" id="ai-av">🤖</div>
-              <div class="ai-meta">
-                <div class="ai-status" id="ai-st">ANALISI IN CORSO</div>
-                <div class="ai-title" id="ai-ti">L'AI sta elaborando la risposta...</div>
+          <div class="a-body">
+            <div class="a-label"><i class="fa-solid fa-user-tie"></i> Risposta compilata dall'Owner</div>
+            <div class="a-answer-block" id="a-block">
+              <span class="precomp-badge"><i class="fa-solid fa-robot"></i> Pre-compilata</span>
+              <span id="a-text" style="display:block;margin-top:6px;color:var(--text-muted);font-style:italic">Seleziona una domanda per visualizzare la risposta.</span>
+            </div>
+            <div id="pdf-row-wrap"></div>
+            <div class="validate-row">
+              <button class="btn-validate" id="btn-val" onclick="doValidate()" disabled>
+                <i class="fa-solid fa-robot"></i> Avvia Validazione AI
+              </button>
+            </div>
+            <!-- AI Panel -->
+            <div class="ai-vp hidden" id="ai-vp">
+              <div class="ai-vp-hd thinking" id="ai-hd">
+                <div class="ai-avatar" id="ai-av">🤖</div>
+                <div class="ai-meta">
+                  <div class="ai-status" id="ai-st">ANALISI IN CORSO</div>
+                  <div class="ai-title" id="ai-ti">L'AI sta elaborando la risposta...</div>
+                </div>
+                <div class="ai-score thinking" id="ai-sc"><i class="fa-solid fa-circle-notch fa-spin"></i> Processing</div>
               </div>
-              <div class="ai-score thinking" id="ai-sc">
-                <i class="fa-solid fa-circle-notch fa-spin"></i> Processing
+              <div class="ai-body" id="ai-body">
+                <div class="typing-dots"><span></span><span></span><span></span></div>
               </div>
             </div>
-            <div class="ai-body" id="ai-body">
-              <div class="typing-dots"><span></span><span></span><span></span></div>
-            </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -873,93 +617,163 @@ body{
   </main>
 </div>
 
-<!-- DEMO HINT -->
-<div class="demo-hint" id="demo-hint">
-  <i class="fa-solid fa-circle-info fa-lg"></i>
-  <span>Seleziona una domanda poi premi <strong>Avvia Validazione AI</strong>. Usa <strong>"Vedi altri esempi"</strong> per cambiare set.</span>
-  <button class="dhc" onclick="document.getElementById('demo-hint').style.display='none'">✕</button>
+<!-- MODAL DOMANDE -->
+<div class="modal-ov" id="modal-ov">
+  <div class="modal-box">
+    <div class="modal-hdr" id="modal-hdr">
+      <div class="modal-hdr-info">
+        <div class="modal-hdr-qname">NIS2 / DELOITTE</div>
+        <div class="modal-hdr-title" id="modal-title"></div>
+      </div>
+      <div class="modal-hdr-acts">
+        <button class="modal-act-btn" title="Seleziona tutte" onclick="modalSelAll(true)"><i class="fa-solid fa-check-double"></i></button>
+        <button class="modal-act-btn" title="Deseleziona tutte" onclick="modalSelAll(false)"><i class="fa-solid fa-xmark"></i></button>
+        <button class="modal-act-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </div>
+    <div class="modal-body-inner">
+      <div class="modal-sub-sb" id="modal-sub-sb"></div>
+      <div class="modal-domande" id="modal-domande"></div>
+    </div>
+    <div class="modal-ftr">
+      <span class="modal-ftr-info" id="modal-ftr-info"></span>
+      <button class="btn-modal-close" onclick="closeModal()">Chiudi</button>
+    </div>
+  </div>
 </div>
 
 <script>
-/* ═══════════════════════════════
-   DATA
-═══════════════════════════════ */
-const SETS=[
-  {
-    label:'Gestione degli Incidenti',
-    questions:[
-      {id:'RS.MA-01',text:'È definito, attuato, aggiornato e documentato un piano per la gestione degli incidenti di sicurezza informatica e la notifica verso le autorità competenti.',answer:'Disponiamo di un Incident Response Plan (IRP) formale, approvato dal CDA nel 2024 e aggiornato annualmente. Il documento include procedura di notifica NIS2 entro 72 ore, escalation verso il CSIRT Italia e comunicazione agli stakeholder. Il team CSIRT interno è composto da 4 figure specializzate con responsabilità chiaramente definite. Nel corso del 2024 sono state svolte 2 esercitazioni tabletop con documentazione degli esiti e piano di miglioramento.',file:'IRP_v2024_approvato_CDA.pdf',status:'accepted'},
-      {id:'DE.AE-02',text:'Gli eventi potenzialmente avversi sono analizzati per meglio comprenderne le attività associate.',answer:'Gli eventi vengono raccolti dal SIEM aziendale (Splunk Enterprise) e analizzati dal SOC interno attivo 8/5. Sono definite soglie di alerting per criticità alta, media e bassa con SLA di risposta. La correlazione degli eventi avviene in tempo reale con regole personalizzate. I report mensili vengono consegnati al CISO e archiviati nel repository documentale con tracciatura completa.',file:'SOC_Procedure_Analisi_2024.pdf',status:'accepted'},
-      {id:'DE.CM-01',text:'Sono presenti, aggiornati, mantenuti e ben configurati sistemi di rilevamento dei possibili incidenti significativi.',answer:'Abbiamo implementato un IDS/IPS su tutti i perimetri di rete, aggiornato settimanalmente. Tuttavia non disponiamo ancora di un processo di revisione formale delle configurazioni e la copertura degli endpoint remoti non è completa. Stiamo pianificando un\'estensione entro Q3 2025 con budget approvato.',file:null,status:'warning'},
-      {id:'RC.RP-01',text:'Sono adottate e documentate procedure per il ripristino del normale funzionamento dei sistemi coinvolti da incidenti di sicurezza informatica.',answer:'Non abbiamo procedure documentate per il ripristino post-incidente. In caso di problemi ci affidiamo all\'esperienza del personale IT. Non sono definiti RTO/RPO e non sono stati eseguiti test di ripristino formali negli ultimi 3 anni.',file:null,status:'rejected'},
-      {id:'RS.AN-03',text:'È eseguita un\'analisi per stabilire cosa è avvenuto durante un incidente e la causa principale dell\'incidente.',answer:'Per gli incidenti di maggiore impatto eseguiamo analisi post-mortem con template Word condiviso. Il processo non è però integrato nel sistema di ticketing e la root cause analysis non segue una metodologia standardizzata (es. 5 Whys). I risultati non vengono sempre comunicati al management in modo strutturato.',file:'Template_PostMortem_v1.docx',status:'warning'}
-    ]
-  },
-  {
-    label:'Governance e Supply Chain',
-    questions:[
-      {id:'GV.SC-01',text:'In merito all\'affidamento di forniture di sistemi informativi, sono previsti requisiti di sicurezza coerenti con le misure del soggetto.',answer:'Disponiamo di una procedura formalizzata di vendor assessment per tutti i fornitori IT critici. I contratti includono clausole di sicurezza (GDPR, NIS2, ISO 27001) e SLA di risposta agli incidenti. Eseguiamo audit annuali sui fornitori tier-1 e questionari di autovalutazione per il tier-2. Il registro fornitori viene aggiornato trimestralmente. L\'ultimo audit completo (novembre 2024) ha avuto esito positivo.',file:'Vendor_Assessment_Policy_2024.pdf',status:'accepted'},
-      {id:'GV.PO-01',text:'Sono adottate e documentate politiche di cybersecurity, approvate dagli organi di amministrazione.',answer:'Le politiche di sicurezza informatica sono documentate e pubblicate sul portale intranet aziendale. L\'ultima revisione risale a marzo 2024 con approvazione formale del CDA. Include: Acceptable Use Policy, Password Policy, Incident Response Policy, Patch Management Policy e Data Classification Policy. Piano di revisione annuale programmato per marzo 2025.',file:'Security_Policies_Suite_2024_CDA.pdf',status:'accepted'},
-      {id:'GV.RR-02',text:'È definita e resa nota all\'interno del soggetto l\'organizzazione di cybersecurity con ruoli e responsabilità.',answer:'Esiste un organigramma della sicurezza aggiornato: il CISO riporta direttamente al CEO. Sono definiti responsabili per ogni asset critico. La comunicazione avviene tramite intranet. Le responsabilità vengono riviste in caso di cambiamenti organizzativi, ma non esiste un processo formale di revisione periodica né una data definita per il riesame annuale.',file:'Organigramma_Security_2024.pdf',status:'warning'},
-      {id:'GV-RM-03',text:'È definito, attuato, aggiornato e documentato un piano di gestione del rischio di cybersecurity.',answer:'Non disponiamo di un piano di risk management formale. La valutazione dei rischi avviene in modo informale quando si verifica un problema. Non utilizziamo metodologie standardizzate (ISO 31000, FAIR). Non abbiamo un registro rischi aggiornato né un piano di trattamento approvato dagli organi di governance.',file:null,status:'rejected'},
-      {id:'GV.SC-07',text:'È valutato il rischio associato alle forniture considerando accesso del fornitore, impatto di interruzione e tempi di ripristino.',answer:'Effettuiamo una valutazione preliminare del rischio prima di attivare nuovi fornitori. La classificazione avviene su tre livelli (critico, rilevante, standard). Per i fornitori critici abbiamo analizzato scenari di interruzione e identificato alternative. I tempi di ripristino stimati sono documentati nei contratti. La procedura è parzialmente supportata dal portale GRC aziendale.',file:'Risk_Fornitori_Framework_2024.pdf',status:'warning'}
-    ]
-  },
-  {
-    label:'Protezione Dati e Continuità',
-    questions:[
-      {id:'PR.DS-11',text:'Sono effettuati periodicamente backup dei dati e delle configurazioni. È verificata periodicamente l\'utilizzabilità dei backup mediante test di ripristino.',answer:'I backup vengono eseguiti giornalmente (incrementale) e settimanalmente (full) su storage ridondato in due datacenter geograficamente separati. I backup sono cifrati con AES-256. Ogni trimestre eseguiamo test di ripristino documentati: l\'ultimo (dicembre 2024) ha confermato RTO di 4 ore e RPO di 24 ore per i sistemi critici. Conservazione garantita per 90 giorni.',file:'Backup_Policy_e_Test_Q4_2024.pdf',status:'accepted'},
-      {id:'PR.AA-03',text:'Le modalità di autenticazione sono commisurate al rischio connesso ai privilegi delle utenze. Sono impiegate modalità di autenticazione multifattore.',answer:'Abbiamo implementato MFA (Microsoft Authenticator) per tutti gli accessi ai sistemi critici e per il lavoro remoto dal 2023. Gli amministratori usano account privilegiati separati con MFA obbligatorio. Per gli accessi interni standard è ancora in uso solo la password. Il progetto di estensione MFA a tutti gli utenti è in corso (completamento Q2 2025).',file:'MFA_Deployment_Status_2024.pdf',status:'warning'},
-      {id:'PR.PS-04',text:'Sono conservati in modo sicuro e centralizzato i log necessari al monitoraggio. Sono definite e documentate le tempistiche di conservazione dei log.',answer:'I log di sistema vengono raccolti da un SIEM centralizzato (Microsoft Sentinel). La retention è di 12 mesi per i log di sicurezza e 6 mesi per quelli operativi, in linea con i requisiti NIS2. L\'accesso è ristretto agli amministratori di sicurezza con tracciatura degli accessi. L\'integrità dei log è garantita tramite hash chain. Le procedure sono documentate e revisionate annualmente.',file:'Log_Management_Policy_2024.pdf',status:'accepted'},
-      {id:'ID.IM-04',text:'Sono definiti, attuati, aggiornati e documentati piani di continuità operativa e disaster recovery.',answer:'Non abbiamo un Business Continuity Plan (BCP) formale. In caso di disastro ci affidiamo alle procedure verbali del personale senior. Nessun test di continuità è stato eseguito negli ultimi 3 anni. Il management ha pianificato un progetto BCP per il 2025 ma non è ancora stato avviato né sono state allocate risorse.',file:null,status:'rejected'},
-      {id:'ID.RA-05',text:'È eseguita e documentata la valutazione del rischio con identificazione, analisi e ponderazione, a intervalli pianificati.',answer:'La valutazione del rischio viene eseguita annualmente con metodologia ISO 27005. L\'ultima valutazione (ottobre 2024) ha identificato 47 rischi, di cui 8 ad alta criticità. Per ciascun rischio è definito un owner e un piano di trattamento con scadenze. Il risk register è aggiornato trimestralmente sulla piattaforma GRC. I risultati vengono presentati al CDA semestralmente.',file:'Risk_Assessment_ISO27005_Q4_2024.pdf',status:'accepted'}
-    ]
-  }
+const AREA_COLORS=[
+  {bg:'#EBF5FF',txt:'#1a4a8c',icon:'#2563eb',pill:'#DBEAFE',pillTxt:'#1e40af'},
+  {bg:'#F3EFFB',txt:'#4c1d95',icon:'#7c3aed',pill:'#EDE9FE',pillTxt:'#5b21b6'},
+  {bg:'#ECFDF5',txt:'#064e3b',icon:'#059669',pill:'#D1FAE5',pillTxt:'#065f46'},
+  {bg:'#FEF9EE',txt:'#78350f',icon:'#d97706',pill:'#FEF3C7',pillTxt:'#92400e'},
+  {bg:'#FFF1F2',txt:'#881337',icon:'#e11d48',pill:'#FFE4E6',pillTxt:'#9f1239'},
+  {bg:'#F0FDFA',txt:'#134e4a',icon:'#0d9488',pill:'#CCFBF1',pillTxt:'#115e59'},
+];
+const EMOJIS=['🔍','🏛️','🎯','🛡️','📋','⚡'];
+const CMMI=['N/A','Iniziale','Ripetibile','Definito','Gestito','Ottimizzato'];
+
+/*  NIS2 DATA  */
+const NIS2=[
+  {area:'DETECT',locked:false,sottoaree:[
+    {nome:'Adverse Event Analysis',domande:[
+      {id:'DE.AE-02',domanda:'Gli eventi potenzialmente avversi sono analizzati per meglio comprenderne le attività associate.',tag1:'AE',tag2:'4'},
+      {id:'DE.AE-03',domanda:'Sono eseguite attività di analisi e correlazione ai fini di rilevare tempestivamente incidenti di sicurezza.',tag1:'AE',tag2:'4'},
+      {id:'DE.AE-04',domanda:"L'impatto e la portata stimati degli eventi avversi sono compresi.",tag1:'AE',tag2:'4'},
+      {id:'DE.AE-06',domanda:'Le informazioni sugli eventi avversi sono fornite al personale e agli strumenti autorizzati.',tag1:'AE',tag2:'4'},
+      {id:'DE.AE-08',domanda:'Gli incidenti sono dichiarati quando gli eventi avversi soddisfano i criteri definiti.',tag1:'AE',tag2:'3'},
+    ]},
+    {nome:'Continuous Monitoring',domande:[
+      {id:'DE.CM-01',domanda:'Sono presenti, aggiornati, mantenuti e ben configurati sistemi di rilevamento dei possibili incidenti significativi.',tag1:'CM',tag2:'4'},
+      {id:'DE.CM-02',domanda:"L'ambiente fisico è monitorato per individuare eventi potenzialmente avversi.",tag1:'CM',tag2:'3'},
+      {id:'DE.CM-06',domanda:'Sono definiti, monitorati e documentati parametri quali-quantitativi per rilevare gli accessi non autorizzati o con abuso dei privilegi.',tag1:'CM',tag2:'4'},
+      {id:'DE.CM-09',domanda:'Sono presenti, aggiornati e ben configurati sistemi di protezione delle postazioni terminali per il rilevamento del codice malevolo.',tag1:'CM',tag2:'4'},
+    ]},
+  ]},
+  {area:'GOVERN',locked:false,sottoaree:[
+    {nome:'Organizational Context',domande:[
+      {id:'GV-OC-01',domanda:"La missione dell'organizzazione è compresa e informa la gestione del rischio di cybersecurity.",tag1:'OC',tag2:'4'},
+      {id:'GV-OC-02',domanda:"Gli stakeholder interni ed esterni sono noti e le loro esigenze riguardo la gestione del rischio di cybersecurity sono comprese.",tag1:'OC',tag2:'4'},
+      {id:'GV-OC-03',domanda:"I requisiti legali, normativi e contrattuali riguardanti la cybersecurity sono compresi e gestiti.",tag1:'OC',tag2:'4'},
+    ]},
+    {nome:'Policy',domande:[
+      {id:'GV.PO-01',domanda:"Sono adottate e documentate politiche di cybersecurity in coerenza con gli obblighi normativi applicabili.",tag1:'PO',tag2:'4'},
+      {id:'GV.PO-01b',domanda:"Le politiche di cybersecurity sono approvate dagli organi di amministrazione o da una figura formalmente delegata.",tag1:'PO',tag2:'4'},
+      {id:'GV.PO-02',domanda:"Gli esiti delle attività di riesame delle politiche di cybersecurity sono tracciati in un registro.",tag1:'PO',tag2:'3'},
+    ]},
+    {nome:'Risk Management Strategy',domande:[
+      {id:'GV-RM-01',domanda:"Gli obiettivi di gestione del rischio sono stabiliti e accettati dagli stakeholder dell'organizzazione.",tag1:'RM',tag2:'4'},
+      {id:'GV-RM-03',domanda:"È definito, attuato, aggiornato e documentato un piano di gestione del rischio di cybersecurity.",tag1:'RM',tag2:'4'},
+    ]},
+  ]},
+  {area:'IDENTIFY',locked:false,sottoaree:[
+    {nome:'Asset Management',domande:[
+      {id:'ID.AM-01',domanda:"È realizzato e mantenuto un inventario aggiornato degli apparati fisici (hardware) approvati.",tag1:'AM',tag2:'4'},
+      {id:'ID.AM-02',domanda:"È realizzato e mantenuto un inventario aggiornato dei servizi, dei sistemi e delle applicazioni software approvati.",tag1:'AM',tag2:'4'},
+      {id:'ID.AM-05',domanda:"Gli asset sono prioritizzati in base alla categorizzazione, alla criticità, alle risorse e all'impatto sulla missione.",tag1:'AM',tag2:'3'},
+    ]},
+    {nome:'Risk Assessment',domande:[
+      {id:'ID.RA-01',domanda:"Sono eseguite periodicamente attività per l'identificazione delle vulnerabilità e predisposte apposite relazioni.",tag1:'RA',tag2:'4'},
+      {id:'ID.RA-05',domanda:"È eseguita e documentata la valutazione del rischio della sicurezza dei sistemi informativi e di rete.",tag1:'RA',tag2:'4'},
+      {id:'ID.RA-08',domanda:"Le vulnerabilità sono prontamente risolte attraverso aggiornamenti di sicurezza o misure di mitigazione.",tag1:'RA',tag2:'4'},
+    ]},
+  ]},
+  {area:'PROTECT',locked:true,sottoaree:[
+    {nome:'Awareness and Training',domande:[
+      {id:'PR.AT-01',domanda:"È documentato un piano di formazione in materia di sicurezza informatica del personale.",tag1:'AT',tag2:'4'},
+      {id:'PR.AT-02',domanda:"Il piano di formazione prevede formazione dedicata al personale con ruoli specializzati.",tag1:'AT',tag2:'4'},
+    ]},
+    {nome:'Data Security',domande:[
+      {id:'PR.DS-01',domanda:"I dati memorizzati sui dispositivi portatili e rimovibili sono cifrati con protocolli allo stato dell'arte.",tag1:'DS',tag2:'4'},
+      {id:'PR.DS-11',domanda:"Sono effettuati periodicamente i backup dei dati e delle configurazioni con verifica periodica dei ripristini.",tag1:'DS',tag2:'4'},
+    ]},
+  ]},
+  {area:'RESPOND',locked:true,sottoaree:[
+    {nome:'Incident Management',domande:[
+      {id:'RS.MA-01',domanda:"È definito, attuato, aggiornato e documentato un piano per la gestione degli incidenti di sicurezza informatica.",tag1:'IM',tag2:'4'},
+      {id:'RS.MA-03',domanda:"Gli incidenti sono categorizzati e prioritizzati.",tag1:'IM',tag2:'3'},
+    ]},
+  ]},
+  {area:'RECOVER',locked:true,sottoaree:[
+    {nome:'Incident Recovery Plan',domande:[
+      {id:'RC.RP-01',domanda:"Sono adottate e documentate procedure per il ripristino del normale funzionamento dei sistemi informativi.",tag1:'RP',tag2:'4'},
+      {id:'RC.RP-03',domanda:"L'integrità dei backup e delle altre risorse di ripristino è verificata prima del loro utilizzo.",tag1:'RP',tag2:'4'},
+    ]},
+  ]},
 ];
 
-/* STATE */
-let curSet=0,curQ=0,validated={};
+/*  OWNER ANSWERS  */
+const OWN={
+  'DE.AE-02':{file:'SOC_EventAnalysis_Procedure_v3.pdf',answer:'Il nostro SOC analizza gli eventi avversi tramite SIEM (Splunk Enterprise) con regole di correlazione aggiornate settimanalmente. Il processo segue la metodologia MITRE ATT&CK: ogni evento viene classificato per severity, correlato con altri alert e analizzato per identificare la kill chain. Sono definiti SLA di risposta: 15 min per alta criticità, 1 ora per media. Report mensili al CISO con evidenza completa.',status:'accepted'},
+  'DE.AE-03':{file:'SIEM_Correlation_Rules_2025.pdf',answer:'Utilizziamo Splunk con oltre 200 regole di correlazione personalizzate. Il SOC opera H24 con turni interni e supporto MDR notturno (CrowdStrike Falcon Complete). La correlazione avviene in tempo reale con analisi contestuale tramite threat intelligence integrata (Recorded Future). Documentazione delle procedure aggiornata a gennaio 2025.',status:'accepted'},
+  'DE.AE-04':{file:'Impact_Assessment_Matrix_v2.pdf',answer:'Adottiamo una matrice di impatto 5x5 aggiornata trimestralmente (ultima revisione: marzo 2025). La stima dell\'impatto considera: disponibilità dei sistemi, integrità dei dati, reputazione aziendale e obblighi normativi. Ogni evento ad alta severity viene escalato al CISO entro 2 ore. Metodologia basata su CVSS 3.1 e FAIR.',status:'accepted'},
+  'DE.AE-06':{file:'InfoSharing_Policy_2024.pdf',answer:'Le informazioni sugli eventi vengono distribuite automaticamente tramite piattaforma SOAR (Palo Alto XSOAR) ai team autorizzati in base al livello di classificazione. Esistono procedure documentate per la condivisione con CSIRT Italia e ISAC di settore. Policy di information sharing approvata dal CISO nel 2024 con revisione annuale pianificata.',status:'accepted'},
+  'DE.AE-08':{file:'Incident_Declaration_Criteria.pdf',answer:'Esistono criteri documentati per la dichiarazione degli incidenti basati su severity, impatto e tipologia. Tuttavia la procedura non è stata aggiornata da 16 mesi (ultima revisione: ottobre 2023). Le soglie di escalation sono in fase di revisione per adeguarsi alle linee guida NIS2 aggiornate. Piano di aggiornamento previsto per Q2 2025.',status:'warning'},
+  'DE.CM-01':{file:'SIEM_IDS_Configuration_Q1_2025.pdf',answer:'SIEM Splunk Enterprise 9.2 operativo H24 con aggiornamento signature settimanale. IDS/IPS Palo Alto su tutti i perimetri di rete. SOC interno 8/5 + MDR notturno. Regole di correlazione revisionate mensilmente. Coverage degli endpoint: 98% (Windows/Mac), sistemi OT in fase di integrazione con piano completamento Q3 2025.',status:'accepted'},
+  'DE.CM-02':{file:'Physical_Security_Monitoring.pdf',answer:'Il monitoraggio fisico è garantito tramite CCTV H24 (con retention 90 giorni) e controllo accessi badge su tutte le aree critiche. I log vengono conservati per 12 mesi. Tuttavia non è presente un sistema di alert automatico per anomalie fisiche e i log fisici non sono ancora integrati con il SIEM aziendale. Progetto di integrazione pianificato per Q4 2025.',status:'warning'},
+  'DE.CM-06':{file:'UEBA_Report_2025.pdf',answer:'UEBA (Varonis) implementato per utenti privilegiati e account di servizio. Monitoraggio accessi anomali con alert automatici. I sistemi legacy (ERP on-premise anni 2010) e le VPN di vecchia generazione non sono ancora coperti dalla soluzione UEBA per limitazioni tecniche. Piano di estensione con budget approvato per H2 2025.',status:'warning'},
+  'DE.CM-09':{file:'EDR_Deployment_CrowdStrike.pdf',answer:'EDR CrowdStrike Falcon deployato sul 98% degli endpoint Windows e macOS (467/477 dispositivi). I restanti 10 dispositivi legacy sono protetti con soluzioni AV tradizionali. I sistemi OT/SCADA (linee di produzione) non dispongono di agente EDR per incompatibilità tecnica. Piano di protezione OT con soluzione Claroty in corso di valutazione.',status:'warning'},
+  'GV-OC-01':{file:'Governance_Cybersecurity_Framework.pdf',answer:'La missione aziendale è formalizzata nel documento di governance approvato dal CDA nel 2024 e riesaminato annualmente. Il risk management di cybersecurity è allineato agli obiettivi strategici aziendali con revisione semestrale dal Comitato Cybersecurity (istituito nel 2023). Il CISO riporta direttamente al CEO con aggiornamenti trimestrali al CDA.',status:'accepted'},
+  'GV-OC-02':{file:'Stakeholder_Register_2025.pdf',answer:'Registro degli stakeholder aggiornato trimestralmente (ultima versione: aprile 2025). Include: clienti enterprise, fornitori critici (tier 1 e 2), autorità regolatorie (ACN, AGID), partner tecnologici. Per ciascun stakeholder sono documentate le aspettative, il livello di accesso ai sistemi e i requisiti di sicurezza contrattuali. Revisione semestrale con il Legal team.',status:'accepted'},
+  'GV-OC-03':{file:'Regulatory_Compliance_Map_Q1.pdf',answer:'Mappa di conformità normativa aggiornata a marzo 2025 con NIS2, GDPR, DORA (settore finanziario). Il Legal team effettua monitoraggio trimestrale delle novità normative con reportistica al CISO. Tuttavia non tutti i contratti con i fornitori tier-2 sono stati aggiornati con i requisiti NIS2 specifici: piano di adeguamento contrattuale entro Q3 2025.',status:'warning'},
+  'GV.PO-01':{file:'Security_Policy_Framework_v4_CDA.pdf',answer:'Framework completo di policy di sicurezza approvato dal CDA in data 14 febbraio 2025: Acceptable Use Policy, Password Policy, Incident Response Policy, Patch Management Policy, Data Classification Policy, Vendor Security Policy. Ogni policy include responsabile, data revisione e indicatori di compliance. Riesame annuale documentato con registro approvazioni.',status:'accepted'},
+  'GV.PO-01b':{file:'CDA_Minutes_Feb2025_Security.pdf',answer:'Verbali del CDA del 14/02/2025 con approvazione formale del framework di policy di sicurezza. Il CDA ha formalmente delegato al CISO gli aggiornamenti operativi entro i limiti della policy. Comitato Cybersecurity istituito con mandato triennale. Le delibere del CDA sono archiviate nel repository documentale con accesso controllato.',status:'accepted'},
+  'GV.PO-02':{file:'Policy_Review_Register_2024.pdf',answer:'Il registro degli esiti di riesame esiste ed è compilato. Tuttavia la frequenza di aggiornamento non è rispettata: l\'ultimo riesame formale risale a 14 mesi fa (febbraio 2024, soglia NIS2: 12 mesi). La procedura di riesame periodico non è seguita con sistematicità. Piano di recupero: riesame programmato per aprile 2025 con approvazione CDA.',status:'warning'},
+  'GV-RM-01':{file:'Risk_Appetite_Statement_2024.pdf',answer:'Obiettivi di risk management formalizzati nel Risk Appetite Statement approvato dal CDA nel 2024. Definiti: risk appetite, risk tolerance per ciascuna categoria di rischio, KRI (Key Risk Indicators) monitorati trimestralmente. Il processo di revisione annuale è documentato con verbali del Comitato Cybersecurity. Metodologia allineata a ISO 31000.',status:'accepted'},
+  'GV-RM-03':{file:'Risk_Management_Plan_OUTDATED.pdf',answer:'Il piano di gestione del rischio esiste ma non è stato formalmente aggiornato negli ultimi 14 mesi (ultima versione: ottobre 2023). Il risk assessment completo non è stato rieseguito dall\'ottobre 2023. Il rischio derivante dalla supply chain e dai fornitori critici non è ancora integrato nel piano. Mancano 3 scenari di rischio identificati nel 2024. Azione correttiva urgente richiesta.',status:'rejected'},
+  'ID.AM-01':{file:'CMDB_Hardware_Q1_2025.pdf',answer:'Inventario hardware gestito tramite CMDB ServiceNow con aggiornamento semi-automatico via agenti di discovery (SCCM). Copertura: 94% degli asset IT. I dispositivi OT/IoT (22 PLC e sensori di produzione) non sono ancora censiti nel CMDB principale ma sono tracciati in un foglio Excel separato. Piano di integrazione OT nel CMDB con Claroty entro Q3 2025.',status:'warning'},
+  'ID.AM-02':{file:'Software_Asset_SAM_2025.pdf',answer:'Inventario software gestito con SCCM + ManageEngine ServiceDesk Plus. Aggiornamento automatico mensile per i software standard. Le applicazioni SaaS (47 licenze attive) sono gestite separatamente con un registro manuale non sempre aggiornato. Esiste un processo di software authorization ma non copre completamente le applicazioni AI/ML introdotte nel 2024.',status:'warning'},
+  'ID.AM-05':{file:'Asset_Classification_Matrix.pdf',answer:'Matrice di classificazione e prioritizzazione degli asset approvata dal CISO nel 2024 (revisione annuale). Gli asset sono classificati in 4 livelli (critico, rilevante, standard, non essenziale) in base a criticità per la missione, valore business e impatto in caso di compromissione. Il 78% degli asset critici è stato formalmente classificato. Completamento previsto Q2 2025.',status:'accepted'},
+  'ID.RA-01':{file:'VA_Report_Q1_2025_Qualys.pdf',answer:'Vulnerability assessment eseguito trimestralmente tramite Qualys VM su tutti i sistemi in scope NIS2. Penetration test annuale da provider certificato (ultima esecuzione: novembre 2024, esito: 2 critical risolte, 4 high in remediation). Risultati comunicati al CISO e al management. Programma di patch management automatizzato per le vulnerabilità critiche.',status:'accepted'},
+  'ID.RA-05':{file:'Risk_Assessment_ISO27005_Oct2024.pdf',answer:'Risk assessment eseguito con metodologia ISO 27005/EBIOS RM. Ultima valutazione completa: ottobre 2024 con approvazione CDA (18/11/2024). Identificati 53 rischi, di cui 9 ad alta criticità con piani di trattamento. Risk register aggiornato trimestralmente su piattaforma GRC. Threat intelligence integrata da Recorded Future. Revisione semestrale per rischi critici raccomandata.',status:'accepted'},
+  'ID.RA-08':{file:'Patch_Management_Policy_v3.pdf',answer:'Patch management automatizzato per sistemi Windows via WSUS con SLA: critica entro 48h, alta entro 7gg. Sistemi Linux aggiornati manualmente con cadenza mensile (processo non automatizzato). Sistemi OT/SCADA: nessun patch management strutturato per incompatibilità con i vendor. Piano di remediation OT in corso con fornitore specializzato. 3 vulnerabilità critiche in remediation da >30gg.',status:'warning'},
+};
+
+let selDom={};
+let modalState={areaData:null,ai:0,subIdx:0};
+let demoStep=1;
+let curQ=0;
+let validated={};
+let ownerQuestions=[];
 let desktopCollapsed=false;
 
-/* ═══════════════════════════════
-   INIT
-═══════════════════════════════ */
 function startDemo(){
   document.getElementById('demo-overlay').style.display='none';
   document.getElementById('app-shell').style.display='flex';
-  // Su mobile la sidebar parte chiusa
-  if(window.innerWidth<=767){
-    document.getElementById('sidebar').classList.remove('mobile-open');
-  }
-  loadSet(0);
+  if(window.innerWidth<=767) document.getElementById('sidebar').classList.remove('mobile-open');
+  renderSelGrid();
 }
 
-function loadSet(idx){
-  curSet=idx;curQ=0;validated={};
-  const s=SETS[idx];
-  document.getElementById('ps-t').textContent=s.questions.length;
-  document.getElementById('q-subtitle').textContent=s.label;
-  document.getElementById('page-sub').textContent='Fase: Assessment · '+s.label;
-  document.getElementById('examples-btn').innerHTML=
-    `<i class="fa-solid fa-rotate"></i> Vedi altri esempi <span style="font-size:10px;opacity:.55;margin-left:2px">(${idx+1}/${SETS.length})</span>`;
-  renderList();selectQ(0);updateProg();
-}
-function cycleSet(){loadSet((curSet+1)%SETS.length);}
-
-/* ═══════════════════════════════
-   SIDEBAR CONTROLS
-═══════════════════════════════ */
+/*  SIDEBAR  */
 function toggleDesktopSidebar(){
   desktopCollapsed=!desktopCollapsed;
   document.getElementById('sidebar').classList.toggle('collapsed',desktopCollapsed);
   document.getElementById('main-content').classList.toggle('collapsed',desktopCollapsed);
-  document.getElementById('topbar-logo').classList.toggle('collapsed',desktopCollapsed);
   document.getElementById('burger-icon').className=desktopCollapsed?'fa-solid fa-bars':'fa-solid fa-angles-left';
 }
 function toggleMobileSidebar(){
-  const sb=document.getElementById('sidebar');
-  const ov=document.getElementById('sidebar-overlay');
-  const ic=document.getElementById('hamburger-icon');
+  const sb=document.getElementById('sidebar'),ov=document.getElementById('sidebar-overlay'),ic=document.getElementById('hamburger-icon');
   const open=sb.classList.toggle('mobile-open');
   ov.classList.toggle('open',open);
   ic.className=open?'fa-solid fa-xmark':'fa-solid fa-bars';
@@ -970,119 +784,324 @@ function closeMobileSidebar(){
   document.getElementById('hamburger-icon').className='fa-solid fa-bars';
 }
 
-/* ═══════════════════════════════
-   Q LIST
-═══════════════════════════════ */
-function renderList(){
-  const list=document.getElementById('q-list');
-  const qs=SETS[curSet].questions;
+/*  STEP  */
+function goStep(n){
+  if(n===2&&Object.keys(selDom).length===0)return;
+  demoStep=n;
+  document.getElementById('step1-wrap').style.display=n===1?'block':'none';
+  document.getElementById('step2-wrap').style.display=n===2?'block':'none';
+  ['dsi-1','dsi-2'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    el.classList.toggle('active',i+1===n);
+    el.classList.toggle('done',i+1<n);
+    document.getElementById('dsn'+(i+1)).innerHTML=i+1<n?'<i class="fa-solid fa-check"></i>':String(i+1);
+  });
+  if(n===1){
+    document.getElementById('page-title-txt').textContent='Selezione Questionario — NIS2';
+    document.getElementById('info-fase').textContent='Def. Questionario';
+    document.getElementById('sp2').classList.add('active');
+    document.getElementById('sp2').classList.remove('done');
+    document.getElementById('sp3').classList.remove('active');
+    document.getElementById('btn-header-lbl').textContent='Cambia set';
+    renderSelSidebar();
+  } else {
+    document.getElementById('page-title-txt').textContent='Compilazione Questionario — NIS2';
+    document.getElementById('info-fase').textContent='Assessment';
+    document.getElementById('sp2').classList.remove('active');
+    document.getElementById('sp2').classList.add('done');
+    document.getElementById('sp3').classList.add('active');
+    document.getElementById('sp-line3').classList.add('done');
+    document.getElementById('btn-header-lbl').textContent='Modifica selezione';
+    setupOwnerStep();
+  }
+}
+function headerAction(){if(demoStep===1)resetAll();else goStep(1);}
+
+function resetAll(){
+  selDom={};validated={};ownerQuestions=[];
+  renderSelGrid();renderSelSidebar();
+}
+
+/*  REVIEWER  */
+function cntSel(){return Object.keys(selDom).length}
+function cntSelArea(a){return Object.values(selDom).filter(d=>d.area===a).length}
+function cntTotArea(a){let c=0;a.sottoaree.forEach(s=>s.domande.forEach(()=>c++));return c}
+function cntSelSub(sub){return sub.domande.filter(d=>selDom[d.id]).length}
+
+function renderSelGrid(){
+  const body=document.getElementById('sel-main-body');
+  body.innerHTML='';
+  NIS2.forEach((areaData,ai)=>{
+    const col=AREA_COLORS[ai%AREA_COLORS.length];
+    const selA=cntSelArea(areaData.area),totA=cntTotArea(areaData);
+    const isAll=selA===totA&&totA>0,isInd=selA>0&&selA<totA;
+    const wrap=document.createElement('div');
+    wrap.className='qb-wrap';
+    wrap.innerHTML=`<div class="qb-header">
+      <div class="qb-hdr-l">
+        <div class="qb-chk ${isAll?'all':isInd?'ind':''}" onclick="toggleAreaAll(${ai})">${isAll||isInd?'<i class="fa-solid fa-check" style="font-size:8px"></i>':''}</div>
+        <h4 class="qb-title">${areaData.area}</h4>
+      </div>
+      <span class="qb-badge">${selA} / ${totA}</span>
+    </div>`;
+    const grid=document.createElement('div');
+    grid.className='aree-grid';
+    areaData.sottoaree.forEach((sub,si)=>{
+      const selS=cntSelSub(sub),totS=sub.domande.length,pct=totS>0?Math.round(selS/totS*100):0;
+      const card=document.createElement('div');
+      card.className='area-card'+(selS>0?' has-sel':'')+(areaData.locked?' locked':'');
+      if(!areaData.locked) card.onclick=()=>openModal(areaData,ai,si);
+      card.innerHTML=`${selS>0?`<div class="ac-sel-badge">${selS}</div>`:''}
+        <div class="ac-icon" style="background:${col.bg};color:${col.icon}">${EMOJIS[ai%EMOJIS.length]}</div>
+        <div class="ac-name" style="color:${col.txt}">${sub.nome}</div>
+        <div class="ac-meta">
+          <span class="ac-pill" style="background:${col.pill};color:${col.pillTxt}">${totS} dom.</span>
+          ${areaData.locked?'<span class="ac-count" style="color:var(--text-muted)"><i class="fa-solid fa-lock" style="font-size:9px"></i> Riservato</span>':''}
+        </div>
+        <div class="ac-progress"><div class="ac-progress-fill" style="width:${pct}%;background:${col.icon}"></div></div>
+        ${areaData.locked?`<div class="lock-ov"><div class="lock-ov-icon"><i class="fa-solid fa-lock"></i></div><div class="lock-ov-txt">Accesso riservato</div></div>`:''}`;
+      grid.appendChild(card);
+    });
+    wrap.appendChild(grid);
+    body.appendChild(wrap);
+  });
+  renderSelSidebar();
+  updateProcedi();
+}
+
+function renderSelSidebar(){
+  const list=document.getElementById('sel-q-list');
+  const n=cntSel();
+  document.getElementById('sel-n').textContent=n;
+  const areas=[...new Set(Object.values(selDom).map(d=>d.area))];
+  document.getElementById('sel-areas').textContent=areas.length+' aree';
+  if(n===0){list.innerHTML='<div style="padding:20px 10px;text-align:center;font-size:11px;color:var(--text-muted);line-height:1.7">Seleziona le domande<br>dalla griglia →</div>';return;}
   list.innerHTML='';
-  qs.forEach((q,i)=>{
-    const v=validated[i];const sel=i===curQ;
-    const cls=v?(v==='accepted'?'acc':v==='rejected'?'rej':'wrn'):'';
-    const num=v==='accepted'?'✓':v==='rejected'?'✗':v==='warning'?'~':i+1;
-    const badge=v==='accepted'?'✅ Conforme':v==='rejected'?'❌ Non conforme':v==='warning'?'⚠️ Parziale':q.id;
-    const li=document.createElement('li');
-    li.className=`q-item${sel?' selected':''}${v?' answered '+cls:''}`;
-    li.onclick=()=>{selectQ(i);if(window.innerWidth<=767)document.querySelector('.a-panel').scrollIntoView({behavior:'smooth',block:'start'});};
-    li.innerHTML=`<div class="q-item-num">${num}</div><div class="q-item-body"><div class="q-item-text">${q.text.length>80?q.text.slice(0,80)+'…':q.text}</div><div class="q-item-meta"><span class="q-item-id">${q.id}</span><span class="q-item-badge">${badge}</span></div></div>`;
-    list.appendChild(li);
+  const byArea={};
+  Object.values(selDom).forEach(d=>{if(!byArea[d.area])byArea[d.area]=[];byArea[d.area].push(d);});
+  Object.entries(byArea).forEach(([area,doms])=>{
+    const g=document.createElement('div');
+    g.innerHTML=`<div class="sel-area-lbl">${area}</div>`;
+    doms.forEach(d=>{
+      const r=document.createElement('div');
+      r.className='sel-qrow sel';
+      r.innerHTML=`<div class="sel-chk on"><i class="fa-solid fa-check" style="font-size:7px"></i></div><div style="flex:1;min-width:0"><div class="sel-qid">${d.id}</div><div class="sel-qtxt">${d.domanda}</div></div>`;
+      r.querySelector('.sel-chk').addEventListener('click',e=>{e.stopPropagation();toggleDomanda(d.id);});
+      g.appendChild(r);
+    });
+    list.appendChild(g);
+  });
+}
+
+function updateProcedi(){
+  const n=cntSel(),btn=document.getElementById('btn-procedi'),txt=document.getElementById('procedi-txt');
+  btn.classList.toggle('on',n>0);
+  txt.innerHTML=n>0?`<strong>${n}</strong> domande selezionate — pronto per l'Owner`:'Seleziona almeno una domanda per procedere';
+}
+
+function toggleAreaAll(ai){
+  const area=NIS2[ai];if(area.locked)return;
+  const totA=cntTotArea(area),selA=cntSelArea(area.area),add=selA<totA;
+  area.sottoaree.forEach(sub=>sub.domande.forEach(d=>{
+    if(add)selDom[d.id]={...d,area:area.area,subNome:sub.nome};
+    else delete selDom[d.id];
+  }));
+  renderSelGrid();
+}
+
+function toggleDomanda(id){
+  if(selDom[id])delete selDom[id];
+  else{
+    for(const a of NIS2){if(a.locked)continue;for(const s of a.sottoaree){const d=s.domande.find(x=>x.id===id);if(d){selDom[id]={...d,area:a.area,subNome:s.nome};break;}}}
+  }
+  renderSelGrid();
+  if(modalState.areaData)renderModalDomande();
+}
+
+/*  MODALI  */
+function openModal(areaData,ai,subIdx){
+  modalState={areaData,ai,subIdx};
+  const col=AREA_COLORS[ai%AREA_COLORS.length];
+  const hdr=document.getElementById('modal-hdr');
+  hdr.style.background=`linear-gradient(135deg,${col.bg},${col.pill})`;
+  hdr.style.borderBottom=`2px solid ${col.icon}33`;
+  document.getElementById('modal-title').textContent=areaData.area+' · '+areaData.sottoaree[subIdx].nome;
+  document.getElementById('modal-title').style.color=col.txt;
+  document.getElementById('modal-ov').classList.add('open');
+  renderModalSidebar();renderModalDomande();
+}
+
+function renderModalSidebar(){
+  const {areaData,subIdx}=modalState;
+  const sb=document.getElementById('modal-sub-sb');sb.innerHTML='';
+  areaData.sottoaree.forEach((sub,si)=>{
+    const selS=cntSelSub(sub),totS=sub.domande.length;
+    const item=document.createElement('div');
+    item.className='modal-sub-item'+(si===subIdx?' active':'');
+    item.innerHTML=`<div class="modal-sub-name">${sub.nome}</div><div class="modal-sub-meta"><span>${totS} dom.</span>${selS>0?`<span class="modal-sub-sel">${selS} ✓</span>`:''}</div>`;
+    item.onclick=()=>{modalState.subIdx=si;document.getElementById('modal-title').textContent=areaData.area+' · '+sub.nome;renderModalSidebar();renderModalDomande();};
+    sb.appendChild(item);
+  });
+}
+
+function renderModalDomande(){
+  const {areaData,subIdx}=modalState;
+  const sub=areaData.sottoaree[subIdx];
+  const domList=document.getElementById('modal-domande');
+  const selS=cntSelSub(sub);
+  document.getElementById('modal-ftr-info').innerHTML=`Selezionate: <strong>${selS}</strong> / <strong>${sub.domande.length}</strong>`;
+  domList.innerHTML=`<div class="modal-sub-title">${sub.nome}</div>`;
+  sub.domande.forEach((d,di)=>{
+    const isSel=!!selDom[d.id];
+    const item=document.createElement('div');
+    item.className='dom-item'+(isSel?' sel':'');
+    item.onclick=()=>toggleDomanda(d.id);
+    item.innerHTML=`<div class="dom-chk${isSel?' on':''}" onclick="event.stopPropagation();toggleDomanda('${d.id}')">${isSel?'<i class="fa-solid fa-check" style="font-size:8px"></i>':''}</div>
+      <div class="dom-num">${di+1}</div>
+      <div class="dom-content">
+        <div class="dom-tags"><span class="dom-tag-id">${d.id}</span><span class="dom-tag-sub">${d.tag1}</span><span class="dom-crit">Crit. ${d.tag2}</span></div>
+        <div class="dom-text">${d.domanda}</div>
+        <div class="dom-livelli">${CMMI.map(l=>`<button class="liv-btn${(d._livelli&&d._livelli.includes(l))?' on':''}" onclick="event.stopPropagation();toggleLiv('${d.id}','${l}')">${l}</button>`).join('')}</div>
+      </div>`;
+    domList.appendChild(item);
+  });
+}
+
+function modalSelAll(val){
+  if(!modalState.areaData)return;
+  const sub=modalState.areaData.sottoaree[modalState.subIdx];
+  sub.domande.forEach(d=>{if(val)selDom[d.id]={...d,area:modalState.areaData.area,subNome:sub.nome};else delete selDom[d.id];});
+  renderSelGrid();renderModalSidebar();renderModalDomande();
+}
+function closeModal(){document.getElementById('modal-ov').classList.remove('open')}
+
+function toggleLiv(id,liv){
+  let d=selDom[id];
+  if(!d){for(const a of NIS2)for(const s of a.sottoaree){const f=s.domande.find(x=>x.id===id);if(f){d=f;break;}}}
+  if(!d)return;
+  if(!d._livelli)d._livelli=[];
+  const idx=d._livelli.indexOf(liv);
+  if(idx>-1)d._livelli.splice(idx,1);else d._livelli.push(liv);
+  renderModalDomande();
+}
+
+/*  OWNER  */
+function setupOwnerStep(){
+  ownerQuestions=Object.values(selDom);
+  curQ=0;validated={};
+  document.getElementById('ps-t').textContent=ownerQuestions.length;
+  document.getElementById('q-subtitle-o').textContent=ownerQuestions.length+' domande assegnate dal Reviewer';
+  renderOwnerList();
+  if(ownerQuestions.length>0)selectQ(0);
+  updateOwnerProg();
+}
+
+function renderOwnerList(){
+  const list=document.getElementById('q-list-o');
+  list.innerHTML='';
+  const byArea={};
+  ownerQuestions.forEach((d,i)=>{if(!byArea[d.area])byArea[d.area]=[];byArea[d.area].push({d,i});});
+  Object.entries(byArea).forEach(([area,items])=>{
+    items.forEach(({d,i})=>{
+      const v=validated[i];const sel=i===curQ;
+      const cls=v?(v==='accepted'?'acc':v==='rejected'?'rej':'wrn'):'';
+      const num=v==='accepted'?'<i class="fa-solid fa-check"></i>':v==='rejected'?'<i class="fa-solid fa-xmark"></i>':v==='warning'?'~':i+1;
+      const badge=v==='accepted'?'✅ Conforme':v==='rejected'?'❌ Non conforme':v==='warning'?'⚠️ Parziale':d.id;
+      const li=document.createElement('li');
+      li.className=`q-item${sel?' selected':''}${v?' answered '+cls:''}`;
+      li.onclick=()=>{selectQ(i);if(window.innerWidth<=767)document.querySelector('.a-panel').scrollIntoView({behavior:'smooth',block:'start'})};
+      li.innerHTML=`<div class="q-item-num">${num}</div><div class="q-item-body"><div class="q-item-text">${d.domanda.length>80?d.domanda.slice(0,80)+'…':d.domanda}</div><div class="q-item-meta"><span class="q-item-id">${area}</span><span class="q-item-badge">${badge}</span></div></div>`;
+      list.appendChild(li);
+    });
   });
 }
 
 function selectQ(idx){
   curQ=idx;
-  const q=SETS[curSet].questions[idx];
-  document.getElementById('a-qid').textContent=q.id;
-  document.getElementById('a-qtext').textContent=q.text;
-  document.getElementById('a-text').textContent=q.answer;
-  document.getElementById('a-text').style.fontStyle='normal';
-  document.getElementById('a-text').style.color='var(--text)';
-  const blk=document.getElementById('a-block');blk.className='a-answer-block';
-  const ft=document.getElementById('file-txt');const fi=document.getElementById('file-info');
-  if(q.file){
-    ft.innerHTML=`<i class="fa-solid fa-file-pdf" style="color:var(--red)"></i> ${q.file}`;
-    fi.style.borderColor='rgba(29,158,117,.3)';fi.style.background='rgba(29,158,117,.04)';
+  const d=ownerQuestions[idx];
+  if(!d)return;
+  const ans=OWN[d.id];
+  document.getElementById('a-qid').textContent=d.id+' · '+d.area;
+  document.getElementById('a-qtext').textContent=d.domanda;
+  const at=document.getElementById('a-text');
+  at.textContent=ans?ans.answer:'[Risposta non disponibile nel mockup per questa domanda]';
+  at.style.fontStyle='normal';at.style.color='var(--text)';
+  document.getElementById('a-block').className='a-answer-block';
+  const pdfWrap=document.getElementById('pdf-row-wrap');
+  if(ans&&ans.file){
+    pdfWrap.innerHTML=`<div class="pdf-row"><i class="fa-solid fa-file-pdf"></i><span><strong>${ans.file}</strong> &nbsp;·&nbsp; Caricato il 12/04/2025 &nbsp;·&nbsp; Verificato ✓</span></div>`;
   } else {
-    ft.innerHTML=`<i class="fa-solid fa-paperclip"></i> Nessun documento allegato`;
-    fi.style.borderColor='';fi.style.background='';
+    pdfWrap.innerHTML=`<div class="pdf-row" style="opacity:.5"><i class="fa-solid fa-paperclip"></i><span>Nessun documento allegato nel mockup</span></div>`;
   }
   document.getElementById('btn-prev').disabled=idx===0;
-  document.getElementById('btn-next').disabled=idx===SETS[curSet].questions.length-1;
+  document.getElementById('btn-next').disabled=idx===ownerQuestions.length-1;
   const btn=document.getElementById('btn-val');
-  btn.disabled=false;
+  btn.disabled=!ans;
   btn.innerHTML='<i class="fa-solid fa-robot"></i> Avvia Validazione AI';
-  if(validated[idx]){showResult(q.status,getScore(q),buildFeedback(q),false);applyBorder(blk,q.status);}
+  if(validated[idx]&&ans){showResult(ans.status,getScore(ans),buildFeedback(ans));}
   else{document.getElementById('ai-vp').className='ai-vp hidden';}
-  renderList();
+  renderOwnerList();
 }
-function navQ(d){const qs=SETS[curSet].questions;selectQ(Math.max(0,Math.min(qs.length-1,curQ+d)));}
+function navQ(d){selectQ(Math.max(0,Math.min(ownerQuestions.length-1,curQ+d)));}
 
-/* ═══════════════════════════════
-   VALIDATION
-═══════════════════════════════ */
 function doValidate(){
-  const q=SETS[curSet].questions[curQ];
+  const d=ownerQuestions[curQ];if(!d)return;
+  const ans=OWN[d.id];if(!ans)return;
   const btn=document.getElementById('btn-val');
-  btn.disabled=true;
-  btn.innerHTML='<i class="fa-solid fa-circle-notch fa-spin"></i> Analisi in corso...';
+  btn.disabled=true;btn.innerHTML='<i class="fa-solid fa-circle-notch fa-spin"></i> Analisi in corso...';
   const vp=document.getElementById('ai-vp');
   vp.className='ai-vp thinking';
   document.getElementById('ai-hd').className='ai-vp-hd thinking';
   document.getElementById('ai-av').textContent='🤖';
   document.getElementById('ai-st').textContent='ANALISI IN CORSO';
-  document.getElementById('ai-ti').textContent="L'AI sta elaborando la risposta...";
+  document.getElementById('ai-ti').textContent="L'AI sta elaborando risposta e documento allegato...";
   document.getElementById('ai-sc').className='ai-score thinking';
   document.getElementById('ai-sc').innerHTML='<i class="fa-solid fa-circle-notch fa-spin"></i> Processing';
   document.getElementById('ai-body').innerHTML='<div class="typing-dots"><span></span><span></span><span></span></div>';
   setTimeout(()=>{
-    const s=getScore(q);const f=buildFeedback(q);
-    showResult(q.status,s,f,true);
-    applyBorder(document.getElementById('a-block'),q.status);
-    validated[curQ]=q.status;updateProg();renderList();
+    const s=getScore(ans),f=buildFeedback(ans);
+    showResult(ans.status,s,f);
+    applyBorder(document.getElementById('a-block'),ans.status);
+    validated[curQ]=ans.status;
+    updateOwnerProg();renderOwnerList();
     btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-rotate-left"></i> Rivalida';
-    // Scroll al pannello AI su mobile
-    if(window.innerWidth<=767){
-      setTimeout(()=>document.getElementById('ai-vp').scrollIntoView({behavior:'smooth',block:'nearest'}),100);
-    }
-  },2000);
+    if(window.innerWidth<=767)setTimeout(()=>document.getElementById('ai-vp').scrollIntoView({behavior:'smooth',block:'nearest'}),100);
+  },1800+Math.random()*600);
 }
 
-function getScore(q){
+function getScore(ans){
   const base={accepted:84,warning:55,rejected:20};
-  let s=base[q.status]||50;
-  if(q.file&&q.status!=='rejected')s=Math.min(97,s+7);
+  let s=base[ans.status]||50;
+  if(ans.file&&ans.status!=='rejected')s=Math.min(96,s+6);
   return s;
 }
-function buildFeedback(q){
+
+function buildFeedback(ans){
   const f=[];
-  if(q.status==='accepted'){
-    f.push({t:'ok',d:'Completezza',m:'Risposta dettagliata e strutturata con riferimenti concreti a processi, ruoli e strumenti. Dimostra piena consapevolezza dei requisiti.'});
-    const kw=['procedura','piano','approvato','csirt','soc','annuale','test','rto','rpo','documentat'];
-    const found=kw.filter(k=>q.answer.toLowerCase().includes(k)).slice(0,3);
-    if(found.length)f.push({t:'ok',d:'Terminologia NIS2',m:`Rilevati indicatori di maturità: <strong>${found.join(', ')}</strong>. Conforme agli art. 20-21 NIS2.`});
-    if(q.file)f.push({t:'ok',d:'Evidenza Documentale',m:`Documento allegato: <strong>${q.file}</strong>. Supporta la risposta e facilita la verifica dell'Auditor.`});
-    else f.push({t:'warn',d:'Evidenza Documentale',m:'Nessun allegato. Si consiglia di allegare la policy di riferimento per rafforzare la conformità.'});
-  } else if(q.status==='warning'){
-    f.push({t:'warn',d:'Conformità parziale',m:'Misure parzialmente adeguate. Mancano elementi chiave richiesti dalla normativa NIS2. Integrazioni necessarie.'});
-    f.push({t:'warn',d:'Copertura NIS2',m:'Conformità parziale rispetto all\'art. 21 NIS2. Raccomandato un piano di miglioramento con scadenza definita.'});
-    if(q.file)f.push({t:'ok',d:'Evidenza Documentale',m:`Documento allegato: <strong>${q.file}</strong>. Supporta la risposta nonostante la parzialità.`});
-    else f.push({t:'ko',d:'Evidenza Documentale',m:"Assenza di documentazione. L'Auditor non può verificare le misure dichiarate."});
+  if(ans.status==='accepted'){
+    f.push({t:'ok',d:'Completezza',m:'Risposta dettagliata con riferimenti concreti a processi, ruoli, strumenti e scadenze. Dimostra piena maturità rispetto ai requisiti NIS2.'});
+    if(ans.file)f.push({t:'ok',d:'Evidenza documentale',m:`Documento allegato: <strong>${ans.file}</strong>. Supporta la risposta e facilita la verifica da parte dell'Auditor.`});
+    f.push({t:'ok',d:'Conformità NIS2',m:'Risposta allineata agli artt. 20-21 NIS2. Nessuna azione correttiva obbligatoria.'});
+  } else if(ans.status==='warning'){
+    f.push({t:'warn',d:'Conformità parziale',m:'Misure presenti ma incomplete. Mancano elementi chiave o la documentazione non è aggiornata nei termini richiesti da NIS2.'});
+    f.push({t:'warn',d:'Piano di miglioramento',m:'Raccomandato definire un piano di miglioramento con scadenze precise e responsabile identificato.'});
+    if(ans.file)f.push({t:'ok',d:'Evidenza documentale',m:`Documento allegato: <strong>${ans.file}</strong>. Supporta parzialmente la risposta.`});
+    else f.push({t:'ko',d:'Evidenza documentale',m:"Assenza di documentazione. L'Auditor non può verificare le misure dichiarate."});
   } else {
-    f.push({t:'ko',d:'Gap Critico',m:'Assenza di misure adeguate. Gap significativi rispetto ai requisiti obbligatori NIS2.'});
-    const bw=['non abbiamo','non disponiamo','non documentat','nessun','informale','verbale'];
-    const bf=bw.filter(k=>q.answer.toLowerCase().includes(k)).slice(0,2);
-    if(bf.length)f.push({t:'ko',d:'Indicatori di non conformità',m:`Criticità rilevate: "<strong>${bf.join('</strong>", "<strong>')}</strong>". Non soddisfa i requisiti NIS2 Art. 21.`});
-    f.push({t:'ko',d:'Azione correttiva obbligatoria',m:"Azione correttiva richiesta prima della chiusura. Da inserire nel piano di remediation con priorità alta."});
+    f.push({t:'ko',d:'Gap critico',m:'Assenza di misure adeguate o documentazione. Gap significativo rispetto ai requisiti obbligatori NIS2 Art. 21.'});
+    f.push({t:'ko',d:'Azione correttiva obbligatoria',m:'Inserire nel piano di remediation con priorità alta. Completamento richiesto prima della chiusura dell\'assessment.'});
+    if(!ans.file)f.push({t:'ko',d:'Evidenza documentale',m:"Nessun documento allegato. Impossibile verificare le misure."});
   }
   return f;
 }
+
 function applyBorder(el,st){
   el.className='a-answer-block';
   if(st==='accepted')el.classList.add('valid');
   else if(st==='rejected')el.classList.add('invalid');
   else el.classList.add('warn-b');
 }
+
 function showResult(status,score,fbs){
   const cfg={
     accepted:{emoji:'✅',st:'DOCUMENTO ACCETTATO',ti:'Risposta conforme ai requisiti NIS2 — Nessuna azione correttiva richiesta.',ic:'fa-circle-check'},
@@ -1099,9 +1118,9 @@ function showResult(status,score,fbs){
   document.getElementById('ai-sc').innerHTML=`<i class="fa-solid ${c.ic}"></i> Score: ${score}/100`;
   const fbHTML=fbs.map((f,i)=>`<li class="fb-item ${f.t}" style="animation-delay:${i*.1}s"><span class="fi-ico">${f.t==='ok'?'✅':f.t==='ko'?'❌':'⚠️'}</span><div class="fi-txt"><span class="fi-dim">${f.d}</span>${f.m}</div></li>`).join('');
   const actHTML=status==='accepted'
-    ?`<button class="btn-a primary" onclick="navQ(1)"><i class="fa-solid fa-check"></i> Salva e prossima</button><button class="btn-a secondary" onclick="navQ(1)"><i class="fa-solid fa-forward"></i> Vai alla prossima</button>`
+    ?`<button class="btn-a primary" onclick="navQ(1)"><i class="fa-solid fa-check"></i> Salva e prossima</button><button class="btn-a secondary" onclick="navQ(1)"><i class="fa-solid fa-forward"></i> Prossima</button>`
     :status==='warning'
-    ?`<button class="btn-a primary" onclick="navQ(1)"><i class="fa-solid fa-floppy-disk"></i> Salva con riserva</button><button class="btn-a secondary" onclick="resetQ()"><i class="fa-solid fa-pencil"></i> Modifica</button>`
+    ?`<button class="btn-a primary" onclick="navQ(1)"><i class="fa-solid fa-floppy-disk"></i> Salva con riserva</button><button class="btn-a secondary" onclick="resetQ()"><i class="fa-solid fa-pencil"></i> Segna per revisione</button>`
     :`<button class="btn-a danger" onclick="resetQ()"><i class="fa-solid fa-rotate-left"></i> Segna per revisione</button><button class="btn-a secondary" onclick="navQ(1)"><i class="fa-solid fa-forward"></i> Prossima</button>`;
   document.getElementById('ai-body').innerHTML=`
     <ul class="fb-list">${fbHTML}</ul>
@@ -1112,23 +1131,26 @@ function showResult(status,score,fbs){
     </div>
     <div class="ai-actions">${actHTML}</div>`;
 }
+
 function resetQ(){
   delete validated[curQ];
   document.getElementById('a-block').className='a-answer-block';
   document.getElementById('ai-vp').className='ai-vp hidden';
   document.getElementById('btn-val').innerHTML='<i class="fa-solid fa-robot"></i> Avvia Validazione AI';
-  updateProg();renderList();
+  updateOwnerProg();renderOwnerList();
 }
-function updateProg(){
-  const qs=SETS[curSet].questions;
+
+function updateOwnerProg(){
   const done=Object.values(validated).filter(Boolean);
   const acc=done.filter(s=>s==='accepted').length;
-  const pct=Math.round(done.length/qs.length*100);
+  const pct=ownerQuestions.length>0?Math.round(done.length/ownerQuestions.length*100):0;
   document.getElementById('ps-a').textContent=done.length;
   document.getElementById('ps-v').textContent=acc;
   document.getElementById('ps-pct').textContent=pct+'%';
   document.getElementById('ps-fill').style.width=pct+'%';
 }
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 </script>
 </body>
 </html>
