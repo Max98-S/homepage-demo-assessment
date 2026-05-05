@@ -46,57 +46,13 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .tb-burger{display:none;width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);align-items:center;justify-content:center;color:rgba(255,255,255,.7);font-size:16px;cursor:pointer;flex-shrink:0;transition:all .2s}
 .tb-burger:hover{background:rgba(0,198,255,.2);color:#00c6ff}
 @media(max-width:767px){.tb-burger{display:flex}}
-.tb-logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  flex-shrink:0;
-  text-decoration:none;
-}
-
-/* ICONA */
-.tb-logo-icon{
-  height:40px;
-  margin-left: 20px;
-  width:auto;
-  display:block;
-  filter: drop-shadow(0 0 15px rgba(167, 167, 167, 0.627));
-  transition: filter 0.3s ease;
-}
-
-/* TESTO */
-.tb-logo-text{
-  height:70px; /* leggermente più basso per proporzione */
-  width:auto;
-  display:block;
-  filter: drop-shadow(0 0 15px rgba(167, 167, 167, 0.627));
-  transition: filter 0.3s ease;
-}
-.tb-logo-text2{
-  height: 150px;
-  filter: drop-shadow(0 0 15px rgba(167, 167, 167, 0.627));
-  transition: filter 0.3s ease;
-}
-.tb-logo-icon2{
-  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
-  transition: filter 0.3s ease;
-  height: 92px;
-}
-.tb-logo-text3{
-  height: 72px;
-  filter: drop-shadow(0 0 15px rgba(167, 167, 167, 0.627));
-  transition: filter 0.3s ease;
-}
-.tb-logo-icon3{
-  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
-  transition: filter 0.3s ease;
-  height: 64px;
-}
-.tb-search{margin-left:8px;flex:1;max-width:500px;display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 14px;cursor:text;transition:all .2s}
-.tb-search:hover{border-color:rgba(0,198,255,.3)}
-.tb-search i{font-size:12px;color:rgba(255,255,255,.4)}
-.tb-search span{font-size:12px;color:rgba(255,255,255,.35);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-@media(max-width:640px){.tb-search{display:none}}
+.tb-logo{display:flex;align-items:center;gap:10px;flex-shrink:0;text-decoration:none}
+.tb-logo-icon{height:40px;margin-left:20px;width:auto;display:block;filter:drop-shadow(0 0 15px rgba(167,167,167,.627));transition:filter .3s}
+.tb-logo-text{height:70px;width:auto;display:block;filter:drop-shadow(0 0 15px rgba(167,167,167,.627));transition:filter .3s}
+.tb-logo-text2{height:150px;filter:drop-shadow(0 0 15px rgba(167,167,167,.627));transition:filter .3s}
+.tb-logo-icon2{filter:drop-shadow(0 0 15px rgba(255,255,255,.3));transition:filter .3s;height:92px}
+.tb-logo-text3{height:72px;filter:drop-shadow(0 0 15px rgba(167,167,167,.627));transition:filter .3s}
+.tb-logo-icon3{filter:drop-shadow(0 0 15px rgba(255,255,255,.3));transition:filter .3s;height:64px}
 .tb-spacer{flex:1}
 .tb-icons{display:flex;align-items:center;gap:6px}
 .tb-ic{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.7);font-size:14px;cursor:pointer;transition:all .2s;position:relative;flex-shrink:0}
@@ -208,7 +164,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .ftag .fdot{width:6px;height:6px;border-radius:50%}
 .s-count{font-size:11px;color:var(--muted)}
 .s-count strong{color:var(--text)}
-
 
 /* SELECT ALL */
 .sel-all-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
@@ -389,9 +344,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .piano-date-inp:focus{border-color:var(--accent);background:rgba(0,198,255,.02)}
 .piano-date-inp::-webkit-calendar-picker-indicator{opacity:.5;cursor:pointer}
 @media(max-width:700px){.piano-date-hdr{grid-template-columns:1fr 130px 130px}.piano-date-row{grid-template-columns:1fr 130px 130px}.piano-date-inp{font-size:11px;padding:6px 8px}}
-@media(max-width:550px){.piano-date-hdr{grid-template-columns:1fr 110px 110px}.piano-date-row{grid-template-columns:1fr 110px 110px}}
 
-/* OWNER STEP */
+/* ===================== OWNER STEP — solo risposta ===================== */
 .prog-sum{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:11px 16px;margin-bottom:14px;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow);flex-wrap:wrap}
 .ps-s{display:flex;flex-direction:column}
 .ps-v{font-size:20px;font-weight:800;color:var(--text)}
@@ -419,25 +373,17 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .q-it:last-child{border-bottom:none}
 .q-it:hover{background:rgba(0,198,255,.04)}
 .q-it.sel{background:rgba(0,198,255,.08);border-left:3px solid var(--accent)}
-.q-it.ans.acc{background:rgba(29,158,117,.06)}
-.q-it.ans.acc.sel{background:rgba(29,158,117,.12);border-left-color:var(--green)}
-.q-it.ans.rej{background:rgba(216,90,48,.05)}
-.q-it.ans.rej.sel{background:rgba(216,90,48,.1);border-left-color:var(--red)}
-.q-it.ans.wrn{background:rgba(212,160,23,.05)}
-.q-it.ans.wrn.sel{background:rgba(212,160,23,.1);border-left-color:var(--yellow)}
+.q-it.ans{background:rgba(29,158,117,.06)}
+.q-it.ans.sel{background:rgba(29,158,117,.12);border-left-color:var(--green)}
 .q-num{width:20px;height:20px;border-radius:50%;flex-shrink:0;margin-top:2px;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--muted)}
 .q-it.sel .q-num{background:rgba(0,198,255,.15);border-color:var(--accent);color:var(--accent)}
-.q-it.ans.acc .q-num{background:rgba(29,158,117,.15);border-color:var(--green);color:var(--green)}
-.q-it.ans.rej .q-num{background:rgba(216,90,48,.15);border-color:var(--red);color:var(--red)}
-.q-it.ans.wrn .q-num{background:rgba(212,160,23,.15);border-color:var(--yellow);color:var(--yellow)}
+.q-it.ans .q-num{background:rgba(29,158,117,.15);border-color:var(--green);color:var(--green)}
 .q-ib{flex:1;min-width:0}
 .q-itxt{font-size:11px;color:var(--text);line-height:1.5}
 .q-imeta{display:flex;align-items:center;gap:5px;margin-top:3px;flex-wrap:wrap}
 .q-iid{font-size:9px;font-weight:700;color:var(--muted)}
 .q-ibadge{font-size:9px;font-weight:700;padding:2px 6px;border-radius:99px;background:var(--bg);color:var(--muted);border:1px solid var(--border)}
-.q-it.ans.acc .q-ibadge{background:rgba(29,158,117,.1);color:var(--green);border-color:rgba(29,158,117,.2)}
-.q-it.ans.rej .q-ibadge{background:rgba(216,90,48,.1);color:var(--red);border-color:rgba(216,90,48,.2)}
-.q-it.ans.wrn .q-ibadge{background:rgba(212,160,23,.1);color:var(--yellow);border-color:rgba(212,160,23,.2)}
+.q-it.ans .q-ibadge{background:rgba(29,158,117,.1);color:var(--green);border-color:rgba(29,158,117,.2)}
 
 /* ANSWER PANEL */
 .a-panel{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
@@ -487,14 +433,61 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .pdf-rm:hover{background:rgba(216,90,48,.2)}
 .pdf-hidden-inp{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
 
+/* OWNER NEXT BTN */
+.owner-next-bar{display:flex;justify-content:flex-end;padding:14px 16px;border-top:1px solid var(--border);background:rgba(26,42,108,.02)}
+.btn-owner-next{padding:12px 28px;border-radius:10px;font-size:14px;font-weight:800;background:linear-gradient(135deg,#00c6ff,#1a2a6c);color:#fff;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;display:inline-flex;align-items:center;gap:9px;box-shadow:0 4px 20px rgba(0,198,255,.35);transition:all .2s}
+.btn-owner-next:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,198,255,.55)}
+
+/* ===================== AUDITOR STEP ===================== */
+.aud-prog-sum{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:11px 16px;margin-bottom:14px;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow);flex-wrap:wrap}
+
+/* AUDITOR QA LAYOUT */
+.aud-qa-layout{display:grid;grid-template-columns:270px 1fr;gap:14px;align-items:start}
+@media(max-width:1000px){.aud-qa-layout{grid-template-columns:230px 1fr}}
+@media(max-width:767px){.aud-qa-layout{grid-template-columns:1fr}}
+
+/* AUDITOR question list items */
+.q-it.val-acc{background:rgba(29,158,117,.06)}
+.q-it.val-acc.sel{background:rgba(29,158,117,.12);border-left-color:var(--green)}
+.q-it.val-acc .q-num{background:rgba(29,158,117,.15);border-color:var(--green);color:var(--green)}
+.q-it.val-acc .q-ibadge{background:rgba(29,158,117,.1);color:var(--green);border-color:rgba(29,158,117,.2)}
+.q-it.val-wrn{background:rgba(212,160,23,.05)}
+.q-it.val-wrn.sel{background:rgba(212,160,23,.1);border-left-color:var(--yellow)}
+.q-it.val-wrn .q-num{background:rgba(212,160,23,.15);border-color:var(--yellow);color:var(--yellow)}
+.q-it.val-wrn .q-ibadge{background:rgba(212,160,23,.1);color:var(--yellow);border-color:rgba(212,160,23,.2)}
+.q-it.val-rej{background:rgba(216,90,48,.05)}
+.q-it.val-rej.sel{background:rgba(216,90,48,.1);border-left-color:var(--red)}
+.q-it.val-rej .q-num{background:rgba(216,90,48,.15);border-color:var(--red);color:var(--red)}
+.q-it.val-rej .q-ibadge{background:rgba(216,90,48,.1);color:var(--red);border-color:rgba(216,90,48,.2)}
+
+/* AUDITOR PANEL */
+.aud-panel{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+.aud-panel-hdr{padding:12px 16px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(26,42,108,.04),rgba(0,198,255,.03));display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.aud-panel-navs{display:flex;gap:5px;flex-shrink:0}
+.aud-panel-body{padding:16px;display:flex;flex-direction:column;gap:14px}
+
+/* OWNER ANSWER REVIEW */
+.owner-ans-view{background:var(--bg);border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:4px}
+.oav-hdr{padding:10px 14px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(26,42,108,.04),transparent);display:flex;align-items:center;gap:8px}
+.oav-badge{font-size:9px;font-weight:700;padding:2px 8px;border-radius:99px;background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.2);color:#6d28d9}
+.oav-title{font-size:11px;font-weight:700;color:var(--text)}
+.oav-body{padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.oav-cmmi{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.oav-cmmi-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)}
+.oav-cmmi-val{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:7px;border:1.5px solid rgba(0,198,255,.3);background:rgba(0,198,255,.08);font-size:11px;font-weight:700;color:var(--accent)}
+.oav-ans-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:4px}
+.oav-ans-txt{font-size:12px;color:var(--text);line-height:1.7;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 12px;min-height:60px}
+.oav-file{display:flex;align-items:center;gap:8px;padding:8px 12px;background:rgba(29,158,117,.04);border:1px solid rgba(29,158,117,.2);border-radius:8px}
+.oav-file-ic{font-size:16px;color:var(--green)}
+.oav-file-nm{font-size:11px;font-weight:700;color:var(--text)}
+.oav-file-sz{font-size:10px;color:var(--muted)}
+.oav-no-file{font-size:11px;color:var(--muted);font-style:italic}
+
 /* VALIDATION BTNS */
 .val-row{display:flex;gap:10px;flex-wrap:wrap}
 .btn-val-ai{padding:11px 20px;border-radius:10px;font-size:13px;font-weight:700;background:var(--grad);color:#fff;border:none;cursor:pointer;transition:all .2s;font-family:'Plus Jakarta Sans',sans-serif;box-shadow:0 0 16px rgba(0,198,255,.25);display:inline-flex;align-items:center;gap:8px;white-space:nowrap;min-height:44px}
 .btn-val-ai:hover{transform:translateY(-1px);box-shadow:0 4px 22px rgba(0,198,255,.5)}
 .btn-val-ai:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
-.btn-val-aud{padding:11px 20px;border-radius:10px;font-size:13px;font-weight:700;background:rgba(212,160,23,.1);color:var(--yellow);border:1.5px solid rgba(212,160,23,.3);cursor:pointer;transition:all .2s;font-family:'Plus Jakarta Sans',sans-serif;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;min-height:44px}
-.btn-val-aud:hover{background:rgba(212,160,23,.2);transform:translateY(-1px)}
-.btn-val-aud:disabled{opacity:.4;cursor:not-allowed;transform:none}
 
 /* AI PANEL */
 .ai-vp{border-radius:14px;overflow:hidden;border:1.5px solid var(--border);transition:all .4s;margin-top:4px}
@@ -560,22 +553,42 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .conf-tick:nth-child(4) .conf-tick-n{color:var(--red)}
 .conf-tick.active .conf-tick-n{text-shadow:0 0 10px currentColor}
 .conf-tick.active .conf-tick-l{font-weight:700;opacity:1}
-.aud-block{margin-top:10px;padding:10px 13px;background:rgba(212,160,23,.05);border:1.5px solid rgba(212,160,23,.2);border-radius:9px}
-.aud-lbl{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--yellow);margin-bottom:7px;display:flex;align-items:center;gap:6px}
-.aud-radios{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:7px}
-.aud-r{padding:5px 12px;border-radius:7px;font-size:11px;font-weight:600;border:1.5px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .15s}
-.aud-r:hover{border-color:var(--yellow);color:var(--yellow)}
-.aud-r.on-a{background:rgba(29,158,117,.1);border-color:var(--green);color:var(--green)}
-.aud-r.on-r{background:rgba(216,90,48,.1);border-color:var(--red);color:var(--red)}
-.aud-r.on-w{background:rgba(212,160,23,.1);border-color:var(--yellow);color:var(--yellow)}
-.aud-note{width:100%;border:1.5px solid var(--border);border-radius:7px;padding:7px 10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;color:var(--text);line-height:1.6;min-height:52px;resize:vertical;outline:none;background:var(--surface);transition:border .2s}
-.aud-note:focus{border-color:var(--yellow)}
-.ai-acts{display:flex;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);flex-wrap:wrap}
+
+/* MANUAL VALIDATION BLOCK */
+.man-val-block{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;overflow:hidden}
+.man-val-hdr{padding:10px 14px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(26,42,108,.04),transparent);display:flex;align-items:center;gap:8px}
+.man-val-hdr-icon{width:28px;height:28px;border-radius:7px;background:rgba(212,160,23,.1);border:1px solid rgba(212,160,23,.2);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.man-val-hdr-title{font-size:12px;font-weight:700;color:var(--text)}
+.man-val-hdr-sub{font-size:10px;color:var(--muted);margin-top:1px}
+.man-val-body{padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.man-val-radios{display:flex;gap:8px;flex-wrap:wrap}
+.mvr{display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:9px;border:1.5px solid var(--border);background:var(--bg);cursor:pointer;transition:all .2s;font-size:12px;font-weight:600;color:var(--muted)}
+.mvr:hover{border-color:var(--accent);background:rgba(0,198,255,.05);color:var(--text)}
+.mvr.on-acc{border-color:var(--green);background:rgba(29,158,117,.08);color:var(--green)}
+.mvr.on-wrn{border-color:var(--yellow);background:rgba(212,160,23,.08);color:var(--yellow)}
+.mvr.on-rej{border-color:var(--red);background:rgba(216,90,48,.08);color:var(--red)}
+.mvr-circle{width:14px;height:14px;border-radius:50%;border:2px solid currentColor;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.mvr.on-acc .mvr-circle,.mvr.on-wrn .mvr-circle,.mvr.on-rej .mvr-circle{background:currentColor}
+.man-val-note{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:9px;padding:9px 12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;color:var(--text);line-height:1.7;min-height:80px;resize:vertical;outline:none;transition:border .2s}
+.man-val-note:focus{border-color:var(--accent)}
+.man-val-save{padding:9px 20px;border-radius:8px;font-size:12px;font-weight:700;background:var(--grad);color:#fff;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;display:inline-flex;align-items:center;gap:7px;transition:all .2s;opacity:.4;pointer-events:none}
+.man-val-save.on{opacity:1;pointer-events:all}
+.man-val-save.on:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,198,255,.4)}
+
+/* AUD ACTIONS */
+.aud-acts{display:flex;gap:8px;margin-top:4px;padding-top:12px;border-top:1px solid var(--border);flex-wrap:wrap}
 .btn-a{padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;gap:6px;min-height:38px}
 .btn-a.pr{background:var(--grad);color:#fff;border:none}
 .btn-a.pr:hover{transform:translateY(-1px)}
 .btn-a.sc{background:transparent;color:var(--muted);border:1px solid var(--border)}
 .btn-a.sc:hover{border-color:var(--accent);color:var(--accent)}
+
+/* GENERATE REPORT BAR */
+.complete-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-top:1px solid var(--border);background:rgba(26,42,108,.02);flex-wrap:wrap;gap:10px}
+.complete-bar-txt{font-size:12px;color:var(--muted)}
+.complete-bar-txt strong{color:var(--text)}
+.btn-complete{padding:13px 32px;border-radius:11px;font-size:14px;font-weight:800;background:linear-gradient(135deg,#00c6ff,#1a2a6c);color:#fff;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;display:inline-flex;align-items:center;gap:9px;box-shadow:0 4px 22px rgba(0,198,255,.4);transition:all .2s}
+.btn-complete:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,198,255,.6)}
 
 /* RELAZIONE / REPORT */
 .report-wrap{animation:fadeIn .4s ease}
@@ -618,9 +631,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .finding-title{font-size:12px;font-weight:700;color:var(--text)}
 .finding-desc{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.6}
 .report-footer{text-align:center;padding:20px;font-size:11px;color:var(--muted);border-top:1px solid var(--border);margin-top:8px}
-.complete-bar{display:flex;justify-content:center;padding:14px;border-top:1px solid var(--border)}
-.btn-complete{padding:13px 32px;border-radius:11px;font-size:14px;font-weight:800;background:linear-gradient(135deg,#00c6ff,#1a2a6c);color:#fff;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;display:inline-flex;align-items:center;gap:9px;box-shadow:0 4px 22px rgba(0,198,255,.4);transition:all .2s}
-.btn-complete:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,198,255,.6)}
 </style>
 </head>
 <body>
@@ -629,13 +639,13 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <div class="ov" id="ov">
   <div class="ov-badge"><div class="ov-dot"></div>Demo interattiva — Workflow completo NIS2</div>
   <a href="#" class="tb-logo">
-  <img src="logo.png" class="tb-logo-icon2" alt="logo">
-  <img src="logo-text.png" class="tb-logo-text2" alt="logo text">
+    <img src="logo.png" class="tb-logo-icon2" alt="logo">
+    <img src="logo-text.png" class="tb-logo-text2" alt="logo text">
   </a>
-  <div class="ov-sub">Simula il workflow completo: il <strong style="color:#fff">Reviewer</strong> seleziona le domande, poi l'<strong style="color:#fff">Owner</strong> compila con l'<strong style="color:#00c6ff">AI</strong> che valida in tempo reale. Relazione NIS2 finale inclusa.</div>
+  <div class="ov-sub">Simula il workflow completo: il <strong style="color:#fff">Reviewer</strong> seleziona le domande → l'<strong style="color:#fff">Owner</strong> compila le risposte → l'<strong style="color:#fff">Auditor</strong> valida con <strong style="color:#00c6ff">AI</strong> o manualmente. Relazione NIS2 finale inclusa.</div>
   <div class="ov-btns">
     <button class="btn-start" onclick="startDemo()"><i class="fa-solid fa-play"></i> Avvia la Demo</button>
-    <a href="#" class="btn-back-ov" onclick="return false"><i class="fa-solid fa-arrow-left"></i> Torna al sito</a>
+    <a href="index.html" class="btn-back-ov"><i class="fa-solid fa-arrow-left"></i> Torna al sito</a>
   </div>
 </div>
 
@@ -649,12 +659,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
       <img src="logo.png" class="tb-logo-icon" alt="logo">
       <img src="logo-text.png" class="tb-logo-text" alt="logo text">
     </a>
-    <!-- 
-    <div class="tb-search">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <span>Cerca assessment, aziende, utenti...</span>
-    </div>
-    -->
     <div class="tb-spacer"></div>
     <div class="tb-icons">
       <button class="tb-ic" title="Messaggi"><i class="fa-solid fa-comment-dots"></i></button>
@@ -693,10 +697,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
       </ul></li>
     </ul>
     <div class="sb-bottom">
-      <a href="#" class="sb-back-site" onclick="return false">
-        <i class="fa-solid fa-arrow-left"></i>
-        <span>Torna al sito</span>
-      </a>
+      <a href="index.html" class="sb-back-site"><i class="fa-solid fa-arrow-left"></i><span>Torna al sito</span></a>
     </div>
   </aside>
 
@@ -730,7 +731,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
       <div class="sp-line done" id="spline2"></div>
       <div class="sp-s active" id="sp2"><div class="sp-c" id="sp2c">2</div><div class="sp-info"><div class="sp-label" id="sp2l">Def. Questionario</div><div class="sp-sub" id="sp2s">In corso</div></div></div>
       <div class="sp-line" id="spline3"></div>
-      <div class="sp-s" id="sp3"><div class="sp-c" id="sp3c">3</div><div class="sp-info"><div class="sp-label">Assessment</div><div class="sp-sub">Compilazione AI</div></div></div>
+      <div class="sp-s" id="sp3"><div class="sp-c" id="sp3c">3</div><div class="sp-info"><div class="sp-label">Assessment</div><div class="sp-sub">Compilazione</div></div></div>
       <div class="sp-line" id="spline4"></div>
       <div class="sp-s" id="sp4"><div class="sp-c" id="sp4c">4</div><div class="sp-info"><div class="sp-label">Post-Assessment</div><div class="sp-sub">Remediation</div></div></div>
       <div class="sp-line" id="spline5"></div>
@@ -740,34 +741,18 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
     </div>
 
     <!-- ==================== REVIEWER STEP ==================== -->
-    <div id="step1">
-
+    <div id="step-reviewer">
       <div class="tabs-bar">
-        <button class="tab-btn active" id="tab-q" onclick="switchTab('q')">
-          <span class="tab-check" id="tabchk-q"></span>
-          <i class="fa-solid fa-clipboard-list"></i>
-          <span class="tab-lbl">Questionario</span>
-        </button>
-        <button class="tab-btn" id="tab-d" onclick="switchTab('d')">
-          <span class="tab-check" id="tabchk-d"></span>
-          <i class="fa-solid fa-folder-open"></i>
-          <span class="tab-lbl">Documentazione</span>
-        </button>
-        <button class="tab-btn" id="tab-p" onclick="switchTab('p')">
-          <span class="tab-check" id="tabchk-p"></span>
-          <i class="fa-solid fa-calendar-check"></i>
-          <span class="tab-lbl">Piano di lavoro</span>
-        </button>
+        <button class="tab-btn active" id="tab-q" onclick="switchTab('q')"><span class="tab-check" id="tabchk-q"></span><i class="fa-solid fa-clipboard-list"></i><span class="tab-lbl">Questionario</span></button>
+        <button class="tab-btn" id="tab-d" onclick="switchTab('d')"><span class="tab-check" id="tabchk-d"></span><i class="fa-solid fa-folder-open"></i><span class="tab-lbl">Documentazione</span></button>
+        <button class="tab-btn" id="tab-p" onclick="switchTab('p')"><span class="tab-check" id="tabchk-p"></span><i class="fa-solid fa-calendar-check"></i><span class="tab-lbl">Piano di lavoro</span></button>
       </div>
 
       <!-- TAB: QUESTIONARIO -->
       <div id="tab-content-q">
         <div class="search-bar">
           <div class="s-row">
-            <div class="s-inp">
-              <i class="fa-solid fa-magnifying-glass"></i>
-              <input type="text" id="rev-search" placeholder="Cerca per ID, testo, normativa, livello NIS2, compliance..." oninput="onSearch()">
-            </div>
+            <div class="s-inp"><i class="fa-solid fa-magnifying-glass"></i><input type="text" id="rev-search" placeholder="Cerca per ID, testo, normativa, livello NIS2, compliance..." oninput="onSearch()"></div>
           </div>
           <div class="s-filters" id="area-filters"></div>
           <div class="s-filters" id="tag-filters">
@@ -781,12 +766,10 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
           </div>
           <div class="s-count" id="s-count">Caricamento...</div>
         </div>
-
         <div class="sel-all-row">
           <button class="btn-sel-all" onclick="selectAll()"><i class="fa-solid fa-check-double"></i> Seleziona tutte (192)</button>
           <button class="btn-clr-all" onclick="clearAll()"><i class="fa-solid fa-xmark"></i> Deseleziona tutto</button>
         </div>
-
         <div class="sel-layout">
           <div class="sel-sb">
             <div class="sel-sb-h">
@@ -802,80 +785,53 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
               <button class="sb-nav-arrow" id="sb-next" onclick="sbNavPage(1)" disabled><i class="fa-solid fa-chevron-down"></i></button>
             </div>
           </div>
-
           <div class="sel-main">
-            <div class="sel-main-h">
-              <div><h3>Questionario NIS2</h3><p>Seleziona aree di controllo e domande da includere nell'assessment (192 domande totali)</p></div>
-            </div>
+            <div class="sel-main-h"><div><h3>Questionario NIS2</h3><p>Seleziona aree di controllo e domande da includere nell'assessment (192 domande totali)</p></div></div>
             <div class="sel-body" id="sel-body"></div>
             <div class="procedi">
               <span class="procedi-txt" id="procedi-txt">Seleziona almeno una domanda per procedere</span>
-              <button class="btn-owner" id="btn-owner" onclick="goToOwner()"><i class="fa-solid fa-arrow-right"></i> Entra Owner</button>
+              <button class="btn-owner" id="btn-owner" onclick="goToOwner()"><i class="fa-solid fa-user-tie"></i> Entra Owner</button>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- TAB: DOCUMENTAZIONE — SINGLE UPLOAD -->
+      <!-- TAB: DOCUMENTAZIONE -->
       <div id="tab-content-d" style="display:none">
         <div class="doc-single-wrap">
-          <div class="doc-single-hdr">
-            <h3><i class="fa-solid fa-cloud-arrow-up" style="color:var(--accent)"></i> Upload Documentazione</h3>
-          </div>
+          <div class="doc-single-hdr"><h3><i class="fa-solid fa-cloud-arrow-up" style="color:var(--accent)"></i> Upload Documentazione</h3></div>
           <div class="doc-single-body">
             <div class="doc-upload-single" id="doc-upload-zone" ondragover="docDragOver(event)" ondragleave="docDragLeave(event)" ondrop="docDrop(event)">
               <input type="file" class="dup-hidden-inp" id="doc-file-inp" accept="*/*" onchange="handleDocSingle(event)">
               <div class="dup-icon" id="dup-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
               <div class="dup-title" id="dup-title">Trascina il file qui o clicca per sfogliare</div>
               <div class="dup-sub" id="dup-sub">Carica la documentazione allegata all'assessment. Supporta tutti i formati di file.</div>
-              <div class="dup-formats">
-                <span class="dup-fmt">PDF</span>
-                <span class="dup-fmt">DOCX</span>
-                <span class="dup-fmt">XLSX</span>
-                <span class="dup-fmt">PNG</span>
-                <span class="dup-fmt">JPG</span>
-                <span class="dup-fmt">ZIP</span>
-                <span class="dup-fmt">e altri</span>
-              </div>
-              <div class="dup-file-info" id="dup-file-info" style="display:none">
-                <div class="dup-fname" id="dup-fname"></div>
-                <div class="dup-fsize" id="dup-fsize"></div>
-              </div>
-              <button class="dup-rm" id="dup-rm" style="display:none" onclick="removeDocSingle(event)" title="Rimuovi file"><i class="fa-solid fa-xmark"></i></button>
+              <div class="dup-formats"><span class="dup-fmt">PDF</span><span class="dup-fmt">DOCX</span><span class="dup-fmt">XLSX</span><span class="dup-fmt">PNG</span><span class="dup-fmt">ZIP</span><span class="dup-fmt">e altri</span></div>
+              <div class="dup-file-info" id="dup-file-info" style="display:none"><div class="dup-fname" id="dup-fname"></div><div class="dup-fsize" id="dup-fsize"></div></div>
+              <button class="dup-rm" id="dup-rm" style="display:none" onclick="removeDocSingle(event)"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <p class="doc-info-note">Il file verrà associato all'assessment <strong>Assessment Cybersecurity Q2-2025</strong> e sarà accessibile all'Owner e all'Auditor per la fase di compilazione.</p>
           </div>
         </div>
-        <div class="entra-owner-bar">
-          <button class="btn-entra-owner" id="doc-owner-btn" onclick="goToOwner()"><i class="fa-solid fa-user-tie"></i> Entra Owner</button>
-        </div>
+        <div class="entra-owner-bar"><button class="btn-entra-owner" id="doc-owner-btn" onclick="goToOwner()"><i class="fa-solid fa-user-tie"></i> Entra Owner</button></div>
       </div>
 
       <!-- TAB: PIANO DI LAVORO -->
       <div id="tab-content-p" style="display:none">
         <div class="piano-date-table">
-          <div class="piano-date-hdr">
-            <div>Fase</div>
-            <div>Data Inizio</div>
-            <div>Data Fine</div>
-          </div>
+          <div class="piano-date-hdr"><div>Fase</div><div>Data Inizio</div><div>Data Fine</div></div>
           <div id="piano-date-rows"></div>
         </div>
-        <div class="entra-owner-bar">
-          <button class="btn-entra-owner" id="piano-owner-btn" onclick="goToOwner()"><i class="fa-solid fa-user-tie"></i> Entra Owner</button>
-        </div>
+        <div class="entra-owner-bar"><button class="btn-entra-owner" id="piano-owner-btn" onclick="goToOwner()"><i class="fa-solid fa-user-tie"></i> Entra Owner</button></div>
       </div>
-
-    </div><!-- /step1 -->
+    </div><!-- /step-reviewer -->
 
     <!-- ==================== OWNER STEP ==================== -->
-    <div id="step2" style="display:none">
+    <div id="step-owner" style="display:none">
       <div class="prog-sum">
         <div class="ps-s"><div class="ps-v" id="ps-a">0</div><div class="ps-l">Risposte</div></div>
         <div class="ps-d"></div>
         <div class="ps-s"><div class="ps-v" id="ps-t">0</div><div class="ps-l">Totale</div></div>
-        <div class="ps-d"></div>
-        <div class="ps-s"><div class="ps-v" id="ps-v">0</div><div class="ps-l">Validate AI</div></div>
         <div class="ps-d"></div>
         <div class="ps-pw">
           <div class="ps-pl"><span>Progresso</span><span id="ps-pct">0%</span></div>
@@ -887,9 +843,9 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
         <div class="q-panel">
           <div class="q-panel-h">
             <div class="q-panel-label">NIS2 · Domande assegnate</div>
-            <div class="q-panel-title" id="q-panel-title">Domande selezionate dal Reviewer</div>
+            <div class="q-panel-title" id="owner-q-panel-title">Domande selezionate dal Reviewer</div>
           </div>
-          <ul class="q-list" id="q-list"></ul>
+          <ul class="q-list" id="owner-q-list"></ul>
           <div style="padding:9px 12px;border-top:1px solid var(--border)">
             <button class="btn-a sc" onclick="backToReviewer()" style="width:100%;justify-content:center"><i class="fa-solid fa-arrow-left"></i> Modifica selezione</button>
           </div>
@@ -898,12 +854,12 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
         <div class="a-panel">
           <div class="a-hdr">
             <div style="flex:1;min-width:0">
-              <div class="a-qid" id="a-qid">—</div>
-              <div class="a-qtxt" id="a-qtxt">Seleziona una domanda dalla lista.</div>
+              <div class="a-qid" id="owner-a-qid">—</div>
+              <div class="a-qtxt" id="owner-a-qtxt">Seleziona una domanda dalla lista.</div>
             </div>
             <div class="a-navs">
-              <button class="a-nav-btn" id="btn-prev" onclick="navQ(-1)" disabled><i class="fa-solid fa-chevron-left"></i></button>
-              <button class="a-nav-btn" id="btn-next" onclick="navQ(1)" disabled><i class="fa-solid fa-chevron-right"></i></button>
+              <button class="a-nav-btn" id="owner-btn-prev" onclick="ownerNavQ(-1)" disabled><i class="fa-solid fa-chevron-left"></i></button>
+              <button class="a-nav-btn" id="owner-btn-next" onclick="ownerNavQ(1)" disabled><i class="fa-solid fa-chevron-right"></i></button>
             </div>
           </div>
           <div class="a-body">
@@ -923,48 +879,133 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
               <div class="ev-sec">
                 <div class="ev-lbl"><i class="fa-solid fa-file-lines"></i> Evidenza</div>
                 <div class="ev-cols">
-                  <textarea class="ev-ta" id="a-ev" placeholder="Descrivi le evidenze, i processi adottati, i riferimenti documentali..."></textarea>
-                  <div class="pdf-zone" id="pdf-z" onclick="trigPdf()">
-                    <input type="file" class="pdf-hidden-inp" id="pdf-inp" accept="*/*" onchange="handleFile(event)">
-                    <div class="pdf-ic" id="pdf-ic"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-                    <div class="pdf-nm" id="pdf-nm">Trascina il file o fai click</div>
-                    <div class="pdf-sub" id="pdf-sb">PDF, DOCX, XLSX, PNG... tutti i formati</div>
-                    <div id="pdf-fi" style="display:none;flex-direction:column;align-items:center;gap:3px">
-                      <div class="pdf-fn" id="pdf-fn"></div>
-                      <div class="pdf-fs" id="pdf-fs"></div>
-                    </div>
-                    <button class="pdf-rm" id="pdf-rm" style="display:none" onclick="removeFile(event)"><i class="fa-solid fa-xmark"></i></button>
+                  <textarea class="ev-ta" id="owner-a-ev" placeholder="Descrivi le evidenze, i processi adottati, i riferimenti documentali..."></textarea>
+                  <div class="pdf-zone" id="owner-pdf-z" onclick="ownerTrigPdf()">
+                    <input type="file" class="pdf-hidden-inp" id="owner-pdf-inp" accept="*/*" onchange="ownerHandleFile(event)">
+                    <div class="pdf-ic" id="owner-pdf-ic"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                    <div class="pdf-nm" id="owner-pdf-nm">Trascina il file o fai click</div>
+                    <div class="pdf-sub" id="owner-pdf-sb">PDF, DOCX, XLSX, PNG... tutti i formati</div>
+                    <div id="owner-pdf-fi" style="display:none;flex-direction:column;align-items:center;gap:3px"><div class="pdf-fn" id="owner-pdf-fn"></div><div class="pdf-fs" id="owner-pdf-fs"></div></div>
+                    <button class="pdf-rm" id="owner-pdf-rm" style="display:none" onclick="ownerRemoveFile(event)"><i class="fa-solid fa-xmark"></i></button>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+          <div class="owner-next-bar">
+            <button class="btn-owner-next" onclick="goToAuditor()">
+              <span>Avanti - Entra Auditor</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div><!-- /step-owner -->
 
-            <div class="val-row">
-              <button class="btn-val-ai" id="btn-val-ai" onclick="doValAI()" disabled><i class="fa-solid fa-robot"></i> Avvia Validazione AI</button>
-              <button class="btn-val-aud" id="btn-val-aud" onclick="doValAud()" disabled><i class="fa-solid fa-user-shield"></i> Validazione Auditor</button>
+    <!-- ==================== AUDITOR STEP ==================== -->
+    <div id="step-auditor" style="display:none">
+      <div class="aud-prog-sum">
+        <div class="ps-s"><div class="ps-v" id="aud-ps-v">0</div><div class="ps-l">Validate</div></div>
+        <div class="ps-d"></div>
+        <div class="ps-s"><div class="ps-v" id="aud-ps-t">0</div><div class="ps-l">Totale</div></div>
+        <div class="ps-d"></div>
+        <div class="ps-s"><div class="ps-v" id="aud-ps-acc" style="color:var(--green)">0</div><div class="ps-l">Conformi</div></div>
+        <div class="ps-d"></div>
+        <div class="ps-s"><div class="ps-v" id="aud-ps-rej" style="color:var(--red)">0</div><div class="ps-l">Non conf.</div></div>
+        <div class="ps-d"></div>
+        <div class="ps-pw">
+          <div class="ps-pl"><span>Progresso Validazione</span><span id="aud-ps-pct">0%</span></div>
+          <div class="ps-pt"><div class="ps-pf" id="aud-ps-pf" style="width:0%"></div></div>
+        </div>
+      </div>
+
+      <div class="aud-qa-layout">
+        <div class="q-panel">
+          <div class="q-panel-h">
+            <div class="q-panel-label">NIS2 · Validazione Auditor</div>
+            <div class="q-panel-title" id="aud-q-panel-title">Domande da validare</div>
+          </div>
+          <ul class="q-list" id="aud-q-list"></ul>
+          <div style="padding:9px 12px;border-top:1px solid var(--border)">
+            <button class="btn-a sc" onclick="backToOwner()" style="width:100%;justify-content:center"><i class="fa-solid fa-arrow-left"></i> Torna Owner</button>
+          </div>
+        </div>
+
+        <div class="aud-panel">
+          <div class="aud-panel-hdr">
+            <div style="flex:1;min-width:0">
+              <div class="a-qid" id="aud-a-qid">—</div>
+              <div class="a-qtxt" id="aud-a-qtxt">Seleziona una domanda dalla lista.</div>
             </div>
-
-            <div class="ai-vp hidden" id="ai-vp">
-              <div class="ai-hd thinking" id="ai-hd">
-                <div class="ai-av" id="ai-av">🤖</div>
-                <div class="ai-meta">
-                  <div class="ai-st" id="ai-st">ANALISI IN CORSO</div>
-                  <div class="ai-ti" id="ai-ti">L'AI sta elaborando...</div>
-                </div>
-                <div class="ai-chips" id="ai-chips"><div class="ai-sc thinking"><i class="fa-solid fa-circle-notch fa-spin"></i> Processing</div></div>
-              </div>
-              <div class="ai-body" id="ai-body"><div class="typing-dots"><span></span><span></span><span></span></div></div>
+            <div class="aud-panel-navs">
+              <button class="a-nav-btn" id="aud-btn-prev" onclick="audNavQ(-1)" disabled><i class="fa-solid fa-chevron-left"></i></button>
+              <button class="a-nav-btn" id="aud-btn-next" onclick="audNavQ(1)" disabled><i class="fa-solid fa-chevron-right"></i></button>
             </div>
           </div>
-          <div class="complete-bar" id="complete-bar" style="display:none">
+          <div class="aud-panel-body">
+
+            <!-- Owner answer readonly view -->
+            <div class="owner-ans-view">
+              <div class="oav-hdr">
+                <div class="oav-badge"><i class="fa-solid fa-user-tie"></i> Risposta Owner</div>
+                <div class="oav-title" id="oav-title">—</div>
+              </div>
+              <div class="oav-body">
+                <div>
+                  <div class="oav-cmmi-lbl">Livello CMMI</div>
+                  <div class="oav-cmmi" style="margin-top:4px"><div class="oav-cmmi-val" id="oav-cmmi">—</div></div>
+                </div>
+                <div>
+                  <div class="oav-ans-lbl">Evidenza fornita</div>
+                  <div class="oav-ans-txt" id="oav-ans-txt">—</div>
+                </div>
+                <div id="oav-file-wrap"></div>
+              </div>
+            </div>
+
+            <!-- AI Validation -->
+            <div class="val-row">
+              <button class="btn-val-ai" id="aud-btn-val-ai" onclick="doValAI()"><i class="fa-solid fa-robot"></i> Avvia Validazione AI</button>
+            </div>
+            <div class="ai-vp hidden" id="ai-vp"></div>
+
+            <!-- Manual Validation -->
+            <div class="man-val-block">
+              <div class="man-val-hdr">
+                <div class="man-val-hdr-icon"><i class="fa-solid fa-user-shield"></i></div>
+                <div>
+                  <div class="man-val-hdr-title">Validazione Manuale Auditor</div>
+                  <div class="man-val-hdr-sub">Override manuale — seleziona l'esito e aggiungi note</div>
+                </div>
+              </div>
+              <div class="man-val-body">
+                <div class="man-val-radios">
+                  <div class="mvr" id="mvr-acc" onclick="setManVal('accepted',this)"><div class="mvr-circle"></div><i class="fa-solid fa-circle-check" style="color:var(--green)"></i> Conforme</div>
+                  <div class="mvr" id="mvr-wrn" onclick="setManVal('warning',this)"><div class="mvr-circle"></div><i class="fa-solid fa-triangle-exclamation" style="color:var(--yellow)"></i> Parzialmente Conforme</div>
+                  <div class="mvr" id="mvr-rej" onclick="setManVal('rejected',this)"><div class="mvr-circle"></div><i class="fa-solid fa-circle-xmark" style="color:var(--red)"></i> Non Conforme</div>
+                </div>
+                <textarea class="man-val-note" id="man-val-note" placeholder="Note Auditor: osservazioni, motivazione, richiesta integrazioni..."></textarea>
+                <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+                  <button class="man-val-save" id="man-val-save" onclick="saveManVal()"><i class="fa-solid fa-floppy-disk"></i> Salva validazione manuale</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="aud-acts">
+              <button class="btn-a pr" onclick="audNavQ(1)"><i class="fa-solid fa-arrow-right"></i> Prossima domanda</button>
+              <button class="btn-a sc" onclick="audNavQ(-1)"><i class="fa-solid fa-arrow-left"></i> Precedente</button>
+            </div>
+          </div>
+          <div class="complete-bar" id="aud-complete-bar" style="display:none">
+            <div class="complete-bar-txt"><strong id="aud-complete-txt">—</strong> domande validate</div>
             <button class="btn-complete" onclick="showReport()"><i class="fa-solid fa-file-chart-column"></i> Genera Relazione NIS2</button>
           </div>
         </div>
       </div>
-    </div>
+    </div><!-- /step-auditor -->
 
     <!-- ==================== REPORT ==================== -->
-    <div id="step3" style="display:none"></div>
+    <div id="step-report" style="display:none"></div>
 
   </main>
 </div>
@@ -995,7 +1036,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 
 <script>
 // ===================== DATA =====================
-const NIS2_DATA={"GOVERN":{"Organizational Context":[{"id":"GV-OC-01","domanda":"La missione dell'organizzazione è compresa e informa la gestione del rischio di cybersecurity.","criticita":1,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV-OC-02","domanda":"Gli stakeholder interni ed esterni sono noti e le loro esigenze e aspettative riguardo la gestione del rischio di cybersecurity sono comprese e considerate.","criticita":3,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV-OC-03","domanda":"I requisiti legali, normativi e contrattuali riguardanti la cybersecurity, compresi gli obblighi in materia di privacy e libertà civili, sono compresi e gestiti.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV-OC-04","domanda":"È mantenuto un elenco aggiornato dei sistemi informativi e di rete rilevanti.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV-OC-05","domanda":"I risultati, le capacità e i servizi dai quali l'organizzazione dipende sono compresi e comunicati.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}],"Risk Management Strategy":[{"id":"GV-RM-01","domanda":"Gli obiettivi di gestione del rischio sono stabiliti e accettati dagli stakeholder dell'organizzazione.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV-RM-02","domanda":"Esiste un documento aggiornato di dettaglio che identifica e descrive il rischio tollerato dal soggetto.","criticita":4,"normativa":"PSNC","livello_nis2":"","compliance":"Compliance"},{"id":"GV-RM-03","domanda":"È definito, attuato, aggiornato e documentato un piano di gestione del rischio di cybersecurity all'interno dell'organizzazione","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV-RM-04","domanda":"È stabilita e comunicata la direzione strategica che descrive le opzioni appropriate di risposta al rischio.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV-RM-05","domanda":"Sono stabiliti canali di comunicazione in tutta l'organizzazione per il rischio di cybersecurity.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV-RM-06","domanda":"È stabilito e comunicato un metodo standardizzato per calcolare, documentare, categorizzare e prioritizzare i rischi.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV-RM-07","domanda":"Le opportunità strategiche sono caratterizzate e incluse nelle discussioni sul rischio di cybersecurity.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}],"Roles, Responsibilities, and Authorities":[{"id":"GV.RR-01","domanda":"Gli organi di amministrazione e direttivi sono responsabili per il rischio di cybersecurity e promuovono una cultura consapevole del rischio.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV.RR-02-01","domanda":"È definita e resa nota all'interno del soggetto l'organizzazione di cybersecurity e ne sono stabiliti ruoli e responsabilità.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.RR-02-02","domanda":"Esiste un elenco aggiornato del personale avente ruoli e responsabilità in ambito cybersecurity.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.RR-02-03","domanda":"Sono designati ruoli specifici coerentemente con quanto richiesto dalle normative applicabili.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.RR-02-04","domanda":"I ruoli e le responsabilità sono riesaminati e aggiornati periodicamente.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.RR-03","domanda":"Sono allocate risorse adeguate, commisurate alla strategia di gestione del rischio.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV.RR-04-01","domanda":"È verificata l'affidabilità del personale autorizzato ad accedere ai sistemi critici.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.RR-04-02","domanda":"Sono definiti a livello contrattuale gli obblighi di sicurezza dopo la cessazione del rapporto di lavoro.","criticita":4,"normativa":"NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"GV.RR-05","domanda":"I ruoli, le responsabilità e i poteri inerenti al trattamento dei dati personali sono stabiliti e comunicati.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}],"Policy":[{"id":"GV.PO-01-01","domanda":"Sono adottate e documentate politiche di cybersecurity in coerenza con gli obblighi normativi applicabili.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.PO-01-02","domanda":"Le politiche di cybersecurity sono approvate dagli organi di amministrazione o da una figura da loro formalmente delegata.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.PO-01-03","domanda":"Le politiche di cybersecurity sono riesaminate e aggiornate periodicamente e comunque almeno con cadenza annuale.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.PO-02","domanda":"Gli esiti delle attività di riesame delle politiche di cybersecurity sono tracciati all'interno di un registro.","criticita":4,"normativa":"NIS2","livello_nis2":"Essenziale","compliance":"Compliance"}],"Oversight":[{"id":"GV.OV-01","domanda":"I risultati della strategia di gestione del rischio di cybersecurity sono revisionati per informare e adeguare la strategia.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV.OV-02","domanda":"La strategia di gestione del rischio di cybersecurity è revisionata e adeguata per garantire la copertura dei requisiti.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV.OV-03","domanda":"Le prestazioni relative alla gestione del rischio di cybersecurity sono valutate e revisionate.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}],"Cybersecurity Supply Chain Risk Management":[{"id":"GV.SC-01-01","domanda":"In merito all'affidamento di forniture di sistemi informativi sono previsti requisiti di sicurezza coerenti con le misure applicate dal soggetto.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.SC-01-02","domanda":"Sono definiti i requisiti di sicurezza per le forniture esterne.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"GV.SC-02","domanda":"Sono definiti i ruoli e le responsabilità in materia di sicurezza informatica di eventuali terze parti.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.SC-03","domanda":"È realizzato e mantenuto un inventario dei fornitori e partner terzi rilevanti ai fini della sicurezza.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV.SC-04","domanda":"I fornitori sono noti e prioritizzati in base alla criticità.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.SC-05","domanda":"I requisiti di sicurezza sono inseriti nei contratti relativi alle forniture rilevanti.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.SC-06","domanda":"Pianificazione e due diligence sono svolte per ridurre i rischi prima di intraprendere rapporti con fornitori.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV.SC-07-01","domanda":"È valutato il rischio associato alle forniture considerando almeno il livello di accesso del fornitore ai sistemi.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.SC-07-02","domanda":"È effettuata e documentata la valutazione periodica dei fornitori e partner terzi.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.SC-08","domanda":"I fornitori e le altre terze parti rilevanti sono inclusi nelle attività di pianificazione e risposta agli incidenti.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV.SC-09","domanda":"Le pratiche di sicurezza della catena di approvvigionamento sono integrate nei programmi di gestione del rischio.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}]},"IDENTIFY":{"Asset Management":[{"id":"ID.AM-01-01","domanda":"È realizzato e mantenuto un inventario aggiornato degli apparati fisici (hardware) approvati.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.AM-01-02","domanda":"È consentito esclusivamente l'uso di apparati fisici (hardware) approvati da attori interni al soggetto.","criticita":4,"normativa":"PSNC","livello_nis2":"","compliance":"Compliance"},{"id":"ID.AM-02-01","domanda":"È realizzato e mantenuto un inventario aggiornato dei servizi, dei sistemi e delle applicazioni software approvati.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.AM-02-02","domanda":"È consentito esclusivamente l'uso di servizi, sistemi e applicazioni software approvati.","criticita":4,"normativa":"PSNC","livello_nis2":"","compliance":"Compliance"},{"id":"ID.AM-03-01","domanda":"È realizzato e mantenuto un inventario aggiornato dei flussi di dati approvati.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"ID.AM-04","domanda":"Sono mantenuti gli inventari dei servizi erogati dai fornitori.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.AM-05","domanda":"Gli asset sono prioritizzati in base alla categorizzazione, alla criticità, alle risorse e all'impatto sulla missione.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.AM-07","domanda":"Sono mantenuti gli inventari dei dati e dei relativi metadati.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.AM-08","domanda":"I sistemi, l'hardware, il software, i servizi e i dati sono gestiti durante il loro intero ciclo di vita.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}],"Risk Assessment":[{"id":"ID.RA-01-01","domanda":"Sono eseguite periodicamente attività per l'identificazione delle vulnerabilità e predisposte apposite relazioni.","criticita":4,"normativa":"PSNC","livello_nis2":"","compliance":"Compliance"},{"id":"ID.RA-01-02","domanda":"Sono eseguiti e documentati penetration test e/o vulnerability assessment sui sistemi.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"ID.RA-02","domanda":"Le informazioni di cyber threat intelligence sono ricevute da forum e fonti di condivisione delle informazioni.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.RA-03","domanda":"Le minacce interne ed esterne all'organizzazione sono identificate e registrate.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.RA-04","domanda":"I potenziali impatti e le probabilità di sfruttamento delle vulnerabilità sono identificati e registrati.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.RA-05-01","domanda":"È eseguita e documentata la valutazione del rischio della sicurezza dei sistemi informativi e di rete.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.RA-05-02","domanda":"La valutazione del rischio è eseguita a intervalli pianificati e qualora si verifichino incidenti significativi.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.RA-05-03","domanda":"La valutazione del rischio è effettuata considerando le minacce interne ed esterne e le vulnerabilità non risolte.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"ID.RA-06-01","domanda":"È definito un piano di trattamento del rischio che comprende le opzioni di trattamento e le misure da attuare.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.RA-06-02","domanda":"Il piano di trattamento del rischio, ivi compresa l'accettazione di eventuali rischi residui, è approvato dagli organi direttivi.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.RA-06-03","domanda":"Sono monitorati i canali di comunicazione del CSIRT Italia e di eventuali CERT di riferimento.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.RA-07","domanda":"Le modifiche e le eccezioni sono gestite, valutate per il loro impatto sul rischio, registrate e tracciate.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.RA-08-01","domanda":"Le vulnerabilità sono prontamente risolte attraverso aggiornamenti di sicurezza o misure di mitigazione.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.RA-08-02","domanda":"È definito, attuato e documentato un piano di gestione delle vulnerabilità e relative procedure.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.RA-08-03","domanda":"Il piano di gestione delle vulnerabilità è approvato dagli organi di amministrazione e direttivi.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"}],"Improvement":[{"id":"ID.IM-01-01","domanda":"È definito e documentato un piano per il riesame periodico della conformità e un piano di adeguamento.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.IM-01-02","domanda":"È definito e documentato un piano per il monitoraggio e la misura dell'efficacia delle misure di gestione del rischio.","criticita":4,"normativa":"NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"ID.IM-02","domanda":"Sono identificati miglioramenti in esito ai test e alle esercitazioni di sicurezza.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.IM-03","domanda":"Sono identificati miglioramenti dall'esecuzione di processi, procedure e attività operativi.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.IM-04-01","domanda":"Sono definiti, attuati, aggiornati e documentati piani di continuità operativa.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.IM-04-02","domanda":"Sono definiti, attuati, aggiornati e documentati piani di disaster recovery.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.IM-04-03","domanda":"È definito, attuato, aggiornato e documentato un piano per la gestione delle crisi.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.IM-04-04","domanda":"I piani di continuità operativa, disaster recovery e gestione delle crisi sono approvati e riesaminati.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"}],"Data Management":[{"id":"DP-ID.DM-01","domanda":"Il ciclo di vita dei dati è definito e documentato.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"DP-ID.DM-02","domanda":"Sono definiti e documentati i processi riguardanti l'informazione dell'interessato in merito al trattamento dei dati.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"DP-ID.DM-03","domanda":"Sono definiti e documentati i processi di raccolta e revoca del consenso dell'interessato al trattamento di dati.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"DP-ID.DM-04","domanda":"Sono definiti e documentati i processi per l'esercizio dei diritti dell'interessato (accesso, rettifica, cancellazione).","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"DP-ID.DM-05","domanda":"Sono definiti e documentati i processi di trasferimento dei dati in ambito internazionale.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}]},"PROTECT":{"Identity Management, Authentication, and Access Control":[{"id":"PR.AA-01-01","domanda":"Tutte le utenze sono censite e sono individuali per gli utenti.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AA-01-02","domanda":"Le credenziali di accesso relative alle utenze sono robuste e aggiornate con una cadenza proporzionata ai privilegi.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AA-01-03","domanda":"Sono verificate periodicamente le utenze e le credenziali di accesso, aggiornandole/revocandole in caso di variazioni.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AA-01-04","domanda":"Sono attuate e documentate procedure relative alla gestione delle utenze e delle credenziali.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AA-02","domanda":"Le identità sono verificate e associate alle credenziali in base al contesto delle interazioni.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"PR.AA-03-01","domanda":"Le modalità di autenticazione sono commisurate al rischio connesso ai privilegi delle utenze.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AA-03-02","domanda":"Sono impiegate modalità di autenticazione multifattore.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AA-05-01","domanda":"I permessi sono assegnati alle utenze in accordo ai principi del minimo privilegio e della separazione delle funzioni.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AA-05-02","domanda":"È assicurata la completa distinzione tra utenze con e senza privilegi degli amministratori di sistema.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AA-05-03","domanda":"Tutte le utenze con privilegi e quelle utilizzate per l'accesso remoto sono censite e approvate.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AA-06","domanda":"Sono attuate e documentate procedure relative alla modalità di gestione degli accessi fisici.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"}],"Awareness and Training":[{"id":"PR.AT-01-01","domanda":"È documentato un piano di formazione in materia di sicurezza informatica del personale.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AT-01-02","domanda":"Il piano di formazione è approvato dagli organi di amministrazione e direttivi.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AT-01-03","domanda":"Esiste un registro aggiornato dei dipendenti che hanno ricevuto la formazione.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AT-02-01","domanda":"Il piano di formazione prevede una formazione dedicata al personale con ruoli specializzati.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"PR.AT-02-02","domanda":"Esiste un registro aggiornato dei dipendenti con ruoli specializzati che hanno ricevuto la formazione specifica.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Essenziale","compliance":"Compliance"}],"Data Security":[{"id":"PR.DS-01-01","domanda":"I dati memorizzati, in particolare sui dispositivi portatili e removibili, sono cifrati con protocolli allo stato dell'arte.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.DS-01-02","domanda":"Sono attuate e documentate procedure relative alla cifratura dei dati sia in transit che at rest.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.DS-01-03","domanda":"È disabilitata l'auto esecuzione dei supporti rimovibili ed è effettuata la loro scansione.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.DS-02","domanda":"Sono utilizzati protocolli e algoritmi di cifratura allo stato dell'arte per la trasmissione dei dati.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.DS-11-01","domanda":"Sono effettuati periodicamente i backup dei dati e delle configurazioni.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.DS-11-02","domanda":"È assicurata la riservatezza delle informazioni contenute nei backup mediante adeguata protezione.","criticita":4,"normativa":"NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"PR.DS-11-03","domanda":"È verificata periodicamente l'utilizzabilità dei backup effettuati mediante test di ripristino.","criticita":4,"normativa":"NIS2","livello_nis2":"Essenziale","compliance":"Compliance"}],"Platform Security":[{"id":"PR.PS-01-01","domanda":"Sono definite e documentate le configurazioni di riferimento sicure (hardened) per i sistemi informativi.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"PR.PS-02-01","domanda":"È installato esclusivamente software per il quale il fornitore garantisce la disponibilità di aggiornamenti di sicurezza.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.PS-02-02","domanda":"Il software installato è aggiornato all'ultima versione raccomandata dal produttore.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.PS-04-01","domanda":"Sono conservati in modo sicuro e centralizzato almeno i log necessari ai fini del monitoraggio.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.PS-04-02","domanda":"Sono definite e documentate le tempistiche di conservazione dei log.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"}],"Technology Infrastructure Resilience":[{"id":"PR.IR-01-01","domanda":"Sono definite le attività consentite da remoto e implementate adeguate misure di sicurezza per l'accesso.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.IR-01-02","domanda":"Esiste un elenco aggiornato dei sistemi ai quali è possibile accedere da remoto con le relative modalità di accesso.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.IR-01-03","domanda":"Sono presenti, aggiornati, mantenuti e ben configurati i sistemi perimetrali, quali firewall.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.IR-03-01","domanda":"Sono utilizzati sistemi di comunicazione di emergenza protetti.","criticita":4,"normativa":"NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"PR.IR-04","domanda":"È mantenuta un'adeguata capacità di risorse per garantire la disponibilità.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}]},"DETECT":{"Continuous Monitoring":[{"id":"DE.CM-01-01","domanda":"Sono presenti, aggiornati, mantenuti e ben configurati sistemi di rilevamento dei possibili incidenti significativi.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"DE.CM-01-02","domanda":"Sono definiti e documentati i livelli di servizio atteso (SLA) dei sistemi informativi e di rete.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"DE.CM-01-03","domanda":"Sono utilizzati strumenti di analisi e filtraggio sul flusso di traffico in ingresso.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"DE.CM-01-04","domanda":"Al fine di rilevare eventi di sicurezza sono monitorati il traffico, gli accessi da remoto e le attività dei sistemi perimetrali.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"DE.CM-02","domanda":"L'ambiente fisico è monitorato per individuare eventi potenzialmente avversi.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"DE.CM-03","domanda":"L'attività del personale e l'utilizzo della tecnologia sono monitorati per individuare eventi avversi.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"DE.CM-06-01","domanda":"Sono definiti, monitorati e documentati parametri per rilevare gli accessi non autorizzati o con abuso dei privilegi.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"DE.CM-09-01","domanda":"Sono presenti, aggiornati, mantenuti e ben configurati sistemi di protezione delle postazioni terminali per il rilevamento del codice malevolo.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"}],"Adverse Event Analysis":[{"id":"DE.AE-02","domanda":"Gli eventi potenzialmente avversi sono analizzati per meglio comprenderne le attività associate.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"DE.AE-03-01","domanda":"Sono eseguite attività di analisi e correlazione ai fini di rilevare tempestivamente incidenti di sicurezza.","criticita":4,"normativa":"PSNC","livello_nis2":"","compliance":"Compliance"},{"id":"DE.AE-04","domanda":"L'impatto e la portata stimati degli eventi avversi sono compresi.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"DE.AE-06","domanda":"Le informazioni sugli eventi avversi sono fornite al personale e agli strumenti autorizzati.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"DE.AE-08","domanda":"Gli incidenti sono dichiarati quando gli eventi avversi soddisfano i criteri definiti.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}]},"RESPOND":{"Incident Management":[{"id":"RS.MA-01-01","domanda":"È definito, attuato, aggiornato e documentato un piano per la gestione degli incidenti di sicurezza informatica.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"RS.MA-01-02","domanda":"Il piano per la gestione degli incidenti è approvato dagli organi di amministrazione e riesaminato periodicamente.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"RS.MA-02","domanda":"I report sugli incidenti sono sottoposti a triage e convalidati.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"RS.MA-03","domanda":"Gli incidenti sono categorizzati e prioritizzati.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"RS.MA-04","domanda":"Gli incidenti sono scalati o elevati a seconda delle necessità.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}],"Incident Analysis":[{"id":"RS.AN-03","domanda":"È eseguita un'analisi per stabilire cosa è avvenuto durante un incidente e la causa principale.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"RS.AN-06","domanda":"Le azioni eseguite durante un'investigazione sono registrate e l'integrità delle registrazioni è preservata.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"RS.AN-08","domanda":"La magnitudo di un incidente è stimata e convalidata.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}],"Incident Response Reporting and Communication":[{"id":"RS.CO-02","domanda":"Gli stakeholder interni ed esterni sono informati degli incidenti.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"RS.CO-03","domanda":"Le informazioni sono condivise con gli stakeholder interni ed esterni designati.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}],"Incident Mitigation":[{"id":"RS.MI-01","domanda":"Gli incidenti vengono contenuti.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"RS.MI-02","domanda":"Gli incidenti vengono eradicati.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}]},"RECOVER":{"Incident Recovery Plan Execution":[{"id":"RC.RP-01","domanda":"Sono adottate e documentate procedure per il ripristino del normale funzionamento dei sistemi informativi.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"RC.RP-02","domanda":"Le azioni di ripristino sono selezionate, contestualizzate, prioritizzate ed eseguite.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"RC.RP-03","domanda":"L'integrità dei backup e delle altre risorse di ripristino è verificata prima che siano utilizzati.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"RC.RP-05","domanda":"L'integrità degli asset ripristinati è verificata, i sistemi e i servizi sono ripristinati e lo stato operativo normale viene confermato.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}],"Incident Recovery Communication":[{"id":"RC.CO-03","domanda":"Le attività di ripristino a seguito di un incidente sono comunicate alle parti interne ed esterne interessate.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"RC.CO-04","domanda":"Gli aggiornamenti pubblici sul ripristino dagli incidenti sono condivisi utilizzando modalità approvate.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}]}};
+const NIS2_DATA={"GOVERN":{"Organizational Context":[{"id":"GV-OC-01","domanda":"La missione dell'organizzazione è compresa e informa la gestione del rischio di cybersecurity.","criticita":1,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV-OC-02","domanda":"Gli stakeholder interni ed esterni sono noti e le loro esigenze e aspettative riguardo la gestione del rischio di cybersecurity sono comprese e considerate.","criticita":3,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV-OC-03","domanda":"I requisiti legali, normativi e contrattuali riguardanti la cybersecurity, compresi gli obblighi in materia di privacy e libertà civili, sono compresi e gestiti.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV-OC-04","domanda":"È mantenuto un elenco aggiornato dei sistemi informativi e di rete rilevanti.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV-OC-05","domanda":"I risultati, le capacità e i servizi dai quali l'organizzazione dipende sono compresi e comunicati.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}],"Risk Management Strategy":[{"id":"GV-RM-01","domanda":"Gli obiettivi di gestione del rischio sono stabiliti e accettati dagli stakeholder dell'organizzazione.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV-RM-02","domanda":"Esiste un documento aggiornato di dettaglio che identifica e descrive il rischio tollerato dal soggetto.","criticita":4,"normativa":"PSNC","livello_nis2":"","compliance":"Compliance"},{"id":"GV-RM-03","domanda":"È definito, attuato, aggiornato e documentato un piano di gestione del rischio di cybersecurity all'interno dell'organizzazione","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV-RM-04","domanda":"È stabilita e comunicata la direzione strategica che descrive le opzioni appropriate di risposta al rischio.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV-RM-05","domanda":"Sono stabiliti canali di comunicazione in tutta l'organizzazione per il rischio di cybersecurity.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV-RM-06","domanda":"È stabilito e comunicato un metodo standardizzato per calcolare, documentare, categorizzare e prioritizzare i rischi.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV-RM-07","domanda":"Le opportunità strategiche sono caratterizzate e incluse nelle discussioni sul rischio di cybersecurity.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}],"Roles, Responsibilities, and Authorities":[{"id":"GV.RR-01","domanda":"Gli organi di amministrazione e direttivi sono responsabili per il rischio di cybersecurity e promuovono una cultura consapevole del rischio.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV.RR-02-01","domanda":"È definita e resa nota all'interno del soggetto l'organizzazione di cybersecurity e ne sono stabiliti ruoli e responsabilità.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.RR-02-02","domanda":"Esiste un elenco aggiornato del personale avente ruoli e responsabilità in ambito cybersecurity.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.RR-02-03","domanda":"Sono designati ruoli specifici coerentemente con quanto richiesto dalle normative applicabili.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.RR-02-04","domanda":"I ruoli e le responsabilità sono riesaminati e aggiornati periodicamente.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.RR-03","domanda":"Sono allocate risorse adeguate, commisurate alla strategia di gestione del rischio.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV.RR-04-01","domanda":"È verificata l'affidabilità del personale autorizzato ad accedere ai sistemi critici.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.RR-04-02","domanda":"Sono definiti a livello contrattuale gli obblighi di sicurezza dopo la cessazione del rapporto di lavoro.","criticita":4,"normativa":"NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"GV.RR-05","domanda":"I ruoli, le responsabilità e i poteri inerenti al trattamento dei dati personali sono stabiliti e comunicati.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}],"Policy":[{"id":"GV.PO-01-01","domanda":"Sono adottate e documentate politiche di cybersecurity in coerenza con gli obblighi normativi applicabili.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.PO-01-02","domanda":"Le politiche di cybersecurity sono approvate dagli organi di amministrazione o da una figura da loro formalmente delegata.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.PO-01-03","domanda":"Le politiche di cybersecurity sono riesaminate e aggiornate periodicamente e comunque almeno con cadenza annuale.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.PO-02","domanda":"Gli esiti delle attività di riesame delle politiche di cybersecurity sono tracciati all'interno di un registro.","criticita":4,"normativa":"NIS2","livello_nis2":"Essenziale","compliance":"Compliance"}],"Oversight":[{"id":"GV.OV-01","domanda":"I risultati della strategia di gestione del rischio di cybersecurity sono revisionati per informare e adeguare la strategia.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV.OV-02","domanda":"La strategia di gestione del rischio di cybersecurity è revisionata e adeguata per garantire la copertura dei requisiti.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV.OV-03","domanda":"Le prestazioni relative alla gestione del rischio di cybersecurity sono valutate e revisionate.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}],"Cybersecurity Supply Chain Risk Management":[{"id":"GV.SC-01-01","domanda":"In merito all'affidamento di forniture di sistemi informativi sono previsti requisiti di sicurezza coerenti con le misure applicate dal soggetto.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.SC-01-02","domanda":"Sono definiti i requisiti di sicurezza per le forniture esterne.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"GV.SC-02","domanda":"Sono definiti i ruoli e le responsabilità in materia di sicurezza informatica di eventuali terze parti.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.SC-03","domanda":"È realizzato e mantenuto un inventario dei fornitori e partner terzi rilevanti ai fini della sicurezza.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV.SC-04","domanda":"I fornitori sono noti e prioritizzati in base alla criticità.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.SC-05","domanda":"I requisiti di sicurezza sono inseriti nei contratti relativi alle forniture rilevanti.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.SC-06","domanda":"Pianificazione e due diligence sono svolte per ridurre i rischi prima di intraprendere rapporti con fornitori.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV.SC-07-01","domanda":"È valutato il rischio associato alle forniture considerando almeno il livello di accesso del fornitore ai sistemi.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.SC-07-02","domanda":"È effettuata e documentata la valutazione periodica dei fornitori e partner terzi.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.SC-08","domanda":"I fornitori e le altre terze parti rilevanti sono inclusi nelle attività di pianificazione e risposta agli incidenti.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV.SC-09","domanda":"Le pratiche di sicurezza della catena di approvvigionamento sono integrate nei programmi di gestione del rischio.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}]},"IDENTIFY":{"Asset Management":[{"id":"ID.AM-01-01","domanda":"È realizzato e mantenuto un inventario aggiornato degli apparati fisici (hardware) approvati.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.AM-01-02","domanda":"È consentito esclusivamente l'uso di apparati fisici (hardware) approvati da attori interni al soggetto.","criticita":4,"normativa":"PSNC","livello_nis2":"","compliance":"Compliance"},{"id":"ID.AM-02-01","domanda":"È realizzato e mantenuto un inventario aggiornato dei servizi, dei sistemi e delle applicazioni software approvati.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.AM-02-02","domanda":"È consentito esclusivamente l'uso di servizi, sistemi e applicazioni software approvati.","criticita":4,"normativa":"PSNC","livello_nis2":"","compliance":"Compliance"},{"id":"ID.AM-03-01","domanda":"È realizzato e mantenuto un inventario aggiornato dei flussi di dati approvati.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"ID.AM-04","domanda":"Sono mantenuti gli inventari dei servizi erogati dai fornitori.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.AM-05","domanda":"Gli asset sono prioritizzati in base alla categorizzazione, alla criticità, alle risorse e all'impatto sulla missione.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.AM-07","domanda":"Sono mantenuti gli inventari dei dati e dei relativi metadati.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.AM-08","domanda":"I sistemi, l'hardware, il software, i servizi e i dati sono gestiti durante il loro intero ciclo di vita.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}],"Risk Assessment":[{"id":"ID.RA-01-01","domanda":"Sono eseguite periodicamente attività per l'identificazione delle vulnerabilità e predisposte apposite relazioni.","criticita":4,"normativa":"PSNC","livello_nis2":"","compliance":"Compliance"},{"id":"ID.RA-01-02","domanda":"Sono eseguiti e documentati penetration test e/o vulnerability assessment sui sistemi.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"ID.RA-02","domanda":"Le informazioni di cyber threat intelligence sono ricevute da forum e fonti di condivisione delle informazioni.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.RA-03","domanda":"Le minacce interne ed esterne all'organizzazione sono identificate e registrate.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.RA-04","domanda":"I potenziali impatti e le probabilità di sfruttamento delle vulnerabilità sono identificati e registrati.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.RA-05-01","domanda":"È eseguita e documentata la valutazione del rischio della sicurezza dei sistemi informativi e di rete.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.RA-05-02","domanda":"La valutazione del rischio è eseguita a intervalli pianificati e qualora si verifichino incidenti significativi.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.RA-05-03","domanda":"La valutazione del rischio è effettuata considerando le minacce interne ed esterne e le vulnerabilità non risolte.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"ID.RA-06-01","domanda":"È definito un piano di trattamento del rischio che comprende le opzioni di trattamento e le misure da attuare.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.RA-06-02","domanda":"Il piano di trattamento del rischio, ivi compresa l'accettazione di eventuali rischi residui, è approvato dagli organi direttivi.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.RA-06-03","domanda":"Sono monitorati i canali di comunicazione del CSIRT Italia e di eventuali CERT di riferimento.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.RA-07","domanda":"Le modifiche e le eccezioni sono gestite, valutate per il loro impatto sul rischio, registrate e tracciate.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.RA-08-01","domanda":"Le vulnerabilità sono prontamente risolte attraverso aggiornamenti di sicurezza o misure di mitigazione.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.RA-08-02","domanda":"È definito, attuato e documentato un piano di gestione delle vulnerabilità e relative procedure.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.RA-08-03","domanda":"Il piano di gestione delle vulnerabilità è approvato dagli organi di amministrazione e direttivi.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"}],"Improvement":[{"id":"ID.IM-01-01","domanda":"È definito e documentato un piano per il riesame periodico della conformità e un piano di adeguamento.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.IM-01-02","domanda":"È definito e documentato un piano per il monitoraggio e la misura dell'efficacia delle misure di gestione del rischio.","criticita":4,"normativa":"NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"ID.IM-02","domanda":"Sono identificati miglioramenti in esito ai test e alle esercitazioni di sicurezza.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.IM-03","domanda":"Sono identificati miglioramenti dall'esecuzione di processi, procedure e attività operativi.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.IM-04-01","domanda":"Sono definiti, attuati, aggiornati e documentati piani di continuità operativa.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.IM-04-02","domanda":"Sono definiti, attuati, aggiornati e documentati piani di disaster recovery.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.IM-04-03","domanda":"È definito, attuato, aggiornato e documentato un piano per la gestione delle crisi.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.IM-04-04","domanda":"I piani di continuità operativa, disaster recovery e gestione delle crisi sono approvati e riesaminati.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"}]},"PROTECT":{"Identity Management, Authentication, and Access Control":[{"id":"PR.AA-01-01","domanda":"Tutte le utenze sono censite e sono individuali per gli utenti.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AA-01-02","domanda":"Le credenziali di accesso relative alle utenze sono robuste e aggiornate con una cadenza proporzionata ai privilegi.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AA-01-03","domanda":"Sono verificate periodicamente le utenze e le credenziali di accesso, aggiornandole/revocandole in caso di variazioni.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AA-01-04","domanda":"Sono attuate e documentate procedure relative alla gestione delle utenze e delle credenziali.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AA-03-01","domanda":"Le modalità di autenticazione sono commisurate al rischio connesso ai privilegi delle utenze.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AA-03-02","domanda":"Sono impiegate modalità di autenticazione multifattore.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AA-05-01","domanda":"I permessi sono assegnati alle utenze in accordo ai principi del minimo privilegio e della separazione delle funzioni.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AA-05-02","domanda":"È assicurata la completa distinzione tra utenze con e senza privilegi degli amministratori di sistema.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AA-06","domanda":"Sono attuate e documentate procedure relative alla modalità di gestione degli accessi fisici.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"}],"Data Security":[{"id":"PR.DS-01-01","domanda":"I dati memorizzati, in particolare sui dispositivi portatili e removibili, sono cifrati con protocolli allo stato dell'arte.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.DS-01-02","domanda":"Sono attuate e documentate procedure relative alla cifratura dei dati sia in transit che at rest.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.DS-11-01","domanda":"Sono effettuati periodicamente i backup dei dati e delle configurazioni.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.DS-11-02","domanda":"È assicurata la riservatezza delle informazioni contenute nei backup mediante adeguata protezione.","criticita":4,"normativa":"NIS2","livello_nis2":"Essenziale","compliance":"Compliance"}],"Platform Security":[{"id":"PR.PS-01-01","domanda":"Sono definite e documentate le configurazioni di riferimento sicure (hardened) per i sistemi informativi.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"PR.PS-02-01","domanda":"È installato esclusivamente software per il quale il fornitore garantisce la disponibilità di aggiornamenti di sicurezza.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.PS-04-01","domanda":"Sono conservati in modo sicuro e centralizzato almeno i log necessari ai fini del monitoraggio.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"}]},"DETECT":{"Continuous Monitoring":[{"id":"DE.CM-01-01","domanda":"Sono presenti, aggiornati, mantenuti e ben configurati sistemi di rilevamento dei possibili incidenti significativi.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"DE.CM-01-02","domanda":"Sono definiti e documentati i livelli di servizio atteso (SLA) dei sistemi informativi e di rete.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"DE.CM-09-01","domanda":"Sono presenti, aggiornati, mantenuti e ben configurati sistemi di protezione delle postazioni terminali per il rilevamento del codice malevolo.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"}],"Adverse Event Analysis":[{"id":"DE.AE-02","domanda":"Gli eventi potenzialmente avversi sono analizzati per meglio comprenderne le attività associate.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"DE.AE-03-01","domanda":"Sono eseguite attività di analisi e correlazione ai fini di rilevare tempestivamente incidenti di sicurezza.","criticita":4,"normativa":"PSNC","livello_nis2":"","compliance":"Compliance"}]},"RESPOND":{"Incident Management":[{"id":"RS.MA-01-01","domanda":"È definito, attuato, aggiornato e documentato un piano per la gestione degli incidenti di sicurezza informatica.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"RS.MA-01-02","domanda":"Il piano per la gestione degli incidenti è approvato dagli organi di amministrazione e riesaminato periodicamente.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"RS.MA-02","domanda":"I report sugli incidenti sono sottoposti a triage e convalidati.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}],"Incident Analysis":[{"id":"RS.AN-03","domanda":"È eseguita un'analisi per stabilire cosa è avvenuto durante un incidente e la causa principale.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"RS.AN-06","domanda":"Le azioni eseguite durante un'investigazione sono registrate e l'integrità delle registrazioni è preservata.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}]},"RECOVER":{"Incident Recovery Plan Execution":[{"id":"RC.RP-01","domanda":"Sono adottate e documentate procedure per il ripristino del normale funzionamento dei sistemi informativi.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"RC.RP-02","domanda":"Le azioni di ripristino sono selezionate, contestualizzate, prioritizzate ed eseguite.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}],"Incident Recovery Communication":[{"id":"RC.CO-03","domanda":"Le attività di ripristino a seguito di un incidente sono comunicate alle parti interne ed esterne interessate.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Essenziale","compliance":"Compliance"}]}};
 
 const AREA_CFG={
   GOVERN:{col:'#2563eb',bg:'#EBF5FF',icon:'🏛️'},
@@ -1006,7 +1047,8 @@ const AREA_CFG={
   RECOVER:{col:'#0d9488',bg:'#F0FDFA',icon:'🔄'},
 };
 
-const LOCKED_AREAS=new Set(['RESPOND','RECOVER']);
+const LOCKED_AREAS=new Set();
+
 const PIANO_PHASES = [
   { 
     id: 'prep', 
@@ -1071,7 +1113,7 @@ const PIANO_PHASES = [
 ];
 
 const MOCK_ANS={
-  'DE.CM-01-01':{status:'accepted',score:1,abs:'Sistemi di rilevamento enterprise (SIEM + IDS) operativi H24 con copertura completa.',fbs:[{t:'ok',d:'Completezza',m:'Risposta dettagliata con riferimento a SIEM, IDS, SLA e procedure documentate.'},{t:'ok',d:'Evidenza documentale',m:'Documentazione presente e aggiornata.'},{t:'ok',d:'Conformità NIS2',m:'Pienamente allineato agli artt. 20-21 NIS2.'}]},
+  'DE.CM-01-01':{status:'accepted',score:1,abs:'Sistemi di rilevamento enterprise (SIEM + IDS) operativi H24 con copertura completa.',fbs:[{t:'ok',d:'Completezza',m:'Risposta dettagliata con SIEM, IDS, SLA e procedure documentate.'},{t:'ok',d:'Evidenza documentale',m:'Documentazione presente e aggiornata.'},{t:'ok',d:'Conformità NIS2',m:'Pienamente allineato agli artt. 20-21 NIS2.'}]},
   'GV.PO-01-01':{status:'accepted',score:1,abs:'Framework completo di policy di sicurezza approvato dal CDA.',fbs:[{t:'ok',d:'Completezza',m:'Policy framework completo con approvazione CDA formale.'},{t:'ok',d:'Conformità NIS2',m:'Piena conformità NIS2 Art. 21.'}]},
   'ID.RA-05-01':{status:'warning',score:2,abs:'Risk assessment eseguito ma con frequenza non conforme. Alcune categorie non incluse.',fbs:[{t:'warn',d:'Conformità parziale',m:'Risk assessment presente ma non aggiornato nei termini richiesti da NIS2 (>12 mesi).'},{t:'warn',d:'Gap supply chain',m:'I rischi derivanti dalla supply chain non sono integrati nel piano.'},{t:'ok',d:'Metodologia',m:'Approccio ISO 27005 corretto.'}]},
   'GV-RM-03':{status:'rejected',score:4,abs:'Piano di gestione del rischio scaduto (>14 mesi). Gap critico — azione correttiva obbligatoria urgente.',fbs:[{t:'ko',d:'Gap critico',m:'Piano scaduto da oltre 14 mesi. Frequenza di revisione NIS2 non rispettata.'},{t:'ko',d:'Scenari mancanti',m:'Rischi supply chain non inclusi.'},{t:'ko',d:'Azione obbligatoria',m:'Aggiornamento urgente richiesto prima della chiusura assessment.'}]},
@@ -1087,28 +1129,27 @@ function getMockAns(){
 // ===================== STATE =====================
 let selDom={};
 let modalState={area:null,subIdx:0};
-let curQ=0;
-let validated={};
 let ownerQs=[];
-let ownerAnswers={};
+let ownerAnswers={};  // idx -> {cmmi, answer, file}
+let ownerCurQ=0;
+let auditorCurQ=0;
+let auditorValidations={}; // idx -> {status, note, source} source='ai'|'manual'
 let uploadedFiles={};
 let dskCol=false;
 let searchTxt='';
 let activeFilters=new Set();
 let activeTagFilters=new Set();
-let sbPage=0;const SB_PAGE_SIZE=8;
+let sbPage=0; const SB_PAGE_SIZE=8;
 let curTab='q';
 let tabDone={q:false,d:false,p:false};
 let docSingleFile=null;
+let manValCurChoice=null;
 
 // ===================== BOOT =====================
 function startDemo(){
   document.getElementById('ov').style.display='none';
   document.getElementById('shell').style.display='flex';
-  buildAreaFilters();
-  buildPianoTable();
-  renderGrid();
-  refreshEntraOwnerBtns();
+  buildAreaFilters();buildPianoTable();renderGrid();refreshEntraOwnerBtns();
 }
 
 // ===================== SIDEBAR =====================
@@ -1133,18 +1174,23 @@ function closeMob(){
 // ===================== STEP BAR =====================
 function updateStepBar(step){
   if(step>=2){
-    document.getElementById('sp2').classList.remove('active');
-    document.getElementById('sp2').classList.add('done');
+    const sp2=document.getElementById('sp2');
+    sp2.classList.remove('active');sp2.classList.add('done');
     document.getElementById('sp2c').innerHTML='<i class="fa-solid fa-check"></i>';
     document.getElementById('spline3').classList.add('done');
     document.getElementById('sp3').classList.add('active');
   }
   if(step>=3){
-    document.getElementById('sp3').classList.remove('active');
-    document.getElementById('sp3').classList.add('done');
+    const sp3=document.getElementById('sp3');
+    sp3.classList.remove('active');sp3.classList.add('done');
     document.getElementById('sp3c').innerHTML='<i class="fa-solid fa-check"></i>';
     document.getElementById('spline4').classList.add('done');
     document.getElementById('sp4').classList.add('active');
+  }
+  if(step>=4){
+    const sp4=document.getElementById('sp4');
+    sp4.classList.remove('active');sp4.classList.add('done');
+    document.getElementById('sp4c').innerHTML='<i class="fa-solid fa-check"></i>';
   }
 }
 
@@ -1210,11 +1256,8 @@ function selectAll(){
   });
   renderGrid();renderSelSb();refreshEntraOwnerBtns();
 }
-function clearAll(){
-  selDom={};renderGrid();renderSelSb();refreshEntraOwnerBtns();
-}
+function clearAll(){selDom={};renderGrid();renderSelSb();refreshEntraOwnerBtns();}
 
-// ===================== MATCH =====================
 function matchQ(d,area,sub){
   if(activeFilters.size>0&&!activeFilters.has(area))return false;
   const norm=d.normativa.toLowerCase();const nis=d.livello_nis2.toLowerCase();const comp=d.compliance.toLowerCase();
@@ -1244,18 +1287,14 @@ function renderGrid(){
     if(activeFilters.size>0&&!activeFilters.has(area))return;
     const cfg=AREA_CFG[area]||{col:'#666',bg:'#eee',icon:'📋'};
     const locked=LOCKED_AREAS.has(area);
-    let anyMatch=false;
-    let selArea=0,totArea=0;
-    Object.entries(subs).forEach(([sub,doms])=>{
-      doms.forEach(d=>{totArea++;if(selDom[d.id])selArea++;if(matchQ(d,area,sub))anyMatch=true;});
-    });
+    let anyMatch=false;let selArea=0,totArea=0;
+    Object.entries(subs).forEach(([sub,doms])=>{doms.forEach(d=>{totArea++;if(selDom[d.id])selArea++;if(matchQ(d,area,sub))anyMatch=true;});});
     totalDom+=totArea;
     if(searchTxt&&!anyMatch)return;
     if(activeTagFilters.size>0&&!anyMatch)return;
     const isAll=selArea===totArea&&totArea>0,isInd=selArea>0&&selArea<totArea;
     const wrap=document.createElement('div');wrap.className='qb';
-    const lockBadge=locked?`<span style="font-size:9px;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:4px;background:rgba(255,255,255,.08);padding:2px 8px;border-radius:99px"><i class="fa-solid fa-lock"></i> Non disponibile</span>`:'';
-    wrap.innerHTML=`<div class="qb-head"><div class="qb-hl">${!locked?`<div class="qb-chk ${isAll?'all':isInd?'ind':''}">${isAll||isInd?'<i class="fa-solid fa-check" style="font-size:8px"></i>':''}</div>`:'<div style="width:14px"></div>'}<h4 class="qb-title">${area}</h4></div><div style="display:flex;align-items:center;gap:8px">${lockBadge}<span class="qb-badge">${locked?'—':selArea+'/'+totArea}</span></div></div>`;
+    wrap.innerHTML=`<div class="qb-head"><div class="qb-hl">${!locked?`<div class="qb-chk ${isAll?'all':isInd?'ind':''}">${isAll||isInd?'<i class="fa-solid fa-check" style="font-size:8px"></i>':''}</div>`:'<div style="width:14px"></div>'}<h4 class="qb-title">${area}</h4></div><div style="display:flex;align-items:center;gap:8px"><span class="qb-badge">${locked?'—':selArea+'/'+totArea}</span></div></div>`;
     if(!locked)wrap.querySelector('.qb-chk').addEventListener('click',()=>toggleAreaAll(area));
     const grid=document.createElement('div');grid.className='aree-grid';
     Object.entries(subs).forEach(([sub,doms],si)=>{
@@ -1266,13 +1305,9 @@ function renderGrid(){
       card.className='ac'+(selS>0?' has-sel':'')+(locked?' locked-area':'');
       if(!locked)card.onclick=()=>openModal(area,si);
       card.innerHTML=`${selS>0&&!locked?`<div class="ac-badge">${selS}</div>`:''}
-        ${locked?`<div class="area-locked-badge"><i class="fa-solid fa-lock"></i> Bloccata</div>`:''}
         <div class="ac-ic" style="background:${cfg.bg};color:${cfg.col}">${cfg.icon}</div>
         <div class="ac-nm" style="color:${cfg.col}">${sub}</div>
-        <div class="ac-meta">
-          <span class="ac-pill" style="background:${cfg.bg};color:${cfg.col}">${totS} dom.</span>
-          ${!locked?`<span class="ac-sel-ct">${selS>0?selS+' ✓':''}</span>`:''}
-        </div>
+        <div class="ac-meta"><span class="ac-pill" style="background:${cfg.bg};color:${cfg.col}">${totS} dom.</span>${!locked?`<span class="ac-sel-ct">${selS>0?selS+' ✓':''}</span>`:''}</div>
         ${!locked?`<div class="ac-prog"><div class="ac-pfill" style="width:${pct}%;background:${cfg.col}"></div></div>`:''}`;
       grid.appendChild(card);
     });
@@ -1311,10 +1346,8 @@ function renderSelSb(){
   document.getElementById('sel-areas-ct').textContent=areas.length+' aree';
   if(n===0){
     list.innerHTML='<div style="padding:18px 10px;text-align:center;font-size:11px;color:var(--muted);line-height:1.7">Nessuna domanda<br>selezionata</div>';
-    document.getElementById('sb-prev').disabled=true;
-    document.getElementById('sb-next').disabled=true;
-    document.getElementById('sb-nav-info').textContent='—';
-    return;
+    document.getElementById('sb-prev').disabled=true;document.getElementById('sb-next').disabled=true;
+    document.getElementById('sb-nav-info').textContent='—';return;
   }
   const allDoms=Object.values(selDom);
   const totalPages=Math.ceil(allDoms.length/SB_PAGE_SIZE);
@@ -1345,8 +1378,7 @@ function openModal(area,si){
   renderModalSb();renderModalDom();
 }
 function renderModalSb(){
-  const {area,subIdx}=modalState;
-  const subs=NIS2_DATA[area];const sb=document.getElementById('modal-sb');sb.innerHTML='';
+  const {area,subIdx}=modalState;const subs=NIS2_DATA[area];const sb=document.getElementById('modal-sb');sb.innerHTML='';
   Object.entries(subs).forEach(([sub,doms],si)=>{
     const selS=doms.filter(d=>selDom[d.id]).length,tot=doms.length;
     const isAll=selS===tot&&tot>0,isInd=selS>0&&selS<tot;
@@ -1359,16 +1391,14 @@ function renderModalSb(){
       renderGrid();renderModalSb();renderModalDom();
     });
     it.addEventListener('click',()=>{
-      modalState.subIdx=si;
-      document.getElementById('modal-title').textContent=area+' · '+sub;
+      modalState.subIdx=si;document.getElementById('modal-title').textContent=area+' · '+sub;
       renderModalSb();renderModalDom();
     });
     sb.appendChild(it);
   });
 }
 function renderModalDom(){
-  const {area,subIdx}=modalState;
-  const subs=NIS2_DATA[area];const subNames=Object.keys(subs);
+  const {area,subIdx}=modalState;const subs=NIS2_DATA[area];const subNames=Object.keys(subs);
   const sub=subNames[subIdx];const doms=subs[sub];
   const q=(document.getElementById('modal-srch').value||'').toLowerCase().trim();
   const selS=doms.filter(d=>selDom[d.id]).length;
@@ -1406,45 +1436,27 @@ function toggleDom(id){
 }
 function closeModal(){document.getElementById('modal-ov').classList.remove('open');}
 
-// ===================== DOCUMENTAZIONE — SINGLE UPLOAD =====================
-function docDragOver(e){
-  e.preventDefault();
-  document.getElementById('doc-upload-zone').classList.add('dragover');
-}
-function docDragLeave(e){
-  document.getElementById('doc-upload-zone').classList.remove('dragover');
-}
-function docDrop(e){
-  e.preventDefault();
-  document.getElementById('doc-upload-zone').classList.remove('dragover');
-  const f=e.dataTransfer.files[0];
-  if(f)applyDocSingle(f);
-}
-function handleDocSingle(e){
-  const f=e.target.files[0];if(!f)return;
-  applyDocSingle(f);
-}
+// ===================== DOCUMENTAZIONE =====================
+function docDragOver(e){e.preventDefault();document.getElementById('doc-upload-zone').classList.add('dragover');}
+function docDragLeave(e){document.getElementById('doc-upload-zone').classList.remove('dragover');}
+function docDrop(e){e.preventDefault();document.getElementById('doc-upload-zone').classList.remove('dragover');const f=e.dataTransfer.files[0];if(f)applyDocSingle(f);}
+function handleDocSingle(e){const f=e.target.files[0];if(!f)return;applyDocSingle(f);}
 function applyDocSingle(f){
   docSingleFile=f;
-  const zone=document.getElementById('doc-upload-zone');
-  zone.classList.add('done');
+  const zone=document.getElementById('doc-upload-zone');zone.classList.add('done');
   document.getElementById('dup-icon').innerHTML='<i class="fa-solid fa-circle-check"></i>';
   document.getElementById('dup-title').textContent='File caricato con successo';
   document.getElementById('dup-sub').textContent='Il documento è stato allegato all\'assessment.';
   document.getElementById('dup-file-info').style.display='flex';
   document.getElementById('dup-fname').textContent=f.name;
-  const kb=f.size/1024;
-  document.getElementById('dup-fsize').textContent=kb>1024?(kb/1024).toFixed(1)+' MB':Math.round(kb)+' KB';
+  const kb=f.size/1024;document.getElementById('dup-fsize').textContent=kb>1024?(kb/1024).toFixed(1)+' MB':Math.round(kb)+' KB';
   document.getElementById('dup-rm').style.display='flex';
   document.querySelector('.dup-formats').style.display='none';
-  if(!tabDone.d)markTabDone('d');
-  refreshEntraOwnerBtns();
+  if(!tabDone.d)markTabDone('d');refreshEntraOwnerBtns();
 }
 function removeDocSingle(e){
-  e.stopPropagation();
-  docSingleFile=null;
-  const zone=document.getElementById('doc-upload-zone');
-  zone.classList.remove('done');
+  e.stopPropagation();docSingleFile=null;
+  const zone=document.getElementById('doc-upload-zone');zone.classList.remove('done');
   document.getElementById('dup-icon').innerHTML='<i class="fa-solid fa-cloud-arrow-up"></i>';
   document.getElementById('dup-title').textContent='Trascina il file qui o clicca per sfogliare';
   document.getElementById('dup-sub').textContent='Carica la documentazione allegata all\'assessment. Supporta tutti i formati di file.';
@@ -1454,32 +1466,25 @@ function removeDocSingle(e){
   document.getElementById('doc-file-inp').value='';
 }
 
-// ===================== PIANO DI LAVORO =====================
+// ===================== PIANO =====================
 function buildPianoTable(){
   const rows=document.getElementById('piano-date-rows');rows.innerHTML='';
   PIANO_PHASES.forEach(p=>{
     const row=document.createElement('div');row.className='piano-date-row';
-    row.innerHTML=`
-      <div class="piano-phase-info">
-        <div class="piano-phase-icon">${p.icon}</div>
-        <div><div class="piano-phase-name">${p.name}</div></div>
-      </div>
-      <div><input type="date" class="piano-date-inp" id="piano-start-${p.id}" onchange="checkPianoDates()"></div>
-      <div><input type="date" class="piano-date-inp" id="piano-end-${p.id}" onchange="checkPianoDates()"></div>`;
+    row.innerHTML=`<div class="piano-phase-info"><div class="piano-phase-icon">${p.icon}</div><div><div class="piano-phase-name">${p.name}</div></div></div><div><input type="date" class="piano-date-inp" id="piano-start-${p.id}" onchange="checkPianoDates()"></div><div><input type="date" class="piano-date-inp" id="piano-end-${p.id}" onchange="checkPianoDates()"></div>`;
     rows.appendChild(row);
   });
 }
 function checkPianoDates(){
   const filled=PIANO_PHASES.filter(p=>document.getElementById('piano-start-'+p.id).value||document.getElementById('piano-end-'+p.id).value).length;
-  if(filled>=3&&!tabDone.p)markTabDone('p');
-  refreshEntraOwnerBtns();
+  if(filled>=3&&!tabDone.p)markTabDone('p');refreshEntraOwnerBtns();
 }
 
 // ===================== GOTO OWNER =====================
 function goToOwner(){
   if(Object.keys(selDom).length===0)return;
-  document.getElementById('step1').style.display='none';
-  document.getElementById('step2').style.display='block';
+  document.getElementById('step-reviewer').style.display='none';
+  document.getElementById('step-owner').style.display='block';
   document.getElementById('ph-title').textContent='Compilazione Questionario — NIS2';
   document.getElementById('info-fase').textContent='Assessment';
   updateStepBar(2);
@@ -1489,228 +1494,323 @@ function goToOwner(){
   setupOwner();
 }
 function backToReviewer(){
-  document.getElementById('step2').style.display='none';
-  document.getElementById('step1').style.display='block';
+  document.getElementById('step-owner').style.display='none';
+  document.getElementById('step-reviewer').style.display='block';
   document.getElementById('ph-title').textContent='Selezione Questionario — NIS2';
   document.getElementById('info-fase').textContent='Def. Questionario';
   document.getElementById('tb-av').textContent='MR';
   document.getElementById('tb-uname').textContent='Mario Rossi';
   document.getElementById('tb-urole').textContent='Reviewer';
-  document.getElementById('sp2').classList.add('active');
-  document.getElementById('sp2').classList.remove('done');
-  document.getElementById('sp3').classList.remove('active');
-  document.getElementById('spline3').classList.remove('done');
+  // reset step bar
+  document.getElementById('sp2').classList.add('active');document.getElementById('sp2').classList.remove('done');
+  document.getElementById('sp3').classList.remove('active');document.getElementById('spline3').classList.remove('done');
   document.getElementById('sp2c').textContent='2';
 }
 
 // ===================== OWNER =====================
 function setupOwner(){
-  ownerQs=Object.values(selDom);curQ=0;validated={};
+  ownerQs=Object.values(selDom);ownerCurQ=0;
   document.getElementById('ps-t').textContent=ownerQs.length;
-  document.getElementById('q-panel-title').textContent=ownerQs.length+' domande assegnate dal Reviewer';
-  renderOwnerList();if(ownerQs.length>0)selectQ(0);
+  document.getElementById('owner-q-panel-title').textContent=ownerQs.length+' domande assegnate dal Reviewer';
+  renderOwnerList();if(ownerQs.length>0)ownerSelectQ(0);
   updateOwnerProg();
 }
 function renderOwnerList(){
-  const list=document.getElementById('q-list');list.innerHTML='';
+  const list=document.getElementById('owner-q-list');list.innerHTML='';
   ownerQs.forEach((d,i)=>{
-    const v=validated[i];const sel=i===curQ;
-    const cls=v?(v==='accepted'?'acc':v==='rejected'?'rej':'wrn'):'';
-    const num=v==='accepted'?'<i class="fa-solid fa-check"></i>':v==='rejected'?'<i class="fa-solid fa-xmark"></i>':v==='warning'?'~':i+1;
-    const badge=v==='accepted'?'✅ Conforme':v==='rejected'?'❌ Non conforme':v==='warning'?'⚠️ Parziale':d.id;
+    const ans=ownerAnswers[i];const hasAns=ans&&(ans.answer||ans.cmmi);
+    const sel=i===ownerCurQ;
     const li=document.createElement('li');
-    li.className=`q-it${sel?' sel':''}${v?' ans '+cls:''}`;
-    li.onclick=()=>selectQ(i);
-    li.innerHTML=`<div class="q-num">${num}</div><div class="q-ib"><div class="q-itxt">${d.domanda.length>75?d.domanda.slice(0,75)+'…':d.domanda}</div><div class="q-imeta"><span class="q-iid">${d.area}</span><span class="q-ibadge">${badge}</span></div></div>`;
+    li.className=`q-it${sel?' sel':''}${hasAns?' ans':''}`;
+    li.onclick=()=>ownerSelectQ(i);
+    const badge=hasAns?'✏️ Compilata':d.id;
+    const numCont=hasAns?'<i class="fa-solid fa-check"></i>':i+1;
+    li.innerHTML=`<div class="q-num">${numCont}</div><div class="q-ib"><div class="q-itxt">${d.domanda.length>75?d.domanda.slice(0,75)+'…':d.domanda}</div><div class="q-imeta"><span class="q-iid">${d.area}</span><span class="q-ibadge">${badge}</span></div></div>`;
     list.appendChild(li);
   });
-  const done=Object.values(validated).filter(Boolean).length;
-  document.getElementById('complete-bar').style.display=done>=Math.min(5,ownerQs.length)?'flex':'none';
 }
-function selectQ(idx){
-  if(ownerQs[curQ])saveEdits();
-  curQ=idx;const d=ownerQs[idx];if(!d)return;
+function ownerSelectQ(idx){
+  if(ownerQs[ownerCurQ])ownerSaveEdits();
+  ownerCurQ=idx;const d=ownerQs[idx];if(!d)return;
   const st=ownerAnswers[idx]||{};
-  document.getElementById('a-qid').textContent=d.id+' · '+d.area;
-  document.getElementById('a-qtxt').textContent=d.domanda;
+  document.getElementById('owner-a-qid').textContent=d.id+' · '+d.area;
+  document.getElementById('owner-a-qtxt').textContent=d.domanda;
   document.getElementById('cmmi-qid').textContent=d.id;
   document.getElementById('cmmi-qtxt').textContent=d.domanda;
-  document.getElementById('a-ev').value=st.answer||'';
+  document.getElementById('owner-a-ev').value=st.answer||'';
   document.querySelectorAll('.cmmi-r').forEach(b=>b.classList.toggle('on',b.getAttribute('data-v')===(st.cmmi||'')));
-  resetPdfZ();
-  if(uploadedFiles[idx]){const f=uploadedFiles[idx];showPdfFile(f.name,f.size);}
-  document.getElementById('btn-prev').disabled=idx===0;
-  document.getElementById('btn-next').disabled=idx===ownerQs.length-1;
-  const btnAI = document.getElementById('btn-val-ai');
-  if (validated[idx]) {
-    btnAI.disabled = true;
-    btnAI.innerHTML = '<i class="fa-solid fa-lock"></i> Rivalida AI';
-  } else {
-    btnAI.disabled = false;
-    btnAI.innerHTML = '<i class="fa-solid fa-robot"></i> Avvia Validazione AI';
-  }
-  document.getElementById('btn-val-aud').disabled=false;
-  if(validated[idx]){
-    const ans=MOCK_ANS[d.id]||getMockAns();
-    showResult(ans.status,ans.score,ans.abs,ans.fbs);
-  }else{document.getElementById('ai-vp').className='ai-vp hidden';}
+  ownerResetPdfZ();
+  if(uploadedFiles[idx]){const f=uploadedFiles[idx];ownerShowPdfFile(f.name,f.size);}
+  document.getElementById('owner-btn-prev').disabled=idx===0;
+  document.getElementById('owner-btn-next').disabled=idx===ownerQs.length-1;
   renderOwnerList();
 }
-function saveEdits(){
-  if(!ownerQs[curQ])return;
-  if(!ownerAnswers[curQ])ownerAnswers[curQ]={};
-  ownerAnswers[curQ].answer=document.getElementById('a-ev').value;
+function ownerSaveEdits(){
+  if(!ownerQs[ownerCurQ])return;
+  if(!ownerAnswers[ownerCurQ])ownerAnswers[ownerCurQ]={};
+  ownerAnswers[ownerCurQ].answer=document.getElementById('owner-a-ev').value;
 }
 function setCmmi(v,el){
-  if(!ownerAnswers[curQ])ownerAnswers[curQ]={};
-  ownerAnswers[curQ].cmmi=v;
+  if(!ownerAnswers[ownerCurQ])ownerAnswers[ownerCurQ]={};
+  ownerAnswers[ownerCurQ].cmmi=v;
   document.querySelectorAll('.cmmi-r').forEach(b=>b.classList.remove('on'));
   el.classList.add('on');
+  updateOwnerProg();renderOwnerList();
 }
-function navQ(d){saveEdits();selectQ(Math.max(0,Math.min(ownerQs.length-1,curQ+d)));}
+function ownerNavQ(d){ownerSaveEdits();ownerSelectQ(Math.max(0,Math.min(ownerQs.length-1,ownerCurQ+d)));}
+function updateOwnerProg(){
+  const done=Object.values(ownerAnswers).filter(a=>a&&(a.answer||a.cmmi)).length;
+  const pct=ownerQs.length>0?Math.round(done/ownerQs.length*100):0;
+  document.getElementById('ps-a').textContent=done;
+  document.getElementById('ps-pct').textContent=pct+'%';
+  document.getElementById('ps-pf').style.width=pct+'%';
+}
+function ownerTrigPdf(){document.getElementById('owner-pdf-inp').click();}
+function ownerHandleFile(e){const f=e.target.files[0];if(!f)return;uploadedFiles[ownerCurQ]=f;ownerShowPdfFile(f.name,f.size);}
+function ownerShowPdfFile(name,size){
+  const z=document.getElementById('owner-pdf-z');z.classList.add('done');
+  document.getElementById('owner-pdf-ic').innerHTML='<i class="fa-solid fa-circle-check"></i>';
+  document.getElementById('owner-pdf-nm').style.display='none';document.getElementById('owner-pdf-sb').style.display='none';
+  document.getElementById('owner-pdf-fi').style.display='flex';
+  document.getElementById('owner-pdf-fn').textContent=name;
+  const kb=size/1024;document.getElementById('owner-pdf-fs').textContent=kb>1024?(kb/1024).toFixed(1)+' MB':Math.round(kb)+' KB';
+  document.getElementById('owner-pdf-rm').style.display='flex';
+}
+function ownerResetPdfZ(){
+  document.getElementById('owner-pdf-z').classList.remove('done');
+  document.getElementById('owner-pdf-ic').innerHTML='<i class="fa-solid fa-cloud-arrow-up"></i>';
+  document.getElementById('owner-pdf-nm').style.display='';document.getElementById('owner-pdf-sb').style.display='';
+  document.getElementById('owner-pdf-fi').style.display='none';document.getElementById('owner-pdf-rm').style.display='none';
+  document.getElementById('owner-pdf-inp').value='';
+}
+function ownerRemoveFile(e){e.stopPropagation();delete uploadedFiles[ownerCurQ];ownerResetPdfZ();}
 
-function trigPdf(){document.getElementById('pdf-inp').click();}
-function handleFile(e){const f=e.target.files[0];if(!f)return;uploadedFiles[curQ]=f;showPdfFile(f.name,f.size);}
-function showPdfFile(name,size){
-  const z=document.getElementById('pdf-z');z.classList.add('done');
-  document.getElementById('pdf-ic').innerHTML='<i class="fa-solid fa-circle-check"></i>';
-  document.getElementById('pdf-nm').style.display='none';document.getElementById('pdf-sb').style.display='none';
-  document.getElementById('pdf-fi').style.display='flex';
-  document.getElementById('pdf-fn').textContent=name;
-  const kb=size/1024;document.getElementById('pdf-fs').textContent=kb>1024?(kb/1024).toFixed(1)+' MB':Math.round(kb)+' KB';
-  document.getElementById('pdf-rm').style.display='flex';
+// ===================== GOTO AUDITOR =====================
+function goToAuditor(){
+  ownerSaveEdits();
+  document.getElementById('step-owner').style.display='none';
+  document.getElementById('step-auditor').style.display='block';
+  document.getElementById('ph-title').textContent='Validazione Auditor — NIS2';
+  document.getElementById('info-fase').textContent='Validazione';
+  updateStepBar(3);
+  document.getElementById('tb-av').textContent='SV';
+  document.getElementById('tb-uname').textContent='Silvia Verdi';
+  document.getElementById('tb-urole').textContent='Auditor';
+  setupAuditor();
 }
-function resetPdfZ(){
-  document.getElementById('pdf-z').classList.remove('done');
-  document.getElementById('pdf-ic').innerHTML='<i class="fa-solid fa-cloud-arrow-up"></i>';
-  document.getElementById('pdf-nm').style.display='';document.getElementById('pdf-sb').style.display='';
-  document.getElementById('pdf-fi').style.display='none';document.getElementById('pdf-rm').style.display='none';
-  document.getElementById('pdf-inp').value='';
+function backToOwner(){
+  document.getElementById('step-auditor').style.display='none';
+  document.getElementById('step-owner').style.display='block';
+  document.getElementById('ph-title').textContent='Compilazione Questionario — NIS2';
+  document.getElementById('info-fase').textContent='Assessment';
+  document.getElementById('tb-av').textContent='PB';
+  document.getElementById('tb-uname').textContent='Paolo Bianchi';
+  document.getElementById('tb-urole').textContent='Owner';
+  // reset step 3
+  document.getElementById('sp3').classList.remove('done');document.getElementById('sp3').classList.add('active');
+  document.getElementById('sp4').classList.remove('active');document.getElementById('spline4').classList.remove('done');
+  document.getElementById('sp3c').textContent='3';
 }
-function removeFile(e){e.stopPropagation();delete uploadedFiles[curQ];resetPdfZ();}
 
-// ===================== VALIDATE =====================
+// ===================== AUDITOR =====================
+function setupAuditor(){
+  auditorCurQ=0;
+  document.getElementById('aud-ps-t').textContent=ownerQs.length;
+  document.getElementById('aud-q-panel-title').textContent=ownerQs.length+' domande da validare';
+  renderAuditorList();if(ownerQs.length>0)auditorSelectQ(0);
+  updateAuditorProg();
+}
+function renderAuditorList(){
+  const list=document.getElementById('aud-q-list');list.innerHTML='';
+  ownerQs.forEach((d,i)=>{
+    const v=auditorValidations[i];const sel=i===auditorCurQ;
+    let vCls='';let numCont=i+1;let badge=d.id;
+    if(v){
+      vCls=v.status==='accepted'?' val-acc':v.status==='warning'?' val-wrn':' val-rej';
+      numCont=v.status==='accepted'?'<i class="fa-solid fa-check"></i>':v.status==='rejected'?'<i class="fa-solid fa-xmark"></i>':'~';
+      badge=v.status==='accepted'?'✅ Conforme':v.status==='rejected'?'❌ Non conf.':'⚠️ Parziale';
+    }
+    const li=document.createElement('li');
+    li.className=`q-it${sel?' sel':''}${vCls}`;
+    li.onclick=()=>auditorSelectQ(i);
+    li.innerHTML=`<div class="q-num">${numCont}</div><div class="q-ib"><div class="q-itxt">${d.domanda.length>75?d.domanda.slice(0,75)+'…':d.domanda}</div><div class="q-imeta"><span class="q-iid">${d.area}</span><span class="q-ibadge">${badge}</span></div></div>`;
+    list.appendChild(li);
+  });
+}
+function auditorSelectQ(idx){
+  auditorCurQ=idx;const d=ownerQs[idx];if(!d)return;
+  const ownerAns=ownerAnswers[idx]||{};
+  const v=auditorValidations[idx];
+  // Update header
+  document.getElementById('aud-a-qid').textContent=d.id+' · '+d.area;
+  document.getElementById('aud-a-qtxt').textContent=d.domanda;
+  // Update owner answer view
+  document.getElementById('oav-title').textContent=d.domanda;
+  const cmmiVal=ownerAns.cmmi||'—';
+  document.getElementById('oav-cmmi').textContent=cmmiVal;
+  const ansText=ownerAns.answer||'';
+  document.getElementById('oav-ans-txt').textContent=ansText||'Nessuna evidenza fornita dall\'Owner.';
+  // File
+  const fw=document.getElementById('oav-file-wrap');
+  if(uploadedFiles[idx]){
+    const f=uploadedFiles[idx];const kb=f.size/1024;
+    fw.innerHTML=`<div class="oav-file"><div class="oav-file-ic"><i class="fa-solid fa-file"></i></div><div><div class="oav-file-nm">${f.name}</div><div class="oav-file-sz">${kb>1024?(kb/1024).toFixed(1)+' MB':Math.round(kb)+' KB'}</div></div></div>`;
+  } else {
+    fw.innerHTML='<div class="oav-no-file"><i class="fa-solid fa-file-slash"></i> Nessun documento allegato dall\'Owner</div>';
+  }
+  // Nav
+  document.getElementById('aud-btn-prev').disabled=idx===0;
+  document.getElementById('aud-btn-next').disabled=idx===ownerQs.length-1;
+  // AI button
+  const aiBtn=document.getElementById('aud-btn-val-ai');
+  if(v&&v.source==='ai'){
+    aiBtn.disabled=true;aiBtn.innerHTML='<i class="fa-solid fa-lock"></i> AI Validazione completata';
+  } else {
+    aiBtn.disabled=false;aiBtn.innerHTML='<i class="fa-solid fa-robot"></i> Avvia Validazione AI';
+  }
+  // Manual val
+  manValCurChoice=null;
+  document.getElementById('mvr-acc').className='mvr';
+  document.getElementById('mvr-wrn').className='mvr';
+  document.getElementById('mvr-rej').className='mvr';
+  document.getElementById('man-val-note').value='';
+  document.getElementById('man-val-save').classList.remove('on');
+  if(v&&v.source==='manual'){
+    const cls=v.status==='accepted'?'on-acc':v.status==='warning'?'on-wrn':'on-rej';
+    const mvrId=v.status==='accepted'?'mvr-acc':v.status==='warning'?'mvr-wrn':'mvr-rej';
+    document.getElementById(mvrId).className='mvr '+cls;
+    document.getElementById('man-val-note').value=v.note||'';
+    manValCurChoice=v.status;
+    document.getElementById('man-val-save').classList.add('on');
+  }
+  // AI panel
+  if(v&&v.source==='ai'){
+    const aiAns=MOCK_ANS[d.id]||v._aiData||getMockAns();
+    showAIResult(aiAns.status,aiAns.score,aiAns.abs,aiAns.fbs);
+  } else {
+    document.getElementById('ai-vp').className='ai-vp hidden';
+    document.getElementById('ai-vp').innerHTML='';
+  }
+  renderAuditorList();
+  updateAuditorProg();
+}
+function audNavQ(d){auditorSelectQ(Math.max(0,Math.min(ownerQs.length-1,auditorCurQ+d)));}
+function updateAuditorProg(){
+  const vals=Object.values(auditorValidations);
+  const done=vals.length;
+  const acc=vals.filter(v=>v.status==='accepted').length;
+  const rej=vals.filter(v=>v.status==='rejected').length;
+  const pct=ownerQs.length>0?Math.round(done/ownerQs.length*100):0;
+  document.getElementById('aud-ps-v').textContent=done;
+  document.getElementById('aud-ps-acc').textContent=acc;
+  document.getElementById('aud-ps-rej').textContent=rej;
+  document.getElementById('aud-ps-pct').textContent=pct+'%';
+  document.getElementById('aud-ps-pf').style.width=pct+'%';
+  const cb=document.getElementById('aud-complete-bar');
+  if(done>=Math.min(3,ownerQs.length)){
+    cb.style.display='flex';
+    document.getElementById('aud-complete-txt').textContent=done;
+  } else {
+    cb.style.display='none';
+  }
+}
+
+// ===================== AI VALIDATION (auditor) =====================
 function doValAI(){
-  const d=ownerQs[curQ];if(!d)return;
-  saveEdits();
-  const btn=document.getElementById('btn-val-ai');btn.disabled=true;
-  btn.innerHTML='<i class="fa-solid fa-circle-notch fa-spin"></i> Analisi in corso...';
-  startThinking();
+  const d=ownerQs[auditorCurQ];if(!d)return;
+  const btn=document.getElementById('aud-btn-val-ai');
+  btn.disabled=true;btn.innerHTML='<i class="fa-solid fa-circle-notch fa-spin"></i> Analisi in corso...';
+  showAIThinking();
   setTimeout(()=>{
-  const ans=MOCK_ANS[d.id]||getMockAns();
-  showResult(ans.status,ans.score,ans.abs,ans.fbs);
-
-  validated[curQ] = true; // 👈 cambia: solo flag booleano
-
-  updateOwnerProg();
-  renderOwnerList();
-
-  btn.disabled = true; // 👈 blocca definitivamente
-  btn.innerHTML = '<i class="fa-solid fa-lock"></i> Rivalida AI';
+    const aiAns=MOCK_ANS[d.id]||getMockAns();
+    showAIResult(aiAns.status,aiAns.score,aiAns.abs,aiAns.fbs);
+    auditorValidations[auditorCurQ]={status:aiAns.status,source:'ai',_aiData:aiAns};
+    btn.disabled=true;btn.innerHTML='<i class="fa-solid fa-lock"></i> AI Validazione completata';
+    updateAuditorProg();renderAuditorList();
   },1400+Math.random()*700);
 }
-function doValAud(){
-  const d=ownerQs[curQ];if(!d)return;
-  saveEdits();
-  const btn=document.getElementById('btn-val-aud');btn.disabled=true;
-  btn.innerHTML='<i class="fa-solid fa-circle-notch fa-spin"></i> Verifica Auditor...';
-  startThinking();
-  setTimeout(()=>{
-    const ans=MOCK_ANS[d.id]||getMockAns();
-    showResult(ans.status,ans.score,ans.abs,ans.fbs);
-    validated[curQ]=ans.status;
-    updateOwnerProg();renderOwnerList();
-    btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-user-shield"></i> Validazione Auditor';
-  },1400+Math.random()*700);
-}
-function startThinking(){
+function showAIThinking(){
   const vp=document.getElementById('ai-vp');vp.className='ai-vp thinking';
-  document.getElementById('ai-hd').className='ai-hd thinking';
-  document.getElementById('ai-av').textContent='🤖';
-  document.getElementById('ai-st').textContent='ANALISI IN CORSO';
-  document.getElementById('ai-ti').textContent="L'AI sta analizzando risposta e documenti allegati...";
-  document.getElementById('ai-chips').innerHTML='<div class="ai-sc thinking"><i class="fa-solid fa-circle-notch fa-spin"></i> Processing</div>';
-  document.getElementById('ai-body').innerHTML='<div class="typing-dots"><span></span><span></span><span></span></div>';
+  vp.innerHTML=`<div class="ai-hd thinking"><div class="ai-av">🤖</div><div class="ai-meta"><div class="ai-st">ANALISI IN CORSO</div><div class="ai-ti">L'AI sta analizzando risposta e documenti allegati...</div></div><div class="ai-chips"><div class="ai-sc thinking"><i class="fa-solid fa-circle-notch fa-spin"></i> Processing</div></div></div><div class="ai-body"><div class="typing-dots"><span></span><span></span><span></span></div></div>`;
 }
-function showResult(status,score,abs,fbs){
+function showAIResult(status,score,abs,fbs){
   const cfg={
     accepted:{emoji:'✅',st:'DOCUMENTO ACCETTATO',ti:'Risposta conforme ai requisiti NIS2.',ic:'fa-circle-check'},
     warning:{emoji:'⚠️',st:'CONFORMITÀ PARZIALE',ti:'Risposta parzialmente adeguata — Integrazioni raccomandate.',ic:'fa-triangle-exclamation'},
     rejected:{emoji:'❌',st:'DOCUMENTO NON ACCETTATO',ti:'Risposta non conforme — Azione correttiva obbligatoria.',ic:'fa-circle-xmark'}
   };
   const c=cfg[status];
-  document.getElementById('ai-vp').className='ai-vp '+status;
-  document.getElementById('ai-hd').className='ai-hd '+status;
-  document.getElementById('ai-av').textContent=c.emoji;
-  document.getElementById('ai-st').textContent=c.st;
-  document.getElementById('ai-ti').textContent=c.ti;
-  document.getElementById('ai-chips').innerHTML=`<div class="ai-sc ${status}"><i class="fa-solid ${c.ic}"></i> Livello: ${score}/4</div>`;
+  const vp=document.getElementById('ai-vp');vp.className='ai-vp '+status;
   const confLabels=['Conforme','Parz. Conforme','Non Conforme','Critico'];
   const needles=[12,37,63,88];
   const ticksH=confLabels.map((l,i)=>`<div class="conf-tick${score===i+1?' active':''}"><span class="conf-tick-n">${i+1}</span><span class="conf-tick-l">${l}</span></div>`).join('');
-  const fbH=fbs.map((f,i)=>`<li class="fb-it ${f.t}" style="animation-delay:${i*.1}s"><span class="fb-ico">${f.t==='ok'?'✅':f.t==='ko'?'❌':'⚠️'}</span><div class="fb-txt"><span class="fb-dim">${f.d}</span>${f.m}</div></li>`).join('');
-  document.getElementById('ai-body').innerHTML=`
-    <div class="ai-abstract"><div class="ai-abs-lbl"><i class="fa-solid fa-robot"></i> Abstract AI</div><div class="ai-abs-txt">${abs}</div></div>
-    <ul class="fb-list">${fbH}</ul>
-    <div class="conf-wrap">
-      <div class="conf-hdr"><div class="conf-lbl"><i class="fa-solid fa-shield-halved"></i> Indice di Conformità NIS2</div><div class="conf-val">${score} — ${confLabels[score-1]}</div></div>
-      <div class="conf-track"><div class="conf-needle" style="left:${needles[score-1]}%"></div></div>
-      <div class="conf-ticks">${ticksH}</div>
+  const fbH=fbs.map((f,fi)=>`<li class="fb-it ${f.t}" style="animation-delay:${fi*.1}s"><span class="fb-ico">${f.t==='ok'?'✅':f.t==='ko'?'❌':'⚠️'}</span><div class="fb-txt"><span class="fb-dim">${f.d}</span>${f.m}</div></li>`).join('');
+  vp.innerHTML=`
+    <div class="ai-hd ${status}">
+      <div class="ai-av">${c.emoji}</div>
+      <div class="ai-meta"><div class="ai-st">${c.st}</div><div class="ai-ti">${c.ti}</div></div>
+      <div class="ai-chips"><div class="ai-sc ${status}"><i class="fa-solid ${c.ic}"></i> Livello: ${score}/4</div></div>
     </div>
-    <div class="aud-block">
-      <div class="aud-lbl"><i class="fa-solid fa-user-shield"></i> Override Auditor</div>
-      <div class="aud-radios">
-        <button class="aud-r" onclick="setAud('accepted',this)">✅ Conforme</button>
-        <button class="aud-r" onclick="setAud('warning',this)">⚠️ Parziale</button>
-        <button class="aud-r" onclick="setAud('rejected',this)">❌ Non conforme</button>
+    <div class="ai-body">
+      <div class="ai-abstract"><div class="ai-abs-lbl"><i class="fa-solid fa-robot"></i> Abstract AI</div><div class="ai-abs-txt">${abs}</div></div>
+      <ul class="fb-list">${fbH}</ul>
+      <div class="conf-wrap">
+        <div class="conf-hdr"><div class="conf-lbl"><i class="fa-solid fa-shield-halved"></i> Indice di Conformità NIS2</div><div class="conf-val">${score} — ${confLabels[score-1]}</div></div>
+        <div class="conf-track"><div class="conf-needle" style="left:${needles[score-1]}%"></div></div>
+        <div class="conf-ticks">${ticksH}</div>
       </div>
-      <textarea class="aud-note" placeholder="Note Auditor: osservazioni, richiesta integrazioni, motivazione override..."></textarea>
-    </div>
-    <div class="ai-acts">
-      <button class="btn-a pr" onclick="navQ(1)"><i class="fa-solid fa-arrow-right"></i> Salva e prossima</button>
-      <button class="btn-a sc" onclick="navQ(-1)"><i class="fa-solid fa-arrow-left"></i> Precedente</button>
     </div>`;
 }
-function setAud(v,el){document.querySelectorAll('.aud-r').forEach(b=>b.className='aud-r');el.classList.add(v==='accepted'?'on-a':v==='rejected'?'on-r':'on-w');}
-function updateOwnerProg(){
-  const done=Object.values(validated).filter(Boolean);
-  const acc=done.filter(s=>s==='accepted').length;
-  const pct=ownerQs.length>0?Math.round(done.length/ownerQs.length*100):0;
-  document.getElementById('ps-a').textContent=done.length;
-  document.getElementById('ps-v').textContent=acc;
-  document.getElementById('ps-pct').textContent=pct+'%';
-  document.getElementById('ps-pf').style.width=pct+'%';
+
+// ===================== MANUAL VALIDATION =====================
+function setManVal(v,el){
+  manValCurChoice=v;
+  document.getElementById('mvr-acc').className='mvr';
+  document.getElementById('mvr-wrn').className='mvr';
+  document.getElementById('mvr-rej').className='mvr';
+  const cls=v==='accepted'?'on-acc':v==='warning'?'on-wrn':'on-rej';
+  el.className='mvr '+cls;
+  document.getElementById('man-val-save').classList.add('on');
+}
+function saveManVal(){
+  if(!manValCurChoice)return;
+  const note=document.getElementById('man-val-note').value;
+  auditorValidations[auditorCurQ]={status:manValCurChoice,note,source:'manual'};
+  // disable AI since manual override applied
+  const aiBtn=document.getElementById('aud-btn-val-ai');
+  aiBtn.disabled=true;aiBtn.innerHTML='<i class="fa-solid fa-lock"></i> Override manuale applicato';
+  // flash save button
+  const sb=document.getElementById('man-val-save');
+  sb.innerHTML='<i class="fa-solid fa-check"></i> Salvata!';
+  setTimeout(()=>{sb.innerHTML='<i class="fa-solid fa-floppy-disk"></i> Salva validazione manuale';},1500);
+  updateAuditorProg();renderAuditorList();
 }
 
 // ===================== REPORT =====================
 function showReport(){
-  document.getElementById('step2').style.display='none';
-  document.getElementById('step3').style.display='block';
+  document.getElementById('step-auditor').style.display='none';
+  document.getElementById('step-report').style.display='block';
   document.getElementById('ph-title').textContent='Relazione NIS2 — 3AInformatica S.r.l.';
   document.getElementById('info-fase').textContent='Post-Assessment';
-  updateStepBar(3);
+  updateStepBar(4);
   renderReport();
 }
-function showStep2(){
-  document.getElementById('step3').style.display='none';
-  document.getElementById('step2').style.display='block';
-  document.getElementById('ph-title').textContent='Compilazione Questionario — NIS2';
-}
 function renderReport(){
-  const done=Object.values(validated).filter(Boolean);
-  const acc=done.filter(s=>s==='accepted').length;
-  const wrn=done.filter(s=>s==='warning').length;
-  const rej=done.filter(s=>s==='rejected').length;
+  const vals=Object.values(auditorValidations);
+  const done=vals.length;
+  const acc=vals.filter(v=>v.status==='accepted').length;
+  const wrn=vals.filter(v=>v.status==='warning').length;
+  const rej=vals.filter(v=>v.status==='rejected').length;
   const tot=ownerQs.length;
   const areas=Object.keys(NIS2_DATA);
   const areaScores=areas.map(a=>{
     const adoms=ownerQs.filter(d=>d.area===a);
-    const validIdx=adoms.map(d=>ownerQs.indexOf(d)).filter(i=>validated[i]);
-    const accCount=validIdx.filter(i=>validated[i]==='accepted').length;
+    const validIdx=adoms.map(d=>ownerQs.indexOf(d)).filter(i=>auditorValidations[i]);
+    const accCount=validIdx.filter(i=>auditorValidations[i]&&auditorValidations[i].status==='accepted').length;
     const score=adoms.length>0?Math.round((accCount/Math.max(adoms.length,1))*100):Math.round(Math.random()*40+40);
     return{area:a,score:isNaN(score)?Math.round(Math.random()*40+40):score};
   });
-  document.getElementById('step3').innerHTML=`
+  document.getElementById('step-report').innerHTML=`
 <div class="report-wrap">
   <div class="report-hero">
     <div>
@@ -1734,12 +1834,12 @@ function renderReport(){
     <div class="rep-card">
       <h4><i class="fa-solid fa-chart-pie"></i> Distribuzione Risposte</h4>
       <div class="donut-wrap">
-        ${buildDonut(acc,wrn,rej,done.length,tot)}
+        ${buildDonut(acc,wrn,rej,done,tot)}
         <div class="donut-legend">
-          <div class="dl-item"><div class="dl-dot" style="background:#1D9E75"></div><div class="dl-lbl">Conformi</div><div class="dl-val">${acc}</div><div class="dl-pct">${done.length>0?Math.round(acc/done.length*100):0}%</div></div>
-          <div class="dl-item"><div class="dl-dot" style="background:#D4A017"></div><div class="dl-lbl">Parziali</div><div class="dl-val">${wrn}</div><div class="dl-pct">${done.length>0?Math.round(wrn/done.length*100):0}%</div></div>
-          <div class="dl-item"><div class="dl-dot" style="background:#D85A30"></div><div class="dl-lbl">Non conformi</div><div class="dl-val">${rej}</div><div class="dl-pct">${done.length>0?Math.round(rej/done.length*100):0}%</div></div>
-          <div class="dl-item"><div class="dl-dot" style="background:#7b8ab8"></div><div class="dl-lbl">Non risposte</div><div class="dl-val">${tot-done.length}</div><div class="dl-pct">${tot>0?Math.round((tot-done.length)/tot*100):0}%</div></div>
+          <div class="dl-item"><div class="dl-dot" style="background:#1D9E75"></div><div class="dl-lbl">Conformi</div><div class="dl-val">${acc}</div><div class="dl-pct">${done>0?Math.round(acc/done*100):0}%</div></div>
+          <div class="dl-item"><div class="dl-dot" style="background:#D4A017"></div><div class="dl-lbl">Parziali</div><div class="dl-val">${wrn}</div><div class="dl-pct">${done>0?Math.round(wrn/done*100):0}%</div></div>
+          <div class="dl-item"><div class="dl-dot" style="background:#D85A30"></div><div class="dl-lbl">Non conformi</div><div class="dl-val">${rej}</div><div class="dl-pct">${done>0?Math.round(rej/done*100):0}%</div></div>
+          <div class="dl-item"><div class="dl-dot" style="background:#7b8ab8"></div><div class="dl-lbl">Non validate</div><div class="dl-val">${tot-done}</div><div class="dl-pct">${tot>0?Math.round((tot-done)/tot*100):0}%</div></div>
         </div>
       </div>
     </div>
@@ -1776,56 +1876,39 @@ function renderReport(){
     <strong>3AuditFlow</strong> by 3A Informatica · Assessment Cybersecurity NIS2 Q2-2025 · Documento riservato<br>
     Generato il ${new Date().toLocaleDateString('it-IT')} alle ${new Date().toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'})} · © 2025 3AuditFlow
     <div style="margin-top:12px">
-      <button onclick="showStep2()" style="padding:9px 20px;border-radius:8px;border:1.5px solid var(--border);background:var(--surface);color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">
-        <i class="fa-solid fa-arrow-left"></i> Torna all'Assessment
+      <button onclick="backToAuditorFromReport()" style="padding:9px 20px;border-radius:8px;border:1.5px solid var(--border);background:var(--surface);color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">
+        <i class="fa-solid fa-arrow-left"></i> Torna alla Validazione
       </button>
     </div>
   </div>
 </div>`;
 }
+function backToAuditorFromReport(){
+  document.getElementById('step-report').style.display='none';
+  document.getElementById('step-auditor').style.display='block';
+  document.getElementById('ph-title').textContent='Validazione Auditor — NIS2';
+  document.getElementById('info-fase').textContent='Validazione';
+}
 
 function buildDonut(acc,wrn,rej,done,tot){
   const r=80,cx=100,cy=100,stroke=22;const circ=2*Math.PI*r;
   const vals=[
-    {v:done>0?acc/done:0,c:'#1D9E75'},
-    {v:done>0?wrn/done:0,c:'#D4A017'},
-    {v:done>0?rej/done:0,c:'#D85A30'},
-    {v:done>0?(done-acc-wrn-rej)/done:0,c:'#7b8ab8'},
+    {v:done>0?acc/done:0,c:'#1D9E75'},{v:done>0?wrn/done:0,c:'#D4A017'},
+    {v:done>0?rej/done:0,c:'#D85A30'},{v:done>0?(done-acc-wrn-rej)/done:0,c:'#7b8ab8'},
     {v:tot>0?(tot-done)/tot:0,c:'#e2e5ee'},
   ];
   let offset=0;
-  const segs=vals.map(({v,c})=>{
-    const len=v*circ;
-    const seg=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${c}" stroke-width="${stroke}" stroke-dasharray="${len} ${circ-len}" stroke-dashoffset="${-offset*circ}" transform="rotate(-90 ${cx} ${cy})" stroke-linecap="butt"/>`;
-    offset+=v;return seg;
-  }).join('');
+  const segs=vals.map(({v,c})=>{const len=v*circ;const seg=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${c}" stroke-width="${stroke}" stroke-dasharray="${len} ${circ-len}" stroke-dashoffset="${-offset*circ}" transform="rotate(-90 ${cx} ${cy})" stroke-linecap="butt"/>`;offset+=v;return seg;}).join('');
   const pct=tot>0?Math.round(done/tot*100):0;
-  return`<svg class="donut-svg" viewBox="0 0 200 200" width="160" height="160">
-    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#f0f2f7" stroke-width="${stroke}"/>
-    ${segs}
-    <text x="${cx}" y="${cy-8}" class="donut-center-text" font-size="20" font-weight="800" fill="#1a2a6c">${pct}%</text>
-    <text x="${cx}" y="${cy+10}" class="donut-center-text" font-size="10" fill="#7b8ab8">completato</text>
-  </svg>`;
+  return`<svg class="donut-svg" viewBox="0 0 200 200" width="160" height="160"><circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#f0f2f7" stroke-width="${stroke}"/>${segs}<text x="${cx}" y="${cy-8}" class="donut-center-text" font-size="20" font-weight="800" fill="#1a2a6c">${pct}%</text><text x="${cx}" y="${cy+10}" class="donut-center-text" font-size="10" fill="#7b8ab8">completato</text></svg>`;
 }
-
 function buildRadar(areaScores){
-  const n=areaScores.length,cx=130,cy=120,r=90;
-  const step=2*Math.PI/n;
-  const pts=areaScores.map(({score},i)=>{
-    const ang=-Math.PI/2+i*step;const dist=score/100*r;
-    return{x:cx+dist*Math.cos(ang),y:cy+dist*Math.sin(ang)};
-  });
+  const n=areaScores.length,cx=130,cy=120,r=90;const step=2*Math.PI/n;
+  const pts=areaScores.map(({score},i)=>{const ang=-Math.PI/2+i*step;const dist=score/100*r;return{x:cx+dist*Math.cos(ang),y:cy+dist*Math.sin(ang)};});
   const polyPts=pts.map(p=>`${p.x},${p.y}`).join(' ');
-  const gridLines=[0.25,0.5,0.75,1].map(pct=>{
-    const gPts=areaScores.map((_,i)=>{const ang=-Math.PI/2+i*step;const d=pct*r;return`${cx+d*Math.cos(ang)},${cy+d*Math.sin(ang)}`;}).join(' ');
-    return`<polygon points="${gPts}" fill="none" stroke="#e2e5ee" stroke-width="1"/>`;
-  }).join('');
+  const gridLines=[0.25,0.5,0.75,1].map(pct=>{const gPts=areaScores.map((_,i)=>{const ang=-Math.PI/2+i*step;const d=pct*r;return`${cx+d*Math.cos(ang)},${cy+d*Math.sin(ang)}`;}).join(' ');return`<polygon points="${gPts}" fill="none" stroke="#e2e5ee" stroke-width="1"/>`;}).join('');
   const spokes=areaScores.map((_,i)=>{const ang=-Math.PI/2+i*step;return`<line x1="${cx}" y1="${cy}" x2="${cx+r*Math.cos(ang)}" y2="${cy+r*Math.sin(ang)}" stroke="#e2e5ee" stroke-width="1"/>`;}).join('');
-  const labels=areaScores.map(({area,score},i)=>{
-    const ang=-Math.PI/2+i*step;const d=r+18;const lx=cx+d*Math.cos(ang);const ly=cy+d*Math.sin(ang);
-    const cfg=AREA_CFG[area]||{col:'#666'};
-    return`<text x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="middle" font-size="8" font-weight="700" fill="${cfg.col}">${cfg.icon} ${area}</text>`;
-  }).join('');
+  const labels=areaScores.map(({area,score},i)=>{const ang=-Math.PI/2+i*step;const d=r+18;const lx=cx+d*Math.cos(ang);const ly=cy+d*Math.sin(ang);const cfg=AREA_CFG[area]||{col:'#666'};return`<text x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="middle" font-size="8" font-weight="700" fill="${cfg.col}">${cfg.icon} ${area}</text>`;}).join('');
   return`<svg viewBox="0 0 260 240" width="260" height="240">${gridLines}${spokes}<polygon points="${polyPts}" fill="rgba(0,198,255,.15)" stroke="#00c6ff" stroke-width="2"/>${pts.map(p=>`<circle cx="${p.x}" cy="${p.y}" r="4" fill="#00c6ff"/>`).join('')}${labels}</svg>`;
 }
 
