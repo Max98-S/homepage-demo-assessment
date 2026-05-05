@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -54,7 +55,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .tb-logo-text3{height:72px;filter:drop-shadow(0 0 15px rgba(167,167,167,.627));transition:filter .3s}
 .tb-logo-icon3{filter:drop-shadow(0 0 15px rgba(255,255,255,.3));transition:filter .3s;height:64px}
 .tb-spacer{flex:1}
-.tb-icons{display:flex;align-items:center;gap:6px}
+.tb-icons{display:flex;align-items:center;gap:16px}
 .tb-ic{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.7);font-size:14px;cursor:pointer;transition:all .2s;position:relative;flex-shrink:0}
 .tb-ic:hover{background:rgba(0,198,255,.2);border-color:rgba(0,198,255,.4);color:#00c6ff}
 .notif-dot{position:absolute;top:3px;right:3px;width:8px;height:8px;border-radius:50%;background:#ef4444;border:2px solid #060e1f}
@@ -631,9 +632,254 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .finding-title{font-size:12px;font-weight:700;color:var(--text)}
 .finding-desc{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.6}
 .report-footer{text-align:center;padding:20px;font-size:11px;color:var(--muted);border-top:1px solid var(--border);margin-top:8px}
+
+/* ===================== GUIDED TOUR — SPOTLIGHT SYSTEM ===================== */
+
+/* Dark overlay with cutout hole via box-shadow */
+#tour-overlay {
+  position: fixed; inset: 0; z-index: 10000;
+  pointer-events: none; display: none;
+}
+#tour-overlay.active { display: block; pointer-events: all; }
+
+/* The spotlight hole — a transparent box with massive box-shadow */
+#tour-spotlight {
+  position: fixed; z-index: 10001;
+  border-radius: 10px;
+  box-shadow: 0 0 0 9999px rgba(6,14,31,.82);
+  transition: top .38s cubic-bezier(.4,0,.2,1), left .38s cubic-bezier(.4,0,.2,1),
+              width .38s cubic-bezier(.4,0,.2,1), height .38s cubic-bezier(.4,0,.2,1);
+  pointer-events: none;
+  display: none;
+  outline: 2px solid rgba(0,198,255,.55);
+  outline-offset: 3px;
+}
+#tour-spotlight.active { display: block; }
+
+/* Pulse ring around spotlight */
+#tour-spotlight::after {
+  content: '';
+  position: absolute; inset: -8px;
+  border-radius: 14px;
+  border: 2px solid rgba(0,198,255,.35);
+  animation: tour-pulse 2s ease-in-out infinite;
+}
+@keyframes tour-pulse {
+  0%,100%{opacity:.4;transform:scale(1)}
+  50%{opacity:.9;transform:scale(1.015)}
+}
+
+/* SVG Arrow connector */
+#tour-arrow {
+  position: fixed; z-index: 10002; pointer-events: none;
+  display: none; overflow: visible;
+}
+#tour-arrow.active { display: block; }
+
+/* ---- TOUR CARD VARIANTS ---- */
+.tour-card {
+  position: fixed; z-index: 10003;
+  width: 340px; max-width: calc(100vw - 32px);
+  border-radius: 14px; overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.07);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: opacity .25s, transform .25s;
+  display: none;
+  animation: tour-card-in .3s cubic-bezier(.34,1.56,.64,1);
+}
+.tour-card.visible { display: block; }
+@keyframes tour-card-in {
+  from { opacity:0; transform: scale(.94) translateY(8px); }
+  to   { opacity:1; transform: scale(1)   translateY(0); }
+}
+
+/* Variant A — Dark panel (welcome / role intro) */
+.tour-card.var-dark {
+  background: linear-gradient(145deg, #0a1628 0%, #0d1f4e 100%);
+  border: 1px solid rgba(0,198,255,.25);
+}
+.tour-card.var-dark .tc-header {
+  padding: 18px 20px 0;
+  display: flex; align-items: center; gap: 10px;
+}
+.tour-card.var-dark .tc-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 11px; border-radius: 99px;
+  font-size: 10px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase;
+  background: rgba(0,198,255,.12); color: #00c6ff;
+  border: 1px solid rgba(0,198,255,.25);
+}
+.tour-card.var-dark .tc-badge-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: #00c6ff;
+  animation: tour-pulse-dot 1.6s ease-in-out infinite;
+}
+@keyframes tour-pulse-dot { 0%,100%{opacity:.5}50%{opacity:1;transform:scale(1.4)} }
+.tour-card.var-dark .tc-title {
+  padding: 12px 20px 6px;
+  font-size: 18px; font-weight: 800; color: #fff; line-height: 1.2;
+}
+.tour-card.var-dark .tc-body {
+  padding: 0 20px 16px;
+  font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.7;
+}
+.tour-card.var-dark .tc-body strong { color: #fff; font-weight: 700; }
+.tour-card.var-dark .tc-footer {
+  padding: 14px 20px; border-top: 1px solid rgba(255,255,255,.08);
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+}
+.tour-card.var-dark .tc-progress { display: flex; align-items: center; gap: 5px; }
+.tour-card.var-dark .tc-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.2); transition: background .2s; }
+.tour-card.var-dark .tc-dot.on { background: #00c6ff; }
+.tour-card.var-dark .tc-actions { display: flex; gap: 8px; }
+.tour-card.var-dark .tc-btn-skip {
+  padding: 9px 16px; border-radius: 8px; font-size: 12px; font-weight: 600;
+  background: rgba(255,255,255,.06); color: rgba(255,255,255,.5);
+  border: 1px solid rgba(255,255,255,.12); cursor: pointer; font-family: 'Plus Jakarta Sans',sans-serif;
+  transition: all .2s;
+}
+.tour-card.var-dark .tc-btn-skip:hover { color: rgba(255,255,255,.85); background: rgba(255,255,255,.1); }
+.tour-card.var-dark .tc-btn-next {
+  padding: 9px 20px; border-radius: 8px; font-size: 12px; font-weight: 700;
+  background: linear-gradient(135deg,#00c6ff,#1a2a6c); color: #fff;
+  border: none; cursor: pointer; font-family: 'Plus Jakarta Sans',sans-serif;
+  transition: all .2s; display: flex; align-items: center; gap: 6px;
+}
+.tour-card.var-dark .tc-btn-next:hover { transform: translateY(-1px); box-shadow: 0 6px 22px rgba(0,198,255,.4); }
+
+/* Variant B — White card (feature callout) */
+.tour-card.var-light {
+  background: #fff;
+  border: 1px solid var(--border);
+}
+.tour-card.var-light .tc-accent-bar {
+  height: 4px; background: linear-gradient(90deg,#00c6ff,#1a2a6c);
+}
+.tour-card.var-light .tc-icon-row {
+  padding: 16px 20px 0; display: flex; align-items: center; gap: 10px;
+}
+.tour-card.var-light .tc-icon-wrap {
+  width: 38px; height: 38px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.tour-card.var-light .tc-step-label {
+  font-size: 10px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase;
+  color: var(--muted);
+}
+.tour-card.var-light .tc-title {
+  padding: 10px 20px 4px; font-size: 16px; font-weight: 800; color: var(--text);
+}
+.tour-card.var-light .tc-body {
+  padding: 0 20px 14px; font-size: 13px; color: var(--muted); line-height: 1.7;
+}
+.tour-card.var-light .tc-body strong { color: var(--text); font-weight: 700; }
+.tour-card.var-light .tc-tip {
+  margin: 0 20px 14px; padding: 10px 13px; border-radius: 8px;
+  background: rgba(0,198,255,.06); border: 1px solid rgba(0,198,255,.18);
+  font-size: 12px; color: #00c6ff; display: flex; align-items: flex-start; gap: 7px;
+}
+.tour-card.var-light .tc-tip i { margin-top: 2px; flex-shrink: 0; }
+.tour-card.var-light .tc-footer {
+  padding: 12px 20px; border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.tour-card.var-light .tc-progress { display: flex; align-items: center; gap: 5px; }
+.tour-card.var-light .tc-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); transition: background .2s; }
+.tour-card.var-light .tc-dot.on { background: var(--accent); }
+.tour-card.var-light .tc-actions { display: flex; gap: 8px; }
+.tour-card.var-light .tc-btn-skip {
+  padding: 8px 14px; border-radius: 8px; font-size: 12px; font-weight: 600;
+  background: transparent; color: var(--muted); border: 1.5px solid var(--border);
+  cursor: pointer; font-family: 'Plus Jakarta Sans',sans-serif; transition: all .2s;
+}
+.tour-card.var-light .tc-btn-skip:hover { border-color: var(--accent); color: var(--accent); }
+.tour-card.var-light .tc-btn-next {
+  padding: 8px 18px; border-radius: 8px; font-size: 12px; font-weight: 700;
+  background: var(--grad); color: #fff; border: none;
+  cursor: pointer; font-family: 'Plus Jakarta Sans',sans-serif;
+  transition: all .2s; display: flex; align-items: center; gap: 6px;
+}
+.tour-card.var-light .tc-btn-next:hover { transform: translateY(-1px); }
+
+/* Variant C — Role transition card */
+.tour-card.var-role {
+  background: linear-gradient(145deg,#ffffff 0%,#f4f6fb 100%);
+  border: 2px solid transparent;
+}
+.tour-card.var-role .tc-role-banner {
+  padding: 20px 20px 14px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  text-align: center;
+}
+.tour-card.var-role .tc-role-avatar {
+  width: 56px; height: 56px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 800; color: #fff;
+  box-shadow: 0 6px 20px rgba(0,0,0,.2);
+}
+.tour-card.var-role .tc-role-name {
+  font-size: 17px; font-weight: 800; color: var(--text); margin-top: 2px;
+}
+.tour-card.var-role .tc-role-tag {
+  display: inline-flex; align-items: center; gap: 5px; padding: 4px 12px;
+  border-radius: 99px; font-size: 10px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase;
+}
+.tour-card.var-role .tc-body {
+  padding: 0 20px 14px; font-size: 13px; color: var(--muted); line-height: 1.7; text-align: center;
+}
+.tour-card.var-role .tc-body strong { color: var(--text); }
+.tour-card.var-role .tc-checklist {
+  margin: 0 20px 16px; display: flex; flex-direction: column; gap: 7px;
+}
+.tour-card.var-role .tc-check-item {
+  display: flex; align-items: center; gap: 9px; padding: 9px 12px;
+  border-radius: 8px; background: rgba(0,198,255,.05); border: 1px solid rgba(0,198,255,.12);
+  font-size: 12px; color: var(--text); font-weight: 500;
+}
+.tour-card.var-role .tc-check-item i { color: #00c6ff; width: 14px; text-align: center; flex-shrink: 0; }
+.tour-card.var-role .tc-footer {
+  padding: 12px 20px; border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.tour-card.var-role .tc-progress { display: flex; align-items: center; gap: 5px; }
+.tour-card.var-role .tc-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); transition: background .2s; }
+.tour-card.var-role .tc-dot.on { background: var(--accent); }
+.tour-card.var-role .tc-actions { display: flex; gap: 8px; }
+.tour-card.var-role .tc-btn-skip {
+  padding: 8px 14px; border-radius: 8px; font-size: 12px; font-weight: 600;
+  background: transparent; color: var(--muted); border: 1.5px solid var(--border);
+  cursor: pointer; font-family: 'Plus Jakarta Sans',sans-serif; transition: all .2s;
+}
+.tour-card.var-role .tc-btn-skip:hover { border-color: #e11d48; color: #e11d48; }
+.tour-card.var-role .tc-btn-next {
+  padding: 8px 18px; border-radius: 8px; font-size: 12px; font-weight: 700;
+  background: var(--grad); color: #fff; border: none;
+  cursor: pointer; font-family: 'Plus Jakarta Sans',sans-serif;
+  transition: all .2s; display: flex; align-items: center; gap: 6px;
+}
+.tour-card.var-role .tc-btn-next:hover { transform: translateY(-1px); }
+
 </style>
 </head>
 <body>
+
+<!-- TOUR OVERLAY (dark background with spotlight hole) -->
+<div id="tour-overlay"></div>
+<div id="tour-spotlight"></div>
+
+<!-- SVG Arrow connector -->
+<svg id="tour-arrow" width="200" height="200">
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="rgba(0,198,255,.9)"/>
+    </marker>
+  </defs>
+  <path id="tour-arrow-path" fill="none" stroke="rgba(0,198,255,.9)" stroke-width="2"
+        stroke-dasharray="5,4" marker-end="url(#arrowhead)"/>
+</svg>
+
+<!-- Tour Card — dynamically filled by JS -->
+<div id="tour-card" class="tour-card"></div>
 
 <!-- OVERLAY INTRO -->
 <div class="ov" id="ov">
@@ -680,17 +926,17 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
     <button class="sb-toggle" onclick="toggleDsk()"><i class="fa-solid fa-angles-left" id="dsk-ic"></i></button>
     <ul class="sb-nav">
       <li class="sb-sec"><strong class="sb-lbl">Gestione Aziende</strong><ul class="sb-sub">
-        <li><span class="sbl"><i class="fa-solid fa-eye"></i><span>Reviewers</span></span></li>
-        <li><span class="sbl"><i class="fa-solid fa-city"></i><span>Owners</span></span></li>
+        <li><span class="sbl"><i class="fa-solid fa-eye"></i><span>Reviewers</span><i class="fa-solid fa-lock" style="margin-left:auto;font-size:11px;opacity:0.5"></i></span></li>
+        <li><span class="sbl"><i class="fa-solid fa-city"></i><span>Owners</span><i class="fa-solid fa-lock" style="margin-left:auto;font-size:11px;opacity:0.5"></i></span></li>
       </ul></li>
       <li class="sb-sec"><strong class="sb-lbl">Questionari</strong><ul class="sb-sub">
-        <li><span class="sbl"><i class="fa-solid fa-clipboard-list"></i><span>Questionari</span></span></li>
+        <li><span class="sbl"><i class="fa-solid fa-clipboard-list"></i><span>Questionari</span><i class="fa-solid fa-lock" style="margin-left:auto;font-size:11px;opacity:0.5"></i></span></li>
       </ul></li>
       <li class="sb-sec"><strong class="sb-lbl">Utenti</strong><ul class="sb-sub">
-        <li><span class="sbl"><i class="fa-solid fa-shield-halved"></i><span>Admin</span></span></li>
-        <li><span class="sbl"><i class="fa-solid fa-user-check"></i><span>Auditor</span></span></li>
-        <li><span class="sbl"><i class="fa-solid fa-clipboard-check"></i><span>Reviewer</span></span></li>
-        <li><span class="sbl"><i class="fa-solid fa-user-tie"></i><span>Owner</span></span></li>
+        <li><span class="sbl"><i class="fa-solid fa-shield-halved"></i><span>Admin</span><i class="fa-solid fa-lock" style="margin-left:auto;font-size:11px;opacity:0.5"></i></span></li>
+        <li><span class="sbl"><i class="fa-solid fa-user-check"></i><span>Auditor</span><i class="fa-solid fa-lock" style="margin-left:auto;font-size:11px;opacity:0.5"></i></span></li>
+        <li><span class="sbl"><i class="fa-solid fa-clipboard-check"></i><span>Reviewer</span><i class="fa-solid fa-lock" style="margin-left:auto;font-size:11px;opacity:0.5"></i></span></li>
+        <li><span class="sbl"><i class="fa-solid fa-user-tie"></i><span>Owner</span><i class="fa-solid fa-lock" style="margin-left:auto;font-size:11px;opacity:0.5"></i></span></li>
       </ul></li>
       <li class="sb-sec"><strong class="sb-lbl">Assessment</strong><ul class="sb-sub">
         <li><span class="sbl active"><i class="fa-solid fa-chart-gantt"></i><span>Dashboard</span></span></li>
@@ -1050,66 +1296,12 @@ const AREA_CFG={
 const LOCKED_AREAS=new Set();
 
 const PIANO_PHASES = [
-  { 
-    id: 'prep', 
-    name: 'Preparazione', 
-    icon: `
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M9 11H1v12h8V11z"></path>
-        <path d="M23 11h-8v12h8V11z"></path>
-        <path d="M23 1h-8v8h8V1z"></path>
-        <path d="M9 1H1v8h8V1z"></path>
-      </svg>
-    `
-  },
-  { 
-    id: 'pre', 
-    name: 'Pre-Assessment', 
-    icon: `
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="11" cy="11" r="8"></circle>
-        <path d="M21 21l-4.35-4.35"></path>
-      </svg>
-    `
-  },
-  { 
-    id: 'ass', 
-    name: 'Assessment', 
-    icon: `
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M9 11l3 3L22 4"></path>
-        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-      </svg>
-    `
-  },
-  { 
-    id: 'post', 
-    name: 'Post-Assessment', 
-    icon: `
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-        <path d="M14 2v6h6"></path>
-      </svg>
-    `
-  },
-  { 
-    id: 'mon', 
-    name: 'Monitoraggio', 
-    icon: `
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-      </svg>
-    `
-  },
-  { 
-    id: 'chi', 
-    name: 'Chiusura', 
-    icon: `
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M20 6L9 17l-5-5"></path>
-      </svg>
-    `
-  },
+  { id: 'prep', name: 'Preparazione', icon: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11H1v12h8V11z"></path><path d="M23 11h-8v12h8V11z"></path><path d="M23 1h-8v8h8V1z"></path><path d="M9 1H1v8h8V1z"></path></svg>` },
+  { id: 'pre', name: 'Pre-Assessment', icon: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>` },
+  { id: 'ass', name: 'Assessment', icon: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>` },
+  { id: 'post', name: 'Post-Assessment', icon: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path></svg>` },
+  { id: 'mon', name: 'Monitoraggio', icon: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>` },
+  { id: 'chi', name: 'Chiusura', icon: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg>` },
 ];
 
 const MOCK_ANS={
@@ -1130,10 +1322,10 @@ function getMockAns(){
 let selDom={};
 let modalState={area:null,subIdx:0};
 let ownerQs=[];
-let ownerAnswers={};  // idx -> {cmmi, answer, file}
+let ownerAnswers={};  
 let ownerCurQ=0;
 let auditorCurQ=0;
-let auditorValidations={}; // idx -> {status, note, source} source='ai'|'manual'
+let auditorValidations={}; 
 let uploadedFiles={};
 let dskCol=false;
 let searchTxt='';
@@ -1150,7 +1342,385 @@ function startDemo(){
   document.getElementById('ov').style.display='none';
   document.getElementById('shell').style.display='flex';
   buildAreaFilters();buildPianoTable();renderGrid();refreshEntraOwnerBtns();
+  setTimeout(() => {
+    showGuideModal();
+  }, 800);
 }
+
+
+// ===================== GUIDED TOUR — SPOTLIGHT ENGINE =====================
+let guideStep = 0;
+let tourActive = false;
+const TOTAL_STEPS = 8;
+
+/* -----------------------------------------------------------------------
+   STEP DEFINITIONS
+   target   : CSS selector of the element to spotlight (null = no spotlight)
+   variant  : 'dark' | 'light' | 'role'
+   position : 'right' | 'left' | 'top' | 'bottom' | 'center'
+   arrow    : true/false — draw SVG arrow from card to target
+   render   : function that returns the inner HTML of the card
+----------------------------------------------------------------------- */
+const TOUR_STEPS = [
+  // 0 — Welcome, dark full-screen card
+  {
+    target: null,
+    variant: 'dark',
+    position: 'center',
+    arrow: false,
+    render: (step, total) => `
+      <div class="tc-header">
+        <span class="tc-badge"><span class="tc-badge-dot"></span>Demo interattiva</span>
+      </div>
+      <div class="tc-title">Benvenuto in 3AuditFlow</div>
+      <div class="tc-body">
+        Stai per esplorare il <strong>workflow completo NIS2</strong>: dalla selezione del questionario
+        alla relazione finale. Sei autenticato come <strong>Mario Rossi · Reviewer</strong>.
+        Il tour evidenzierà ogni elemento funzionale man mano che procedi.
+      </div>
+      ${footerDark(step, total, 'Avvia il tour', true)}
+    `
+  },
+  // 1 — Info card spotlight
+  {
+    target: '.info-card',
+    variant: 'light',
+    position: 'bottom',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(0,198,255,.1)"><i class="fa-solid fa-id-card" style="color:#00c6ff"></i></div>
+        <span class="tc-step-label">Intestazione Assessment</span>
+      </div>
+      <div class="tc-title">Scheda Riepilogativa</div>
+      <div class="tc-body">
+        Questa barra mostra i dati principali dell'assessment in corso: nome, azienda owner,
+        <strong>fase attiva</strong>, stato e tipologia di questionario.
+        Rimane visibile in tutte le fasi del workflow.
+      </div>
+      <div class="tc-tip"><i class="fa-solid fa-info-circle"></i>
+        La fase cambia automaticamente man mano che si avanza nel workflow.
+      </div>
+      ${footerLight(step, total)}
+    `
+  },
+  // 2 — Step progress bar
+  {
+    target: '.step-prog',
+    variant: 'light',
+    position: 'bottom',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(29,158,117,.1)"><i class="fa-solid fa-list-check" style="color:#1D9E75"></i></div>
+        <span class="tc-step-label">Avanzamento</span>
+      </div>
+      <div class="tc-title">Barra di Avanzamento Fasi</div>
+      <div class="tc-body">
+        Traccia le <strong>6 fasi</strong> del processo: Preparazione, Definizione Questionario,
+        Assessment, Post-Assessment, Monitoraggio e Chiusura. La fase corrente è evidenziata
+        in blu; quelle completate mostrano il segno di spunta.
+      </div>
+      ${footerLight(step, total)}
+    `
+  },
+  // 3 — Tabs bar
+  {
+    target: '.tabs-bar',
+    variant: 'light',
+    position: 'bottom',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(109,40,217,.1)"><i class="fa-solid fa-table-columns" style="color:#6d28d9"></i></div>
+        <span class="tc-step-label">Sezioni Reviewer</span>
+      </div>
+      <div class="tc-title">Tre Sezioni da Completare</div>
+      <div class="tc-body">
+        Il Reviewer deve completare tutte e tre le sezioni prima di passare all'Owner:
+        <strong>Questionario</strong> (selezione domande), <strong>Documentazione</strong>
+        (upload allegati) e <strong>Piano di Lavoro</strong> (date di progetto).
+        Ogni sezione si segna con il segno di spunta una volta completata.
+      </div>
+      <div class="tc-tip"><i class="fa-solid fa-lightbulb"></i>
+        Clicca su ciascun tab per navigare tra le sezioni.
+      </div>
+      ${footerLight(step, total)}
+    `
+  },
+  // 4 — Selection grid
+  {
+    target: '.sel-layout',
+    variant: 'light',
+    position: 'top',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(0,198,255,.1)"><i class="fa-solid fa-table-cells" style="color:#00c6ff"></i></div>
+        <span class="tc-step-label">Selezione Domande</span>
+      </div>
+      <div class="tc-title">Griglia Aree di Controllo</div>
+      <div class="tc-body">
+        A sinistra il riepilogo delle domande selezionate; a destra la griglia delle aree NIS2
+        (GOVERN, IDENTIFY, PROTECT, ecc.). Clicca su una card per aprire il dettaglio
+        e scegliere quali domande includere nell'assessment.
+      </div>
+      <div class="tc-tip"><i class="fa-solid fa-hand-pointer"></i>
+        Seleziona almeno una domanda, poi completa le altre due sezioni per abilitare il passaggio all'Owner.
+      </div>
+      ${footerLight(step, total)}
+    `
+  },
+  // 5 — Owner role transition
+  {
+    target: '.tb-user',
+    variant: 'role',
+    position: 'bottom',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-role-banner">
+        <div class="tc-role-avatar" style="background:linear-gradient(135deg,#0d9488,#065f46)">PB</div>
+        <div class="tc-role-name">Paolo Bianchi</div>
+        <span class="tc-role-tag" style="background:rgba(13,148,136,.1);color:#0d9488;border:1px solid rgba(13,148,136,.25)">
+          <i class="fa-solid fa-user-tie" style="font-size:9px"></i> Owner
+        </span>
+      </div>
+      <div class="tc-body">
+        Ora stai operando come <strong>Owner</strong>. Questo indicatore in alto a destra
+        mostra sempre il ruolo e il nome dell'utente attivo.
+      </div>
+      <div class="tc-checklist">
+        <div class="tc-check-item"><i class="fa-solid fa-pen-to-square"></i> Compila le risposte testuali per ogni domanda</div>
+        <div class="tc-check-item"><i class="fa-solid fa-chart-bar"></i> Seleziona il livello di maturità CMMI</div>
+        <div class="tc-check-item"><i class="fa-solid fa-paperclip"></i> Allega evidenze documentali se disponibili</div>
+      </div>
+      ${footerRole(step, total)}
+    `
+  },
+  // 6 — Auditor role transition
+  {
+    target: '.tb-user',
+    variant: 'role',
+    position: 'bottom',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-role-banner">
+        <div class="tc-role-avatar" style="background:linear-gradient(135deg,#7c3aed,#4c1d95)">SV</div>
+        <div class="tc-role-name">Silvia Verdi</div>
+        <span class="tc-role-tag" style="background:rgba(124,58,237,.1);color:#7c3aed;border:1px solid rgba(124,58,237,.25)">
+          <i class="fa-solid fa-shield-halved" style="font-size:9px"></i> Auditor
+        </span>
+      </div>
+      <div class="tc-body">
+        Ruolo cambiato in <strong>Auditor</strong>. Silvia Verdi ha accesso a tutte le risposte
+        fornite dall'Owner e può procedere alla validazione.
+      </div>
+      <div class="tc-checklist">
+        <div class="tc-check-item"><i class="fa-solid fa-robot"></i> Avvia la validazione automatica tramite AI</div>
+        <div class="tc-check-item"><i class="fa-solid fa-pencil"></i> Oppure valida manualmente scegliendo Conforme / Parziale / Non conforme</div>
+        <div class="tc-check-item"><i class="fa-solid fa-file-lines"></i> Genera la relazione finale NIS2 al completamento</div>
+      </div>
+      ${footerRole(step, total)}
+    `
+  },
+  // 7 — Final step
+  {
+    target: null,
+    variant: 'dark',
+    position: 'center',
+    arrow: false,
+    render: (step, total) => `
+      <div class="tc-header">
+        <span class="tc-badge"><span class="tc-badge-dot"></span>Tour completato</span>
+      </div>
+      <div class="tc-title">Relazione Finale NIS2</div>
+      <div class="tc-body">
+        Dopo la validazione, il pulsante <strong>Genera Relazione NIS2</strong> produce il report
+        completo con grafici a torta, radar chart e tabella scoring per area. Il documento
+        include i principali findings e le azioni correttive raccomandate.
+        <br><br>
+        Esplora liberamente ogni sezione della demo.
+      </div>
+      ${footerDark(step, total, 'Chiudi il tour', false)}
+    `
+  }
+];
+
+// ---- Helper: footer generators ----
+function footerDark(step, total, label, showSkip) {
+  const dots = Array.from({length:total},(_,i)=>`<span class="tc-dot${i===step?' on':''}"></span>`).join('');
+  return `<div class="tc-footer">
+    <div class="tc-progress">${dots}</div>
+    <div class="tc-actions">
+      ${showSkip ? `<button class="tc-btn-skip" onclick="tourSkip()">Salta tour</button>` : ''}
+      <button class="tc-btn-next" onclick="tourNext()"><span>${label}</span><i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+  </div>`;
+}
+function footerLight(step, total) {
+  const dots = Array.from({length:total},(_,i)=>`<span class="tc-dot${i===step?' on':''}"></span>`).join('');
+  return `<div class="tc-footer">
+    <div class="tc-progress">${dots}</div>
+    <div class="tc-actions">
+      <button class="tc-btn-skip" onclick="tourSkip()">Salta</button>
+      <button class="tc-btn-next" onclick="tourNext()"><span>Avanti</span><i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+  </div>`;
+}
+function footerRole(step, total) {
+  const dots = Array.from({length:total},(_,i)=>`<span class="tc-dot${i===step?' on':''}"></span>`).join('');
+  return `<div class="tc-footer">
+    <div class="tc-progress">${dots}</div>
+    <div class="tc-actions">
+      <button class="tc-btn-skip" onclick="tourSkip()">Chiudi tour</button>
+      <button class="tc-btn-next" onclick="tourNext()"><span>Continua</span><i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+  </div>`;
+}
+
+// ---- Spotlight engine ----
+function tourSpotlight(selector, pad=8) {
+  const sp = document.getElementById('tour-spotlight');
+  if(!selector){ sp.classList.remove('active'); return null; }
+  const el = document.querySelector(selector);
+  if(!el){ sp.classList.remove('active'); return null; }
+  const r = el.getBoundingClientRect();
+  sp.style.top    = (r.top    - pad) + 'px';
+  sp.style.left   = (r.left   - pad) + 'px';
+  sp.style.width  = (r.width  + pad*2) + 'px';
+  sp.style.height = (r.height + pad*2) + 'px';
+  sp.classList.add('active');
+  return r;
+}
+
+function tourPositionCard(card, targetRect, position) {
+  const cw = 340, pad = 16;
+  const vw = window.innerWidth, vh = window.innerHeight;
+  let top, left;
+
+  if(!targetRect || position === 'center'){
+    top  = (vh - card.offsetHeight) / 2;
+    left = (vw - cw) / 2;
+  } else {
+    switch(position){
+      case 'bottom':
+        top  = targetRect.bottom + 18;
+        left = Math.min(Math.max(targetRect.left, pad), vw - cw - pad);
+        break;
+      case 'top':
+        top  = targetRect.top - card.offsetHeight - 18;
+        left = Math.min(Math.max(targetRect.left, pad), vw - cw - pad);
+        break;
+      case 'right':
+        top  = Math.max(targetRect.top, pad);
+        left = targetRect.right + 18;
+        break;
+      case 'left':
+        top  = Math.max(targetRect.top, pad);
+        left = targetRect.left - cw - 18;
+        break;
+    }
+    // clamp
+    top  = Math.max(pad, Math.min(top,  vh - card.offsetHeight - pad));
+    left = Math.max(pad, Math.min(left, vw - cw - pad));
+  }
+
+  card.style.top  = top  + 'px';
+  card.style.left = left + 'px';
+  card.style.width = cw  + 'px';
+  return { top, left, width: cw, height: card.offsetHeight };
+}
+
+function tourDrawArrow(cardRect, targetRect, position) {
+  const svg = document.getElementById('tour-arrow');
+  const path = document.getElementById('tour-arrow-path');
+  if(!targetRect || !cardRect){ svg.classList.remove('active'); return; }
+
+  // Arrow from card edge to target center
+  let x1, y1, x2, y2;
+  const tc = targetRect;
+  const tx = tc.left + tc.width/2, ty = tc.top + tc.height/2;
+
+  switch(position){
+    case 'bottom': x1=cardRect.left+cardRect.width/2; y1=cardRect.top; x2=tx; y2=tc.bottom+6; break;
+    case 'top':    x1=cardRect.left+cardRect.width/2; y1=cardRect.top+cardRect.height; x2=tx; y2=tc.top-6; break;
+    case 'right':  x1=cardRect.left; y1=cardRect.top+cardRect.height/2; x2=tc.right+6; y2=ty; break;
+    case 'left':   x1=cardRect.left+cardRect.width; y1=cardRect.top+cardRect.height/2; x2=tc.left-6; y2=ty; break;
+    default: svg.classList.remove('active'); return;
+  }
+
+  const minX=Math.min(x1,x2)-20, minY=Math.min(y1,y2)-20;
+  const w=Math.abs(x2-x1)+40, h=Math.abs(y2-y1)+40;
+  svg.setAttribute('viewBox',`${minX} ${minY} ${w} ${h}`);
+  svg.style.left='0'; svg.style.top='0';
+  svg.style.width=window.innerWidth+'px'; svg.style.height=window.innerHeight+'px';
+
+  // Bezier curve
+  const cx1=x1, cy1=(y1+y2)/2;
+  const cx2=x2, cy2=(y1+y2)/2;
+  path.setAttribute('d',`M${x1},${y1} C${cx1},${cy1} ${cx2},${cy2} ${x2},${y2}`);
+  svg.classList.add('active');
+}
+
+function tourRenderStep() {
+  const s = TOUR_STEPS[guideStep];
+  const card = document.getElementById('tour-card');
+
+  // Remove old classes
+  card.className = `tour-card var-${s.variant}`;
+  card.innerHTML = s.render(guideStep, TOTAL_STEPS);
+  card.classList.add('visible');
+
+  // Position spotlight
+  const tRect = tourSpotlight(s.target, 10);
+
+  // Measure card height then position
+  requestAnimationFrame(() => {
+    const cRect = tourPositionCard(card, tRect, s.position);
+    if(s.arrow && tRect){ tourDrawArrow(cRect, tRect, s.position); }
+    else { document.getElementById('tour-arrow').classList.remove('active'); }
+  });
+}
+
+function showGuideModal() {
+  guideStep = 0;
+  tourActive = true;
+  document.getElementById('tour-overlay').classList.add('active');
+  tourRenderStep();
+}
+
+function tourNext() {
+  guideStep++;
+  if(guideStep >= TOUR_STEPS.length){ tourEnd(); return; }
+  // Re-animate card
+  const card = document.getElementById('tour-card');
+  card.classList.remove('visible');
+  setTimeout(()=>{ tourRenderStep(); }, 80);
+}
+
+function tourSkip() { tourEnd(); }
+
+function tourEnd() {
+  tourActive = false;
+  document.getElementById('tour-overlay').classList.remove('active');
+  document.getElementById('tour-spotlight').classList.remove('active');
+  document.getElementById('tour-arrow').classList.remove('active');
+  const card = document.getElementById('tour-card');
+  card.classList.remove('visible');
+  card.className = 'tour-card';
+}
+
+// Keep spotlight in sync on resize
+window.addEventListener('resize', ()=>{ if(tourActive) tourRenderStep(); });
+
+// Legacy shims (called from transitions)
+function nextGuideStep() { tourNext(); }
+function closeGuideModal() { tourEnd(); }
+function skipGuide() { tourEnd(); }
 
 // ===================== SIDEBAR =====================
 function toggleDsk(){
@@ -1191,6 +1761,15 @@ function updateStepBar(step){
     const sp4=document.getElementById('sp4');
     sp4.classList.remove('active');sp4.classList.add('done');
     document.getElementById('sp4c').innerHTML='<i class="fa-solid fa-check"></i>';
+    document.getElementById('spline5').classList.add('done');
+    document.getElementById('sp5').classList.add('active');
+  }
+  if(step>=5){
+    const sp5=document.getElementById('sp5');
+    sp5.classList.remove('active');sp5.classList.add('done');
+    document.getElementById('sp5c').innerHTML='<i class="fa-solid fa-check"></i>';
+    document.getElementById('spline6').classList.add('done');
+    document.getElementById('sp6').classList.add('active');
   }
 }
 
@@ -1337,34 +1916,48 @@ function toggleAreaAll(area){
   renderGrid();
 }
 
-// ===================== SIDEBAR SELECTION =====================
+// ===================== SIDEBAR SELECTION (grouped by area) =====================
 function renderSelSb(){
   const list=document.getElementById('sel-q-list');
   const n=Object.keys(selDom).length;
   document.getElementById('sel-n').textContent=n;
   const areas=[...new Set(Object.values(selDom).map(d=>d.area))];
   document.getElementById('sel-areas-ct').textContent=areas.length+' aree';
+
   if(n===0){
     list.innerHTML='<div style="padding:18px 10px;text-align:center;font-size:11px;color:var(--muted);line-height:1.7">Nessuna domanda<br>selezionata</div>';
     document.getElementById('sb-prev').disabled=true;document.getElementById('sb-next').disabled=true;
     document.getElementById('sb-nav-info').textContent='—';return;
   }
-  const allDoms=Object.values(selDom);
-  const totalPages=Math.ceil(allDoms.length/SB_PAGE_SIZE);
-  if(sbPage>=totalPages)sbPage=Math.max(0,totalPages-1);
-  const pageItems=allDoms.slice(sbPage*SB_PAGE_SIZE,(sbPage+1)*SB_PAGE_SIZE);
-  list.innerHTML='';
-  pageItems.forEach(d=>{
-    const r=document.createElement('div');r.className='sel-qrow sel';
-    r.innerHTML=`<div class="sel-chk on"><i class="fa-solid fa-check" style="font-size:7px"></i></div><div style="flex:1;min-width:0"><div class="sel-qid">${d.id}</div><div class="sel-qtxt">${d.domanda}</div></div>`;
-    r.querySelector('.sel-chk').addEventListener('click',e=>{e.stopPropagation();toggleDom(d.id);});
-    list.appendChild(r);
+
+  // Group by area
+  const grouped = {};
+  Object.values(selDom).forEach(d => {
+    if(!grouped[d.area]) grouped[d.area] = [];
+    grouped[d.area].push(d);
   });
-  document.getElementById('sb-prev').disabled=sbPage===0;
-  document.getElementById('sb-next').disabled=sbPage>=totalPages-1;
-  document.getElementById('sb-nav-info').textContent=`${sbPage*SB_PAGE_SIZE+1}–${Math.min((sbPage+1)*SB_PAGE_SIZE,n)} / ${n}`;
+
+  list.innerHTML = '';
+  Object.keys(grouped).forEach(area => {
+    const areaHeader = document.createElement('div');
+    areaHeader.style.cssText = 'padding:8px 10px 4px;font-size:10px;font-weight:700;color:var(--accent);border-bottom:1px solid var(--border);margin-bottom:4px;';
+    areaHeader.textContent = area;
+    list.appendChild(areaHeader);
+
+    grouped[area].forEach(d => {
+      const r=document.createElement('div');r.className='sel-qrow sel';
+      r.innerHTML=`<div class="sel-chk on"><i class="fa-solid fa-check" style="font-size:7px"></i></div><div style="flex:1;min-width:0"><div class="sel-qid">${d.id}</div><div class="sel-qtxt">${d.domanda}</div></div>`;
+      r.querySelector('.sel-chk').addEventListener('click',e=>{e.stopPropagation();toggleDom(d.id);});
+      list.appendChild(r);
+    });
+  });
+
+  // Disable pagination for grouped view
+  document.getElementById('sb-prev').disabled=true;
+  document.getElementById('sb-next').disabled=true;
+  document.getElementById('sb-nav-info').textContent=`${n} totali`;
 }
-function sbNavPage(d){sbPage=Math.max(0,sbPage+d);renderSelSb();}
+function sbNavPage(d){ /* disabled for grouped view */ }
 
 // ===================== MODAL =====================
 function openModal(area,si){
@@ -1492,6 +2085,9 @@ function goToOwner(){
   document.getElementById('tb-uname').textContent='Paolo Bianchi';
   document.getElementById('tb-urole').textContent='Owner';
   setupOwner();
+  setTimeout(() => {
+    if (guideStep === 4) nextGuideStep();
+  }, 700);
 }
 function backToReviewer(){
   document.getElementById('step-owner').style.display='none';
@@ -1501,7 +2097,6 @@ function backToReviewer(){
   document.getElementById('tb-av').textContent='MR';
   document.getElementById('tb-uname').textContent='Mario Rossi';
   document.getElementById('tb-urole').textContent='Reviewer';
-  // reset step bar
   document.getElementById('sp2').classList.add('active');document.getElementById('sp2').classList.remove('done');
   document.getElementById('sp3').classList.remove('active');document.getElementById('spline3').classList.remove('done');
   document.getElementById('sp2c').textContent='2';
@@ -1597,6 +2192,9 @@ function goToAuditor(){
   document.getElementById('tb-uname').textContent='Silvia Verdi';
   document.getElementById('tb-urole').textContent='Auditor';
   setupAuditor();
+    setTimeout(() => {
+    if (guideStep === 5) nextGuideStep();
+  }, 700);
 }
 function backToOwner(){
   document.getElementById('step-auditor').style.display='none';
@@ -1606,7 +2204,6 @@ function backToOwner(){
   document.getElementById('tb-av').textContent='PB';
   document.getElementById('tb-uname').textContent='Paolo Bianchi';
   document.getElementById('tb-urole').textContent='Owner';
-  // reset step 3
   document.getElementById('sp3').classList.remove('done');document.getElementById('sp3').classList.add('active');
   document.getElementById('sp4').classList.remove('active');document.getElementById('spline4').classList.remove('done');
   document.getElementById('sp3c').textContent='3';
@@ -1641,16 +2238,13 @@ function auditorSelectQ(idx){
   auditorCurQ=idx;const d=ownerQs[idx];if(!d)return;
   const ownerAns=ownerAnswers[idx]||{};
   const v=auditorValidations[idx];
-  // Update header
   document.getElementById('aud-a-qid').textContent=d.id+' · '+d.area;
   document.getElementById('aud-a-qtxt').textContent=d.domanda;
-  // Update owner answer view
   document.getElementById('oav-title').textContent=d.domanda;
   const cmmiVal=ownerAns.cmmi||'—';
   document.getElementById('oav-cmmi').textContent=cmmiVal;
   const ansText=ownerAns.answer||'';
   document.getElementById('oav-ans-txt').textContent=ansText||'Nessuna evidenza fornita dall\'Owner.';
-  // File
   const fw=document.getElementById('oav-file-wrap');
   if(uploadedFiles[idx]){
     const f=uploadedFiles[idx];const kb=f.size/1024;
@@ -1658,17 +2252,14 @@ function auditorSelectQ(idx){
   } else {
     fw.innerHTML='<div class="oav-no-file"><i class="fa-solid fa-file-slash"></i> Nessun documento allegato dall\'Owner</div>';
   }
-  // Nav
   document.getElementById('aud-btn-prev').disabled=idx===0;
   document.getElementById('aud-btn-next').disabled=idx===ownerQs.length-1;
-  // AI button
   const aiBtn=document.getElementById('aud-btn-val-ai');
   if(v&&v.source==='ai'){
     aiBtn.disabled=true;aiBtn.innerHTML='<i class="fa-solid fa-lock"></i> AI Validazione completata';
   } else {
     aiBtn.disabled=false;aiBtn.innerHTML='<i class="fa-solid fa-robot"></i> Avvia Validazione AI';
   }
-  // Manual val
   manValCurChoice=null;
   document.getElementById('mvr-acc').className='mvr';
   document.getElementById('mvr-wrn').className='mvr';
@@ -1683,7 +2274,6 @@ function auditorSelectQ(idx){
     manValCurChoice=v.status;
     document.getElementById('man-val-save').classList.add('on');
   }
-  // AI panel
   if(v&&v.source==='ai'){
     const aiAns=MOCK_ANS[d.id]||v._aiData||getMockAns();
     showAIResult(aiAns.status,aiAns.score,aiAns.abs,aiAns.fbs);
@@ -1715,7 +2305,7 @@ function updateAuditorProg(){
   }
 }
 
-// ===================== AI VALIDATION (auditor) =====================
+// ===================== AI VALIDATION =====================
 function doValAI(){
   const d=ownerQs[auditorCurQ];if(!d)return;
   const btn=document.getElementById('aud-btn-val-ai');
@@ -1776,10 +2366,8 @@ function saveManVal(){
   if(!manValCurChoice)return;
   const note=document.getElementById('man-val-note').value;
   auditorValidations[auditorCurQ]={status:manValCurChoice,note,source:'manual'};
-  // disable AI since manual override applied
   const aiBtn=document.getElementById('aud-btn-val-ai');
   aiBtn.disabled=true;aiBtn.innerHTML='<i class="fa-solid fa-lock"></i> Override manuale applicato';
-  // flash save button
   const sb=document.getElementById('man-val-save');
   sb.innerHTML='<i class="fa-solid fa-check"></i> Salvata!';
   setTimeout(()=>{sb.innerHTML='<i class="fa-solid fa-floppy-disk"></i> Salva validazione manuale';},1500);
@@ -1792,8 +2380,11 @@ function showReport(){
   document.getElementById('step-report').style.display='block';
   document.getElementById('ph-title').textContent='Relazione NIS2 — 3AInformatica S.r.l.';
   document.getElementById('info-fase').textContent='Post-Assessment';
-  updateStepBar(4);
+  updateStepBar(5); // Arriva a chiusura
   renderReport();
+  setTimeout(() => {
+    if (guideStep === 6 || guideStep === 7) closeGuideModal();
+  }, 500);
 }
 function renderReport(){
   const vals=Object.values(auditorValidations);
@@ -1916,3 +2507,4 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 </script>
 </body>
 </html>
+```
