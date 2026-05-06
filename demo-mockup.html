@@ -858,7 +858,47 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   transition: all .2s; display: flex; align-items: center; gap: 6px;
 }
 .tour-card.var-role .tc-btn-next:hover { transform: translateY(-1px); }
+/* ===================== EVIDENZE - OBBLIGATORIO ===================== */
+.evidenza-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 9.5px;
+  font-weight: 700;
+  border: 1.5px solid;
+  cursor: pointer;
+  transition: all .2s;
+}
 
+.evidenza-box.obbl {
+  background: #1D9E7515;
+  color: #1D9E75;
+  border-color: #1D9E75;
+}
+
+.evidenza-box.non-obbl {
+  background: #D85A3015;
+  color: #D85A30;
+  border-color: #D85A30;
+}
+
+.evidenza-box:hover {
+  transform: scale(1.03);
+}
+
+/* Pulsanti Tutte Obbligatorie */
+.btn-sel-all.obbl-btn { 
+  background:#1D9E7515 !important; 
+  border-color:#1D9E75 !important; 
+  color:#1D9E75 !important; 
+}
+.btn-sel-all.non-obbl-btn { 
+  background:#D85A3015 !important; 
+  border-color:#D85A30 !important; 
+  color:#D85A30 !important; 
+}
 </style>
 </head>
 <body>
@@ -888,9 +928,9 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
     <img src="logo.png" class="tb-logo-icon2" alt="logo">
     <img src="logo-text.png" class="tb-logo-text2" alt="logo text">
   </a>
-  <div class="ov-sub">Simula il workflow completo: il <strong style="color:#fff">Reviewer</strong> seleziona le domande → l'<strong style="color:#fff">Owner</strong> compila le risposte → l'<strong style="color:#fff">Auditor</strong> valida con <strong style="color:#00c6ff">AI</strong> o manualmente. Relazione NIS2 finale inclusa.</div>
+  <div class="ov-sub">Simula il workflow completo: l' <strong style="color:#fff">Admin</strong> crea l'assessment  → il <strong style="color:#fff">Reviewer</strong> seleziona le domande → l'<strong style="color:#fff">Owner</strong> compila le risposte  → l'<strong style="color:#fff">Auditor</strong> valida con <strong style="color:#00c6ff">AI</strong> o manualmente. Relazione NIS2 finale inclusa.</div>
   <div class="ov-btns">
-    <button class="btn-start" onclick="startDemo()"><i class="fa-solid fa-play"></i> Avvia la Demo</button>
+     <button class="btn-start" onclick="goCreaAssessment()"><i class="fa-solid fa-play"></i> Avvia la Demo</button>
     <a href="index.html" class="btn-back-ov"><i class="fa-solid fa-arrow-left"></i> Torna al sito</a>
   </div>
 </div>
@@ -943,7 +983,9 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
       </ul></li>
     </ul>
     <div class="sb-bottom">
-      <a href="index.html" class="sb-back-site"><i class="fa-solid fa-arrow-left"></i><span>Torna al sito</span></a>
+      <a href="crea-assessment2.html" class="sb-back-site">
+        <i class="fa-solid fa-arrow-left"></i><span>Torna a Crea Assessment</span>
+      </a>
     </div>
   </aside>
 
@@ -1012,9 +1054,17 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
           </div>
           <div class="s-count" id="s-count">Caricamento...</div>
         </div>
-        <div class="sel-all-row">
-          <button class="btn-sel-all" onclick="selectAll()"><i class="fa-solid fa-check-double"></i> Seleziona tutte (192)</button>
-          <button class="btn-clr-all" onclick="clearAll()"><i class="fa-solid fa-xmark"></i> Deseleziona tutto</button>
+        <div class="sel-all-row" style="margin-bottom:14px">
+            <button class="btn-sel-all" onclick="selectAll()"><i class="fa-solid fa-check-double"></i> Seleziona tutte (192)</button>
+            <button class="btn-clr-all" onclick="clearAll()"><i class="fa-solid fa-xmark"></i> Deseleziona tutto</button>
+            
+            <button class="btn-sel-all" id="btn-all-obbl" onclick="setAllObbligatorio(true)">
+              <i class="fa-solid fa-flag"></i> Tutte Obbligatorie
+            </button>
+            <button class="btn-sel-all" id="btn-all-nonobbl" onclick="setAllObbligatorio(false)">
+              <i class="fa-solid fa-flag"></i> Tutte Non Obbligatorie
+            </button>
+
         </div>
         <div class="sel-layout">
           <div class="sel-sb">
@@ -1338,15 +1388,28 @@ let docSingleFile=null;
 let manValCurChoice=null;
 
 // ===================== BOOT =====================
-function startDemo(){
-  document.getElementById('ov').style.display='none';
-  document.getElementById('shell').style.display='flex';
-  buildAreaFilters();buildPianoTable();renderGrid();refreshEntraOwnerBtns();
-  setTimeout(() => {
-    showGuideModal();
-  }, 800);
+function goCreaAssessment() {
+    window.location.href = 'crea-assessment2.html';
 }
 
+function startDemo() {
+    document.getElementById('ov').style.display = 'none';
+    document.getElementById('shell').style.display = 'flex';
+    buildAreaFilters(); buildPianoTable(); renderGrid(); refreshEntraOwnerBtns();
+    // Aggiorna il topbar per mostrare Mario Rossi come Reviewer
+    document.getElementById('tb-av').textContent = 'MR';
+    document.getElementById('tb-uname').textContent = 'Mario Rossi';
+    document.getElementById('tb-urole').textContent = 'Reviewer';
+    setTimeout(() => { showGuideModal(); }, 800);
+}
+
+  // Controlla se arriviamo da crea-assessment2.html
+window.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('fromAdmin') === '1') {
+      startDemo();
+    }
+});
 
 // ===================== GUIDED TOUR — SPOTLIGHT ENGINE =====================
 let guideStep = 0;
@@ -1372,11 +1435,11 @@ const TOUR_STEPS = [
       <div class="tc-header">
         <span class="tc-badge"><span class="tc-badge-dot"></span>Demo interattiva</span>
       </div>
-      <div class="tc-title">Benvenuto in 3AuditFlow</div>
+      <div class="tc-title">Selezione domande — Reviewer</div>
       <div class="tc-body">
-        Stai per esplorare il <strong>workflow completo NIS2</strong>: dalla selezione del questionario
-        alla relazione finale. Sei autenticato come <strong>Mario Rossi · Reviewer</strong>.
-        Il tour evidenzierà ogni elemento funzionale man mano che procedi.
+       "Sei ora nel ruolo di <strong>Reviewer (Mario Rossi)</strong>. L'Admin ha già 
+       configurato l'assessment — tocca a te selezionare le domande NIS2, caricare la 
+       documentazione e impostare il piano di lavoro."
       </div>
       ${footerDark(step, total, 'Avvia il tour', true)}
     `
@@ -1926,11 +1989,9 @@ function renderSelSb(){
 
   if(n===0){
     list.innerHTML='<div style="padding:18px 10px;text-align:center;font-size:11px;color:var(--muted);line-height:1.7">Nessuna domanda<br>selezionata</div>';
-    document.getElementById('sb-prev').disabled=true;document.getElementById('sb-next').disabled=true;
-    document.getElementById('sb-nav-info').textContent='—';return;
+    return;
   }
 
-  // Group by area
   const grouped = {};
   Object.values(selDom).forEach(d => {
     if(!grouped[d.area]) grouped[d.area] = [];
@@ -1945,17 +2006,27 @@ function renderSelSb(){
     list.appendChild(areaHeader);
 
     grouped[area].forEach(d => {
-      const r=document.createElement('div');r.className='sel-qrow sel';
-      r.innerHTML=`<div class="sel-chk on"><i class="fa-solid fa-check" style="font-size:7px"></i></div><div style="flex:1;min-width:0"><div class="sel-qid">${d.id}</div><div class="sel-qtxt">${d.domanda}</div></div>`;
-      r.querySelector('.sel-chk').addEventListener('click',e=>{e.stopPropagation();toggleDom(d.id);});
+      const isObbl = d.obbligatorio !== false;
+      const r = document.createElement('div');
+      r.className = 'sel-qrow sel';
+      r.style.cursor = 'pointer';
+      r.onclick = () => reopenModalFromSel(d.id);
+      
+      r.innerHTML = `
+        <div class="sel-chk on"><i class="fa-solid fa-check" style="font-size:7px"></i></div>
+        <div style="flex:1;min-width:0">
+          <div class="sel-qid">${d.id}</div>
+          <div class="sel-qtxt">${d.domanda}</div>
+          <div style="margin-top:5px">
+            <span class="evidenza-box ${isObbl ? 'obbl' : 'non-obbl'}">
+              ${isObbl ? '● Obbligatorio' : '○ Non Obbligatorio'}
+            </span>
+          </div>
+        </div>
+      `;
       list.appendChild(r);
     });
   });
-
-  // Disable pagination for grouped view
-  document.getElementById('sb-prev').disabled=true;
-  document.getElementById('sb-next').disabled=true;
-  document.getElementById('sb-nav-info').textContent=`${n} totali`;
 }
 function sbNavPage(d){ /* disabled for grouped view */ }
 
@@ -1991,28 +2062,64 @@ function renderModalSb(){
   });
 }
 function renderModalDom(){
-  const {area,subIdx}=modalState;const subs=NIS2_DATA[area];const subNames=Object.keys(subs);
-  const sub=subNames[subIdx];const doms=subs[sub];
+  const {area,subIdx}=modalState;
+  const subs=NIS2_DATA[area];
+  const subNames=Object.keys(subs);
+  const sub=subNames[subIdx];
+  const doms=subs[sub];
+
   const q=(document.getElementById('modal-srch').value||'').toLowerCase().trim();
   const selS=doms.filter(d=>selDom[d.id]).length;
+
   document.getElementById('modal-ftr-info').innerHTML=`Selezionate: <strong>${selS}</strong>/${doms.length}`;
+
   const cont=document.getElementById('modal-dom');
   cont.innerHTML=`<div class="modal-sub-top"><div class="modal-sub-ttl">${sub}</div><div class="modal-sub-cbadge"><strong>${selS}</strong>/${doms.length}</div></div>`;
+
   let shown=0;
   doms.forEach((d,di)=>{
     const match=!q||(d.id.toLowerCase().includes(q)||d.domanda.toLowerCase().includes(q)||d.normativa.toLowerCase().includes(q)||d.livello_nis2.toLowerCase().includes(q));
     const isSel=!!selDom[d.id];
+    const èEssenziale = selDom[d.id] ? selDom[d.id].essenziale !== false : true;
+
     const it=document.createElement('div');
-    it.className='dom-item'+(isSel?' sel':'')+(match?'':' hidden-f');
-    if(match)shown++;
-    it.onclick=()=>toggleDom(d.id);
-    const normTag=`<span class="dtag dtag-norm">${d.normativa}</span>`;
-    const nisTag=d.livello_nis2?`<span class="dtag dtag-nis2">${d.livello_nis2}</span>`:'';
-    const compTag=`<span class="dtag ${d.compliance==='Compliance'?'dtag-comp':'dtag-nocomp'}">${d.compliance}</span>`;
-    it.innerHTML=`<div class="dom-chk${isSel?' on':''}">${isSel?'<i class="fa-solid fa-check" style="font-size:8px"></i>':''}</div><div class="dom-num">${di+1}</div><div class="dom-cnt"><div class="dom-tags"><span class="dtag dtag-id">${d.id}</span>${normTag}${nisTag}${compTag}</div><div class="dom-txt">${d.domanda}</div></div>`;
+    it.className=`dom-item${isSel?' sel':''}${match?'':' hidden-f'}`;
+    if(match) shown++;
+
+    it.innerHTML=`
+      <div class="dom-chk${isSel?' on':''}">${isSel?'<i class="fa-solid fa-check" style="font-size:8px"></i>':''}</div>
+      <div class="dom-num">${di+1}</div>
+      <div class="dom-cnt">
+        <div class="dom-tags">
+          <span class="dtag dtag-id">${d.id}</span>
+          <span class="dtag dtag-norm">${d.normativa}</span>
+          ${d.livello_nis2?`<span class="dtag dtag-nis2">${d.livello_nis2}</span>`:''}
+          <span class="dtag ${d.compliance==='Compliance'?'dtag-comp':'dtag-nocomp'}">${d.compliance}</span>
+        </div>
+        <div class="dom-txt">${d.domanda}</div>
+      </div>
+
+      <!-- FLAG ESSENZIALE — quadratino -->
+      <div onclick="event.stopImmediatePropagation(); toggleEssenziale('${d.id}', this)" 
+           style="margin-left:12px; width:28px; height:28px; border:2px solid ${èEssenziale?'#1D9E75':'#D85A30'}; 
+                  background:${èEssenziale?'#1D9E7515':'#D85A3015'}; border-radius:6px; 
+                  display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:13px; flex-shrink:0;">
+        ${èEssenziale ? 
+          '<span style="color:#1D9E75;font-weight:900;">✓</span>' : 
+          '<span style="color:#D85A30;font-weight:900;">✕</span>'}
+      </div>
+    `;
+
+    it.onclick = (e) => {
+      if (!e.target.closest('div[onclick*="toggleEssenziale"]')) toggleDom(d.id);
+    };
     cont.appendChild(it);
   });
-  if(q&&shown===0){const nr=document.createElement('div');nr.className='dom-no-res';nr.textContent='Nessun risultato trovato.';cont.appendChild(nr);}
+
+  if(q && shown===0){
+    const nr=document.createElement('div'); nr.className='dom-no-res';
+    nr.textContent='Nessun risultato trovato.'; cont.appendChild(nr);
+  }
 }
 function toggleDom(id){
   if(selDom[id])delete selDom[id];
@@ -2115,12 +2222,29 @@ function renderOwnerList(){
   ownerQs.forEach((d,i)=>{
     const ans=ownerAnswers[i];const hasAns=ans&&(ans.answer||ans.cmmi);
     const sel=i===ownerCurQ;
+    
+    const èEssenziale = d.essenziale !== false;   // default essenziale
+    const flagHTML = `<span class="q-ibadge" style="background:${èEssenziale?'#1D9E75':'#D85A30'};color:white;">${èEssenziale?'Essenziale':'Non Ess.'}</span>`;
     const li=document.createElement('li');
     li.className=`q-it${sel?' sel':''}${hasAns?' ans':''}`;
     li.onclick=()=>ownerSelectQ(i);
+    
     const badge=hasAns?'✏️ Compilata':d.id;
     const numCont=hasAns?'<i class="fa-solid fa-check"></i>':i+1;
-    li.innerHTML=`<div class="q-num">${numCont}</div><div class="q-ib"><div class="q-itxt">${d.domanda.length>75?d.domanda.slice(0,75)+'…':d.domanda}</div><div class="q-imeta"><span class="q-iid">${d.area}</span><span class="q-ibadge">${badge}</span></div></div>`;
+    
+    li.innerHTML=`
+      <div class="q-num">${numCont}</div>
+      <div class="q-ib">
+        <div class="q-itxt">${d.domanda.length>75?d.domanda.slice(0,75)+'…':d.domanda}</div>
+        <div class="q-imeta">
+          <span class="q-iid">${d.area}</span>
+          <span class="q-ibadge" style="background:${èEssenziale ? '#1D9E75' : '#D85A30'}; color:white; font-size:9px; padding:2px 8px;">
+            ${èEssenziale ? 'Essenziale' : 'Non Ess.'}
+          </span>
+          <span class="q-ibadge">${badge}</span>
+        </div>
+      </div>
+    `;
     list.appendChild(li);
   });
 }
@@ -2305,6 +2429,76 @@ function updateAuditorProg(){
   }
 }
 
+// ===================== FLAG ESSENZIALE =====================
+function toggleEssenziale(id, el){
+  if(!selDom[id]) return;
+  
+  const current = selDom[id].essenziale !== false;
+  selDom[id].essenziale = !current;
+
+  // Aggiorna visivamente il pulsante
+  el.style.background = selDom[id].essenziale ? '#1D9E75' : '#e2e5ee';
+  el.style.color = selDom[id].essenziale ? 'white' : '#555';
+  el.style.borderColor = selDom[id].essenziale ? '#1D9E75' : '#ccc';
+  el.innerHTML = `
+    <i class="fa-solid fa-flag"></i>
+    ${selDom[id].essenziale ? 'Essenziale' : 'Non Essenziale'}
+  `;
+}
+
+function setAllEssenziale(isEssenziale){
+  Object.keys(selDom).forEach(id => {
+    selDom[id].essenziale = isEssenziale;
+  });
+  
+  // Refresh
+  if(modalState.area){
+    renderModalDom();
+  }
+  renderGrid();
+  renderSelSb();
+  
+  alert(`Tutte le domande selezionate sono state impostate come ${isEssenziale ? 'ESSENZIALI' : 'NON ESSENZIALI'}`);
+}
+// Riapri modale cliccando dalla sidebar
+function reopenModalFromSel(id){
+  for(const [area, subs] of Object.entries(NIS2_DATA)){
+    for(const [subName, doms] of Object.entries(subs)){
+      if(doms.some(d => d.id === id)){
+        const subIdx = Object.keys(subs).indexOf(subName);
+        openModal(area, subIdx);
+        setTimeout(() => {
+          document.getElementById('modal-srch').value = id;
+          renderModalDom();
+        }, 300);
+        return;
+      }
+    }
+  }
+}
+
+// Toggle Obbligatorio
+function toggleObbligatorio(id, el){
+  if(!selDom[id]) return;
+  selDom[id].obbligatorio = !selDom[id].obbligatorio;
+  renderGrid();
+  renderSelSb();
+  if(modalState.area) renderModalDom();
+}
+
+// Imposta tutte obbligatorie / non obbligatorie
+function setAllObbligatorio(isObbl){
+  Object.keys(selDom).forEach(id => {
+    selDom[id].obbligatorio = isObbl;
+  });
+  renderGrid();
+  renderSelSb();
+  if(modalState.area) renderModalDom();
+
+  // Evidenzia pulsante attivo
+  document.getElementById('btn-all-obbl').classList.toggle('obbl-btn', isObbl);
+  document.getElementById('btn-all-nonobbl').classList.toggle('non-obbl-btn', !isObbl);
+}
 // ===================== AI VALIDATION =====================
 function doValAI(){
   const d=ownerQs[auditorCurQ];if(!d)return;
