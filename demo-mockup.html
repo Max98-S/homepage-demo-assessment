@@ -675,6 +675,12 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   display: none; overflow: visible;
 }
 #tour-arrow.active { display: block; }
+#tour-arrow-path {
+  stroke: rgba(0,198,255,.7);
+  stroke-width: 1.5;
+  stroke-dasharray: 4,4;
+  fill: none;
+}
 
 /* ---- TOUR CARD VARIANTS ---- */
 .tour-card {
@@ -859,34 +865,50 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 }
 .tour-card.var-role .tc-btn-next:hover { transform: translateY(-1px); }
 /* ===================== EVIDENZE - OBBLIGATORIO ===================== */
-.evidenza-box {
+.ev-box-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 5px 10px;
+  background: var(--bg);
+  font-size: 10px;
+  font-weight: 700;
+}
+.ev-box-label {
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  white-space: nowrap;
+}
+.ev-toggle-btn {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 4px 10px;
+  padding: 3px 10px;
   border-radius: 6px;
-  font-size: 9.5px;
+  font-size: 10px;
   font-weight: 700;
   border: 1.5px solid;
   cursor: pointer;
   transition: all .2s;
+  background: transparent;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
-
-.evidenza-box.obbl {
-  background: #1D9E7515;
+.ev-toggle-btn.obbl {
   color: #1D9E75;
   border-color: #1D9E75;
+  background: #1D9E7515;
 }
-
-.evidenza-box.non-obbl {
-  background: #D85A3015;
-  color: #D85A30;
+.ev-toggle-btn.non-obbl {
+  color: #fff;
   border-color: #D85A30;
+  background: #D85A30;
 }
-
-.evidenza-box:hover {
-  transform: scale(1.03);
-}
+.ev-toggle-btn:hover { transform: scale(1.04); }
 
 /* Pulsanti Tutte Obbligatorie */
 .btn-sel-all.obbl-btn { 
@@ -895,9 +917,12 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   color:#1D9E75 !important; 
 }
 .btn-sel-all.non-obbl-btn { 
-  background:#D85A3015 !important; 
+  background:#fff !important; 
   border-color:#D85A30 !important; 
   color:#D85A30 !important; 
+}
+.btn-sel-all.non-obbl-btn:hover {
+  background:#D85A3015 !important;
 }
 </style>
 </head>
@@ -910,12 +935,12 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <!-- SVG Arrow connector -->
 <svg id="tour-arrow" width="200" height="200">
   <defs>
-    <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L8,3 z" fill="rgba(0,198,255,.9)"/>
+    <marker id="arrowhead" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto">
+      <path d="M0,0 L0,5 L5,2.5 z" fill="rgba(0,198,255,.65)"/>
     </marker>
   </defs>
-  <path id="tour-arrow-path" fill="none" stroke="rgba(0,198,255,.9)" stroke-width="2"
-        stroke-dasharray="5,4" marker-end="url(#arrowhead)"/>
+  <path id="tour-arrow-path" fill="none" stroke="rgba(0,198,255,.65)" stroke-width="1.5"
+        stroke-dasharray="4,4" marker-end="url(#arrowhead)"/>
 </svg>
 
 <!-- Tour Card — dynamically filled by JS -->
@@ -1061,7 +1086,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
             <button class="btn-sel-all" id="btn-all-obbl" onclick="setAllObbligatorio(true)">
               <i class="fa-solid fa-flag"></i> Tutte Obbligatorie
             </button>
-            <button class="btn-sel-all" id="btn-all-nonobbl" onclick="setAllObbligatorio(false)">
+            <button class="btn-sel-all non-obbl-btn" id="btn-all-nonobbl" onclick="setAllObbligatorio(false)">
               <i class="fa-solid fa-flag"></i> Tutte Non Obbligatorie
             </button>
 
@@ -1411,21 +1436,12 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// ===================== GUIDED TOUR — SPOTLIGHT ENGINE =====================
+// ===================== GUIDED TOUR =====================
 let guideStep = 0;
 let tourActive = false;
-const TOTAL_STEPS = 8;
 
-/* -----------------------------------------------------------------------
-   STEP DEFINITIONS
-   target   : CSS selector of the element to spotlight (null = no spotlight)
-   variant  : 'dark' | 'light' | 'role'
-   position : 'right' | 'left' | 'top' | 'bottom' | 'center'
-   arrow    : true/false — draw SVG arrow from card to target
-   render   : function that returns the inner HTML of the card
------------------------------------------------------------------------ */
-const TOUR_STEPS = [
-  // 0 — Welcome, dark full-screen card
+// TOUR PER PAGINA
+const TOUR_REVIEWER = [
   {
     target: null,
     variant: 'dark',
@@ -1433,18 +1449,38 @@ const TOUR_STEPS = [
     arrow: false,
     render: (step, total) => `
       <div class="tc-header">
-        <span class="tc-badge"><span class="tc-badge-dot"></span>Demo interattiva</span>
+        <span class="tc-badge"><span class="tc-badge-dot"></span>Fase 1 — Reviewer</span>
       </div>
-      <div class="tc-title">Selezione domande — Reviewer</div>
+      <div class="tc-title">Benvenuto, Reviewer</div>
       <div class="tc-body">
-       "Sei ora nel ruolo di <strong>Reviewer (Mario Rossi)</strong>. L'Admin ha già 
-       configurato l'assessment — tocca a te selezionare le domande NIS2, caricare la 
-       documentazione e impostare il piano di lavoro."
+        Sei nel ruolo di <strong>Reviewer</strong>. L'Admin ha già configurato l'assessment —
+        il tuo compito è <strong>selezionare le domande NIS2</strong>, caricare la documentazione
+        e impostare il piano di lavoro prima di passare all'Owner.
       </div>
-      ${footerDark(step, total, 'Avvia il tour', true)}
+      ${footerDark(step, total, 'Inizia il tour', true)}
     `
   },
-  // 1 — Info card spotlight
+  {
+    target: '.tb-user',
+    variant: 'light',
+    position: 'bottom',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(0,198,255,.1)"><i class="fa-solid fa-user-circle" style="color:#00c6ff"></i></div>
+        <span class="tc-step-label">Utente Attivo</span>
+      </div>
+      <div class="tc-title">Il tuo ruolo: Reviewer</div>
+      <div class="tc-body">
+        In alto a destra trovi sempre il <strong>nome e ruolo dell'utente attivo</strong>.
+        In questa fase sei <strong>Mario Rossi — Reviewer</strong>.<br><br>
+        L'indicatore cambia automaticamente ad ogni transizione di ruolo:
+        Owner nella fase di compilazione, Auditor nella fase di validazione.
+      </div>
+      ${footerLight(step, total)}
+    `
+  },
   {
     target: '.info-card',
     variant: 'light',
@@ -1458,17 +1494,13 @@ const TOUR_STEPS = [
       </div>
       <div class="tc-title">Scheda Riepilogativa</div>
       <div class="tc-body">
-        Questa barra mostra i dati principali dell'assessment in corso: nome, azienda owner,
-        <strong>fase attiva</strong>, stato e tipologia di questionario.
-        Rimane visibile in tutte le fasi del workflow.
-      </div>
-      <div class="tc-tip"><i class="fa-solid fa-info-circle"></i>
-        La fase cambia automaticamente man mano che si avanza nel workflow.
+        Mostra i dati principali: nome assessment, azienda owner, <strong>fase attiva</strong>,
+        stato e tipologia di questionario. Rimane visibile in tutte le fasi del workflow
+        e si aggiorna automaticamente avanzando.
       </div>
       ${footerLight(step, total)}
     `
   },
-  // 2 — Step progress bar
   {
     target: '.step-prog',
     variant: 'light',
@@ -1478,18 +1510,17 @@ const TOUR_STEPS = [
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
         <div class="tc-icon-wrap" style="background:rgba(29,158,117,.1)"><i class="fa-solid fa-list-check" style="color:#1D9E75"></i></div>
-        <span class="tc-step-label">Avanzamento</span>
+        <span class="tc-step-label">Avanzamento Globale</span>
       </div>
-      <div class="tc-title">Barra di Avanzamento Fasi</div>
+      <div class="tc-title">Barra delle 6 Fasi</div>
       <div class="tc-body">
         Traccia le <strong>6 fasi</strong> del processo: Preparazione, Definizione Questionario,
-        Assessment, Post-Assessment, Monitoraggio e Chiusura. La fase corrente è evidenziata
-        in blu; quelle completate mostrano il segno di spunta.
+        Assessment, Post-Assessment, Monitoraggio e Chiusura. La fase corrente è in blu,
+        quelle completate mostrano il segno di spunta verde.
       </div>
       ${footerLight(step, total)}
     `
   },
-  // 3 — Tabs bar
   {
     target: '.tabs-bar',
     variant: 'light',
@@ -1503,94 +1534,110 @@ const TOUR_STEPS = [
       </div>
       <div class="tc-title">Tre Sezioni da Completare</div>
       <div class="tc-body">
-        Il Reviewer deve completare tutte e tre le sezioni prima di passare all'Owner:
-        <strong>Questionario</strong> (selezione domande), <strong>Documentazione</strong>
-        (upload allegati) e <strong>Piano di Lavoro</strong> (date di progetto).
-        Ogni sezione si segna con il segno di spunta una volta completata.
-      </div>
-      <div class="tc-tip"><i class="fa-solid fa-lightbulb"></i>
-        Clicca su ciascun tab per navigare tra le sezioni.
+        Prima di passare all'Owner devi completare <strong>tutte e tre le sezioni</strong>:<br><br>
+        <strong>📋 Questionario</strong> — seleziona le domande NIS2<br>
+        <strong>📁 Documentazione</strong> — carica gli allegati<br>
+        <strong>📅 Piano di lavoro</strong> — imposta le date di progetto<br><br>
+        Ogni tab si marca con ✓ una volta completato.
       </div>
       ${footerLight(step, total)}
     `
   },
-  // 4 — Selection grid
   {
-    target: '.sel-layout',
+    target: '.search-bar',
+    variant: 'light',
+    position: 'bottom',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(0,198,255,.1)"><i class="fa-solid fa-magnifying-glass" style="color:#00c6ff"></i></div>
+        <span class="tc-step-label">Ricerca e Filtri</span>
+      </div>
+      <div class="tc-title">Cerca e Filtra le Domande</div>
+      <div class="tc-body">
+        Usa la barra di ricerca per trovare domande per <strong>ID, testo, normativa
+        (NIS2, PSNC, GENERAL)</strong> o livello di compliance. I filtri colorati
+        permettono di isolare rapidamente categorie specifiche.
+      </div>
+      <div class="tc-tip"><i class="fa-solid fa-lightbulb"></i>
+        I filtri si combinano: puoi cercare solo le domande NIS2 Essenziali non ancora conformi.
+      </div>
+      ${footerLight(step, total)}
+    `
+  },
+  {
+    target: '.sel-sb',
+    variant: 'light',
+    position: 'right',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(0,198,255,.1)"><i class="fa-solid fa-list-ul" style="color:#00c6ff"></i></div>
+        <span class="tc-step-label">Domande Selezionate</span>
+      </div>
+      <div class="tc-title">Pannello Selezione</div>
+      <div class="tc-body">
+        Qui trovi l'elenco delle domande già incluse nell'assessment, raggruppate per area.
+        Usa le <strong>frecce su/giù</strong> per scorrere tra le pagine quando le domande
+        sono molte.<br><br>
+        Per ogni domanda puoi cambiare il flag <strong>Obbligatorio / Non Obbligatorio</strong>
+        direttamente da qui senza riaprire il modale.
+      </div>
+      ${footerLight(step, total)}
+    `
+  },
+  {
+    target: '.sel-main',
+    variant: 'light',
+    position: 'left',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(0,198,255,.1)"><i class="fa-solid fa-table-cells" style="color:#00c6ff"></i></div>
+        <span class="tc-step-label">Griglia Aree NIS2</span>
+      </div>
+      <div class="tc-title">Selezione Domande per Area</div>
+      <div class="tc-body">
+        Clicca su una card per aprire il dettaglio dell'area (GOVERN, IDENTIFY, PROTECT…)
+        e scegliere quali domande includere. La barra di progresso mostra quante
+        ne hai già selezionate.<br><br>
+        Il checkbox accanto al titolo dell'area seleziona o deseleziona tutte le domande
+        di quell'area in un click.
+      </div>
+      <div class="tc-tip"><i class="fa-solid fa-hand-pointer"></i>
+        Usa "Seleziona tutte" per includere tutte le 192 domande in un colpo solo.
+      </div>
+      ${footerLight(step, total)}
+    `
+  },
+  {
+    target: '.procedi',
     variant: 'light',
     position: 'top',
     arrow: true,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
-        <div class="tc-icon-wrap" style="background:rgba(0,198,255,.1)"><i class="fa-solid fa-table-cells" style="color:#00c6ff"></i></div>
-        <span class="tc-step-label">Selezione Domande</span>
+        <div class="tc-icon-wrap" style="background:rgba(29,158,117,.1)"><i class="fa-solid fa-circle-check" style="color:#1D9E75"></i></div>
+        <span class="tc-step-label">Passaggio all'Owner</span>
       </div>
-      <div class="tc-title">Griglia Aree di Controllo</div>
+      <div class="tc-title">Quando Puoi Procedere</div>
       <div class="tc-body">
-        A sinistra il riepilogo delle domande selezionate; a destra la griglia delle aree NIS2
-        (GOVERN, IDENTIFY, PROTECT, ecc.). Clicca su una card per aprire il dettaglio
-        e scegliere quali domande includere nell'assessment.
+        Il pulsante <strong>"Entra Owner"</strong> si attiva solo quando:<br><br>
+        ✅ Hai selezionato almeno una domanda<br>
+        ✅ Hai completato il tab Documentazione<br>
+        ✅ Hai compilato almeno 3 date nel Piano di lavoro<br><br>
+        Una volta attivo, clicca per passare al ruolo Owner.
       </div>
-      <div class="tc-tip"><i class="fa-solid fa-hand-pointer"></i>
-        Seleziona almeno una domanda, poi completa le altre due sezioni per abilitare il passaggio all'Owner.
-      </div>
-      ${footerLight(step, total)}
+      ${footerDark(step, total, 'Fine tour Reviewer', false)}
     `
-  },
-  // 5 — Owner role transition
-  {
-    target: '.tb-user',
-    variant: 'role',
-    position: 'bottom',
-    arrow: true,
-    render: (step, total) => `
-      <div class="tc-role-banner">
-        <div class="tc-role-avatar" style="background:linear-gradient(135deg,#0d9488,#065f46)">PB</div>
-        <div class="tc-role-name">Paolo Bianchi</div>
-        <span class="tc-role-tag" style="background:rgba(13,148,136,.1);color:#0d9488;border:1px solid rgba(13,148,136,.25)">
-          <i class="fa-solid fa-user-tie" style="font-size:9px"></i> Owner
-        </span>
-      </div>
-      <div class="tc-body">
-        Ora stai operando come <strong>Owner</strong>. Questo indicatore in alto a destra
-        mostra sempre il ruolo e il nome dell'utente attivo.
-      </div>
-      <div class="tc-checklist">
-        <div class="tc-check-item"><i class="fa-solid fa-pen-to-square"></i> Compila le risposte testuali per ogni domanda</div>
-        <div class="tc-check-item"><i class="fa-solid fa-chart-bar"></i> Seleziona il livello di maturità CMMI</div>
-        <div class="tc-check-item"><i class="fa-solid fa-paperclip"></i> Allega evidenze documentali se disponibili</div>
-      </div>
-      ${footerRole(step, total)}
-    `
-  },
-  // 6 — Auditor role transition
-  {
-    target: '.tb-user',
-    variant: 'role',
-    position: 'bottom',
-    arrow: true,
-    render: (step, total) => `
-      <div class="tc-role-banner">
-        <div class="tc-role-avatar" style="background:linear-gradient(135deg,#7c3aed,#4c1d95)">SV</div>
-        <div class="tc-role-name">Silvia Verdi</div>
-        <span class="tc-role-tag" style="background:rgba(124,58,237,.1);color:#7c3aed;border:1px solid rgba(124,58,237,.25)">
-          <i class="fa-solid fa-shield-halved" style="font-size:9px"></i> Auditor
-        </span>
-      </div>
-      <div class="tc-body">
-        Ruolo cambiato in <strong>Auditor</strong>. Silvia Verdi ha accesso a tutte le risposte
-        fornite dall'Owner e può procedere alla validazione.
-      </div>
-      <div class="tc-checklist">
-        <div class="tc-check-item"><i class="fa-solid fa-robot"></i> Avvia la validazione automatica tramite AI</div>
-        <div class="tc-check-item"><i class="fa-solid fa-pencil"></i> Oppure valida manualmente scegliendo Conforme / Parziale / Non conforme</div>
-        <div class="tc-check-item"><i class="fa-solid fa-file-lines"></i> Genera la relazione finale NIS2 al completamento</div>
-      </div>
-      ${footerRole(step, total)}
-    `
-  },
-  // 7 — Final step
+  }
+];
+
+const TOUR_OWNER = [
   {
     target: null,
     variant: 'dark',
@@ -1598,22 +1645,435 @@ const TOUR_STEPS = [
     arrow: false,
     render: (step, total) => `
       <div class="tc-header">
-        <span class="tc-badge"><span class="tc-badge-dot"></span>Tour completato</span>
+        <span class="tc-badge"><span class="tc-badge-dot"></span>Fase 2 — Owner</span>
       </div>
-      <div class="tc-title">Relazione Finale NIS2</div>
+      <div class="tc-title">Benvenuto, Paolo Bianchi</div>
       <div class="tc-body">
-        Dopo la validazione, il pulsante <strong>Genera Relazione NIS2</strong> produce il report
-        completo con grafici a torta, radar chart e tabella scoring per area. Il documento
-        include i principali findings e le azioni correttive raccomandate.
-        <br><br>
-        Esplora liberamente ogni sezione della demo.
+        Sei ora nel ruolo di <strong>Owner</strong>. Il Reviewer ha già selezionato
+        le domande — il tuo compito è <strong>compilare le risposte</strong>, indicare
+        il livello di maturità CMMI e allegare le evidenze documentali per ciascuna domanda.
+      </div>
+      ${footerDark(step, total, 'Inizia il tour', true)}
+    `
+  },
+  {
+    target: '.tb-user',
+    variant: 'light',
+    position: 'bottom',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(13,148,136,.1)"><i class="fa-solid fa-user-circle" style="color:#0d9488"></i></div>
+        <span class="tc-step-label">Utente Attivo</span>
+      </div>
+      <div class="tc-title">Il tuo ruolo: Owner</div>
+      <div class="tc-body">
+        L'indicatore in alto a destra mostra ora <strong>Paolo Bianchi — Owner</strong>.<br><br>
+        Questo conferma che sei entrato nella fase di compilazione. Ogni ruolo ha
+        accesso solo alle funzioni di sua competenza.
+      </div>
+      ${footerLight(step, total)}
+    `
+  },
+  {
+    target: '.prog-sum',
+    variant: 'light',
+    position: 'bottom',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(0,198,255,.1)"><i class="fa-solid fa-chart-line" style="color:#00c6ff"></i></div>
+        <span class="tc-step-label">Avanzamento Compilazione</span>
+      </div>
+      <div class="tc-title">Barra di Progresso Owner</div>
+      <div class="tc-body">
+        Mostra in tempo reale quante domande hai già compilato rispetto al totale assegnato.
+        Una domanda si considera compilata non appena inserisci una risposta testuale
+        <strong>oppure</strong> selezioni un livello CMMI.
+      </div>
+      ${footerLight(step, total)}
+    `
+  },
+  {
+    target: '.q-panel',
+    variant: 'light',
+    position: 'right',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(109,40,217,.1)"><i class="fa-solid fa-list-ul" style="color:#6d28d9"></i></div>
+        <span class="tc-step-label">Lista Domande</span>
+      </div>
+      <div class="tc-title">Pannello di Navigazione</div>
+      <div class="tc-body">
+        Elenca tutte le domande assegnate dal Reviewer. Ogni riga mostra:<br><br>
+        🔵 <strong>Numero</strong> — diventa ✓ verde una volta compilata<br>
+        🏷️ <strong>Area di controllo</strong> (GOVERN, IDENTIFY…)<br>
+        🔴/🟢 <strong>Obbligatorio / Non Obbligatorio</strong><br><br>
+        Clicca su qualsiasi domanda per saltarci direttamente,
+        oppure usa le frecce ← → nel pannello di destra.
+      </div>
+      ${footerLight(step, total)}
+    `
+  },
+  {
+    target: '.cmmi-row',
+    variant: 'light',
+    position: 'bottom',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(29,158,117,.1)"><i class="fa-solid fa-gauge" style="color:#1D9E75"></i></div>
+        <span class="tc-step-label">Livello CMMI</span>
+      </div>
+      <div class="tc-title">Maturità del Processo</div>
+      <div class="tc-body">
+        Seleziona il livello di maturità che descrive meglio la situazione attuale:<br><br>
+        <strong>N/A</strong> — non applicabile<br>
+        <strong>Iniziale</strong> — processi non strutturati<br>
+        <strong>Ripetibile</strong> — processi ripetuti ma non documentati<br>
+        <strong>Definito</strong> — documentato e standardizzato<br>
+        <strong>Gestito</strong> — misurato e controllato<br>
+        <strong>Ottimizzato</strong> — miglioramento continuo attivo
+      </div>
+      ${footerLight(step, total)}
+    `
+  },
+  {
+    target: '.ev-sec',
+    variant: 'light',
+    position: 'top',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(29,158,117,.1)"><i class="fa-solid fa-pen-to-square" style="color:#1D9E75"></i></div>
+        <span class="tc-step-label">Evidenza e Allegato</span>
+      </div>
+      <div class="tc-title">Compilazione Risposta</div>
+      <div class="tc-body">
+        Per ogni domanda compila due campi:<br><br>
+        <strong>📝 Evidenza testuale</strong> — descrivi processi adottati,
+        riferimenti documentali e strumenti utilizzati<br><br>
+        <strong>📎 Allegato</strong> — carica un file PDF, DOCX, XLSX o qualsiasi
+        formato a supporto della risposta<br><br>
+        L'Auditor vedrà tutto nella fase di validazione.
+      </div>
+      ${footerLight(step, total)}
+    `
+  },
+  {
+    target: '.owner-next-bar',
+    variant: 'light',
+    position: 'top',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(124,58,237,.1)"><i class="fa-solid fa-arrow-right" style="color:#7c3aed"></i></div>
+        <span class="tc-step-label">Passaggio all'Auditor</span>
+      </div>
+      <div class="tc-title">Quando Hai Finito</div>
+      <div class="tc-body">
+        Quando hai compilato le risposte che ritieni necessarie, clicca
+        <strong>"Avanti — Entra Auditor"</strong> per passare alla fase di validazione.<br><br>
+        Non è obbligatorio compilare tutte le domande prima di procedere —
+        puoi avanzare in qualsiasi momento.
+      </div>
+      ${footerDark(step, total, 'Fine tour Owner', false)}
+    `
+  }
+];
+
+const TOUR_AUDITOR = [
+  {
+    target: null,
+    variant: 'dark',
+    position: 'center',
+    arrow: false,
+    render: (step, total) => `
+      <div class="tc-header">
+        <span class="tc-badge"><span class="tc-badge-dot"></span>Fase 3 — Auditor</span>
+      </div>
+      <div class="tc-title">Benvenuta, Silvia Verdi</div>
+      <div class="tc-body">
+        Sei nel ruolo di <strong>Auditor</strong>. Hai accesso completo a tutte le risposte
+        e gli allegati forniti dall'Owner. Il tuo compito è <strong>validare ogni domanda</strong>
+        tramite AI o manualmente, per produrre la relazione finale NIS2.
+      </div>
+      ${footerDark(step, total, 'Inizia il tour', true)}
+    `
+  },
+  {
+    target: '.tb-user',
+    variant: 'light',
+    position: 'bottom',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(124,58,237,.1)"><i class="fa-solid fa-user-circle" style="color:#7c3aed"></i></div>
+        <span class="tc-step-label">Utente Attivo</span>
+      </div>
+      <div class="tc-title">Il tuo ruolo: Auditor</div>
+      <div class="tc-body">
+        L'indicatore in alto a destra mostra ora <strong>Silvia Verdi — Auditor</strong>.<br><br>
+        Come Auditor hai accesso in sola lettura alle risposte dell'Owner e puoi
+        validarle tramite AI o manualmente prima di generare la relazione finale.
+      </div>
+      ${footerLight(step, total)}
+    `
+  },
+  {
+    target: '.aud-prog-sum',
+    variant: 'light',
+    position: 'bottom',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(0,198,255,.1)"><i class="fa-solid fa-gauge-high" style="color:#00c6ff"></i></div>
+        <span class="tc-step-label">Riepilogo Validazione</span>
+      </div>
+      <div class="tc-title">Contatori di Validazione</div>
+      <div class="tc-body">
+        Mostra in tempo reale lo stato della validazione:<br><br>
+        🔢 <strong>Validate</strong> — domande già processate<br>
+        🟢 <strong>Conformi</strong> — validate positivamente<br>
+        🔴 <strong>Non conformi</strong> — con gap critici<br>
+        📊 <strong>Progresso</strong> — percentuale completamento<br><br>
+        Il pulsante "Genera Relazione" appare dopo aver validato almeno 3 domande.
+      </div>
+      ${footerLight(step, total)}
+    `
+  },
+  {
+    target: '.q-panel',
+    variant: 'light',
+    position: 'right',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(109,40,217,.1)"><i class="fa-solid fa-list-check" style="color:#6d28d9"></i></div>
+        <span class="tc-step-label">Lista Domande Auditor</span>
+      </div>
+      <div class="tc-title">Pannello di Navigazione</div>
+      <div class="tc-body">
+        Elenca tutte le domande da validare con indicatori colorati:<br><br>
+        ✅ <strong>Verde</strong> — validata come Conforme<br>
+        ⚠️ <strong>Giallo</strong> — Parzialmente Conforme<br>
+        ❌ <strong>Rosso</strong> — Non Conforme<br>
+        ⬜ <strong>Grigio</strong> — ancora da validare<br><br>
+        Clicca su qualsiasi riga per aprire la scheda corrispondente.
+      </div>
+      ${footerLight(step, total)}
+    `
+  },
+  {
+    target: '.owner-ans-view',
+    variant: 'light',
+    position: 'right',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(13,148,136,.1)"><i class="fa-solid fa-user-tie" style="color:#0d9488"></i></div>
+        <span class="tc-step-label">Risposta Owner</span>
+      </div>
+      <div class="tc-title">Visualizzazione Risposta Owner</div>
+      <div class="tc-body">
+        Mostra in sola lettura tutto ciò che l'Owner ha compilato:<br><br>
+        📊 <strong>Livello CMMI</strong> dichiarato<br>
+        📝 <strong>Evidenza testuale</strong> inserita<br>
+        📎 <strong>File allegato</strong> (se presente)<br><br>
+        Analizza questa sezione prima di procedere con la validazione.
+      </div>
+      ${footerLight(step, total)}
+    `
+  },
+  {
+    target: '.val-row',
+    variant: 'light',
+    position: 'bottom',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(0,198,255,.1)"><i class="fa-solid fa-robot" style="color:#00c6ff"></i></div>
+        <span class="tc-step-label">Validazione AI</span>
+      </div>
+      <div class="tc-title">Analisi Automatica con AI</div>
+      <div class="tc-body">
+        Clicca <strong>"Avvia Validazione AI"</strong> per far analizzare la risposta
+        dell'Owner dal motore di intelligenza artificiale.<br><br>
+        L'AI restituisce in pochi secondi esito, abstract, feedback dettagliato
+        e indice di conformità NIS2 da 1 a 4.
+      </div>
+      <div class="tc-tip"><i class="fa-solid fa-info-circle"></i>
+        Puoi sempre sovrascrivere l'esito AI con la validazione manuale.
+      </div>
+      ${footerLight(step, total)}
+    `
+  },
+  {
+    target: '.man-val-block',
+    variant: 'light',
+    position: 'top',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(212,160,23,.1)"><i class="fa-solid fa-user-shield" style="color:#D4A017"></i></div>
+        <span class="tc-step-label">Validazione Manuale</span>
+      </div>
+      <div class="tc-title">Override Manuale Auditor</div>
+      <div class="tc-body">
+        Valida manualmente scegliendo tra:<br><br>
+        🟢 <strong>Conforme</strong> — risposta adeguata<br>
+        🟡 <strong>Parzialmente Conforme</strong> — gap minori<br>
+        🔴 <strong>Non Conforme</strong> — azione correttiva richiesta<br><br>
+        Aggiungi note nel campo testo e clicca <strong>"Salva"</strong>.
+        Questo sovrascrive l'esito AI.
+      </div>
+      ${footerDark(step, total, 'Fine tour Auditor', false)}
+    `
+  }
+];
+
+const TOUR_REPORT = [
+  {
+    target: null,
+    variant: 'dark',
+    position: 'center',
+    arrow: false,
+    render: (step, total) => `
+      <div class="tc-header">
+        <span class="tc-badge"><span class="tc-badge-dot"></span>Fase 4 — Relazione Finale</span>
+      </div>
+      <div class="tc-title">Relazione NIS2 Generata</div>
+      <div class="tc-body">
+        La validazione è completata. 3AuditFlow ha elaborato tutti i dati e generato
+        la <strong>Relazione Finale NIS2</strong> pronta per essere condivisa con
+        il management e le autorità competenti.
+      </div>
+      ${footerDark(step, total, 'Scopri il report', true)}
+    `
+  },
+  {
+    target: '.report-hero',
+    variant: 'light',
+    position: 'bottom',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(0,198,255,.1)"><i class="fa-solid fa-file-shield" style="color:#00c6ff"></i></div>
+        <span class="tc-step-label">Intestazione Report</span>
+      </div>
+      <div class="tc-title">Header della Relazione</div>
+      <div class="tc-body">
+        Contiene i dati identificativi: <strong>ragione sociale</strong>,
+        nome assessment, data di generazione e normative applicate
+        (NIS2 Art. 21, PSNC 2024). Il badge verde conferma il completamento.
+      </div>
+      ${footerLight(step, total)}
+    `
+  },
+  {
+    target: '.donut-wrap',
+    variant: 'light',
+    position: 'right',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(109,40,217,.1)"><i class="fa-solid fa-chart-pie" style="color:#6d28d9"></i></div>
+        <span class="tc-step-label">Distribuzione Risposte</span>
+      </div>
+      <div class="tc-title">Grafico a Torta</div>
+      <div class="tc-body">
+        Mostra la distribuzione delle risposte validate con percentuali:<br><br>
+        🟢 <strong>Conformi</strong><br>
+        🟡 <strong>Parzialmente Conformi</strong><br>
+        🔴 <strong>Non Conformi</strong><br>
+        ⬜ <strong>Non Validate</strong>
+      </div>
+      ${footerLight(step, total)}
+    `
+  },
+  {
+    target: '.radar-wrap',
+    variant: 'light',
+    position: 'left',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(0,198,255,.1)"><i class="fa-solid fa-chart-area" style="color:#00c6ff"></i></div>
+        <span class="tc-step-label">Radar Chart</span>
+      </div>
+      <div class="tc-title">Score per Area di Controllo</div>
+      <div class="tc-body">
+        Il radar mostra lo score percentuale per ciascuna delle 6 aree NIS2
+        (GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND, RECOVER).<br><br>
+        Più grande è l'area colorata in blu, migliore è la postura di sicurezza
+        complessiva dell'organizzazione.
+      </div>
+      ${footerLight(step, total)}
+    `
+  },
+  {
+    target: '.score-table',
+    variant: 'light',
+    position: 'right',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(29,158,117,.1)"><i class="fa-solid fa-table" style="color:#1D9E75"></i></div>
+        <span class="tc-step-label">Tabella Scoring</span>
+      </div>
+      <div class="tc-title">Dettaglio Score per Area</div>
+      <div class="tc-body">
+        Per ogni area mostra score percentuale, barra visiva e livello:<br><br>
+        🟢 <strong>≥80%</strong> — Conforme<br>
+        🟡 <strong>60–79%</strong> — Parziale<br>
+        🔴 <strong>40–59%</strong> — Non Conforme<br>
+        🔴 <strong>&lt;40%</strong> — Critico
+      </div>
+      ${footerLight(step, total)}
+    `
+  },
+  {
+    target: '.finding-list',
+    variant: 'light',
+    position: 'left',
+    arrow: true,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(216,90,48,.1)"><i class="fa-solid fa-triangle-exclamation" style="color:#D85A30"></i></div>
+        <span class="tc-step-label">Findings</span>
+      </div>
+      <div class="tc-title">Principali Findings e Raccomandazioni</div>
+      <div class="tc-body">
+        Findings classificati per gravità:<br><br>
+        🔴 <strong>Critici</strong> — azione urgente entro 30 giorni<br>
+        🟡 <strong>Warning</strong> — piano di remediation raccomandato<br>
+        🟢 <strong>Positivi</strong> — punti di forza confermati<br><br>
+        Ogni finding include titolo, descrizione e timeline di intervento.
       </div>
       ${footerDark(step, total, 'Chiudi il tour', false)}
     `
   }
 ];
 
-// ---- Helper: footer generators ----
+// ---- Helper footer ----
 function footerDark(step, total, label, showSkip) {
   const dots = Array.from({length:total},(_,i)=>`<span class="tc-dot${i===step?' on':''}"></span>`).join('');
   return `<div class="tc-footer">
@@ -1645,7 +2105,9 @@ function footerRole(step, total) {
   </div>`;
 }
 
-// ---- Spotlight engine ----
+// ---- Stato tour corrente ----
+let activeTour = [];
+
 function tourSpotlight(selector, pad=8) {
   const sp = document.getElementById('tour-spotlight');
   if(!selector){ sp.classList.remove('active'); return null; }
@@ -1661,7 +2123,7 @@ function tourSpotlight(selector, pad=8) {
 }
 
 function tourPositionCard(card, targetRect, position) {
-  const cw = 340, pad = 16;
+  const cw = 320, pad = 14;
   const vw = window.innerWidth, vh = window.innerHeight;
   let top, left;
 
@@ -1671,30 +2133,39 @@ function tourPositionCard(card, targetRect, position) {
   } else {
     switch(position){
       case 'bottom':
-        top  = targetRect.bottom + 18;
-        left = Math.min(Math.max(targetRect.left, pad), vw - cw - pad);
+        top  = targetRect.bottom + 14;
+        // allinea a destra del target se vicino al bordo destro
+        if(targetRect.right > vw - cw - pad){
+          left = targetRect.right - cw;
+        } else {
+          left = targetRect.left;
+        }
         break;
       case 'top':
-        top  = targetRect.top - card.offsetHeight - 18;
-        left = Math.min(Math.max(targetRect.left, pad), vw - cw - pad);
+        top  = targetRect.top - card.offsetHeight - 14;
+        if(targetRect.right > vw - cw - pad){
+          left = targetRect.right - cw;
+        } else {
+          left = targetRect.left;
+        }
         break;
       case 'right':
         top  = Math.max(targetRect.top, pad);
-        left = targetRect.right + 18;
+        left = targetRect.right + 14;
         break;
       case 'left':
         top  = Math.max(targetRect.top, pad);
-        left = targetRect.left - cw - 18;
+        left = targetRect.left - cw - 14;
         break;
     }
-    // clamp
+    // clamp finale
     top  = Math.max(pad, Math.min(top,  vh - card.offsetHeight - pad));
     left = Math.max(pad, Math.min(left, vw - cw - pad));
   }
 
-  card.style.top  = top  + 'px';
-  card.style.left = left + 'px';
-  card.style.width = cw  + 'px';
+  card.style.top   = top  + 'px';
+  card.style.left  = left + 'px';
+  card.style.width = cw   + 'px';
   return { top, left, width: cw, height: card.offsetHeight };
 }
 
@@ -1702,12 +2173,9 @@ function tourDrawArrow(cardRect, targetRect, position) {
   const svg = document.getElementById('tour-arrow');
   const path = document.getElementById('tour-arrow-path');
   if(!targetRect || !cardRect){ svg.classList.remove('active'); return; }
-
-  // Arrow from card edge to target center
   let x1, y1, x2, y2;
   const tc = targetRect;
   const tx = tc.left + tc.width/2, ty = tc.top + tc.height/2;
-
   switch(position){
     case 'bottom': x1=cardRect.left+cardRect.width/2; y1=cardRect.top; x2=tx; y2=tc.bottom+6; break;
     case 'top':    x1=cardRect.left+cardRect.width/2; y1=cardRect.top+cardRect.height; x2=tx; y2=tc.top-6; break;
@@ -1715,33 +2183,24 @@ function tourDrawArrow(cardRect, targetRect, position) {
     case 'left':   x1=cardRect.left+cardRect.width; y1=cardRect.top+cardRect.height/2; x2=tc.left-6; y2=ty; break;
     default: svg.classList.remove('active'); return;
   }
-
   const minX=Math.min(x1,x2)-20, minY=Math.min(y1,y2)-20;
   const w=Math.abs(x2-x1)+40, h=Math.abs(y2-y1)+40;
   svg.setAttribute('viewBox',`${minX} ${minY} ${w} ${h}`);
   svg.style.left='0'; svg.style.top='0';
   svg.style.width=window.innerWidth+'px'; svg.style.height=window.innerHeight+'px';
-
-  // Bezier curve
-  const cx1=x1, cy1=(y1+y2)/2;
-  const cx2=x2, cy2=(y1+y2)/2;
+  const cx1=x1, cy1=(y1+y2)/2, cx2=x2, cy2=(y1+y2)/2;
   path.setAttribute('d',`M${x1},${y1} C${cx1},${cy1} ${cx2},${cy2} ${x2},${y2}`);
   svg.classList.add('active');
 }
 
 function tourRenderStep() {
-  const s = TOUR_STEPS[guideStep];
+  const s = activeTour[guideStep];
+  if(!s) return;
   const card = document.getElementById('tour-card');
-
-  // Remove old classes
   card.className = `tour-card var-${s.variant}`;
-  card.innerHTML = s.render(guideStep, TOTAL_STEPS);
+  card.innerHTML = s.render(guideStep, activeTour.length);
   card.classList.add('visible');
-
-  // Position spotlight
   const tRect = tourSpotlight(s.target, 10);
-
-  // Measure card height then position
   requestAnimationFrame(() => {
     const cRect = tourPositionCard(card, tRect, s.position);
     if(s.arrow && tRect){ tourDrawArrow(cRect, tRect, s.position); }
@@ -1749,7 +2208,8 @@ function tourRenderStep() {
   });
 }
 
-function showGuideModal() {
+function startTour(tourSteps) {
+  activeTour = tourSteps;
   guideStep = 0;
   tourActive = true;
   document.getElementById('tour-overlay').classList.add('active');
@@ -1758,8 +2218,7 @@ function showGuideModal() {
 
 function tourNext() {
   guideStep++;
-  if(guideStep >= TOUR_STEPS.length){ tourEnd(); return; }
-  // Re-animate card
+  if(guideStep >= activeTour.length){ tourEnd(); return; }
   const card = document.getElementById('tour-card');
   card.classList.remove('visible');
   setTimeout(()=>{ tourRenderStep(); }, 80);
@@ -1777,13 +2236,13 @@ function tourEnd() {
   card.className = 'tour-card';
 }
 
-// Keep spotlight in sync on resize
 window.addEventListener('resize', ()=>{ if(tourActive) tourRenderStep(); });
 
-// Legacy shims (called from transitions)
-function nextGuideStep() { tourNext(); }
-function closeGuideModal() { tourEnd(); }
-function skipGuide() { tourEnd(); }
+// Shims per compatibilità con chiamate esistenti nel codice
+function showGuideModal() { startTour(TOUR_REVIEWER); }
+function nextGuideStep()  { tourNext(); }
+function closeGuideModal(){ tourEnd(); }
+function skipGuide()      { tourEnd(); }
 
 // ===================== SIDEBAR =====================
 function toggleDsk(){
@@ -1981,54 +2440,97 @@ function toggleAreaAll(area){
 
 // ===================== SIDEBAR SELECTION (grouped by area) =====================
 function renderSelSb(){
-  const list=document.getElementById('sel-q-list');
-  const n=Object.keys(selDom).length;
-  document.getElementById('sel-n').textContent=n;
-  const areas=[...new Set(Object.values(selDom).map(d=>d.area))];
-  document.getElementById('sel-areas-ct').textContent=areas.length+' aree';
+  const list = document.getElementById('sel-q-list');
+  const n = Object.keys(selDom).length;
+  document.getElementById('sel-n').textContent = n;
+  const areas = [...new Set(Object.values(selDom).map(d => d.area))];
+  document.getElementById('sel-areas-ct').textContent = areas.length + ' aree';
 
-  if(n===0){
-    list.innerHTML='<div style="padding:18px 10px;text-align:center;font-size:11px;color:var(--muted);line-height:1.7">Nessuna domanda<br>selezionata</div>';
+  if(n === 0){
+    list.innerHTML = '<div style="padding:18px 10px;text-align:center;font-size:11px;color:var(--muted);line-height:1.7">Seleziona le domande<br>dalla griglia →</div>';
+    document.getElementById('sb-nav-info').textContent = '—';
+    document.getElementById('sb-prev').disabled = true;
+    document.getElementById('sb-next').disabled = true;
     return;
   }
 
+  // Costruisci lista piatta ordinata per area
+  const allItems = [];
   const grouped = {};
   Object.values(selDom).forEach(d => {
     if(!grouped[d.area]) grouped[d.area] = [];
     grouped[d.area].push(d);
   });
+  Object.keys(grouped).forEach(area => {
+    grouped[area].forEach(d => allItems.push(d));
+  });
+
+  const totalPages = Math.ceil(allItems.length / SB_PAGE_SIZE);
+  if(sbPage >= totalPages) sbPage = Math.max(0, totalPages - 1);
+
+  const pageItems = allItems.slice(sbPage * SB_PAGE_SIZE, (sbPage + 1) * SB_PAGE_SIZE);
+
+  // Raggruppa solo gli item della pagina corrente per area
+  const pageGrouped = {};
+  pageItems.forEach(d => {
+    if(!pageGrouped[d.area]) pageGrouped[d.area] = [];
+    pageGrouped[d.area].push(d);
+  });
 
   list.innerHTML = '';
-  Object.keys(grouped).forEach(area => {
+  Object.keys(pageGrouped).forEach(area => {
     const areaHeader = document.createElement('div');
     areaHeader.style.cssText = 'padding:8px 10px 4px;font-size:10px;font-weight:700;color:var(--accent);border-bottom:1px solid var(--border);margin-bottom:4px;';
     areaHeader.textContent = area;
     list.appendChild(areaHeader);
 
-    grouped[area].forEach(d => {
+    pageGrouped[area].forEach(d => {
       const isObbl = d.obbligatorio !== false;
       const r = document.createElement('div');
       r.className = 'sel-qrow sel';
       r.style.cursor = 'pointer';
       r.onclick = () => reopenModalFromSel(d.id);
-      
+
       r.innerHTML = `
         <div class="sel-chk on"><i class="fa-solid fa-check" style="font-size:7px"></i></div>
         <div style="flex:1;min-width:0">
           <div class="sel-qid">${d.id}</div>
           <div class="sel-qtxt">${d.domanda}</div>
           <div style="margin-top:5px">
-            <span class="evidenza-box ${isObbl ? 'obbl' : 'non-obbl'}">
-              ${isObbl ? '● Obbligatorio' : '○ Non Obbligatorio'}
-            </span>
+            <div class="ev-box-wrap">
+              <span class="ev-box-label">Evidenze</span>
+              <button class="ev-toggle-btn ${isObbl ? 'obbl' : 'non-obbl'}"
+                onclick="event.stopPropagation(); toggleObbligatorioSb('${d.id}', this)">
+                ${isObbl ? '● Obbligatorio' : '○ Non Obbligatorio'}
+              </button>
+            </div>
           </div>
         </div>
       `;
       list.appendChild(r);
     });
   });
+
+  // Aggiorna frecce e contatore pagina
+  const from = sbPage * SB_PAGE_SIZE + 1;
+  const to = Math.min((sbPage + 1) * SB_PAGE_SIZE, allItems.length);
+  document.getElementById('sb-nav-info').textContent = `${from}–${to} / ${allItems.length}`;
+  document.getElementById('sb-prev').disabled = sbPage === 0;
+  document.getElementById('sb-next').disabled = sbPage >= totalPages - 1;
 }
-function sbNavPage(d){ /* disabled for grouped view */ }
+function toggleObbligatorioSb(id, btn){
+  if(!selDom[id]) return;
+  selDom[id].obbligatorio = selDom[id].obbligatorio === false ? true : false;
+  const isObbl = selDom[id].obbligatorio !== false;
+  btn.className = 'ev-toggle-btn ' + (isObbl ? 'obbl' : 'non-obbl');
+  btn.textContent = isObbl ? '● Obbligatorio' : '○ Non Obbligatorio';
+}
+function sbNavPage(d){
+  const n = Object.keys(selDom).length;
+  const totalPages = Math.ceil(n / SB_PAGE_SIZE);
+  sbPage = Math.max(0, Math.min(totalPages - 1, sbPage + d));
+  renderSelSb();
+}
 
 // ===================== MODAL =====================
 function openModal(area,si){
@@ -2080,7 +2582,7 @@ function renderModalDom(){
   doms.forEach((d,di)=>{
     const match=!q||(d.id.toLowerCase().includes(q)||d.domanda.toLowerCase().includes(q)||d.normativa.toLowerCase().includes(q)||d.livello_nis2.toLowerCase().includes(q));
     const isSel=!!selDom[d.id];
-    const èEssenziale = selDom[d.id] ? selDom[d.id].essenziale !== false : true;
+    const isObbl=selDom[d.id] ? selDom[d.id].obbligatorio !== false : true;
 
     const it=document.createElement('div');
     it.className=`dom-item${isSel?' sel':''}${match?'':' hidden-f'}`;
@@ -2098,27 +2600,28 @@ function renderModalDom(){
         </div>
         <div class="dom-txt">${d.domanda}</div>
       </div>
-
-      <!-- FLAG ESSENZIALE — quadratino -->
-      <div onclick="event.stopImmediatePropagation(); toggleEssenziale('${d.id}', this)" 
-           style="margin-left:12px; width:28px; height:28px; border:2px solid ${èEssenziale?'#1D9E75':'#D85A30'}; 
-                  background:${èEssenziale?'#1D9E7515':'#D85A3015'}; border-radius:6px; 
-                  display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:13px; flex-shrink:0;">
-        ${èEssenziale ? 
-          '<span style="color:#1D9E75;font-weight:900;">✓</span>' : 
-          '<span style="color:#D85A30;font-weight:900;">✕</span>'}
+      <div onclick="event.stopImmediatePropagation();" style="margin-left:10px;flex-shrink:0;">
+        <div class="ev-box-wrap" style="flex-direction:column;gap:3px;align-items:flex-start;">
+          <span class="ev-box-label">Evidenze</span>
+          <button class="ev-toggle-btn ${isObbl?'obbl':'non-obbl'}"
+            onclick="toggleObbligatorioModal('${d.id}', this)">
+            ${isObbl?'● Obbligatorio':'○ Non Obbligatorio'}
+          </button>
+        </div>
       </div>
     `;
 
-    it.onclick = (e) => {
-      if (!e.target.closest('div[onclick*="toggleEssenziale"]')) toggleDom(d.id);
+    it.onclick=(e)=>{
+      if(!e.target.closest('[onclick*="toggleObbligatorioModal"]')) toggleDom(d.id);
     };
     cont.appendChild(it);
   });
 
   if(q && shown===0){
-    const nr=document.createElement('div'); nr.className='dom-no-res';
-    nr.textContent='Nessun risultato trovato.'; cont.appendChild(nr);
+    const nr=document.createElement('div');
+    nr.className='dom-no-res';
+    nr.textContent='Nessun risultato trovato.';
+    cont.appendChild(nr);
   }
 }
 function toggleDom(id){
@@ -2192,9 +2695,7 @@ function goToOwner(){
   document.getElementById('tb-uname').textContent='Paolo Bianchi';
   document.getElementById('tb-urole').textContent='Owner';
   setupOwner();
-  setTimeout(() => {
-    if (guideStep === 4) nextGuideStep();
-  }, 700);
+  setTimeout(() => { startTour(TOUR_OWNER); }, 700);
 }
 function backToReviewer(){
   document.getElementById('step-owner').style.display='none';
@@ -2223,7 +2724,7 @@ function renderOwnerList(){
     const ans=ownerAnswers[i];const hasAns=ans&&(ans.answer||ans.cmmi);
     const sel=i===ownerCurQ;
     
-    const èEssenziale = d.essenziale !== false;   // default essenziale
+    const èEssenziale = d.obbligatorio !== false;  // default essenziale
     const flagHTML = `<span class="q-ibadge" style="background:${èEssenziale?'#1D9E75':'#D85A30'};color:white;">${èEssenziale?'Essenziale':'Non Ess.'}</span>`;
     const li=document.createElement('li');
     li.className=`q-it${sel?' sel':''}${hasAns?' ans':''}`;
@@ -2239,7 +2740,7 @@ function renderOwnerList(){
         <div class="q-imeta">
           <span class="q-iid">${d.area}</span>
           <span class="q-ibadge" style="background:${èEssenziale ? '#1D9E75' : '#D85A30'}; color:white; font-size:9px; padding:2px 8px;">
-            ${èEssenziale ? 'Essenziale' : 'Non Ess.'}
+            ${èEssenziale ? 'Obbligatorio' : 'Non Obbl.'}
           </span>
           <span class="q-ibadge">${badge}</span>
         </div>
@@ -2316,9 +2817,7 @@ function goToAuditor(){
   document.getElementById('tb-uname').textContent='Silvia Verdi';
   document.getElementById('tb-urole').textContent='Auditor';
   setupAuditor();
-    setTimeout(() => {
-    if (guideStep === 5) nextGuideStep();
-  }, 700);
+  setTimeout(() => { startTour(TOUR_AUDITOR); }, 700);
 }
 function backToOwner(){
   document.getElementById('step-auditor').style.display='none';
@@ -2429,37 +2928,6 @@ function updateAuditorProg(){
   }
 }
 
-// ===================== FLAG ESSENZIALE =====================
-function toggleEssenziale(id, el){
-  if(!selDom[id]) return;
-  
-  const current = selDom[id].essenziale !== false;
-  selDom[id].essenziale = !current;
-
-  // Aggiorna visivamente il pulsante
-  el.style.background = selDom[id].essenziale ? '#1D9E75' : '#e2e5ee';
-  el.style.color = selDom[id].essenziale ? 'white' : '#555';
-  el.style.borderColor = selDom[id].essenziale ? '#1D9E75' : '#ccc';
-  el.innerHTML = `
-    <i class="fa-solid fa-flag"></i>
-    ${selDom[id].essenziale ? 'Essenziale' : 'Non Essenziale'}
-  `;
-}
-
-function setAllEssenziale(isEssenziale){
-  Object.keys(selDom).forEach(id => {
-    selDom[id].essenziale = isEssenziale;
-  });
-  
-  // Refresh
-  if(modalState.area){
-    renderModalDom();
-  }
-  renderGrid();
-  renderSelSb();
-  
-  alert(`Tutte le domande selezionate sono state impostate come ${isEssenziale ? 'ESSENZIALI' : 'NON ESSENZIALI'}`);
-}
 // Riapri modale cliccando dalla sidebar
 function reopenModalFromSel(id){
   for(const [area, subs] of Object.entries(NIS2_DATA)){
@@ -2476,7 +2944,14 @@ function reopenModalFromSel(id){
     }
   }
 }
-
+function toggleObbligatorioModal(id, btn){
+  if(!selDom[id]) return;
+  selDom[id].obbligatorio = selDom[id].obbligatorio === false ? true : false;
+  const isObbl = selDom[id].obbligatorio !== false;
+  btn.className = 'ev-toggle-btn ' + (isObbl ? 'obbl' : 'non-obbl');
+  btn.textContent = isObbl ? '● Obbligatorio' : '○ Non Obbligatorio';
+  renderSelSb();
+}
 // Toggle Obbligatorio
 function toggleObbligatorio(id, el){
   if(!selDom[id]) return;
@@ -2494,10 +2969,7 @@ function setAllObbligatorio(isObbl){
   renderGrid();
   renderSelSb();
   if(modalState.area) renderModalDom();
-
-  // Evidenzia pulsante attivo
-  document.getElementById('btn-all-obbl').classList.toggle('obbl-btn', isObbl);
-  document.getElementById('btn-all-nonobbl').classList.toggle('non-obbl-btn', !isObbl);
+  // Nessun lock sui pulsanti — rimangono sempre cliccabili
 }
 // ===================== AI VALIDATION =====================
 function doValAI(){
@@ -2576,9 +3048,7 @@ function showReport(){
   document.getElementById('info-fase').textContent='Post-Assessment';
   updateStepBar(5); // Arriva a chiusura
   renderReport();
-  setTimeout(() => {
-    if (guideStep === 6 || guideStep === 7) closeGuideModal();
-  }, 500);
+  setTimeout(() => { startTour(TOUR_REPORT); }, 600);
 }
 function renderReport(){
   const vals=Object.values(auditorValidations);
