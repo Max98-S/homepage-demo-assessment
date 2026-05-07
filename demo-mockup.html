@@ -669,17 +669,34 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   50%{opacity:.9;transform:scale(1.015)}
 }
 
-/* SVG Arrow connector */
+/* Freccia tour — linea tratteggiata CSS */
 #tour-arrow {
-  position: fixed; z-index: 10002; pointer-events: none;
-  display: none; overflow: visible;
+  position: fixed; inset: 0; z-index: 10002; pointer-events: none;
+  display: none;
 }
 #tour-arrow.active { display: block; }
-#tour-arrow-path {
-  stroke: rgba(0,198,255,.7);
-  stroke-width: 1.5;
-  stroke-dasharray: 4,4;
-  fill: none;
+.ta-stem {
+  position: absolute;
+  border-left: 2px dashed rgba(0,198,255,.7);
+  transform-origin: top left;
+  pointer-events: none;
+}
+.ta-dot {
+  position: absolute;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(0,198,255,.9);
+  box-shadow: 0 0 8px rgba(0,198,255,.7);
+  transform: translate(-50%,-50%);
+  pointer-events: none;
+}
+.ta-head-inner {
+  position: absolute;
+  width: 0; height: 0;
+  pointer-events: none;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 8px solid rgba(0,198,255,.85);
 }
 
 /* ---- TOUR CARD VARIANTS ---- */
@@ -933,15 +950,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <div id="tour-spotlight"></div>
 
 <!-- SVG Arrow connector -->
-<svg id="tour-arrow" width="200" height="200">
-  <defs>
-    <marker id="arrowhead" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto">
-      <path d="M0,0 L0,5 L5,2.5 z" fill="rgba(0,198,255,.65)"/>
-    </marker>
-  </defs>
-  <path id="tour-arrow-path" fill="none" stroke="rgba(0,198,255,.65)" stroke-width="1.5"
-        stroke-dasharray="4,4" marker-end="url(#arrowhead)"/>
-</svg>
+<!-- Freccia tour CSS -->
+<div id="tour-arrow"></div>
 
 <!-- Tour Card — dynamically filled by JS -->
 <div id="tour-card" class="tour-card"></div>
@@ -1273,7 +1283,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
               </div>
               <div class="oav-body">
                 <div>
-                  <div class="oav-cmmi-lbl">Livello CMMI</div>
+                  <div class="oav-cmmi-lbl">Livello</div>
                   <div class="oav-cmmi" style="margin-top:4px"><div class="oav-cmmi-val" id="oav-cmmi">—</div></div>
                 </div>
                 <div>
@@ -1451,7 +1461,7 @@ const TOUR_REVIEWER = [
       <div class="tc-header">
         <span class="tc-badge"><span class="tc-badge-dot"></span>Fase 1 — Reviewer</span>
       </div>
-      <div class="tc-title">Benvenuto, Reviewer</div>
+      <div class="tc-title">Fase 1 — Selezione questionario</div>
       <div class="tc-body">
         Sei nel ruolo di <strong>Reviewer</strong>. L'Admin ha già configurato l'assessment —
         il tuo compito è <strong>selezionare le domande NIS2</strong>, caricare la documentazione
@@ -1464,7 +1474,7 @@ const TOUR_REVIEWER = [
     target: '.tb-user',
     variant: 'light',
     position: 'bottom',
-    arrow: true,
+    arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
@@ -1485,7 +1495,7 @@ const TOUR_REVIEWER = [
     target: '.info-card',
     variant: 'light',
     position: 'bottom',
-    arrow: true,
+    arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
@@ -1505,7 +1515,7 @@ const TOUR_REVIEWER = [
     target: '.step-prog',
     variant: 'light',
     position: 'bottom',
-    arrow: true,
+    arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
@@ -1525,7 +1535,7 @@ const TOUR_REVIEWER = [
     target: '.tabs-bar',
     variant: 'light',
     position: 'bottom',
-    arrow: true,
+    arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
@@ -1547,7 +1557,7 @@ const TOUR_REVIEWER = [
     target: '.search-bar',
     variant: 'light',
     position: 'bottom',
-    arrow: true,
+    arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
@@ -1570,7 +1580,7 @@ const TOUR_REVIEWER = [
     target: '.sel-sb',
     variant: 'light',
     position: 'right',
-    arrow: true,
+    arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
@@ -1592,7 +1602,7 @@ const TOUR_REVIEWER = [
     target: '.sel-main',
     variant: 'light',
     position: 'left',
-    arrow: true,
+    arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
@@ -1617,7 +1627,7 @@ const TOUR_REVIEWER = [
     target: '.procedi',
     variant: 'light',
     position: 'top',
-    arrow: true,
+    arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
@@ -1627,9 +1637,9 @@ const TOUR_REVIEWER = [
       <div class="tc-title">Quando Puoi Procedere</div>
       <div class="tc-body">
         Il pulsante <strong>"Entra Owner"</strong> si attiva solo quando:<br><br>
-        ✅ Hai selezionato almeno una domanda<br>
-        ✅ Hai completato il tab Documentazione<br>
-        ✅ Hai compilato almeno 3 date nel Piano di lavoro<br><br>
+        ✓ Hai selezionato almeno una domanda<br>
+        ✓ Hai completato il tab Documentazione<br>
+        ✓ Hai compilato almeno 3 date nel Piano di lavoro<br><br>
         Una volta attivo, clicca per passare al ruolo Owner.
       </div>
       ${footerDark(step, total, 'Fine tour Reviewer', false)}
@@ -1647,11 +1657,11 @@ const TOUR_OWNER = [
       <div class="tc-header">
         <span class="tc-badge"><span class="tc-badge-dot"></span>Fase 2 — Owner</span>
       </div>
-      <div class="tc-title">Benvenuto, Paolo Bianchi</div>
+      <div class="tc-title">Fase 2 — Compilazione risposte</div>
       <div class="tc-body">
         Sei ora nel ruolo di <strong>Owner</strong>. Il Reviewer ha già selezionato
         le domande — il tuo compito è <strong>compilare le risposte</strong>, indicare
-        il livello di maturità CMMI e allegare le evidenze documentali per ciascuna domanda.
+        il livello del processo e allegare le evidenze documentali per ciascuna domanda.
       </div>
       ${footerDark(step, total, 'Inizia il tour', true)}
     `
@@ -1660,7 +1670,7 @@ const TOUR_OWNER = [
     target: '.tb-user',
     variant: 'light',
     position: 'bottom',
-    arrow: true,
+    arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
@@ -1680,7 +1690,7 @@ const TOUR_OWNER = [
     target: '.prog-sum',
     variant: 'light',
     position: 'bottom',
-    arrow: true,
+    arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
@@ -1691,7 +1701,7 @@ const TOUR_OWNER = [
       <div class="tc-body">
         Mostra in tempo reale quante domande hai già compilato rispetto al totale assegnato.
         Una domanda si considera compilata non appena inserisci una risposta testuale
-        <strong>oppure</strong> selezioni un livello CMMI.
+        <strong>oppure</strong> selezioni un livello.
       </div>
       ${footerLight(step, total)}
     `
@@ -1700,7 +1710,7 @@ const TOUR_OWNER = [
     target: '.q-panel',
     variant: 'light',
     position: 'right',
-    arrow: true,
+    arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
@@ -1710,8 +1720,8 @@ const TOUR_OWNER = [
       <div class="tc-title">Pannello di Navigazione</div>
       <div class="tc-body">
         Elenca tutte le domande assegnate dal Reviewer. Ogni riga mostra:<br><br>
-        🔵 <strong>Numero</strong> — diventa ✓ verde una volta compilata<br>
-        🏷️ <strong>Area di controllo</strong> (GOVERN, IDENTIFY…)<br>
+        • <strong>Numero</strong> — diventa ✓ verde una volta compilata<br>
+        • <strong>Area di controllo</strong> (GOVERN, IDENTIFY…)<br>
         🔴/🟢 <strong>Obbligatorio / Non Obbligatorio</strong><br><br>
         Clicca su qualsiasi domanda per saltarci direttamente,
         oppure usa le frecce ← → nel pannello di destra.
@@ -1723,16 +1733,16 @@ const TOUR_OWNER = [
     target: '.cmmi-row',
     variant: 'light',
     position: 'bottom',
-    arrow: true,
+    arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
         <div class="tc-icon-wrap" style="background:rgba(29,158,117,.1)"><i class="fa-solid fa-gauge" style="color:#1D9E75"></i></div>
-        <span class="tc-step-label">Livello CMMI</span>
+        <span class="tc-step-label">Valutazione processo</span>
       </div>
-      <div class="tc-title">Maturità del Processo</div>
+      <div class="tc-title">Livello di processo</div>
       <div class="tc-body">
-        Seleziona il livello di maturità che descrive meglio la situazione attuale:<br><br>
+        Seleziona il livello del processo per la domanda corrente:<br><br>
         <strong>N/A</strong> — non applicabile<br>
         <strong>Iniziale</strong> — processi non strutturati<br>
         <strong>Ripetibile</strong> — processi ripetuti ma non documentati<br>
@@ -1747,7 +1757,7 @@ const TOUR_OWNER = [
     target: '.ev-sec',
     variant: 'light',
     position: 'top',
-    arrow: true,
+    arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
@@ -1757,9 +1767,9 @@ const TOUR_OWNER = [
       <div class="tc-title">Compilazione Risposta</div>
       <div class="tc-body">
         Per ogni domanda compila due campi:<br><br>
-        <strong>📝 Evidenza testuale</strong> — descrivi processi adottati,
+        <strong>▹ Evidenza testuale</strong> — descrivi processi adottati,
         riferimenti documentali e strumenti utilizzati<br><br>
-        <strong>📎 Allegato</strong> — carica un file PDF, DOCX, XLSX o qualsiasi
+        <strong>▹ Allegato</strong> — carica un file PDF, DOCX, XLSX o qualsiasi
         formato a supporto della risposta<br><br>
         L'Auditor vedrà tutto nella fase di validazione.
       </div>
@@ -1770,7 +1780,7 @@ const TOUR_OWNER = [
     target: '.owner-next-bar',
     variant: 'light',
     position: 'top',
-    arrow: true,
+    arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
@@ -1799,7 +1809,7 @@ const TOUR_AUDITOR = [
       <div class="tc-header">
         <span class="tc-badge"><span class="tc-badge-dot"></span>Fase 3 — Auditor</span>
       </div>
-      <div class="tc-title">Benvenuta, Silvia Verdi</div>
+      <div class="tc-title">Fase 3 — Validazione</div>
       <div class="tc-body">
         Sei nel ruolo di <strong>Auditor</strong>. Hai accesso completo a tutte le risposte
         e gli allegati forniti dall'Owner. Il tuo compito è <strong>validare ogni domanda</strong>
@@ -1812,7 +1822,7 @@ const TOUR_AUDITOR = [
     target: '.tb-user',
     variant: 'light',
     position: 'bottom',
-    arrow: true,
+    arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
@@ -1832,7 +1842,7 @@ const TOUR_AUDITOR = [
     target: '.aud-prog-sum',
     variant: 'light',
     position: 'bottom',
-    arrow: true,
+    arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
@@ -1842,10 +1852,10 @@ const TOUR_AUDITOR = [
       <div class="tc-title">Contatori di Validazione</div>
       <div class="tc-body">
         Mostra in tempo reale lo stato della validazione:<br><br>
-        🔢 <strong>Validate</strong> — domande già processate<br>
-        🟢 <strong>Conformi</strong> — validate positivamente<br>
-        🔴 <strong>Non conformi</strong> — con gap critici<br>
-        📊 <strong>Progresso</strong> — percentuale completamento<br><br>
+        ▹ <strong>Validate</strong> — domande già processate<br>
+        ▹ <strong>Conformi</strong> — validate positivamente<br>
+        ▹ <strong>Non conformi</strong> — con gap critici<br>
+        ▹ <strong>Progresso</strong> — percentuale completamento<br><br>
         Il pulsante "Genera Relazione" appare dopo aver validato almeno 3 domande.
       </div>
       ${footerLight(step, total)}
@@ -1855,7 +1865,7 @@ const TOUR_AUDITOR = [
     target: '.q-panel',
     variant: 'light',
     position: 'right',
-    arrow: true,
+    arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
@@ -1878,7 +1888,7 @@ const TOUR_AUDITOR = [
     target: '.owner-ans-view',
     variant: 'light',
     position: 'right',
-    arrow: true,
+    arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
@@ -1888,9 +1898,9 @@ const TOUR_AUDITOR = [
       <div class="tc-title">Visualizzazione Risposta Owner</div>
       <div class="tc-body">
         Mostra in sola lettura tutto ciò che l'Owner ha compilato:<br><br>
-        📊 <strong>Livello CMMI</strong> dichiarato<br>
-        📝 <strong>Evidenza testuale</strong> inserita<br>
-        📎 <strong>File allegato</strong> (se presente)<br><br>
+        ◇ <strong>Livello</strong> dichiarato<br>
+        ◇ <strong>Evidenza testuale</strong> inserita<br>
+        ◇ <strong>File allegato</strong> (se presente)<br><br>
         Analizza questa sezione prima di procedere con la validazione.
       </div>
       ${footerLight(step, total)}
@@ -1900,7 +1910,7 @@ const TOUR_AUDITOR = [
     target: '.val-row',
     variant: 'light',
     position: 'bottom',
-    arrow: true,
+    arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
@@ -1924,7 +1934,7 @@ const TOUR_AUDITOR = [
     target: '.man-val-block',
     variant: 'light',
     position: 'top',
-    arrow: true,
+    arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
@@ -1934,9 +1944,9 @@ const TOUR_AUDITOR = [
       <div class="tc-title">Override Manuale Auditor</div>
       <div class="tc-body">
         Valida manualmente scegliendo tra:<br><br>
-        🟢 <strong>Conforme</strong> — risposta adeguata<br>
-        🟡 <strong>Parzialmente Conforme</strong> — gap minori<br>
-        🔴 <strong>Non Conforme</strong> — azione correttiva richiesta<br><br>
+        → <strong>Conforme</strong> — risposta adeguata<br>
+        → <strong>Parzialmente Conforme</strong> — gap minori<br>
+        → <strong>Non Conforme</strong> — azione correttiva richiesta<br><br>
         Aggiungi note nel campo testo e clicca <strong>"Salva"</strong>.
         Questo sovrascrive l'esito AI.
       </div>
@@ -1968,7 +1978,7 @@ const TOUR_REPORT = [
     target: '.report-hero',
     variant: 'light',
     position: 'bottom',
-    arrow: true,
+    arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
@@ -1988,7 +1998,7 @@ const TOUR_REPORT = [
     target: '.donut-wrap',
     variant: 'light',
     position: 'right',
-    arrow: true,
+    arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
@@ -2010,7 +2020,7 @@ const TOUR_REPORT = [
     target: '.radar-wrap',
     variant: 'light',
     position: 'left',
-    arrow: true,
+    arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
@@ -2031,7 +2041,7 @@ const TOUR_REPORT = [
     target: '.score-table',
     variant: 'light',
     position: 'right',
-    arrow: true,
+    arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
@@ -2053,7 +2063,7 @@ const TOUR_REPORT = [
     target: '.finding-list',
     variant: 'light',
     position: 'left',
-    arrow: true,
+    arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
@@ -2170,27 +2180,41 @@ function tourPositionCard(card, targetRect, position) {
 }
 
 function tourDrawArrow(cardRect, targetRect, position) {
-  const svg = document.getElementById('tour-arrow');
-  const path = document.getElementById('tour-arrow-path');
-  if(!targetRect || !cardRect){ svg.classList.remove('active'); return; }
+  const el = document.getElementById('tour-arrow');
+  el.innerHTML = '';
+  if(!targetRect || !cardRect){ el.classList.remove('active'); return; }
+  const pad = 8;
   let x1, y1, x2, y2;
   const tc = targetRect;
-  const tx = tc.left + tc.width/2, ty = tc.top + tc.height/2;
   switch(position){
-    case 'bottom': x1=cardRect.left+cardRect.width/2; y1=cardRect.top; x2=tx; y2=tc.bottom+6; break;
-    case 'top':    x1=cardRect.left+cardRect.width/2; y1=cardRect.top+cardRect.height; x2=tx; y2=tc.top-6; break;
-    case 'right':  x1=cardRect.left; y1=cardRect.top+cardRect.height/2; x2=tc.right+6; y2=ty; break;
-    case 'left':   x1=cardRect.left+cardRect.width; y1=cardRect.top+cardRect.height/2; x2=tc.left-6; y2=ty; break;
-    default: svg.classList.remove('active'); return;
+    case 'bottom': x1=cardRect.left+cardRect.width/2; y1=cardRect.top-pad; x2=tc.left+tc.width/2; y2=tc.bottom+pad; break;
+    case 'top':    x1=cardRect.left+cardRect.width/2; y1=cardRect.top+cardRect.height+pad; x2=tc.left+tc.width/2; y2=tc.top-pad; break;
+    case 'right':  x1=cardRect.left-pad; y1=cardRect.top+cardRect.height/2; x2=tc.right+pad; y2=tc.top+tc.height/2; break;
+    case 'left':   x1=cardRect.left+cardRect.width+pad; y1=cardRect.top+cardRect.height/2; x2=tc.left-pad; y2=tc.top+tc.height/2; break;
+    default: el.classList.remove('active'); return;
   }
-  const minX=Math.min(x1,x2)-20, minY=Math.min(y1,y2)-20;
-  const w=Math.abs(x2-x1)+40, h=Math.abs(y2-y1)+40;
-  svg.setAttribute('viewBox',`${minX} ${minY} ${w} ${h}`);
-  svg.style.left='0'; svg.style.top='0';
-  svg.style.width=window.innerWidth+'px'; svg.style.height=window.innerHeight+'px';
-  const cx1=x1, cy1=(y1+y2)/2, cx2=x2, cy2=(y1+y2)/2;
-  path.setAttribute('d',`M${x1},${y1} C${cx1},${cy1} ${cx2},${cy2} ${x2},${y2}`);
-  svg.classList.add('active');
+  const dx=x2-x1, dy=y2-y1, len=Math.sqrt(dx*dx+dy*dy);
+  if(len<10){ el.classList.remove('active'); return; }
+  const angle=Math.atan2(dy,dx)*180/Math.PI;
+
+  const dot=document.createElement('div');
+  dot.className='ta-dot';
+  dot.style.cssText=`left:${x1}px;top:${y1}px;`;
+  el.appendChild(dot);
+
+  const stem=document.createElement('div');
+  stem.className='ta-stem';
+  stem.style.cssText=`left:${x1}px;top:${y1}px;height:${len}px;transform:rotate(${angle-90}deg);`;
+  el.appendChild(stem);
+
+  const headWrap=document.createElement('div');
+  headWrap.style.cssText=`position:absolute;left:${x2}px;top:${y2}px;transform:translate(-50%,-50%) rotate(${angle-90}deg);`;
+  const head=document.createElement('div');
+  head.className='ta-head-inner';
+  headWrap.appendChild(head);
+  el.appendChild(headWrap);
+
+  el.classList.add('active');
 }
 
 function tourRenderStep() {
