@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{
   --bg:#f0f2f7;--surface:#fff;--border:#e2e5ee;
@@ -632,7 +633,111 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .finding-title{font-size:12px;font-weight:700;color:var(--text)}
 .finding-desc{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.6}
 .report-footer{text-align:center;padding:20px;font-size:11px;color:var(--muted);border-top:1px solid var(--border);margin-top:8px}
+/* AREA COMPLETED BANNER */
+.area-notif-banner {
+  position: fixed; top: calc(var(--th) + 12px); right: 20px;
+  transform: translateX(120%);
+  z-index: 9000; background: linear-gradient(135deg, #0d7a5a, #1D9E75);
+  color: #fff; border-radius: 12px; padding: 13px 18px;
+  display: flex; align-items: center; gap: 12px;
+  box-shadow: 0 8px 32px rgba(29,158,117,.4), 0 0 0 1px rgba(255,255,255,.1);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: transform .45s cubic-bezier(.34,1.56,.64,1), opacity .3s;
+  opacity: 0; pointer-events: none; max-width: 360px;
+}
+.area-notif-banner.show {
+  transform: translateX(0); opacity: 1;
+}
+.area-notif-banner .anb-icon {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: rgba(255,255,255,.2); display: flex; align-items: center;
+  justify-content: center; font-size: 16px; flex-shrink: 0;
+}
+.area-notif-banner .anb-text { display: flex; flex-direction: column; gap: 3px; }
+.area-notif-banner .anb-title { font-weight: 800; font-size: 13px; line-height: 1.3; }
+.area-notif-banner .anb-sub { font-size: 11px; opacity: .8; line-height: 1.4; }
+.area-notif-banner .anb-close {
+  width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,.15);
+  border: none; color: #fff; cursor: pointer; display: flex; align-items: center;
+  justify-content: center; font-size: 11px; flex-shrink: 0; margin-left: 4px;
+  transition: background .15s;
+}
+.area-notif-banner .anb-close:hover { background: rgba(255,255,255,.3); }
 
+/* AREA GROUP in Owner */
+.owner-area-group { margin-bottom: 0; }
+/* AREA GROUP in Owner */
+.owner-area-hdr {
+  display: flex; align-items: center; justify-content: space-between;
+  background: linear-gradient(135deg, #0d1f4e, #1a2a6c);
+  padding: 10px 14px;
+  position: sticky;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  border-top: 3px solid transparent; /* colorato via JS */
+  border-radius: 10px 10px 0 0;
+  margin-top: 14px;
+  top:0;
+  z-index: 10;
+  /* NIENTE sticky — evita sovrapposizioni */
+}
+.owner-area-hdr:first-child { margin-top: 0; }
+.owner-area-hdr-left { display: flex; align-items: center; gap: 9px; }
+.owner-area-hdr-icon { font-size: 16px; }
+.owner-area-hdr-name { font-size: 12px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: .5px; }
+.owner-area-hdr-count { font-size: 10px; color: rgba(255,255,255,.45); background: rgba(255,255,255,.08); padding: 2px 8px; border-radius: 99px; }
+
+.btn-area-done {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 9px; border-radius: 7px; font-size: 10px; font-weight: 700;
+  border: 1.5px solid rgba(255,255,255,.2); background: rgba(255,255,255,.07);
+  color: rgba(255,255,255,.5); cursor: not-allowed; font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: all .2s; white-space: nowrap; opacity: .5;
+  /* default: bloccato finché non risposte tutte */
+}
+.btn-area-done.ready {
+  border-color: rgba(29,158,117,.6); background: rgba(29,158,117,.12);
+  color: #1D9E75; cursor: pointer; opacity: 1; pointer-events: all;
+  box-shadow: 0 0 12px rgba(29,158,117,.5), 0 0 24px rgba(29,158,117,.2);
+  animation: area-glow 2s ease-in-out infinite;
+}
+
+@keyframes area-glow {
+  0%, 100% { 
+    box-shadow: 0 0 0 0 rgba(29,158,117,.7);
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 0 0 8px rgba(29,158,117,.0);
+    transform: scale(1.04);
+  }
+}
+.btn-area-done.ready:hover { background: rgba(29,158,117,.25); transform: translateY(-1px); }
+.btn-area-done.sent {
+  border-color: rgba(29,158,117,.3); background: rgba(29,158,117,.08);
+  color: #1D9E75; cursor: default; opacity: .7; pointer-events: none;
+}
+
+/* Wrapper domande dell'area — bordo laterale colorato */
+.owner-area-items {
+  border-left: 3px solid transparent;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  border-radius: 0 0 10px 10px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+.btn-area-done {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 9px; border-radius: 8px; font-size: 10px; font-weight: 700;
+  border: 1.5px solid rgba(29,158,117,.5); background: rgba(29,158,117,.1);
+  color: #1D9E75; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: all .2s; white-space: nowrap;
+}
+.btn-area-done:hover { background: rgba(29,158,117,.2); border-color: #1D9E75; transform: translateY(-1px); }
+.btn-area-done.sent {
+  border-color: rgba(255,255,255,.2); background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.5); cursor: default; transform: none; pointer-events: none;
+}
 /* ===================== GUIDED TOUR — SPOTLIGHT SYSTEM ===================== */
 
 /* Dark overlay with cutout hole via box-shadow */
@@ -944,6 +1049,14 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 </style>
 </head>
 <body>
+
+<div class="area-notif-banner" id="area-notif-banner">
+  <div class="anb-icon">✅</div>
+  <div class="anb-text">
+    <div class="anb-title" id="anb-title">Area completata</div>
+    <div class="anb-sub" id="anb-sub">Il Reviewer è stato notificato e può già rispondere</div>
+  </div>
+</div>
 
 <!-- TOUR OVERLAY (dark background with spotlight hole) -->
 <div id="tour-overlay"></div>
@@ -1312,7 +1425,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
               <div class="man-val-body">
                 <div class="man-val-radios">
                   <div class="mvr" id="mvr-acc" onclick="setManVal('accepted',this)"><div class="mvr-circle"></div><i class="fa-solid fa-circle-check" style="color:var(--green)"></i> Conforme</div>
-                  <div class="mvr" id="mvr-wrn" onclick="setManVal('warning',this)"><div class="mvr-circle"></div><i class="fa-solid fa-triangle-exclamation" style="color:var(--yellow)"></i> Parzialmente Conforme</div>
                   <div class="mvr" id="mvr-rej" onclick="setManVal('rejected',this)"><div class="mvr-circle"></div><i class="fa-solid fa-circle-xmark" style="color:var(--red)"></i> Non Conforme</div>
                 </div>
                 <textarea class="man-val-note" id="man-val-note" placeholder="Note Auditor: osservazioni, motivazione, richiesta integrazioni..."></textarea>
@@ -1618,7 +1730,7 @@ const TOUR_REVIEWER = [
         di quell'area in un click.
       </div>
       <div class="tc-tip"><i class="fa-solid fa-hand-pointer"></i>
-        Usa "Seleziona tutte" per includere tutte le 192 domande in un colpo solo.
+        Usa "Seleziona tutte" per includere tutte le domande in un colpo solo.
       </div>
       ${footerLight(step, total)}
     `
@@ -1636,11 +1748,10 @@ const TOUR_REVIEWER = [
       </div>
       <div class="tc-title">Quando Puoi Procedere</div>
       <div class="tc-body">
-        Il pulsante <strong>"Entra Owner"</strong> si attiva solo quando:<br><br>
-        ✓ Hai selezionato almeno una domanda<br>
-        ✓ Hai completato il tab Documentazione<br>
-        ✓ Hai compilato almeno 3 date nel Piano di lavoro<br><br>
-        Una volta attivo, clicca per passare al ruolo Owner.
+        Nell'applicativo ufficiale di <strong>3AuditFlow</strong>
+        ad ogni cambio di stato arriva una notifica sull'applicativo o tramite email ai diretti interessati
+        Solo in questo caso essensdo una <strong>demo</strong> puoi proseguire al prossimo step compilando
+        tutti e tre i campi richiesti: <br></br> 1) questionario 2) documentazione 3) piano di lavoro
       </div>
       ${footerDark(step, total, 'Fine tour Reviewer', false)}
     `
@@ -2344,15 +2455,20 @@ function refreshEntraOwnerBtns(){
 
 // ===================== FILTERS =====================
 function buildAreaFilters(){
-  const el=document.getElementById('area-filters');
-  Object.keys(NIS2_DATA).forEach(area=>{
-    const cfg=AREA_CFG[area]||{col:'#666'};
-    const locked=LOCKED_AREAS.has(area);
-    const btn=document.createElement('span');
-    btn.className='ftag'+(locked?' locked':'');
-    btn.setAttribute('data-area',area);
-    btn.innerHTML=`<span class="fdot" style="background:${cfg.col}"></span>${area}${locked?' <i class="fa-solid fa-lock" style="font-size:8px;opacity:.6"></i>':''}`;
-    if(!locked)btn.onclick=function(){toggleAreaFilter(area,this);};
+  const el = document.getElementById('area-filters');
+  el.innerHTML = ''; // reset per sicurezza
+  Object.keys(NIS2_DATA).forEach(area => {
+    const cfg = AREA_CFG[area] || { col: '#666' };
+    const locked = LOCKED_AREAS.has(area);
+    const btn = document.createElement('span');
+    btn.className = 'ftag' + (locked ? ' locked' : '');
+    btn.setAttribute('data-area', area);
+    btn.innerHTML = `<span class="fdot" style="background:${cfg.col}"></span>${area}`;
+    if(!locked){
+      btn.onclick = function(){
+        toggleAreaFilter(area, this);
+      };
+    }
     el.appendChild(btn);
   });
 }
@@ -2383,25 +2499,68 @@ function selectAll(){
 }
 function clearAll(){selDom={};renderGrid();renderSelSb();refreshEntraOwnerBtns();}
 
-function matchQ(d,area,sub){
-  if(activeFilters.size>0&&!activeFilters.has(area))return false;
-  const norm=d.normativa.toLowerCase();const nis=d.livello_nis2.toLowerCase();const comp=d.compliance.toLowerCase();
-  if(activeTagFilters.size>0){
+function matchQ(d, area, sub){
+  // Filtro per Area (dal pannello sinistro)
+  if(activeFilters.size > 0 && !activeFilters.has(area)) return false;
+
+  // Filtri Tag
+  if(activeTagFilters.size > 0){
+    const norm = (d.normativa || '').toLowerCase();
+    const nis  = (d.livello_nis2 || '').toLowerCase();
+    const comp = (d.compliance || '').toLowerCase().trim();
+
     for(const tf of activeTagFilters){
-      if(tf==='compliance'&&comp!=='compliance')return false;
-      if(tf==='no-compliance'&&comp!=='no compliance')return false;
-      if(tf==='essenziale'&&!nis.includes('essenziale'))return false;
-      if(tf==='importante'&&!nis.includes('importante'))return false;
-      if(tf==='nis2-norm'&&!norm.includes('nis2'))return false;
-      if(tf==='psnc'&&!norm.includes('psnc'))return false;
-      if(tf==='general'&&norm!=='general')return false;
+      switch(tf){
+        case 'compliance':
+          if(comp !== 'compliance' && comp !== 'compliant') return false;
+          break;
+        case 'no-compliance':
+          if(!comp.includes('no') && comp !== 'non conforme') return false;
+          break;
+        case 'essenziale':
+          if(!nis.includes('essenziale')) return false;
+          break;
+        case 'importante':
+          if(!nis.includes('importante')) return false;
+          break;
+        case 'nis2-norm':
+          if(!norm.includes('nis2')) return false;
+          break;
+        case 'psnc':
+          if(!norm.includes('psnc')) return false;
+          break;
+        case 'general':
+          if(norm !== 'general') return false;
+          break;
+      }
     }
   }
-  if(!searchTxt)return true;
-  return d.id.toLowerCase().includes(searchTxt)||d.domanda.toLowerCase().includes(searchTxt)||
-         area.toLowerCase().includes(searchTxt)||sub.toLowerCase().includes(searchTxt)||
-         d.normativa.toLowerCase().includes(searchTxt)||d.livello_nis2.toLowerCase().includes(searchTxt)||
-         d.compliance.toLowerCase().includes(searchTxt);
+
+  // Ricerca testuale
+  if(!searchTxt) return true;
+
+  const search = searchTxt.toLowerCase();
+  return (
+    (d.id || '').toLowerCase().includes(search) ||
+    (d.domanda || '').toLowerCase().includes(search) ||
+    area.toLowerCase().includes(search) ||
+    sub.toLowerCase().includes(search) ||
+    norm.includes(search) ||
+    nis.includes(search) ||
+    comp.includes(search)
+  );
+}
+
+// Miglioramento filtri - normalizzazione
+function toggleTagFilter(t, el){
+  if(activeTagFilters.has(t)){
+    activeTagFilters.delete(t);
+    el.classList.remove('on');
+  } else {
+    activeTagFilters.add(t);
+    el.classList.add('on');
+  }
+  renderGrid();
 }
 
 // ===================== RENDER GRID =====================
@@ -2735,44 +2894,122 @@ function backToReviewer(){
 }
 
 // ===================== OWNER =====================
+// ===================== OWNER =====================
+let completedAreas = new Set();
+
 function setupOwner(){
-  ownerQs=Object.values(selDom);ownerCurQ=0;
-  document.getElementById('ps-t').textContent=ownerQs.length;
-  document.getElementById('owner-q-panel-title').textContent=ownerQs.length+' domande assegnate dal Reviewer';
-  renderOwnerList();if(ownerQs.length>0)ownerSelectQ(0);
+  ownerQs = Object.values(selDom);
+  ownerCurQ = 0;
+  completedAreas = new Set();
+  document.getElementById('ps-t').textContent = ownerQs.length;
+  document.getElementById('owner-q-panel-title').textContent = ownerQs.length + ' domande assegnate dal Reviewer';
+  renderOwnerList();
+  if(ownerQs.length > 0) ownerSelectQ(0);
   updateOwnerProg();
 }
 function renderOwnerList(){
-  const list=document.getElementById('owner-q-list');list.innerHTML='';
-  ownerQs.forEach((d,i)=>{
-    const ans=ownerAnswers[i];const hasAns=ans&&(ans.answer||ans.cmmi);
-    const sel=i===ownerCurQ;
-    
-    const èEssenziale = d.obbligatorio !== false;  // default essenziale
-    const flagHTML = `<span class="q-ibadge" style="background:${èEssenziale?'#1D9E75':'#D85A30'};color:white;">${èEssenziale?'Essenziale':'Non Ess.'}</span>`;
-    const li=document.createElement('li');
-    li.className=`q-it${sel?' sel':''}${hasAns?' ans':''}`;
-    li.onclick=()=>ownerSelectQ(i);
-    
-    const badge=hasAns?'✏️ Compilata':d.id;
-    const numCont=hasAns?'<i class="fa-solid fa-check"></i>':i+1;
-    
-    li.innerHTML=`
-      <div class="q-num">${numCont}</div>
-      <div class="q-ib">
-        <div class="q-itxt">${d.domanda.length>75?d.domanda.slice(0,75)+'…':d.domanda}</div>
-        <div class="q-imeta">
-          <span class="q-iid">${d.area}</span>
-          <span class="q-ibadge" style="background:${èEssenziale ? '#1D9E75' : '#D85A30'}; color:white; font-size:9px; padding:2px 8px;">
-            ${èEssenziale ? 'Obbligatorio' : 'Non Obbl.'}
-          </span>
-          <span class="q-ibadge">${badge}</span>
-        </div>
+  const list = document.getElementById('owner-q-list');
+  list.innerHTML = '';
+
+  const byArea = {};
+  ownerQs.forEach((d, i) => {
+    if(!byArea[d.area]) byArea[d.area] = [];
+    byArea[d.area].push({ d, i });
+  });
+
+  Object.entries(byArea).forEach(([area, items]) => {
+    const cfg = AREA_CFG[area] || { col: '#00c6ff', icon: '📋' };
+    const areaCompleted = completedAreas.has(area);
+
+    const answeredCount = items.filter(({ i }) => {
+      const ans = ownerAnswers[i];
+      return ans && (ans.answer || ans.cmmi);
+    }).length;
+
+    const allAnswered = answeredCount === items.length;
+
+    // Stato pulsante
+    let btnCls, btnHtml;
+    if(areaCompleted) {
+      btnCls = 'sent';
+      btnHtml = '<i class="fa-solid fa-check"></i> Notificato';
+    } else if(allAnswered) {
+      btnCls = 'ready';
+      btnHtml = '<i class="fa-solid fa-paper-plane"></i> Completa area';
+    } else {
+      btnCls = '';
+      btnHtml = `<i class="fa-solid fa-lock"></i> ${answeredCount}/${items.length} risposte`;
+    }
+
+    // Header
+    const hdr = document.createElement('div');
+    hdr.className = 'owner-area-hdr';
+    hdr.style.borderTopColor = cfg.col;
+    hdr.innerHTML = `
+      <div class="owner-area-hdr-left">
+        <span class="owner-area-hdr-icon">${cfg.icon}</span>
+        <span class="owner-area-hdr-name" style="color:${areaCompleted ? '#1D9E75' : '#fff'}">${area}</span>
+        <span class="owner-area-hdr-count" style="background:${cfg.col}22;color:${cfg.col}">${answeredCount}/${items.length}</span>
       </div>
+      <button class="btn-area-done ${btnCls}" 
+              id="btn-area-done-${area}"
+              ${allAnswered && !areaCompleted ? `onclick="markAreaDone('${area}')"` : ''}>
+        ${btnHtml}
+      </button>
     `;
-    list.appendChild(li);
+    list.appendChild(hdr);
+
+    // Wrapper domande con bordo colorato laterale
+    const itemsWrap = document.createElement('div');
+    itemsWrap.className = 'owner-area-items';
+    itemsWrap.style.borderLeftColor = areaCompleted ? '#1D9E75' : cfg.col + '66';
+
+    items.forEach(({ d, i }) => {
+      const ans = ownerAnswers[i];
+      const hasAns = ans && (ans.answer || ans.cmmi);
+      const sel = i === ownerCurQ;
+      const isObbl = d.obbligatorio !== false;
+
+      const li = document.createElement('li');
+      li.className = `q-it${sel ? ' sel' : ''}${hasAns ? ' ans' : ''}`;
+      li.style.listStyle = 'none';
+      li.onclick = () => ownerSelectQ(i);
+      li.innerHTML = `
+        <div class="q-num">${hasAns ? '<i class="fa-solid fa-check"></i>' : i + 1}</div>
+        <div class="q-ib">
+          <div class="q-itxt">${d.domanda.length > 70 ? d.domanda.slice(0, 70) + '…' : d.domanda}</div>
+          <div class="q-imeta">
+            <span class="q-iid">${d.id}</span>
+            <span class="q-ibadge" style="background:${isObbl ? '#1D9E75' : '#D85A30'};color:#fff;font-size:9px;padding:2px 8px;">
+              ${isObbl ? 'Obbl.' : 'Non obbl.'}
+            </span>
+          </div>
+        </div>
+      `;
+      itemsWrap.appendChild(li);
+    });
+
+    list.appendChild(itemsWrap);
   });
 }
+
+function markAreaDone(area) {
+  if(completedAreas.has(area)) return;
+  completedAreas.add(area);
+
+  const cfg = AREA_CFG[area] || { icon: '📋' };
+  const banner = document.getElementById('area-notif-banner');
+  document.getElementById('anb-title').textContent = `${cfg.icon}  Area "${area}" completata`;
+  document.getElementById('anb-sub').textContent = 'Il Reviewer è stato notificato e può già rispondere a questa area';
+  banner.classList.add('show');
+
+  // Chiudi automaticamente dopo 5s
+  clearTimeout(window._bannerTimer);
+  window._bannerTimer = setTimeout(() => { banner.classList.remove('show'); }, 5000);
+
+  renderOwnerList();
+}
+
 function ownerSelectQ(idx){
   if(ownerQs[ownerCurQ])ownerSaveEdits();
   ownerCurQ=idx;const d=ownerQs[idx];if(!d)return;
@@ -2790,9 +3027,12 @@ function ownerSelectQ(idx){
   renderOwnerList();
 }
 function ownerSaveEdits(){
-  if(!ownerQs[ownerCurQ])return;
-  if(!ownerAnswers[ownerCurQ])ownerAnswers[ownerCurQ]={};
-  ownerAnswers[ownerCurQ].answer=document.getElementById('owner-a-ev').value;
+  if(!ownerQs[ownerCurQ]) return;
+  if(!ownerAnswers[ownerCurQ]) ownerAnswers[ownerCurQ] = {};
+  ownerAnswers[ownerCurQ].answer = document.getElementById('owner-a-ev').value;
+  // Salva anche il CMMI correntemente selezionato
+  const sel = document.querySelector('.cmmi-r.on');
+  if(sel) ownerAnswers[ownerCurQ].cmmi = sel.getAttribute('data-v');
 }
 function setCmmi(v,el){
   if(!ownerAnswers[ownerCurQ])ownerAnswers[ownerCurQ]={};
@@ -2888,10 +3128,8 @@ function auditorSelectQ(idx){
   document.getElementById('aud-a-qid').textContent=d.id+' · '+d.area;
   document.getElementById('aud-a-qtxt').textContent=d.domanda;
   document.getElementById('oav-title').textContent=d.domanda;
-  const cmmiVal=ownerAns.cmmi||'—';
-  document.getElementById('oav-cmmi').textContent=cmmiVal;
-  const ansText=ownerAns.answer||'';
-  document.getElementById('oav-ans-txt').textContent=ansText||'Nessuna evidenza fornita dall\'Owner.';
+  document.getElementById('oav-cmmi').textContent=ownerAns.cmmi||'—';
+  document.getElementById('oav-ans-txt').textContent=ownerAns.answer||'Nessuna evidenza fornita dall\'Owner.';
   const fw=document.getElementById('oav-file-wrap');
   if(uploadedFiles[idx]){
     const f=uploadedFiles[idx];const kb=f.size/1024;
@@ -2907,15 +3145,15 @@ function auditorSelectQ(idx){
   } else {
     aiBtn.disabled=false;aiBtn.innerHTML='<i class="fa-solid fa-robot"></i> Avvia Validazione AI';
   }
+  // Reset validazione manuale — solo i due pulsanti che esistono nell'HTML
   manValCurChoice=null;
   document.getElementById('mvr-acc').className='mvr';
-  document.getElementById('mvr-wrn').className='mvr';
   document.getElementById('mvr-rej').className='mvr';
   document.getElementById('man-val-note').value='';
   document.getElementById('man-val-save').classList.remove('on');
   if(v&&v.source==='manual'){
-    const cls=v.status==='accepted'?'on-acc':v.status==='warning'?'on-wrn':'on-rej';
-    const mvrId=v.status==='accepted'?'mvr-acc':v.status==='warning'?'mvr-wrn':'mvr-rej';
+    const mvrId=v.status==='accepted'?'mvr-acc':'mvr-rej';
+    const cls=v.status==='accepted'?'on-acc':'on-rej';
     document.getElementById(mvrId).className='mvr '+cls;
     document.getElementById('man-val-note').value=v.note||'';
     manValCurChoice=v.status;
@@ -2995,6 +3233,167 @@ function setAllObbligatorio(isObbl){
   if(modalState.area) renderModalDom();
   // Nessun lock sui pulsanti — rimangono sempre cliccabili
 }
+// ===================== DOCUMENTO DI CHIUSURA PDF =====================
+async function generateClosingPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF('p', 'mm', 'a4');
+  const w = doc.internal.pageSize.getWidth();
+  let y = 22;
+
+  // Header
+  doc.setFillColor(6, 14, 31);
+  doc.rect(0, 0, w, 42, 'F');
+  doc.setTextColor(255,255,255);
+  doc.setFontSize(21);
+  doc.text("Documento di Chiusura Assessment", w/2, 18, { align: "center" });
+  doc.setFontSize(12);
+  doc.text("NIS2 Assessment • 3AInformatica S.r.l.", w/2, 27, { align: "center" });
+  doc.text(new Date().toLocaleDateString('it-IT'), w/2, 34, { align: "center" });
+
+  y = 55;
+
+  // ===================== HELPERS =====================
+const pageH = doc.internal.pageSize.getHeight();
+
+function checkPageSpace(extra = 20){
+  if(y + extra > pageH - 20){
+    doc.addPage();
+    y = 20;
+  }
+}
+
+function sectionTitle(title){
+  checkPageSpace(20);
+  doc.setFontSize(16);
+  doc.setTextColor(26,42,108);
+  doc.text(title, 20, y);
+  y += 10;
+}
+
+function normalText(txt, x = 20, max = 165, lh = 7){
+  doc.setFontSize(11);
+  doc.setTextColor(60,60,60);
+
+  const lines = doc.splitTextToSize(txt, max);
+  lines.forEach(line => {
+    checkPageSpace(lh);
+    doc.text(line, x, y);
+    y += lh;
+  });
+}
+
+// ===================== EXECUTIVE SUMMARY =====================
+sectionTitle("Executive Summary");
+
+const total = ownerQs.length;
+const done = Object.values(auditorValidations).length;
+const acc = Object.values(auditorValidations).filter(v => v?.status === 'accepted').length;
+const rej = Object.values(auditorValidations).filter(v => v?.status === 'rejected').length;
+const wrn = Object.values(auditorValidations).filter(v => v?.status === 'warning').length;
+
+normalText(`Domande totali: ${total}`);
+normalText(`Validazioni completate: ${done}`);
+normalText(`Conformi: ${acc}`);
+normalText(`Parzialmente conformi: ${wrn}`);
+normalText(`Non conformi: ${rej}`);
+
+y += 6;
+
+doc.setFontSize(18);
+doc.setTextColor(26,42,108);
+doc.text("Score Finale: 3.51 / 4", 20, y);
+y += 10;
+
+normalText("Rischio residuo ridotto del 19.23%");
+
+y += 10;
+
+// ===================== GRAFICO BARRE =====================
+sectionTitle("Grafico Distribuzione Validazioni");
+
+const chartX = 25;
+const chartY = y;
+const barW = 28;
+const maxH = 55;
+
+const values = [acc, wrn, rej];
+const labels = ["Conformi", "Warning", "Non Conf."];
+const colors = [
+  [29,158,117],
+  [212,160,23],
+  [216,90,48]
+];
+
+const maxVal = Math.max(...values, 1);
+
+values.forEach((v, i) => {
+  const h = (v / maxVal) * maxH;
+  const x = chartX + (i * 45);
+
+  doc.setFillColor(...colors[i]);
+  doc.rect(x, chartY + (maxH - h), barW, h, 'F');
+
+  doc.setFontSize(10);
+  doc.setTextColor(40,40,40);
+  doc.text(String(v), x + 10, chartY + (maxH - h) - 4);
+
+  const label = doc.splitTextToSize(labels[i], 24);
+  doc.text(label, x, chartY + maxH + 8);
+});
+
+y += 80;
+
+// ===================== RACCOMANDAZIONI =====================
+sectionTitle("Raccomandazioni Principali");
+
+const recs = [
+  ["RAC01", "CONTROLLI ORGANIZZATIVI", "Aggiornamento piano di gestione del rischio", "Alto"],
+  ["RAC02", "CONTROLLI SULLE PERSONE", "Formazione obbligatoria phishing e awareness", "Moderato"],
+  ["RAC03", "CONTROLLI TECNOLOGICI", "Implementazione UEBA su sistemi critici", "Alto"]
+];
+
+recs.forEach(([id, ambito, desc, crit]) => {
+
+  checkPageSpace(18);
+
+  doc.setDrawColor(230,230,230);
+  doc.roundedRect(20, y - 5, 170, 20, 3, 3);
+
+  doc.setFontSize(10);
+  doc.setTextColor(26,42,108);
+  doc.text(id, 25, y + 2);
+
+  doc.setFontSize(10);
+  const ambitoTxt = doc.splitTextToSize(ambito, 45);
+  doc.text(ambitoTxt, 42, y + 2);
+
+  const descTxt = doc.splitTextToSize(desc, 70);
+  doc.text(descTxt, 95, y + 2);
+
+  doc.setFontSize(10);
+  doc.setTextColor(
+    crit === 'Alto' ? 216 : 212,
+    crit === 'Alto' ? 90 : 160,
+    crit === 'Alto' ? 48 : 23
+  );
+
+  doc.text(crit, 170, y + 2);
+
+  y += 26;
+});
+
+// ===================== FOOTER =====================
+doc.setFontSize(10);
+doc.setTextColor(120,120,120);
+doc.text(
+  "Documento generato da 3AuditFlow • Confidenziale",
+  w / 2,
+  285,
+  { align: "center" }
+);
+
+doc.save(`Chiusura_Assessment_NIS2_${new Date().toISOString().slice(0,10)}.pdf`);
+}
 // ===================== AI VALIDATION =====================
 function doValAI(){
   const d=ownerQs[auditorCurQ];if(!d)return;
@@ -3046,9 +3445,8 @@ function showAIResult(status,score,abs,fbs){
 function setManVal(v,el){
   manValCurChoice=v;
   document.getElementById('mvr-acc').className='mvr';
-  document.getElementById('mvr-wrn').className='mvr';
   document.getElementById('mvr-rej').className='mvr';
-  const cls=v==='accepted'?'on-acc':v==='warning'?'on-wrn':'on-rej';
+  const cls=v==='accepted'?'on-acc':'on-rej';
   el.className='mvr '+cls;
   document.getElementById('man-val-save').classList.add('on');
 }
@@ -3075,22 +3473,26 @@ function showReport(){
   setTimeout(() => { startTour(TOUR_REPORT); }, 600);
 }
 function renderReport(){
-  const vals=Object.values(auditorValidations);
-  const done=vals.length;
-  const acc=vals.filter(v=>v.status==='accepted').length;
-  const wrn=vals.filter(v=>v.status==='warning').length;
-  const rej=vals.filter(v=>v.status==='rejected').length;
-  const tot=ownerQs.length;
-  const areas=Object.keys(NIS2_DATA);
-  const areaScores=areas.map(a=>{
-    const adoms=ownerQs.filter(d=>d.area===a);
-    const validIdx=adoms.map(d=>ownerQs.indexOf(d)).filter(i=>auditorValidations[i]);
-    const accCount=validIdx.filter(i=>auditorValidations[i]&&auditorValidations[i].status==='accepted').length;
-    const score=adoms.length>0?Math.round((accCount/Math.max(adoms.length,1))*100):Math.round(Math.random()*40+40);
-    return{area:a,score:isNaN(score)?Math.round(Math.random()*40+40):score};
+  const vals = Object.values(auditorValidations);
+  const done = vals.length;
+  const acc = vals.filter(v => v.status === 'accepted').length;
+  const wrn = vals.filter(v => v.status === 'warning').length;
+  const rej = vals.filter(v => v.status === 'rejected').length;
+  const tot = ownerQs.length;
+  const areas = Object.keys(NIS2_DATA);
+  
+  const areaScores = areas.map(a => {
+    const adoms = ownerQs.filter(d => d.area === a);
+    const validIdx = adoms.map(d => ownerQs.indexOf(d)).filter(i => auditorValidations[i]);
+    const accCount = validIdx.filter(i => auditorValidations[i] && auditorValidations[i].status === 'accepted').length;
+    const score = adoms.length > 0 ? Math.round((accCount / Math.max(adoms.length, 1)) * 100) : Math.round(Math.random() * 40 + 40);
+    return {area: a, score: isNaN(score) ? Math.round(Math.random() * 40 + 40) : score};
   });
-  document.getElementById('step-report').innerHTML=`
+
+  document.getElementById('step-report').innerHTML = `
 <div class="report-wrap">
+
+  <!-- HERO -->
   <div class="report-hero">
     <div>
       <a href="#" class="tb-logo">
@@ -3109,6 +3511,8 @@ function renderReport(){
       </div>
     </div>
   </div>
+
+  <!-- GRAFICI -->
   <div class="report-grid">
     <div class="rep-card">
       <h4><i class="fa-solid fa-chart-pie"></i> Distribuzione Risposte</h4>
@@ -3127,39 +3531,58 @@ function renderReport(){
       <div class="radar-wrap">${buildRadar(areaScores)}</div>
     </div>
   </div>
+
+  <!-- DETTAGLIO PER AREA -->
   <div class="report-grid">
     <div class="rep-card">
       <h4><i class="fa-solid fa-table"></i> Dettaglio per Area</h4>
       <table class="score-table">
         <thead><tr><th>Area</th><th>Score</th><th>Barra</th><th>Livello</th></tr></thead>
         <tbody>
-          ${areaScores.map(({area,score})=>{
-            const lvl=score>=80?{l:'Conforme',c:'#1D9E75'}:score>=60?{l:'Parziale',c:'#D4A017'}:score>=40?{l:'Non conf.',c:'#D85A30'}:{l:'Critico',c:'#8b0000'};
-            return`<tr><td style="font-weight:700">${area}</td><td style="font-weight:800;color:${lvl.c}">${score}%</td><td><div class="score-bar"><div class="score-bar-fill" style="width:${score}%;background:${lvl.c}"></div></div></td><td><span class="score-badge" style="background:${lvl.c}18;color:${lvl.c};border:1px solid ${lvl.c}33">${lvl.l}</span></td></tr>`;
+          ${areaScores.map(({area,score}) => {
+            const lvl = score >= 80 ? {l:'Conforme',c:'#1D9E75'} : 
+                       score >= 60 ? {l:'Parziale',c:'#D4A017'} : 
+                       score >= 40 ? {l:'Non conf.',c:'#D85A30'} : {l:'Critico',c:'#8b0000'};
+            return `<tr>
+              <td style="font-weight:700">${area}</td>
+              <td style="font-weight:800;color:${lvl.c}">${score}%</td>
+              <td><div class="score-bar"><div class="score-bar-fill" style="width:${score}%;background:${lvl.c}"></div></div></td>
+              <td><span class="score-badge" style="background:${lvl.c}18;color:${lvl.c};border:1px solid ${lvl.c}33">${lvl.l}</span></td>
+            </tr>`;
           }).join('')}
         </tbody>
       </table>
     </div>
+
+    <!-- FINDINGS -->
     <div class="rep-card">
       <h4><i class="fa-solid fa-magnifying-glass-chart"></i> Principali Findings</h4>
       <div class="finding-list">
         <div class="finding crit"><div class="finding-ic">🔴</div><div class="finding-body"><div class="finding-title">Piano di Gestione del Rischio — Gap critico</div><div class="finding-desc">Il piano di gestione del rischio non è stato aggiornato negli ultimi 14 mesi. Azione correttiva urgente entro 30 giorni.</div></div></div>
         <div class="finding warn"><div class="finding-ic">🟡</div><div class="finding-body"><div class="finding-title">Monitoraggio Fisico — Integrazione SIEM assente</div><div class="finding-desc">Il monitoraggio fisico non è integrato con il SIEM aziendale. Piano di remediation previsto Q4 2025.</div></div></div>
-        <div class="finding warn"><div class="finding-ic">🟡</div><div class="finding-body"><div class="finding-title">UEBA — Gap su sistemi legacy e VPN</div><div class="finding-desc">La soluzione UEBA non copre i sistemi legacy e le VPN di vecchia generazione.</div></div></div>
-        <div class="finding ok"><div class="finding-ic">🟢</div><div class="finding-body"><div class="finding-title">Policy Framework — Pienamente conforme</div><div class="finding-desc">Framework di policy approvato dal CDA con 6 policy distinte. Nessuna azione richiesta.</div></div></div>
-        <div class="finding ok"><div class="finding-ic">🟢</div><div class="finding-body"><div class="finding-title">SIEM &amp; Incident Detection — Eccellente</div><div class="finding-desc">SIEM enterprise H24 con correlazione real-time e threat intelligence integrata. Coverage 98% endpoint.</div></div></div>
+        <div class="finding ok"><div class="finding-ic">🟢</div><div class="finding-body"><div class="finding-title">SIEM & Incident Detection — Eccellente</div><div class="finding-desc">SIEM enterprise H24 con correlazione real-time e threat intelligence integrata.</div></div></div>
       </div>
     </div>
   </div>
+
+  <!-- PULSANTE PICCOLO CHIUSURA ASSESSMENT -->
+  <div style="margin:40px auto; padding:20px; background:rgba(29,158,117,0.08); border:1px solid #1D9E75; border-radius:14px; max-width:500px; text-align:center;">
+    <button onclick="generateClosingPDF()" 
+            style="padding:12px 28px; font-size:14px; font-weight:700; background:linear-gradient(135deg,#1D9E75,#158f68); color:white; border:none; border-radius:9px; cursor:pointer; box-shadow:0 6px 20px rgba(29,158,117,.4); display:inline-flex; align-items:center; gap:10px;">
+      <i class="fa-solid fa-file-pdf"></i> 
+      Scarica Documento di Chiusura Assessment
+    </button>
+    <div style="margin-top:10px; font-size:12px; color:#1D9E75;">
+      PDF ufficiale con Executive Summary, Raccomandazioni e Grafici
+    </div>
+  </div>
+
+  <!-- FOOTER -->
   <div class="report-footer">
     <strong>3AuditFlow</strong> by 3A Informatica · Assessment Cybersecurity NIS2 Q2-2025 · Documento riservato<br>
     Generato il ${new Date().toLocaleDateString('it-IT')} alle ${new Date().toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'})} · © 2025 3AuditFlow
-    <div style="margin-top:12px">
-      <button onclick="backToAuditorFromReport()" style="padding:9px 20px;border-radius:8px;border:1.5px solid var(--border);background:var(--surface);color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">
-        <i class="fa-solid fa-arrow-left"></i> Torna alla Validazione
-      </button>
-    </div>
   </div>
+
 </div>`;
 }
 function backToAuditorFromReport(){
