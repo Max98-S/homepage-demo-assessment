@@ -1,0 +1,1943 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>3AuditFlow – Piattaforma NIS2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --bg:#f0f2f7;--surface:#fff;--border:#e2e5ee;
+  --text:#1a2a6c;--muted:#7b8ab8;--accent:#00c6ff;
+  --grad:linear-gradient(135deg,#00c6ff,#1a2a6c);
+  --sb:linear-gradient(180deg,#060e1f 0%,#1a2a6c 100%);
+  --top:linear-gradient(90deg,#060e1f 0%,#1a2a6c 100%);
+  --sw:230px;--swc:56px;--th:58px;
+  --green:#1D9E75;--red:#D85A30;--yellow:#D4A017;
+  --shadow:0 4px 24px rgba(26,42,108,.09);--r:12px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);height:100%;overflow:hidden;-webkit-tap-highlight-color:transparent}
+
+/* ===== OVERLAY INTRO ===== */
+.ov{position:fixed;inset:0;z-index:9999;background:radial-gradient(ellipse at 60% 40%,#0d1f4e 0%,#060e1f 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;padding:24px 20px}
+.ov-badge{display:flex;align-items:center;gap:8px;background:rgba(0,198,255,.1);border:1px solid rgba(0,198,255,.25);border-radius:99px;padding:6px 16px;font-size:11px;color:#00c6ff;font-weight:700;letter-spacing:.6px}
+.ov-dot{width:8px;height:8px;border-radius:50%;background:#00c6ff;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.5);opacity:.5}}
+.ov-logo-text{font-family:'DM Serif Display',serif;font-size:clamp(36px,7vw,56px);color:#fff;letter-spacing:-1.5px;line-height:1.1;text-align:center}
+.ov-logo-text em{color:#00c6ff;font-style:italic}
+.ov-sub{font-size:clamp(13px,3.5vw,15px);color:rgba(255,255,255,.5);text-align:center;max-width:560px;line-height:1.8}
+.ov-roles{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+.ov-role-btn{padding:10px 22px;border-radius:10px;font-size:13px;font-weight:700;background:rgba(255,255,255,.07);color:rgba(255,255,255,.8);border:1.5px solid rgba(255,255,255,.14);cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.ov-role-btn:hover{background:rgba(0,198,255,.18);border-color:rgba(0,198,255,.45);color:#fff;transform:translateY(-2px)}
+.ov-role-btn.super{border-color:rgba(212,160,23,.4);color:#D4A017;background:rgba(212,160,23,.08)}
+.ov-role-btn.super:hover{background:rgba(212,160,23,.2)}
+
+/* ===== SHELL ===== */
+.shell{display:flex;height:100dvh;overflow:hidden}
+.sb-ov{display:none;position:fixed;inset:0;z-index:89;background:rgba(0,0,0,.55);backdrop-filter:blur(2px)}
+.sb-ov.open{display:block}
+
+/* ===== TOPBAR ===== */
+.topbar{position:fixed;top:0;left:0;right:0;height:var(--th);background:var(--top);border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;padding:0 16px;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.5);gap:12px}
+.tb-burger{display:none;width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);align-items:center;justify-content:center;color:rgba(255,255,255,.7);font-size:16px;cursor:pointer;flex-shrink:0;transition:all .2s}
+.tb-burger:hover{background:rgba(0,198,255,.2);color:#00c6ff}
+@media(max-width:767px){.tb-burger{display:flex}}
+.tb-logo-wrap{display:flex;align-items:center;gap:8px;flex-shrink:0;margin-left:8px}
+.tb-logo-icon{width:34px;height:34px;border-radius:8px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;font-weight:800;font-family:'DM Serif Display',serif;flex-shrink:0}
+.tb-logo-name{font-family:'DM Serif Display',serif;font-size:22px;color:#fff;letter-spacing:-0.5px}
+.tb-logo-name em{color:#00c6ff;font-style:italic}
+.tb-spacer{flex:1}
+.tb-icons{display:flex;align-items:center;gap:10px}
+.tb-ic{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.7);font-size:14px;cursor:pointer;transition:all .2s;position:relative;flex-shrink:0}
+.tb-ic:hover{background:rgba(0,198,255,.2);border-color:rgba(0,198,255,.4);color:#00c6ff}
+.notif-dot{position:absolute;top:3px;right:3px;width:8px;height:8px;border-radius:50%;background:#ef4444;border:2px solid #060e1f}
+.tb-user{display:flex;align-items:center;gap:8px;background:rgba(0,198,255,.12);border:1.5px solid rgba(0,198,255,.28);border-radius:10px;padding:5px 12px 5px 5px;cursor:pointer;transition:all .2s;flex-shrink:0;margin-left:4px;position:relative}
+.tb-user:hover{background:rgba(0,198,255,.22)}
+.tb-av{width:30px;height:30px;border-radius:8px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;flex-shrink:0}
+.tb-user-info{display:flex;flex-direction:column;line-height:1.2}
+.tb-uname{font-size:12px;font-weight:700;color:#fff;white-space:nowrap}
+.tb-urole{font-size:9px;font-weight:600;color:rgba(0,198,255,.8);white-space:nowrap;letter-spacing:.3px;text-transform:uppercase}
+@media(max-width:480px){.tb-user-info{display:none}.tb-user{padding:5px}}
+
+/* ===== ROLE DROPDOWN ===== */
+.role-dropdown{position:absolute;top:calc(100% + 8px);right:0;width:220px;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:0 16px 48px rgba(0,0,0,.18);z-index:200;overflow:hidden;display:none}
+.role-dropdown.open{display:block;animation:fadeSlideDown .2s ease}
+@keyframes fadeSlideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.rd-header{padding:10px 14px;background:linear-gradient(135deg,#060e1f,#1a2a6c);font-size:9px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.rd-item{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;transition:all .15s;border-bottom:1px solid var(--border)}
+.rd-item:last-child{border-bottom:none}
+.rd-item:hover{background:rgba(0,198,255,.06)}
+.rd-item.active{background:rgba(0,198,255,.08)}
+.rd-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.rd-name{font-size:12px;font-weight:600;color:var(--text);flex:1}
+.rd-item.active .rd-name{color:var(--accent);font-weight:700}
+.rd-check{font-size:11px;color:var(--accent)}
+
+/* ===== SIDEBAR ===== */
+.sidebar{position:fixed;top:var(--th);left:0;width:var(--sw);height:calc(100dvh - var(--th));background:var(--sb);display:flex;flex-direction:column;overflow-y:auto;z-index:90;transition:transform .28s cubic-bezier(.4,0,.2,1),width .25s;scrollbar-width:thin;scrollbar-color:rgba(0,198,255,.2) transparent}
+.sidebar::-webkit-scrollbar{width:3px}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(0,198,255,.2);border-radius:3px}
+.sidebar.col{width:var(--swc)}
+@media(max-width:767px){.sidebar{transform:translateX(-100%);width:var(--sw)!important;box-shadow:4px 0 30px rgba(0,0,0,.5)}.sidebar.mob{transform:translateX(0)}}
+.sb-toggle{width:100%;display:flex;align-items:center;justify-content:flex-end;padding:12px 16px;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.07);color:rgba(255,255,255,.35);cursor:pointer;transition:all .2s;min-height:44px}
+.sb-toggle:hover{color:#00c6ff;background:rgba(0,198,255,.07)}
+.sidebar.col .sb-toggle{justify-content:center;padding:12px 0}
+.sb-nav{list-style:none;padding:6px 0 0;flex:1}
+.sb-sec{margin-bottom:2px}
+.sb-lbl{display:block;padding:12px 18px 4px;font-size:9px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:rgba(255,255,255,.28);white-space:nowrap;overflow:hidden;transition:opacity .2s}
+.sidebar.col .sb-lbl{opacity:0;height:0;padding:0}
+.sb-sub{list-style:none}
+.sb-sub li .sbl{display:flex;align-items:center;gap:10px;padding:10px 18px;font-size:12.5px;font-weight:500;color:rgba(255,255,255,.6);text-decoration:none;cursor:pointer;border-left:3px solid transparent;transition:all .18s;white-space:nowrap;overflow:hidden;min-height:42px}
+.sb-sub li .sbl i{font-size:12px;color:rgba(255,255,255,.35);flex-shrink:0;width:15px;text-align:center}
+.sb-sub li .sbl:hover{color:#fff;background:rgba(255,255,255,.06);border-left-color:rgba(0,198,255,.4)}
+.sb-sub li .sbl:hover i{color:#00c6ff}
+.sb-sub li .sbl.active{color:#00c6ff;background:rgba(0,198,255,.1);border-left-color:#00c6ff;font-weight:700}
+.sb-sub li .sbl.active i{color:#00c6ff}
+.sidebar.col .sb-sub li .sbl{padding:11px 0;justify-content:center;margin:2px 6px;border-radius:8px;border-left:none;gap:0}
+.sidebar.col .sb-sub li .sbl i{font-size:15px;width:auto}
+.sidebar.col .sb-sub li .sbl span{display:none}
+.sb-bottom{padding:10px 8px;border-top:1px solid rgba(255,255,255,.08);margin-top:auto}
+
+/* ===== MAIN ===== */
+.main{margin-left:0;margin-top:var(--th);flex:1;height:calc(100dvh - var(--th));overflow-y:auto;overflow-x:hidden;padding:20px 22px 80px;background:var(--bg);-webkit-overflow-scrolling:touch}
+.main.with-sb{margin-left:var(--sw)}
+.main.with-sb.col{margin-left:var(--swc)}
+@media(max-width:767px){.main{margin-left:0!important;padding:14px 14px 80px}}
+
+/* ===== PAGE HEADER ===== */
+.ph{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;gap:10px;flex-wrap:wrap}
+.ph-left{display:flex;align-items:center;gap:11px}
+.ph-bar{width:4px;height:36px;border-radius:2px;background:var(--grad);flex-shrink:0}
+.ph-title{font-size:clamp(16px,4vw,21px);font-weight:800;color:var(--text)}
+.ph-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.ph-right{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+
+/* ===== BUTTONS ===== */
+.btn-primary{padding:10px 20px;border-radius:9px;font-size:13px;font-weight:700;background:var(--grad);color:#fff;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;display:inline-flex;align-items:center;gap:8px;transition:all .2s;box-shadow:0 4px 14px rgba(0,198,255,.25)}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,198,255,.4)}
+.btn-outline{padding:10px 20px;border-radius:9px;font-size:13px;font-weight:700;background:var(--surface);color:var(--text);border:1.5px solid var(--border);cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.btn-danger{padding:10px 20px;border-radius:9px;font-size:13px;font-weight:700;background:rgba(216,90,48,.08);color:var(--red);border:1.5px solid rgba(216,90,48,.3);cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+.btn-danger:hover{background:rgba(216,90,48,.18)}
+.btn-sm{padding:7px 14px;font-size:12px}
+
+/* ===== TABLES ===== */
+.table-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.table-card table{width:100%;border-collapse:collapse;font-size:12.5px}
+.table-card th{padding:10px 14px;text-align:left;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);border-bottom:2px solid var(--border);background:linear-gradient(135deg,rgba(26,42,108,.03),transparent);white-space:nowrap}
+.table-card td{padding:11px 14px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:middle}
+.table-card tr:last-child td{border-bottom:none}
+.table-card tr:hover td{background:rgba(0,198,255,.02)}
+.td-actions{display:flex;gap:6px;align-items:center}
+.act-btn{width:30px;height:30px;border-radius:7px;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .2s}
+.act-btn:hover{border-color:var(--accent);color:var(--accent)}
+.act-btn.danger:hover{border-color:var(--red);color:var(--red)}
+
+/* ===== BADGES ===== */
+.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:99px;font-size:10px;font-weight:700;white-space:nowrap}
+.badge-green{background:rgba(29,158,117,.1);color:var(--green);border:1px solid rgba(29,158,117,.2)}
+.badge-blue{background:rgba(0,198,255,.1);color:#0099cc;border:1px solid rgba(0,198,255,.2)}
+.badge-yellow{background:rgba(212,160,23,.1);color:var(--yellow);border:1px solid rgba(212,160,23,.2)}
+.badge-red{background:rgba(216,90,48,.1);color:var(--red);border:1px solid rgba(216,90,48,.2)}
+.badge-muted{background:var(--bg);color:var(--muted);border:1px solid var(--border)}
+.badge-gold{background:rgba(212,160,23,.12);color:#a07a00;border:1px solid rgba(212,160,23,.3)}
+
+/* ===== STATS CARDS ===== */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-bottom:20px}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px}
+.stat-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:4px}
+.stat-val{font-size:28px;font-weight:800;color:var(--text);line-height:1}
+.stat-lbl{font-size:11px;color:var(--muted);font-weight:600}
+.stat-delta{font-size:10px;font-weight:700;display:flex;align-items:center;gap:3px}
+.delta-up{color:var(--green)}
+.delta-down{color:var(--red)}
+
+/* ===== MODAL ===== */
+.modal-bg{position:fixed;inset:0;z-index:500;background:rgba(6,14,31,.7);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:16px}
+.modal-bg.open{display:flex}
+.modal{background:var(--surface);border-radius:16px;width:100%;max-width:580px;max-height:90dvh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.35);border:1px solid var(--border);animation:modalIn .25s cubic-bezier(.34,1.56,.64,1)}
+@keyframes modalIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
+.modal-header{padding:18px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--surface);z-index:2}
+.modal-title{font-size:15px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:9px}
+.modal-title i{color:var(--accent)}
+.modal-close{width:32px;height:32px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .2s}
+.modal-close:hover{border-color:var(--red);color:var(--red)}
+.modal-body{padding:20px}
+.modal-footer{padding:14px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px}
+
+/* ===== FORM ===== */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-grid.cols1{grid-template-columns:1fr}
+@media(max-width:500px){.form-grid{grid-template-columns:1fr}}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-group.full{grid-column:1/-1}
+.form-label{font-size:11px;font-weight:700;color:var(--text)}
+.form-label span{color:var(--red)}
+.form-input,.form-select{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:9px 12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;color:var(--text);outline:none;transition:border .2s}
+.form-input:focus,.form-select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,198,255,.07)}
+.form-select{cursor:pointer}
+.form-hint{font-size:10px;color:var(--muted);line-height:1.5}
+.form-divider{grid-column:1/-1;height:1px;background:var(--border);margin:6px 0}
+.form-section-title{grid-column:1/-1;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-top:4px}
+
+/* ===== PLAN SELECTOR ===== */
+.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:4px}
+@media(max-width:500px){.plan-grid{grid-template-columns:1fr 1fr}}
+.plan-opt{border:1.5px solid var(--border);border-radius:9px;padding:10px 12px;cursor:pointer;transition:all .2s;background:var(--bg)}
+.plan-opt:hover{border-color:rgba(0,198,255,.4);background:rgba(0,198,255,.04)}
+.plan-opt.on{border-color:var(--accent);background:rgba(0,198,255,.08)}
+.plan-name{font-size:12px;font-weight:700;color:var(--text)}
+.plan-n{font-size:10px;color:var(--muted);margin-top:2px}
+.plan-opt.on .plan-name{color:var(--accent)}
+.ai-toggle{display:flex;gap:8px;margin-top:4px}
+.ai-opt{flex:1;border:1.5px solid var(--border);border-radius:9px;padding:9px 12px;cursor:pointer;text-align:center;font-size:12px;font-weight:700;color:var(--muted);background:var(--bg);transition:all .2s}
+.ai-opt:hover{border-color:rgba(0,198,255,.3)}
+.ai-opt.on{border-color:var(--accent);background:rgba(0,198,255,.1);color:var(--accent)}
+
+/* ===== ASSESSMENT CARDS ===== */
+.assess-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.assess-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;box-shadow:var(--shadow);cursor:pointer;transition:all .2s}
+.assess-card:hover{border-color:rgba(0,198,255,.35);box-shadow:0 8px 28px rgba(26,42,108,.12);transform:translateY(-2px)}
+.ac-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
+.ac-icon{width:40px;height:40px;border-radius:10px;background:rgba(0,198,255,.1);border:1px solid rgba(0,198,255,.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.ac-badges{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+.ac-title{font-size:14px;font-weight:800;color:var(--text);margin-bottom:4px}
+.ac-sub{font-size:11px;color:var(--muted);line-height:1.6}
+.ac-meta{display:flex;gap:10px;margin-top:12px;padding-top:10px;border-top:1px solid var(--border);flex-wrap:wrap}
+.ac-meta-item{display:flex;flex-direction:column;gap:2px}
+.ac-meta-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+.ac-meta-val{font-size:11px;font-weight:700;color:var(--text)}
+.ac-progress{margin-top:10px}
+.ac-prog-label{display:flex;justify-content:space-between;font-size:10px;font-weight:600;color:var(--muted);margin-bottom:4px}
+.ac-prog-bar{height:5px;border-radius:99px;background:var(--bg);border:1px solid var(--border);overflow:hidden}
+.ac-prog-fill{height:100%;border-radius:99px;background:var(--grad);transition:width .5s}
+
+/* ===== WIZARD ===== */
+.wizard-steps{display:flex;align-items:center;gap:0;margin-bottom:20px;overflow-x:auto;scrollbar-width:none;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:12px 16px;box-shadow:var(--shadow)}
+.wizard-steps::-webkit-scrollbar{display:none}
+.wz-step{display:flex;align-items:center;gap:7px;flex-shrink:0}
+.wz-circle{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;background:var(--bg);border:2px solid var(--border);color:var(--muted);transition:all .3s;flex-shrink:0}
+.wz-step.done .wz-circle{background:rgba(29,158,117,.12);border-color:var(--green);color:var(--green)}
+.wz-step.active .wz-circle{background:rgba(0,198,255,.12);border-color:var(--accent);color:var(--accent);box-shadow:0 0 0 4px rgba(0,198,255,.1)}
+.wz-lbl{font-size:11px;font-weight:600;color:var(--muted);white-space:nowrap}
+.wz-step.active .wz-lbl{color:var(--accent);font-weight:700}
+.wz-step.done .wz-lbl{color:var(--green)}
+.wz-line{width:24px;height:2px;background:var(--border);margin:0 4px;flex-shrink:0;transition:background .3s}
+.wz-line.done{background:var(--green)}
+.wizard-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px;box-shadow:var(--shadow);margin-bottom:14px}
+.wizard-card-title{font-size:13px;font-weight:800;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.wizard-card-title i{color:var(--accent)}
+
+/* ===== TOGGLE ROW ===== */
+.toggle-row{display:flex;gap:8px;flex-wrap:wrap}
+.toggle-opt{padding:8px 16px;border-radius:8px;border:1.5px solid var(--border);background:var(--bg);font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .2s}
+.toggle-opt:hover{border-color:rgba(0,198,255,.35)}
+.toggle-opt.on{border-color:var(--accent);background:rgba(0,198,255,.1);color:var(--accent);font-weight:700}
+.check-row{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:9px;border:1.5px solid var(--border);background:var(--bg);cursor:pointer;transition:all .2s;font-size:12px;font-weight:600;color:var(--muted)}
+.check-row:hover{border-color:rgba(0,198,255,.3)}
+.check-row.on{border-color:var(--accent);background:rgba(0,198,255,.08);color:var(--accent)}
+.check-box{width:16px;height:16px;border-radius:4px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:9px;color:transparent;flex-shrink:0;transition:all .15s}
+.check-row.on .check-box{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* ===== CRITICALITY TABLE ===== */
+.crit-table{width:100%;border-collapse:collapse}
+.crit-table th{padding:8px 12px;text-align:left;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);border-bottom:2px solid var(--border)}
+.crit-table td{padding:8px 12px;border-bottom:1px solid var(--border)}
+.crit-table tr:last-child td{border-bottom:none}
+.crit-input{width:80px;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;padding:6px 10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:700;color:var(--text);outline:none;text-align:center;transition:border .2s}
+.crit-input:focus{border-color:var(--accent)}
+
+/* ===== DROPZONE ===== */
+.dropzone{border:2.5px dashed rgba(0,198,255,.35);border-radius:14px;background:rgba(0,198,255,.02);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:180px;cursor:pointer;transition:all .25s;padding:28px 20px;text-align:center}
+.dropzone:hover{border-color:var(--accent);background:rgba(0,198,255,.07);transform:translateY(-2px)}
+.dz-icon{width:56px;height:56px;border-radius:14px;background:rgba(0,198,255,.1);border:1.5px solid rgba(0,198,255,.2);display:flex;align-items:center;justify-content:center;font-size:22px;color:#00c6ff}
+.dz-title{font-size:14px;font-weight:700;color:var(--text)}
+.dz-sub{font-size:12px;color:var(--muted);line-height:1.6}
+.dz-formats{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.dz-fmt{font-size:9px;font-weight:700;padding:2px 8px;border-radius:99px;background:var(--bg);border:1px solid var(--border);color:var(--muted)}
+
+/* ===== QA WORKSPACE ===== */
+.prog-sum{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:11px 16px;margin-bottom:14px;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow);flex-wrap:wrap}
+.ps-s{display:flex;flex-direction:column}
+.ps-v{font-size:20px;font-weight:800;color:var(--text)}
+.ps-l{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-top:1px}
+.ps-d{width:1px;height:32px;background:var(--border);flex-shrink:0}
+.ps-pw{flex:1;min-width:100px}
+.ps-pl{font-size:10px;font-weight:600;color:var(--muted);margin-bottom:5px;display:flex;justify-content:space-between}
+.ps-pt{height:7px;border-radius:99px;background:var(--bg);border:1px solid var(--border);overflow:hidden}
+.ps-pf{height:100%;border-radius:99px;background:var(--grad);transition:width .5s}
+.qa-layout{display:grid;grid-template-columns:260px 1fr;gap:14px;align-items:start}
+@media(max-width:900px){.qa-layout{grid-template-columns:1fr}}
+.q-panel{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);position:sticky;top:14px}
+@media(max-width:900px){.q-panel{position:static}}
+.q-panel-h{padding:11px 13px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(26,42,108,.05),rgba(0,198,255,.03))}
+.q-panel-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted)}
+.q-panel-title{font-size:12px;font-weight:700;color:var(--text);margin-top:2px}
+.q-list{list-style:none;max-height:400px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(0,198,255,.2) transparent}
+.q-list::-webkit-scrollbar{width:3px}
+.q-list::-webkit-scrollbar-thumb{background:rgba(0,198,255,.2);border-radius:2px}
+.q-it{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .2s;min-height:52px;border-left:3px solid transparent}
+.q-it:last-child{border-bottom:none}
+.q-it:hover{background:rgba(0,198,255,.04)}
+.q-it.sel{background:rgba(0,198,255,.08);border-left-color:var(--accent)}
+.q-it.ans{background:rgba(29,158,117,.06)}
+.q-it.ans.sel{background:rgba(29,158,117,.12);border-left-color:var(--green)}
+.q-num{width:20px;height:20px;border-radius:50%;flex-shrink:0;margin-top:2px;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--muted)}
+.q-it.sel .q-num{background:rgba(0,198,255,.15);border-color:var(--accent);color:var(--accent)}
+.q-it.ans .q-num{background:rgba(29,158,117,.15);border-color:var(--green);color:var(--green)}
+.q-ib{flex:1;min-width:0}
+.q-itxt{font-size:11px;color:var(--text);line-height:1.5}
+.q-imeta{display:flex;align-items:center;gap:5px;margin-top:3px;flex-wrap:wrap}
+.q-iid{font-size:9px;font-weight:700;color:var(--muted)}
+.q-ibadge{font-size:9px;font-weight:700;padding:2px 6px;border-radius:99px;background:var(--bg);color:var(--muted);border:1px solid var(--border)}
+.q-it.ans .q-ibadge{background:rgba(29,158,117,.1);color:var(--green);border-color:rgba(29,158,117,.2)}
+.a-panel{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+.a-hdr{padding:12px 16px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(26,42,108,.04),rgba(0,198,255,.03));display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.a-qid{font-size:10px;font-weight:700;letter-spacing:1px;color:var(--accent);text-transform:uppercase}
+.a-qtxt{font-size:14px;font-weight:700;color:var(--text);line-height:1.55;margin-top:3px}
+.a-navs{display:flex;gap:5px;flex-shrink:0}
+.a-nav-btn{width:30px;height:30px;border-radius:7px;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted);cursor:pointer;transition:all .2s}
+.a-nav-btn:hover{border-color:var(--accent);color:var(--accent)}
+.a-body{padding:16px;display:flex;flex-direction:column;gap:14px}
+.cmmi-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.cmmi-r{display:flex;align-items:center;gap:5px;cursor:pointer;padding:6px 12px;border-radius:7px;border:1.5px solid var(--border);background:var(--surface);transition:all .15s}
+.cmmi-r:hover,.cmmi-r.on{border-color:var(--accent);background:rgba(0,198,255,.1)}
+.cmmi-circle{width:12px;height:12px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;transition:all .15s}
+.cmmi-r.on .cmmi-circle{border-color:var(--accent);background:var(--accent)}
+.cmmi-lbl{font-size:11px;font-weight:600;color:var(--muted)}
+.cmmi-r.on .cmmi-lbl{color:var(--accent);font-weight:700}
+.ev-label{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:5px}
+.ev-ta{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:9px;padding:9px 12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;color:var(--text);line-height:1.7;min-height:100px;resize:vertical;outline:none;transition:border .2s}
+.ev-ta:focus{border-color:var(--accent)}
+.owner-next-bar{display:flex;justify-content:flex-end;padding:12px 16px;border-top:1px solid var(--border);background:rgba(26,42,108,.02)}
+
+/* ===== AUDITOR PANEL ===== */
+.mvr-row{display:flex;gap:8px;flex-wrap:wrap}
+.mvr{display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:9px;border:1.5px solid var(--border);background:var(--bg);cursor:pointer;transition:all .2s;font-size:12px;font-weight:600;color:var(--muted)}
+.mvr:hover{border-color:var(--accent);color:var(--text)}
+.mvr.on-acc{border-color:var(--green);background:rgba(29,158,117,.08);color:var(--green)}
+.mvr.on-wrn{border-color:var(--yellow);background:rgba(212,160,23,.08);color:var(--yellow)}
+.mvr.on-rej{border-color:var(--red);background:rgba(216,90,48,.08);color:var(--red)}
+.mvr-circle{width:14px;height:14px;border-radius:50%;border:2px solid currentColor;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.mvr.on-acc .mvr-circle,.mvr.on-wrn .mvr-circle,.mvr.on-rej .mvr-circle{background:currentColor}
+.man-val-note{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:9px;padding:9px 12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;color:var(--text);line-height:1.7;min-height:80px;resize:vertical;outline:none;transition:border .2s}
+.man-val-note:focus{border-color:var(--accent)}
+.q-it.val-acc{background:rgba(29,158,117,.06);border-left-color:var(--green)}
+.q-it.val-wrn{background:rgba(212,160,23,.05);border-left-color:var(--yellow)}
+.q-it.val-rej{background:rgba(216,90,48,.05);border-left-color:var(--red)}
+.q-it.val-acc .q-num{background:rgba(29,158,117,.15);border-color:var(--green);color:var(--green)}
+.q-it.val-wrn .q-num{background:rgba(212,160,23,.15);border-color:var(--yellow);color:var(--yellow)}
+.q-it.val-rej .q-num{background:rgba(216,90,48,.15);border-color:var(--red);color:var(--red)}
+
+/* ===== REPORT ===== */
+.report-hero{background:linear-gradient(135deg,#060e1f 0%,#1a2a6c 100%);border-radius:16px;padding:24px;margin-bottom:16px;color:#fff}
+.rh-logo{font-family:'DM Serif Display',serif;font-size:26px;letter-spacing:-1px;margin-bottom:8px}
+.rh-logo em{color:#00c6ff;font-style:italic}
+.rh-title{font-size:18px;font-weight:800;color:#fff;margin-bottom:4px}
+.rh-sub{font-size:12px;color:rgba(255,255,255,.6);line-height:1.7}
+.rh-badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.rh-badge{padding:4px 12px;border-radius:99px;font-size:10px;font-weight:700;background:rgba(0,198,255,.15);border:1px solid rgba(0,198,255,.25);color:#00c6ff}
+.rh-badge.g{background:rgba(29,158,117,.15);border-color:rgba(29,158,117,.3);color:var(--green)}
+.report-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+@media(max-width:700px){.report-grid{grid-template-columns:1fr}}
+.rep-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;box-shadow:var(--shadow)}
+.rep-card h4{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.finding{padding:10px 13px;border-radius:9px;border:1.5px solid var(--border);display:flex;gap:10px;align-items:flex-start;margin-bottom:8px}
+.finding.crit{border-color:rgba(216,90,48,.3);background:rgba(216,90,48,.04)}
+.finding.warn{border-color:rgba(212,160,23,.3);background:rgba(212,160,23,.04)}
+.finding.ok{border-color:rgba(29,158,117,.3);background:rgba(29,158,117,.04)}
+.finding-title{font-size:12px;font-weight:700;color:var(--text)}
+.finding-desc{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.6}
+.score-table{width:100%;border-collapse:collapse;font-size:12px}
+.score-table th{text-align:left;padding:7px 10px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);border-bottom:2px solid var(--border)}
+.score-table td{padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:middle}
+.score-bar{height:6px;border-radius:99px;background:var(--bg);overflow:hidden;width:80px}
+.score-bar-fill{height:100%;border-radius:99px}
+
+/* ===== TOAST ===== */
+.toast{position:fixed;bottom:24px;right:24px;z-index:9999;background:linear-gradient(135deg,#0d7a5a,#1D9E75);color:#fff;border-radius:12px;padding:13px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 32px rgba(29,158,117,.4);font-family:'Plus Jakarta Sans',sans-serif;transform:translateX(120%);transition:transform .4s cubic-bezier(.34,1.56,.64,1),opacity .3s;opacity:0;pointer-events:none;max-width:340px}
+.toast.show{transform:translateX(0);opacity:1}
+.toast-icon{font-size:16px}
+.toast-title{font-size:13px;font-weight:800}
+.toast-sub{font-size:11px;opacity:.8;margin-top:2px}
+
+/* ===== EMPTY STATE ===== */
+.empty-state{text-align:center;padding:48px 20px;color:var(--muted)}
+.empty-state i{font-size:40px;margin-bottom:14px;opacity:.3;display:block}
+.empty-state p{font-size:14px;font-weight:600}
+.empty-state small{font-size:12px;opacity:.7}
+
+/* ===== OWNER ANS VIEW (auditor) ===== */
+.oav-box{background:var(--bg);border:1.5px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:8px}
+.oav-badge-role{font-size:9px;font-weight:700;padding:2px 8px;border-radius:99px;background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.2);color:#6d28d9;display:inline-flex;align-items:center;gap:4px}
+.oav-cmmi-val{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:7px;border:1.5px solid rgba(0,198,255,.3);background:rgba(0,198,255,.08);font-size:11px;font-weight:700;color:var(--accent);margin-top:6px}
+.oav-ans-txt{font-size:12px;color:var(--text);line-height:1.7;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-top:6px;min-height:50px}
+
+/* ===== MULTI ASSESSMENT UPLOAD ===== */
+.excel-template-bar{background:linear-gradient(135deg,rgba(29,158,117,.08),rgba(29,158,117,.04));border:1.5px solid rgba(29,158,117,.25);border-radius:10px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+
+/* ===== ACTOR ASSIGN CARD ===== */
+.actor-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);margin-bottom:14px}
+.actor-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(26,42,108,.04),rgba(0,198,255,.02))}
+.actor-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.actor-title{font-size:13px;font-weight:800;color:var(--text)}
+.actor-sub{font-size:11px;color:var(--muted);margin-top:1px}
+.actor-body{padding:16px}
+
+/* ===== BREADCRUMB ===== */
+.breadcrumb{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);margin-bottom:12px;flex-wrap:wrap}
+.breadcrumb a{color:var(--muted);text-decoration:none;cursor:pointer;transition:color .2s}
+.breadcrumb a:hover{color:var(--accent)}
+.breadcrumb .sep{opacity:.4}
+.breadcrumb .current{color:var(--text);font-weight:600}
+</style>
+</head>
+<body>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <div class="toast-icon" id="toast-icon">✅</div>
+  <div><div class="toast-title" id="toast-title">Operazione completata</div><div class="toast-sub" id="toast-sub"></div></div>
+</div>
+
+<!-- ROLE DROPDOWN OVERLAY (chiude il dropdown cliccando fuori) -->
+<div id="rd-ov" style="position:fixed;inset:0;z-index:150;display:none" onclick="closeRoleDropdown()"></div>
+
+<!-- ========== OVERLAY INTRO ========== -->
+<div class="ov" id="ov">
+  <div class="ov-badge"><div class="ov-dot"></div>3AuditFlow · Piattaforma NIS2</div>
+  <div class="ov-logo-text"><em>3Audit</em>Flow</div>
+  <div style="font-size:11px;color:rgba(255,255,255,.35);text-align:center;font-family:'DM Serif Display',serif;font-style:italic">by 3A Informatica</div>
+  <div class="ov-sub">Seleziona il ruolo con cui vuoi accedere alla piattaforma. Potrai cambiare ruolo in qualsiasi momento dalla barra in alto.</div>
+  <div class="ov-roles">
+    <button class="ov-role-btn super" onclick="enterAs('super-admin')"><i class="fa-solid fa-crown"></i> Super Admin</button>
+    <button class="ov-role-btn" onclick="enterAs('corporation-admin')"><i class="fa-solid fa-building"></i> Corporation Admin</button>
+    <button class="ov-role-btn" onclick="enterAs('assessment-admin')"><i class="fa-solid fa-shield-halved"></i> Assessment Admin</button>
+    <button class="ov-role-btn" onclick="enterAs('reviewer')"><i class="fa-solid fa-eye"></i> Reviewer</button>
+    <button class="ov-role-btn" onclick="enterAs('owner')"><i class="fa-solid fa-user-tie"></i> Owner</button>
+    <button class="ov-role-btn" onclick="enterAs('auditor')"><i class="fa-solid fa-user-check"></i> Auditor</button>
+  </div>
+</div>
+
+<!-- ========== SHELL ========== -->
+<div class="shell" id="shell" style="display:none">
+  <div class="sb-ov" id="sb-ov" onclick="closeMob()"></div>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <button class="tb-burger" onclick="toggleMob()"><i class="fa-solid fa-bars"></i></button>
+    <div class="tb-logo-wrap">
+      <div class="tb-logo-icon">3A</div>
+      <div class="tb-logo-name"><em>3Audit</em>Flow</div>
+    </div>
+    <div class="tb-spacer"></div>
+    <div class="tb-icons">
+      <button class="tb-ic"><i class="fa-solid fa-comment-dots"></i></button>
+      <button class="tb-ic"><i class="fa-solid fa-bell"></i><span class="notif-dot"></span></button>
+      <button class="tb-ic"><i class="fa-solid fa-gear"></i></button>
+      <div class="tb-user" id="tb-user" onclick="toggleRoleDropdown()">
+        <div class="tb-av" id="tb-av">SA</div>
+        <div class="tb-user-info">
+          <span class="tb-uname" id="tb-uname">Mario Bianchi</span>
+          <span class="tb-urole" id="tb-urole">Super Admin</span>
+        </div>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:rgba(255,255,255,.5);margin-left:2px"></i>
+        <!-- ROLE DROPDOWN -->
+        <div class="role-dropdown" id="role-dropdown">
+          <div class="rd-header">Cambia Ruolo</div>
+          <div class="rd-item" data-role="super-admin" onclick="switchRole('super-admin')">
+            <div class="rd-dot" style="background:#D4A017"></div>
+            <span class="rd-name"><i class="fa-solid fa-crown" style="font-size:10px;margin-right:4px"></i>Super Admin</span>
+            <i class="fa-solid fa-check rd-check" style="display:none"></i>
+          </div>
+          <div class="rd-item" data-role="corporation-admin" onclick="switchRole('corporation-admin')">
+            <div class="rd-dot" style="background:#00c6ff"></div>
+            <span class="rd-name"><i class="fa-solid fa-building" style="font-size:10px;margin-right:4px"></i>Corporation Admin</span>
+            <i class="fa-solid fa-check rd-check" style="display:none"></i>
+          </div>
+          <div class="rd-item" data-role="assessment-admin" onclick="switchRole('assessment-admin')">
+            <div class="rd-dot" style="background:#7c3aed"></div>
+            <span class="rd-name"><i class="fa-solid fa-shield-halved" style="font-size:10px;margin-right:4px"></i>Assessment Admin</span>
+            <i class="fa-solid fa-check rd-check" style="display:none"></i>
+          </div>
+          <div class="rd-item" data-role="reviewer" onclick="switchRole('reviewer')">
+            <div class="rd-dot" style="background:#1D9E75"></div>
+            <span class="rd-name"><i class="fa-solid fa-eye" style="font-size:10px;margin-right:4px"></i>Reviewer</span>
+            <i class="fa-solid fa-check rd-check" style="display:none"></i>
+          </div>
+          <div class="rd-item" data-role="owner" onclick="switchRole('owner')">
+            <div class="rd-dot" style="background:#D85A30"></div>
+            <span class="rd-name"><i class="fa-solid fa-user-tie" style="font-size:10px;margin-right:4px"></i>Owner</span>
+            <i class="fa-solid fa-check rd-check" style="display:none"></i>
+          </div>
+          <div class="rd-item" data-role="auditor" onclick="switchRole('auditor')">
+            <div class="rd-dot" style="background:#0099cc"></div>
+            <span class="rd-name"><i class="fa-solid fa-user-check" style="font-size:10px;margin-right:4px"></i>Auditor</span>
+            <i class="fa-solid fa-check rd-check" style="display:none"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SIDEBAR (solo super-admin) -->
+  <aside class="sidebar" id="sidebar" style="display:none">
+    <button class="sb-toggle" onclick="toggleDsk()"><i class="fa-solid fa-angles-left" id="dsk-ic"></i></button>
+    <ul class="sb-nav">
+      <li class="sb-sec">
+        <strong class="sb-lbl">Gestione Utenza</strong>
+        <ul class="sb-sub">
+          <li><span class="sbl active" id="sb-licenze" onclick="saNav('licenze')"><i class="fa-solid fa-id-card"></i><span>Licenze</span></span></li>
+          <li><span class="sbl" id="sb-corpadmin" onclick="saNav('corporation-admin')"><i class="fa-solid fa-building"></i><span>Corporation Admin</span></span></li>
+          <li><span class="sbl" id="sb-auditor" onclick="saNav('auditor-list')"><i class="fa-solid fa-user-check"></i><span>Auditor</span></span></li>
+          <li><span class="sbl" id="sb-reviewer" onclick="saNav('reviewer-list')"><i class="fa-solid fa-eye"></i><span>Reviewer</span></span></li>
+          <li><span class="sbl" id="sb-owner" onclick="saNav('owner-list')"><i class="fa-solid fa-user-tie"></i><span>Owner</span></span></li>
+        </ul>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main" id="main">
+    <div id="page-content"></div>
+  </main>
+</div>
+
+<!-- ========== MODALS ========== -->
+<!-- Modal Nuova Licenza -->
+<div class="modal-bg" id="modal-licenza">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title"><i class="fa-solid fa-id-card"></i> Nuova Licenza</div>
+      <button class="modal-close" onclick="closeModal('modal-licenza')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Ragione Sociale <span>*</span></label>
+          <input class="form-input" placeholder="es. Acme S.r.l." id="lic-rs">
+        </div>
+        <div class="form-group">
+          <label class="form-label">P.IVA <span>*</span></label>
+          <input class="form-input" placeholder="es. 01234567890" id="lic-piva">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nome Referente (Corp. Admin) <span>*</span></label>
+          <input class="form-input" placeholder="Nome" id="lic-nome">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Cognome Referente <span>*</span></label>
+          <input class="form-input" placeholder="Cognome" id="lic-cognome">
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Email Referente <span>*</span></label>
+          <input class="form-input" type="email" placeholder="email@azienda.it" id="lic-email">
+        </div>
+        <div class="form-divider"></div>
+        <div class="form-section-title"><i class="fa-solid fa-layer-group" style="margin-right:6px;color:var(--accent)"></i>Piano Licenza</div>
+        <div class="form-group full">
+          <div class="plan-grid">
+            <div class="plan-opt on" data-plan="single" onclick="selPlan(this)"><div class="plan-name">Single</div><div class="plan-n">1 assessment</div></div>
+            <div class="plan-opt" data-plan="bronze" onclick="selPlan(this)"><div class="plan-name">Bronze</div><div class="plan-n">5 assessment</div></div>
+            <div class="plan-opt" data-plan="silver" onclick="selPlan(this)"><div class="plan-name">Silver</div><div class="plan-n">10 assessment</div></div>
+            <div class="plan-opt" data-plan="gold" onclick="selPlan(this)"><div class="plan-name">Gold</div><div class="plan-n">15 assessment</div></div>
+            <div class="plan-opt" data-plan="premium" onclick="selPlan(this)"><div class="plan-name">Premium</div><div class="plan-n">20 assessment</div></div>
+            <div class="plan-opt" data-plan="unlimited" onclick="selPlan(this)"><div class="plan-name">Unlimited</div><div class="plan-n">∞ assessment</div></div>
+          </div>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Intelligenza Artificiale</label>
+          <div class="ai-toggle">
+            <div class="ai-opt on" data-ai="no" onclick="selAI(this)"><i class="fa-solid fa-robot" style="opacity:.4"></i> Senza AI</div>
+            <div class="ai-opt" data-ai="si" onclick="selAI(this)"><i class="fa-solid fa-robot" style="color:var(--accent)"></i> Con AI</div>
+          </div>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Scadenza</label>
+          <div class="form-hint" id="lic-scadenza-hint" style="background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:9px 12px;font-weight:700;color:var(--text)">Calcolata automaticamente: +1 anno dalla data odierna</div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-outline btn-sm" onclick="closeModal('modal-licenza')">Annulla</button>
+      <button class="btn-primary btn-sm" onclick="saveLicenza()"><i class="fa-solid fa-check"></i> Salva Licenza</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Nuovo Utente generico -->
+<div class="modal-bg" id="modal-utente">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-utente-title"><i class="fa-solid fa-user-plus"></i> Nuovo Utente</div>
+      <button class="modal-close" onclick="closeModal('modal-utente')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Nome <span>*</span></label>
+          <input class="form-input" placeholder="Nome" id="ut-nome">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Cognome <span>*</span></label>
+          <input class="form-input" placeholder="Cognome" id="ut-cognome">
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Email <span>*</span></label>
+          <input class="form-input" type="email" placeholder="email@azienda.it" id="ut-email">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Telefono</label>
+          <input class="form-input" placeholder="+39 000 0000000" id="ut-tel">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Ragione Sociale</label>
+          <input class="form-input" placeholder="Azienda S.r.l." id="ut-rs">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-outline btn-sm" onclick="closeModal('modal-utente')">Annulla</button>
+      <button class="btn-primary btn-sm" onclick="saveUtente()"><i class="fa-solid fa-check"></i> Salva</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Nuovo Assessment Admin (da Corporation Admin) -->
+<div class="modal-bg" id="modal-aa">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title"><i class="fa-solid fa-shield-halved"></i> Nuovo Assessment Admin</div>
+      <button class="modal-close" onclick="closeModal('modal-aa')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Nome <span>*</span></label>
+          <input class="form-input" placeholder="Nome" id="aa-nome">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Cognome <span>*</span></label>
+          <input class="form-input" placeholder="Cognome" id="aa-cognome">
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Email <span>*</span></label>
+          <input class="form-input" type="email" placeholder="email@azienda.it" id="aa-email">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Telefono</label>
+          <input class="form-input" placeholder="+39 000 0000000" id="aa-tel">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Ragione Sociale</label>
+          <input class="form-input" placeholder="Azienda S.r.l." id="aa-rs">
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Tipologia Assessment</label>
+          <select class="form-select" id="aa-tipo">
+            <option value="normale">Assessment Normale</option>
+            <option value="multi">Multi Assessment</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-outline btn-sm" onclick="closeModal('modal-aa')">Annulla</button>
+      <button class="btn-primary btn-sm" onclick="saveAssessmentAdmin()"><i class="fa-solid fa-check"></i> Crea</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// =====================================================================
+// STATE
+// =====================================================================
+let currentRole = 'super-admin';
+let sidebarCollapsed = false;
+let currentSaSection = 'licenze';
+let selectedPlan = 'single';
+let selectedAI = 'no';
+
+// Mock Data
+const USERS = {
+  'super-admin':        { name:'Mario Bianchi',   initials:'MB', email:'m.bianchi@3a.it' },
+  'corporation-admin':  { name:'Laura Conti',     initials:'LC', email:'l.conti@acme.it' },
+  'assessment-admin':   { name:'Roberto Ferrara', initials:'RF', email:'r.ferrara@acme.it' },
+  'reviewer':           { name:'Giulia Martini',  initials:'GM', email:'g.martini@acme.it' },
+  'owner':              { name:'Carlo Esposito',  initials:'CE', email:'c.esposito@target.it' },
+  'auditor':            { name:'Sofia Ricci',     initials:'SR', email:'s.ricci@auditing.it' },
+};
+
+const ROLE_LABELS = {
+  'super-admin':'Super Admin','corporation-admin':'Corporation Admin',
+  'assessment-admin':'Assessment Admin','reviewer':'Reviewer',
+  'owner':'Owner','auditor':'Auditor'
+};
+
+const MOCK_LICENZE = [
+  {id:1, azienda:'Acme S.r.l.', piva:'01234567890', piano:'Gold', consumo:'8/15', scadenza:'2026-05-10', stato:'Attiva', ai:'Sì'},
+  {id:2, azienda:'Beta Tech SpA', piva:'09876543210', piano:'Silver', consumo:'3/10', scadenza:'2026-08-22', stato:'Attiva', ai:'No'},
+  {id:3, azienda:'Gamma Logistica', piva:'11223344550', piano:'Bronze', consumo:'5/5', scadenza:'2025-12-01', stato:'Scaduta', ai:'Sì'},
+  {id:4, azienda:'Delta Consulting', piva:'55667788990', piano:'Premium', consumo:'12/20', scadenza:'2027-01-15', stato:'Attiva', ai:'Sì'},
+];
+
+const MOCK_CORP_ADMINS = [
+  {id:1, nome:'Laura Conti', email:'l.conti@acme.it', tel:'+39 02 1234567', azienda:'Acme S.r.l.'},
+  {id:2, nome:'Marco Viotti', email:'m.viotti@betatech.it', tel:'+39 011 9876543', azienda:'Beta Tech SpA'},
+  {id:3, nome:'Anna Greco', email:'a.greco@gamma.it', tel:'+39 06 5551234', azienda:'Gamma Logistica'},
+];
+
+const MOCK_AUDITORS = [
+  {id:1, nome:'Sofia Ricci', email:'s.ricci@auditing.it', tel:'+39 02 9871234', azienda:'Ricci Audit S.r.l.'},
+  {id:2, nome:'Luca Mancini', email:'l.mancini@certify.it', tel:'+39 06 7651230', azienda:'Certify Now SpA'},
+];
+
+const MOCK_REVIEWERS = [
+  {id:1, nome:'Giulia Martini', email:'g.martini@acme.it', tel:'+39 02 3456789', azienda:'Acme S.r.l.'},
+  {id:2, nome:'Paolo Neri', email:'p.neri@betatech.it', tel:'+39 011 1112233', azienda:'Beta Tech SpA'},
+];
+
+const MOCK_OWNERS = [
+  {id:1, nome:'Carlo Esposito', email:'c.esposito@target.it', tel:'+39 081 9990000', azienda:'Target Infra S.r.l.'},
+  {id:2, nome:'Elena Fabbri', email:'e.fabbri@gamma.it', tel:'+39 06 4443322', azienda:'Gamma Logistica'},
+];
+
+const MOCK_ASSESSMENT_ADMINS = [
+  {id:1, nome:'Roberto Ferrara', email:'r.ferrara@acme.it', tel:'+39 02 5556677', azienda:'Acme S.r.l.', tipo:'Assessment Normale', stato:'In corso', progresso:60},
+  {id:2, nome:'Elena Fabbri', email:'e.fabbri@gamma.it', tel:'+39 06 4443322', azienda:'Gamma Logistica', tipo:'Multi Assessment', stato:'Configurazione', progresso:20},
+];
+
+const MOCK_ASSESSMENTS_AA = [
+  {id:1, titolo:'NIS2 Assessment Q2-2025', azienda:'Acme S.r.l.', tipo:'Completo', stato:'Validazione', progresso:75, ai:true},
+  {id:2, titolo:'Prequalifica Cybersecurity', azienda:'Target Infra', tipo:'Semplificato', stato:'Compilazione Owner', progresso:45, ai:false},
+];
+
+const MOCK_ASSESSMENTS_ROA = [
+  {id:1, titolo:'NIS2 Assessment Q2-2025', azienda:'Acme S.r.l.', tipo:'Completo', stato:'In corso', progresso:60, scadenza:'2025-07-31'},
+  {id:2, titolo:'Prequalifica IT', azienda:'Target Infra', tipo:'Semplificato', stato:'Attesa', progresso:10, scadenza:'2025-08-15'},
+];
+
+const NIS2_QUESTIONS = [
+  {id:'GR.1.1', area:'Governance & Risk', q:'Esiste una politica di gestione del rischio formalmente approvata dalla dirigenza?'},
+  {id:'GR.1.2', area:'Governance & Risk', q:'Il piano di gestione del rischio è aggiornato almeno annualmente?'},
+  {id:'GR.2.1', area:'Governance & Risk', q:'Sono definiti ruoli e responsabilità in materia di sicurezza informatica?'},
+  {id:'PS.1.1', area:'Protezione Sistemi', q:'I sistemi critici sono inventariati e classificati per livello di criticità?'},
+  {id:'PS.1.2', area:'Protezione Sistemi', q:'Sono adottate misure di segmentazione della rete per i sistemi OT/IT?'},
+  {id:'PS.2.1', area:'Protezione Sistemi', q:'Sono implementate politiche di gestione degli aggiornamenti di sicurezza?'},
+  {id:'SI.1.1', area:'Sicurezza Incidenti', q:'Esiste una procedura documentata per la gestione degli incidenti di sicurezza?'},
+  {id:'SI.1.2', area:'Sicurezza Incidenti', q:'Gli incidenti sono notificati alle autorità competenti nei tempi previsti da NIS2?'},
+  {id:'BC.1.1', area:'Business Continuity', q:'È presente un piano di continuità operativa (BCP) approvato?'},
+  {id:'BC.1.2', area:'Business Continuity', q:'I backup critici sono testati con regolarità almeno ogni 6 mesi?'},
+];
+
+let selectedQuestions = [];
+let ownerAnswers = {};
+let auditorValidations = {};
+let currentOwnerQ = null;
+let currentAuditorQ = null;
+let wizardStep = 1;
+let wizardConfig = {processo:'completo', relazione:'NIS2', tipo:'assessment', evidenze:'obbligatorie', monitoraggio:'con', rip_ass:false, rip_mon:false, rif_rel:false};
+let assessmentCreating = null; // 'normale' o 'multi'
+
+// =====================================================================
+// ENTRY
+// =====================================================================
+function enterAs(role) {
+  document.getElementById('ov').style.display = 'none';
+  document.getElementById('shell').style.display = 'flex';
+  currentRole = role;
+  applyRole();
+}
+
+function applyRole() {
+  const u = USERS[currentRole];
+  document.getElementById('tb-av').textContent = u.initials;
+  document.getElementById('tb-uname').textContent = u.name;
+  document.getElementById('tb-urole').textContent = ROLE_LABELS[currentRole];
+
+  // sidebar
+  const sb = document.getElementById('sidebar');
+  const main = document.getElementById('main');
+  if (currentRole === 'super-admin') {
+    sb.style.display = 'flex';
+    main.classList.add('with-sb');
+    if (sidebarCollapsed) main.classList.add('col');
+  } else {
+    sb.style.display = 'none';
+    main.classList.remove('with-sb','col');
+  }
+
+  // update dropdown active
+  document.querySelectorAll('.rd-item').forEach(el => {
+    const isActive = el.dataset.role === currentRole;
+    el.classList.toggle('active', isActive);
+    el.querySelector('.rd-check').style.display = isActive ? 'inline' : 'none';
+  });
+
+  // render dashboard
+  renderDashboard();
+}
+
+function switchRole(role) {
+  closeRoleDropdown();
+  currentRole = role;
+  applyRole();
+  showToast('Ruolo cambiato', ROLE_LABELS[role], '🔄');
+}
+
+// =====================================================================
+// SIDEBAR
+// =====================================================================
+function toggleDsk() {
+  sidebarCollapsed = !sidebarCollapsed;
+  const sb = document.getElementById('sidebar');
+  const main = document.getElementById('main');
+  sb.classList.toggle('col', sidebarCollapsed);
+  if (sidebarCollapsed) { main.classList.add('col'); } else { main.classList.remove('col'); }
+  document.getElementById('dsk-ic').className = sidebarCollapsed ? 'fa-solid fa-angles-right' : 'fa-solid fa-angles-left';
+}
+function toggleMob() {
+  document.getElementById('sidebar').classList.toggle('mob');
+  document.getElementById('sb-ov').classList.toggle('open');
+}
+function closeMob() {
+  document.getElementById('sidebar').classList.remove('mob');
+  document.getElementById('sb-ov').classList.remove('open');
+}
+
+// =====================================================================
+// ROLE DROPDOWN
+// =====================================================================
+function toggleRoleDropdown(e) {
+  const dd = document.getElementById('role-dropdown');
+  const ov = document.getElementById('rd-ov');
+  const isOpen = dd.classList.toggle('open');
+  ov.style.display = isOpen ? 'block' : 'none';
+}
+function closeRoleDropdown() {
+  document.getElementById('role-dropdown').classList.remove('open');
+  document.getElementById('rd-ov').style.display = 'none';
+}
+
+// =====================================================================
+// DASHBOARD ROUTER
+// =====================================================================
+function renderDashboard() {
+  switch(currentRole) {
+    case 'super-admin':      renderSuperAdmin(); break;
+    case 'corporation-admin':renderCorporationAdmin(); break;
+    case 'assessment-admin': renderAssessmentAdmin(); break;
+    case 'reviewer':         renderReviewerDash(); break;
+    case 'owner':            renderOwnerDash(); break;
+    case 'auditor':          renderAuditorDash(); break;
+  }
+}
+
+// =====================================================================
+// SUPER ADMIN
+// =====================================================================
+function saNav(section) {
+  currentSaSection = section;
+  ['licenze','corpadmin','auditor','reviewer','owner'].forEach(k => {
+    const el = document.getElementById('sb-'+k);
+    if (el) el.classList.remove('active');
+  });
+  const map = {licenze:'sb-licenze','corporation-admin':'sb-corpadmin','auditor-list':'sb-auditor','reviewer-list':'sb-reviewer','owner-list':'sb-owner'};
+  if (map[section]) document.getElementById(map[section]).classList.add('active');
+  renderSuperAdmin();
+}
+
+function renderSuperAdmin() {
+  switch(currentSaSection) {
+    case 'licenze':           renderLicenze(); break;
+    case 'corporation-admin': renderCorpAdminList(); break;
+    case 'auditor-list':      renderUserList('Auditor', MOCK_AUDITORS); break;
+    case 'reviewer-list':     renderUserList('Reviewer', MOCK_REVIEWERS); break;
+    case 'owner-list':        renderUserList('Owner', MOCK_OWNERS); break;
+    default: renderLicenze();
+  }
+}
+
+function renderLicenze() {
+  const pc = document.getElementById('page-content');
+  const today = new Date();
+  pc.innerHTML = `
+    <div class="ph">
+      <div class="ph-left">
+        <div class="ph-bar"></div>
+        <div><div class="ph-title">Licenze</div><div class="ph-sub">Dashboard Super Admin · Gestione licenze aziendali</div></div>
+      </div>
+      <div class="ph-right">
+        <button class="btn-primary" onclick="openModal('modal-licenza')"><i class="fa-solid fa-plus"></i> Nuova Licenza</button>
+      </div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(0,198,255,.1);color:#00c6ff"><i class="fa-solid fa-id-card"></i></div>
+        <div class="stat-val">${MOCK_LICENZE.length}</div>
+        <div class="stat-lbl">Licenze Totali</div>
+        <div class="stat-delta delta-up"><i class="fa-solid fa-arrow-up"></i> +2 questo mese</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(29,158,117,.1);color:#1D9E75"><i class="fa-solid fa-circle-check"></i></div>
+        <div class="stat-val">${MOCK_LICENZE.filter(l=>l.stato==='Attiva').length}</div>
+        <div class="stat-lbl">Licenze Attive</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(216,90,48,.1);color:#D85A30"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        <div class="stat-val">${MOCK_LICENZE.filter(l=>l.stato==='Scaduta').length}</div>
+        <div class="stat-lbl">Licenze Scadute</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(212,160,23,.1);color:#D4A017"><i class="fa-solid fa-robot"></i></div>
+        <div class="stat-val">${MOCK_LICENZE.filter(l=>l.ai==='Sì').length}</div>
+        <div class="stat-lbl">Con AI</div>
+      </div>
+    </div>
+    <div class="table-card">
+      <table>
+        <thead><tr>
+          <th>Azienda</th><th>Piano</th><th>Consumo</th><th>Scadenza</th><th>AI</th><th>Stato</th><th>Azioni</th>
+        </tr></thead>
+        <tbody>
+          ${MOCK_LICENZE.map(l => `<tr>
+            <td><strong>${l.azienda}</strong><br><small style="color:var(--muted)">${l.piva}</small></td>
+            <td><span class="badge badge-gold">${l.piano}</span></td>
+            <td><span style="font-weight:700">${l.consumo}</span></td>
+            <td><span style="font-size:12px;${l.stato==='Scaduta'?'color:var(--red)':''}">${l.scadenza}</span></td>
+            <td>${l.ai==='Sì'?'<span class="badge badge-blue"><i class="fa-solid fa-robot"></i> Sì</span>':'<span class="badge badge-muted">No</span>'}</td>
+            <td>${l.stato==='Attiva'?'<span class="badge badge-green">Attiva</span>':'<span class="badge badge-red">Scaduta</span>'}</td>
+            <td><div class="td-actions">
+              <button class="act-btn" title="Visualizza"><i class="fa-solid fa-eye"></i></button>
+              <button class="act-btn" title="Modifica"><i class="fa-solid fa-pen"></i></button>
+              <button class="act-btn danger" title="Elimina" onclick="deleteLicenza(${l.id})"><i class="fa-solid fa-trash"></i></button>
+            </div></td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+function renderCorpAdminList() {
+  renderUserList('Corporation Admin', MOCK_CORP_ADMINS, false);
+  document.getElementById('page-content').querySelector('.ph-title').textContent = 'Corporation Admin';
+  document.getElementById('page-content').querySelector('.ph-sub').textContent = 'Lista Corporation Admin censiti';
+}
+
+function renderUserList(tipo, list, canAdd=false) {
+  const pc = document.getElementById('page-content');
+  pc.innerHTML = `
+    <div class="ph">
+      <div class="ph-left">
+        <div class="ph-bar"></div>
+        <div><div class="ph-title">${tipo}</div><div class="ph-sub">Lista ${tipo} censiti nella piattaforma</div></div>
+      </div>
+      ${canAdd?'<div class="ph-right"><button class="btn-primary" onclick="openModal(\'modal-utente\')"><i class="fa-solid fa-plus"></i> Nuovo</button></div>':''}
+    </div>
+    <div class="table-card">
+      <table>
+        <thead><tr><th>Nome</th><th>Email</th><th>Telefono</th><th>Ragione Sociale</th><th>Azioni</th></tr></thead>
+        <tbody>
+          ${list.map(u => `<tr>
+            <td><strong>${u.nome}</strong></td>
+            <td>${u.email}</td>
+            <td>${u.tel}</td>
+            <td>${u.azienda}</td>
+            <td><div class="td-actions">
+              <button class="act-btn" title="Visualizza"><i class="fa-solid fa-eye"></i></button>
+              <button class="act-btn" title="Modifica"><i class="fa-solid fa-pen"></i></button>
+              <button class="act-btn danger" title="Elimina"><i class="fa-solid fa-trash"></i></button>
+            </div></td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+function deleteLicenza(id) {
+  const idx = MOCK_LICENZE.findIndex(l => l.id === id);
+  if (idx > -1) { MOCK_LICENZE.splice(idx, 1); renderLicenze(); showToast('Licenza eliminata','','🗑️'); }
+}
+
+// =====================================================================
+// CORPORATION ADMIN
+// =====================================================================
+function renderCorporationAdmin() {
+  const pc = document.getElementById('page-content');
+  pc.innerHTML = `
+    <div class="ph">
+      <div class="ph-left">
+        <div class="ph-bar"></div>
+        <div><div class="ph-title">Dashboard</div><div class="ph-sub">Acme S.r.l. · Licenza Gold · 8/15 assessment utilizzati</div></div>
+      </div>
+      <div class="ph-right">
+        <button class="btn-primary" onclick="openModal('modal-aa')"><i class="fa-solid fa-plus"></i> Nuovo Assessment Admin</button>
+      </div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(0,198,255,.1);color:#00c6ff"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="stat-val">${MOCK_ASSESSMENT_ADMINS.length}</div>
+        <div class="stat-lbl">Assessment Admin</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(29,158,117,.1);color:#1D9E75"><i class="fa-solid fa-chart-gantt"></i></div>
+        <div class="stat-val">8</div>
+        <div class="stat-lbl">Assessment Totali</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(212,160,23,.1);color:#D4A017"><i class="fa-solid fa-layer-group"></i></div>
+        <div class="stat-val">7</div>
+        <div class="stat-lbl">Rimanenti</div>
+      </div>
+    </div>
+    <div class="table-card">
+      <table>
+        <thead><tr><th>Azienda</th><th>Assessment Admin</th><th>Tipologia</th><th>Stato</th><th>Progresso</th><th>Azioni</th></tr></thead>
+        <tbody>
+          ${MOCK_ASSESSMENT_ADMINS.map(a => `<tr>
+            <td><strong>${a.azienda}</strong></td>
+            <td>${a.nome}<br><small style="color:var(--muted)">${a.email}</small></td>
+            <td><span class="badge badge-blue">${a.tipo}</span></td>
+            <td><span class="badge badge-${a.stato==='In corso'?'green':'yellow'}">${a.stato}</span></td>
+            <td>
+              <div style="display:flex;align-items:center;gap:8px">
+                <div class="ac-prog-bar" style="width:80px"><div class="ac-prog-fill" style="width:${a.progresso}%"></div></div>
+                <span style="font-size:11px;font-weight:700;color:var(--muted)">${a.progresso}%</span>
+              </div>
+            </td>
+            <td><div class="td-actions">
+              <button class="act-btn" title="Visualizza" onclick="caViewAssessmentAdmin(${a.id})"><i class="fa-solid fa-eye"></i></button>
+              <button class="act-btn" title="Modifica"><i class="fa-solid fa-pen"></i></button>
+              <button class="act-btn danger" title="Revoca"><i class="fa-solid fa-ban"></i></button>
+            </div></td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+function caViewAssessmentAdmin(id) {
+  // mostra opzione scegli tipo assessment
+  const a = MOCK_ASSESSMENT_ADMINS.find(x=>x.id===id);
+  const pc = document.getElementById('page-content');
+  pc.innerHTML = `
+    <div class="breadcrumb">
+      <a onclick="renderCorporationAdmin()"><i class="fa-solid fa-house"></i> Dashboard</a>
+      <span class="sep">/</span>
+      <span class="current">${a.nome}</span>
+    </div>
+    <div class="ph"><div class="ph-left"><div class="ph-bar"></div>
+      <div><div class="ph-title">Crea Assessment</div><div class="ph-sub">Seleziona la tipologia di assessment per ${a.nome}</div></div>
+    </div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:600px">
+      <div class="assess-card" onclick="startWizard('normale',${id})">
+        <div class="ac-top"><div class="ac-icon">📋</div><span class="badge badge-blue">Standard</span></div>
+        <div class="ac-title">Assessment Normale</div>
+        <div class="ac-sub">Un singolo assessment con configurazione completa di processo, relazione, modello ed evidenze.</div>
+        <div style="margin-top:14px"><button class="btn-primary" style="width:100%;justify-content:center">Avvia <i class="fa-solid fa-arrow-right"></i></button></div>
+      </div>
+      <div class="assess-card" onclick="startWizard('multi',${id})">
+        <div class="ac-top"><div class="ac-icon">📦</div><span class="badge badge-gold">Multi</span></div>
+        <div class="ac-title">Multi Assessment</div>
+        <div class="ac-sub">Carica un Excel con più aziende e crea lo stesso assessment per tutti gli assessment-admin.</div>
+        <div style="margin-top:14px"><button class="btn-primary" style="width:100%;justify-content:center">Avvia <i class="fa-solid fa-arrow-right"></i></button></div>
+      </div>
+    </div>`;
+}
+
+function startWizard(tipo, aaId) {
+  assessmentCreating = tipo;
+  wizardStep = tipo === 'multi' ? 0 : 1;
+  wizardConfig = {processo:'completo', relazione:'NIS2', tipo:'assessment', evidenze:'obbligatorie', monitoraggio:'con', rip_ass:false, rip_mon:false, rif_rel:false};
+  renderWizard();
+}
+
+function renderWizard() {
+  if (assessmentCreating === 'multi' && wizardStep === 0) {
+    renderWizardMultiUpload();
+    return;
+  }
+  const steps = [
+    {n:1,lbl:'Info Generali'},
+    {n:2,lbl:'Configurazione'},
+    {n:3,lbl:'Criticità'}
+  ];
+  const stepsHtml = steps.map((s,i) => {
+    let cls = '';
+    if (s.n < wizardStep) cls = 'done';
+    else if (s.n === wizardStep) cls = 'active';
+    return `${i>0?`<div class="wz-line ${s.n<=wizardStep?'done':''}"></div>`:''}
+    <div class="wz-step ${cls}">
+      <div class="wz-circle">${s.n < wizardStep ? '<i class="fa-solid fa-check" style="font-size:10px"></i>' : s.n}</div>
+      <span class="wz-lbl">${s.lbl}</span>
+    </div>`;
+  }).join('');
+
+  let bodyHtml = '';
+  if (wizardStep === 1) bodyHtml = renderWizardStep1();
+  else if (wizardStep === 2) bodyHtml = renderWizardStep2();
+  else if (wizardStep === 3) bodyHtml = renderWizardStep3();
+
+  const pc = document.getElementById('page-content');
+  pc.innerHTML = `
+    <div class="breadcrumb">
+      <a onclick="renderCorporationAdmin()"><i class="fa-solid fa-house"></i> Dashboard</a>
+      <span class="sep">/</span>
+      <span class="current">Nuovo Assessment${assessmentCreating==='multi'?' (Multi)':''}</span>
+    </div>
+    <div class="ph"><div class="ph-left"><div class="ph-bar"></div>
+      <div><div class="ph-title">Wizard Assessment</div><div class="ph-sub">Configurazione nuovo assessment</div></div>
+    </div></div>
+    <div class="wizard-steps">${stepsHtml}</div>
+    ${bodyHtml}
+    <div style="display:flex;justify-content:space-between;margin-top:14px">
+      <button class="btn-outline" onclick="wizardPrev()"><i class="fa-solid fa-arrow-left"></i> ${wizardStep===1?'Annulla':'Indietro'}</button>
+      <button class="btn-primary" onclick="wizardNext()">${wizardStep===3?'<i class="fa-solid fa-check"></i> Crea Assessment':'Avanti <i class="fa-solid fa-arrow-right"></i>'}</button>
+    </div>`;
+}
+
+function renderWizardMultiUpload() {
+  const pc = document.getElementById('page-content');
+  pc.innerHTML = `
+    <div class="breadcrumb">
+      <a onclick="renderCorporationAdmin()"><i class="fa-solid fa-house"></i> Dashboard</a>
+      <span class="sep">/</span><span class="current">Multi Assessment · Upload Excel</span>
+    </div>
+    <div class="ph"><div class="ph-left"><div class="ph-bar"></div>
+      <div><div class="ph-title">Carica Elenco Aziende</div><div class="ph-sub">Multi Assessment · Step 1 di 4</div></div>
+    </div></div>
+    <div class="excel-template-bar">
+      <div><i class="fa-solid fa-file-excel" style="color:var(--green);margin-right:8px"></i><strong>Template Excel</strong><span style="font-size:11px;color:var(--muted);margin-left:8px">Colonne: Ragione Sociale, P.IVA, Nome, Cognome, Email, Telefono</span></div>
+      <button class="btn-outline btn-sm" onclick="showToast('Template scaricato','file template.xlsx','📥')"><i class="fa-solid fa-download"></i> Scarica Template</button>
+    </div>
+    <div class="wizard-card">
+      <div class="dropzone" onclick="showToast('File caricato','lista_aziende.xlsx - 3 righe rilevate','✅')">
+        <div class="dz-icon"><i class="fa-solid fa-file-excel"></i></div>
+        <div class="dz-title">Carica il file Excel</div>
+        <div class="dz-sub">Trascina il file qui o clicca per sfogliare</div>
+        <div class="dz-formats"><span class="dz-fmt">XLSX</span><span class="dz-fmt">XLS</span></div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-top:14px">
+      <button class="btn-outline" onclick="renderCorporationAdmin()"><i class="fa-solid fa-arrow-left"></i> Annulla</button>
+      <button class="btn-primary" onclick="wizardStep=1;renderWizard()">Avanti <i class="fa-solid fa-arrow-right"></i></button>
+    </div>`;
+}
+
+function renderWizardStep1() {
+  return `<div class="wizard-card">
+    <div class="wizard-card-title"><i class="fa-solid fa-circle-info"></i> Informazioni Generali</div>
+    <div class="form-grid cols1">
+      <div class="form-group">
+        <label class="form-label">Descrizione Assessment</label>
+        <textarea class="form-input" style="min-height:100px;resize:vertical" placeholder="Descrivi lo scopo e il contesto di questo assessment..."></textarea>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderWizardStep2() {
+  const c = wizardConfig;
+  return `<div class="wizard-card">
+    <div class="wizard-card-title"><i class="fa-solid fa-sliders"></i> Configurazione</div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div>
+        <div class="form-label" style="margin-bottom:8px">Processo</div>
+        <div class="toggle-row">
+          <div class="toggle-opt ${c.processo==='completo'?'on':''}" onclick="setConf('processo','completo',this)">Completo (Reviewer + Owner + Auditor)</div>
+          <div class="toggle-opt ${c.processo==='semplificato'?'on':''}" onclick="setConf('processo','semplificato',this)">Semplificato (Reviewer + Owner)</div>
+        </div>
+      </div>
+      <div>
+        <div class="form-label" style="margin-bottom:8px">Relazione</div>
+        <div class="toggle-row">
+          <div class="toggle-opt ${c.relazione==='NIS2'?'on':''}" onclick="setConf('relazione','NIS2',this)">NIS2</div>
+          <div class="toggle-opt ${c.relazione==='standard'?'on':''}" onclick="setConf('relazione','standard',this)">Standard</div>
+        </div>
+      </div>
+      <div>
+        <div class="form-label" style="margin-bottom:8px">Modello</div>
+        <div class="toggle-row">
+          <div class="toggle-opt on">${c.relazione==='NIS2'?'Score Optimize 5 Livelli':'Modello Standard'}</div>
+        </div>
+        <div class="form-hint" style="margin-top:5px">Il modello è determinato dalla relazione selezionata</div>
+      </div>
+      <div>
+        <div class="form-label" style="margin-bottom:8px">Tipo Assessment</div>
+        <div class="toggle-row">
+          <div class="toggle-opt ${c.tipo==='assessment'?'on':''}" onclick="setConf('tipo','assessment',this)">Assessment</div>
+          <div class="toggle-opt ${c.tipo==='prequalifica'?'on':''}" onclick="setConf('tipo','prequalifica',this)">Prequalifica (senza monitoraggio)</div>
+        </div>
+      </div>
+      <div>
+        <div class="form-label" style="margin-bottom:8px">Evidenze</div>
+        <div class="toggle-row">
+          <div class="toggle-opt ${c.evidenze==='obbligatorie'?'on':''}" onclick="setConf('evidenze','obbligatorie',this)">Obbligatorie</div>
+          <div class="toggle-opt ${c.evidenze==='facoltative'?'on':''}" onclick="setConf('evidenze','facoltative',this)">Facoltative</div>
+        </div>
+      </div>
+      ${c.tipo!=='prequalifica'?`<div>
+        <div class="form-label" style="margin-bottom:8px">Monitoraggio</div>
+        <div class="toggle-row">
+          <div class="toggle-opt ${c.monitoraggio==='con'?'on':''}" onclick="setConf('monitoraggio','con',this)">Con Monitoraggio</div>
+          <div class="toggle-opt ${c.monitoraggio==='senza'?'on':''}" onclick="setConf('monitoraggio','senza',this)">Senza Monitoraggio</div>
+        </div>
+      </div>`:''}
+      <div>
+        <div class="form-label" style="margin-bottom:8px">Opzioni Avanzate</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div class="check-row ${c.rip_ass?'on':''}" onclick="toggleCheck('rip_ass',this)">
+            <div class="check-box"><i class="fa-solid fa-check"></i></div>
+            Assessment Ripianificabile
+          </div>
+          ${c.tipo!=='prequalifica'?`<div class="check-row ${c.rip_mon?'on':''}" onclick="toggleCheck('rip_mon',this)">
+            <div class="check-box"><i class="fa-solid fa-check"></i></div>
+            Monitoring Ripianificabile
+          </div>`:''}
+          <div class="check-row ${c.rif_rel?'on':''}" onclick="toggleCheck('rif_rel',this)">
+            <div class="check-box"><i class="fa-solid fa-check"></i></div>
+            Relazione Rifiutabile
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderWizardStep3() {
+  const livelli = [{n:1,l:'Basso',c:'#1D9E75'},{n:2,l:'Moderato',c:'#86b800'},{n:3,l:'Alto',c:'#D4A017'},{n:4,l:'Molto Alto',c:'#D85A30'}];
+  return `<div class="wizard-card">
+    <div class="wizard-card-title"><i class="fa-solid fa-triangle-exclamation"></i> Giorni di Criticità</div>
+    <div class="form-hint" style="margin-bottom:14px">Definisci il numero di giorni per ogni livello di criticità rilevato durante l'assessment.</div>
+    <table class="crit-table">
+      <thead><tr><th>Livello</th><th>Descrizione</th><th>Giorni</th></tr></thead>
+      <tbody>
+        ${livelli.map(l=>`<tr>
+          <td><span class="badge" style="background:${l.c}18;color:${l.c};border:1px solid ${l.c}33">Livello ${l.n}</span></td>
+          <td style="font-weight:600">${l.l}</td>
+          <td><input class="crit-input" type="number" value="${l.n*10}" min="1"></td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+  </div>`;
+}
+
+function setConf(key, val, el) {
+  wizardConfig[key] = val;
+  renderWizard();
+}
+
+function toggleCheck(key, el) {
+  wizardConfig[key] = !wizardConfig[key];
+  el.classList.toggle('on', wizardConfig[key]);
+  el.querySelector('.check-box').innerHTML = wizardConfig[key] ? '<i class="fa-solid fa-check"></i>' : '';
+}
+
+function wizardNext() {
+  if (wizardStep < 3) { wizardStep++; renderWizard(); }
+  else { showToast('Assessment creato!','Il workflow è stato avviato','🎉'); renderCorporationAdmin(); }
+}
+
+function wizardPrev() {
+  if (wizardStep === 1 && assessmentCreating === 'multi') { wizardStep = 0; renderWizard(); }
+  else if (wizardStep > 1) { wizardStep--; renderWizard(); }
+  else { renderCorporationAdmin(); }
+}
+
+// =====================================================================
+// ASSESSMENT ADMIN
+// =====================================================================
+function renderAssessmentAdmin() {
+  const pc = document.getElementById('page-content');
+  pc.innerHTML = `
+    <div class="ph"><div class="ph-left"><div class="ph-bar"></div>
+      <div><div class="ph-title">I Miei Assessment</div><div class="ph-sub">Assessment Admin · ${USERS['assessment-admin'].name}</div></div>
+    </div></div>
+    <div class="assess-grid">
+      ${MOCK_ASSESSMENTS_AA.map(a=>`
+        <div class="assess-card" onclick="aaViewAssessment(${a.id})">
+          <div class="ac-top">
+            <div class="ac-icon">📋</div>
+            <div class="ac-badges">
+              <span class="badge ${a.tipo==='Completo'?'badge-blue':'badge-yellow'}">${a.tipo}</span>
+              ${a.ai?'<span class="badge badge-blue"><i class="fa-solid fa-robot"></i> AI</span>':''}
+            </div>
+          </div>
+          <div class="ac-title">${a.titolo}</div>
+          <div class="ac-sub">${a.azienda}</div>
+          <div class="ac-meta">
+            <div class="ac-meta-item"><div class="ac-meta-lbl">Stato</div><div class="ac-meta-val">${a.stato}</div></div>
+          </div>
+          <div class="ac-progress">
+            <div class="ac-prog-label"><span>Progresso</span><span>${a.progresso}%</span></div>
+            <div class="ac-prog-bar"><div class="ac-prog-fill" style="width:${a.progresso}%"></div></div>
+          </div>
+        </div>`).join('')}
+    </div>`;
+}
+
+function aaViewAssessment(id) {
+  const a = MOCK_ASSESSMENTS_AA.find(x=>x.id===id);
+  const pc = document.getElementById('page-content');
+  const hasAI = a.ai;
+  const isCompleto = a.tipo === 'Completo';
+
+  pc.innerHTML = `
+    <div class="breadcrumb">
+      <a onclick="renderAssessmentAdmin()"><i class="fa-solid fa-house"></i> Dashboard</a>
+      <span class="sep">/</span><span class="current">${a.titolo}</span>
+    </div>
+    <div class="ph"><div class="ph-left"><div class="ph-bar"></div>
+      <div><div class="ph-title">${a.titolo}</div><div class="ph-sub">Assegna gli attori del processo · ${a.azienda}</div></div>
+    </div></div>
+
+    <div class="actor-card">
+      <div class="actor-header">
+        <div class="actor-icon" style="background:rgba(29,158,117,.1);color:#1D9E75"><i class="fa-solid fa-eye"></i></div>
+        <div><div class="actor-title">Reviewer</div><div class="actor-sub">Seleziona le domande del questionario</div></div>
+      </div>
+      <div class="actor-body">
+        <div class="form-grid">
+          <div class="form-group"><label class="form-label">Nome</label><input class="form-input" placeholder="Nome" value="Giulia"></div>
+          <div class="form-group"><label class="form-label">Cognome</label><input class="form-input" placeholder="Cognome" value="Martini"></div>
+          <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" value="g.martini@acme.it"></div>
+          <div class="form-group"><label class="form-label">Telefono</label><input class="form-input" value="+39 02 3456789"></div>
+          <div class="form-group"><label class="form-label">Ragione Sociale</label><input class="form-input" value="Acme S.r.l."></div>
+          <div class="form-group"><label class="form-label">Logo</label><input class="form-input" type="file" style="padding:6px"></div>
+          <div class="form-group"><label class="form-label">Footer Documento</label><input class="form-input" placeholder="Testo footer..."></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="actor-card">
+      <div class="actor-header">
+        <div class="actor-icon" style="background:rgba(216,90,48,.1);color:#D85A30"><i class="fa-solid fa-user-tie"></i></div>
+        <div><div class="actor-title">Owner</div><div class="actor-sub">Risponde alle domande del questionario ${!isCompleto?'· verifica le risposte (processo semplificato)':''}</div></div>
+      </div>
+      <div class="actor-body">
+        <div class="form-grid">
+          <div class="form-group"><label class="form-label">Nome</label><input class="form-input" placeholder="Nome" value="Carlo"></div>
+          <div class="form-group"><label class="form-label">Cognome</label><input class="form-input" placeholder="Cognome" value="Esposito"></div>
+          <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" value="c.esposito@target.it"></div>
+          <div class="form-group"><label class="form-label">Telefono</label><input class="form-input" value="+39 081 9990000"></div>
+          <div class="form-group"><label class="form-label">Ragione Sociale</label><input class="form-input" value="Target Infra S.r.l."></div>
+          <div class="form-group"><label class="form-label">Logo</label><input class="form-input" type="file" style="padding:6px"></div>
+          <div class="form-group"><label class="form-label">Footer Documento</label><input class="form-input" placeholder="Testo footer..."></div>
+          ${!isCompleto && hasAI?'<div class="form-group full"><div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(0,198,255,.06);border:1.5px solid rgba(0,198,255,.2);border-radius:9px"><i class="fa-solid fa-robot" style="color:var(--accent)"></i><span style="font-size:12px;font-weight:600;color:var(--accent)">AI disponibile (licenza con AI attiva)</span></div></div>':''}
+        </div>
+      </div>
+    </div>
+
+    ${isCompleto?`<div class="actor-card">
+      <div class="actor-header">
+        <div class="actor-icon" style="background:rgba(0,198,255,.1);color:#0099cc"><i class="fa-solid fa-user-check"></i></div>
+        <div><div class="actor-title">Auditor</div><div class="actor-sub">Verifica le risposte dell'Owner (processo completo)</div></div>
+      </div>
+      <div class="actor-body">
+        <div class="form-grid">
+          <div class="form-group"><label class="form-label">Nome</label><input class="form-input" placeholder="Nome" value="Sofia"></div>
+          <div class="form-group"><label class="form-label">Cognome</label><input class="form-input" placeholder="Cognome" value="Ricci"></div>
+          <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" value="s.ricci@auditing.it"></div>
+          <div class="form-group"><label class="form-label">Telefono</label><input class="form-input" value="+39 02 9871234"></div>
+          <div class="form-group"><label class="form-label">Ragione Sociale</label><input class="form-input" value="Ricci Audit S.r.l."></div>
+          <div class="form-group"><label class="form-label">Logo</label><input class="form-input" type="file" style="padding:6px"></div>
+          <div class="form-group"><label class="form-label">Footer Documento</label><input class="form-input" placeholder="Testo footer..."></div>
+          ${hasAI?'<div class="form-group full"><div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(0,198,255,.06);border:1.5px solid rgba(0,198,255,.2);border-radius:9px"><i class="fa-solid fa-robot" style="color:var(--accent)"></i><span style="font-size:12px;font-weight:600;color:var(--accent)">AI disponibile (licenza con AI attiva)</span></div></div>':''}
+        </div>
+      </div>
+    </div>`:''}
+
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:4px">
+      <button class="btn-outline" onclick="renderAssessmentAdmin()">Annulla</button>
+      <button class="btn-primary" onclick="showToast('Attori assegnati!','Notifiche inviate agli attori','✅');renderAssessmentAdmin()"><i class="fa-solid fa-check"></i> Salva e Invia</button>
+    </div>`;
+}
+
+// =====================================================================
+// REVIEWER / OWNER / AUDITOR DASHBOARD
+// =====================================================================
+function renderReviewerDash() { renderRoaDash('reviewer'); }
+function renderOwnerDash() { renderRoaDash('owner'); }
+function renderAuditorDash() { renderRoaDash('auditor'); }
+
+function renderRoaDash(role) {
+  const labels = {reviewer:'Reviewer',owner:'Owner',auditor:'Auditor'};
+  const subs = {reviewer:'Seleziona le domande dei questionari assegnati',owner:'Rispondi alle domande assegnate',auditor:'Valida le risposte dell\'Owner'};
+  const pc = document.getElementById('page-content');
+  pc.innerHTML = `
+    <div class="ph"><div class="ph-left"><div class="ph-bar"></div>
+      <div><div class="ph-title">I Miei Assessment</div><div class="ph-sub">${labels[role]} · ${subs[role]}</div></div>
+    </div></div>
+    <div class="assess-grid">
+      ${MOCK_ASSESSMENTS_ROA.map(a=>`
+        <div class="assess-card" onclick="enterWorkspace('${role}',${a.id})">
+          <div class="ac-top">
+            <div class="ac-icon">📋</div>
+            <div class="ac-badges"><span class="badge ${a.tipo==='Completo'?'badge-blue':'badge-yellow'}">${a.tipo}</span></div>
+          </div>
+          <div class="ac-title">${a.titolo}</div>
+          <div class="ac-sub">${a.azienda}</div>
+          <div class="ac-meta">
+            <div class="ac-meta-item"><div class="ac-meta-lbl">Stato</div><div class="ac-meta-val">${a.stato}</div></div>
+            <div class="ac-meta-item"><div class="ac-meta-lbl">Scadenza</div><div class="ac-meta-val">${a.scadenza}</div></div>
+          </div>
+          <div class="ac-progress">
+            <div class="ac-prog-label"><span>Progresso</span><span>${a.progresso}%</span></div>
+            <div class="ac-prog-bar"><div class="ac-prog-fill" style="width:${a.progresso}%"></div></div>
+          </div>
+        </div>`).join('')}
+    </div>`;
+}
+
+// =====================================================================
+// WORKSPACE (Reviewer, Owner, Auditor)
+// =====================================================================
+function enterWorkspace(role, id) {
+  selectedQuestions = [];
+  ownerAnswers = {};
+  auditorValidations = {};
+  currentOwnerQ = null;
+  currentAuditorQ = null;
+
+  if (role === 'reviewer') renderReviewerWorkspace(id);
+  else if (role === 'owner') renderOwnerWorkspace(id);
+  else if (role === 'auditor') renderAuditorWorkspace(id);
+}
+
+// --- REVIEWER ---
+function renderReviewerWorkspace(id) {
+  const a = MOCK_ASSESSMENTS_ROA.find(x=>x.id===id);
+  const pc = document.getElementById('page-content');
+
+  const qHtml = NIS2_QUESTIONS.map((q,i) => {
+    const isSelected = selectedQuestions.includes(q.id);
+    return `<li class="q-it ${isSelected?'ans':''}" onclick="toggleQuestion('${q.id}',this)">
+      <div class="q-num">${isSelected?'<i class="fa-solid fa-check" style="font-size:8px"></i>':i+1}</div>
+      <div class="q-ib">
+        <div class="q-itxt">${q.q}</div>
+        <div class="q-imeta">
+          <span class="q-iid">${q.id}</span>
+          <span class="q-ibadge">${q.area}</span>
+        </div>
+      </div>
+    </li>`;
+  }).join('');
+
+  pc.innerHTML = `
+    <div class="breadcrumb">
+      <a onclick="renderReviewerDash()"><i class="fa-solid fa-house"></i> Dashboard</a>
+      <span class="sep">/</span><span class="current">${a.titolo}</span>
+    </div>
+    <div class="ph">
+      <div class="ph-left"><div class="ph-bar"></div>
+        <div><div class="ph-title">Selezione Questionario</div><div class="ph-sub">Reviewer · Seleziona le domande per l'Owner</div></div>
+      </div>
+      <div class="ph-right" id="rev-count-bar">
+        <span class="badge badge-blue" id="rev-count">${selectedQuestions.length} selezionate</span>
+        <button class="btn-primary" onclick="showToast('Questionario inviato','L\'Owner può ora rispondere','✅');renderReviewerDash()">
+          <i class="fa-solid fa-paper-plane"></i> Invia all'Owner
+        </button>
+      </div>
+    </div>
+    <div class="prog-sum">
+      <div class="ps-s"><div class="ps-v" id="rev-sel-n">${selectedQuestions.length}</div><div class="ps-l">Selezionate</div></div>
+      <div class="ps-d"></div>
+      <div class="ps-s"><div class="ps-v">${NIS2_QUESTIONS.length}</div><div class="ps-l">Totale</div></div>
+      <div class="ps-d"></div>
+      <div class="ps-pw">
+        <div class="ps-pl"><span>Selezione</span><span id="rev-pct">${Math.round(selectedQuestions.length/NIS2_QUESTIONS.length*100)}%</span></div>
+        <div class="ps-pt"><div class="ps-pf" id="rev-prog" style="width:${Math.round(selectedQuestions.length/NIS2_QUESTIONS.length*100)}%"></div></div>
+      </div>
+    </div>
+    <div class="table-card" style="overflow:visible">
+      <div style="padding:10px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+        <span style="font-size:12px;font-weight:700;color:var(--muted)">Domande NIS2 · ${NIS2_QUESTIONS.length} disponibili</span>
+        <div style="display:flex;gap:8px">
+          <button class="btn-outline btn-sm" onclick="selectAllQ()"><i class="fa-solid fa-check-double"></i> Tutte</button>
+          <button class="btn-outline btn-sm" onclick="clearAllQ()"><i class="fa-solid fa-xmark"></i> Nessuna</button>
+        </div>
+      </div>
+      <ul id="reviewer-q-list">${qHtml}</ul>
+    </div>`;
+
+  updateRevStats();
+}
+
+function toggleQuestion(qid, el) {
+  const idx = selectedQuestions.indexOf(qid);
+  if (idx > -1) { selectedQuestions.splice(idx,1); el.classList.remove('ans'); }
+  else { selectedQuestions.push(qid); el.classList.add('ans'); }
+  const i = NIS2_QUESTIONS.findIndex(q=>q.id===qid);
+  el.querySelector('.q-num').innerHTML = el.classList.contains('ans') ? '<i class="fa-solid fa-check" style="font-size:8px"></i>' : i+1;
+  updateRevStats();
+}
+
+function selectAllQ() {
+  selectedQuestions = NIS2_QUESTIONS.map(q=>q.id);
+  renderReviewerWorkspace(1);
+}
+function clearAllQ() {
+  selectedQuestions = [];
+  renderReviewerWorkspace(1);
+}
+
+function updateRevStats() {
+  const n = selectedQuestions.length; const tot = NIS2_QUESTIONS.length;
+  const pct = Math.round(n/tot*100);
+  const el1 = document.getElementById('rev-sel-n');
+  const el2 = document.getElementById('rev-pct');
+  const el3 = document.getElementById('rev-prog');
+  const el4 = document.getElementById('rev-count');
+  if (el1) el1.textContent = n;
+  if (el2) el2.textContent = pct+'%';
+  if (el3) el3.style.width = pct+'%';
+  if (el4) el4.textContent = n+' selezionate';
+}
+
+// --- OWNER ---
+function renderOwnerWorkspace(id) {
+  const a = MOCK_ASSESSMENTS_ROA.find(x=>x.id===id);
+  // usa domande selezionate o tutte se nessuna selezionata
+  const qs = selectedQuestions.length > 0
+    ? NIS2_QUESTIONS.filter(q=>selectedQuestions.includes(q.id))
+    : NIS2_QUESTIONS;
+
+  if (qs.length === 0) {
+    showToast('Nessuna domanda assegnata','Il Reviewer non ha ancora selezionato domande','⚠️');
+    renderOwnerDash(); return;
+  }
+  if (!currentOwnerQ) currentOwnerQ = qs[0].id;
+
+  const answered = Object.keys(ownerAnswers).length;
+  const pct = Math.round(answered/qs.length*100);
+  const curQ = qs.find(q=>q.id===currentOwnerQ) || qs[0];
+  const curAns = ownerAnswers[currentOwnerQ] || {};
+  const curIdx = qs.findIndex(q=>q.id===currentOwnerQ);
+  const cmmi = ['N/A','Iniziale','Ripetibile','Definito','Gestito','Ottimizzato'];
+
+  const qListHtml = qs.map((q,i) => {
+    const hasAns = !!ownerAnswers[q.id];
+    return `<li class="q-it ${hasAns?'ans':''} ${q.id===currentOwnerQ?'sel':''}" onclick="ownerSelectQ('${q.id}')">
+      <div class="q-num">${hasAns?'<i class="fa-solid fa-check" style="font-size:8px"></i>':i+1}</div>
+      <div class="q-ib">
+        <div class="q-itxt">${q.q.substring(0,60)}${q.q.length>60?'...':''}</div>
+        <div class="q-imeta"><span class="q-iid">${q.id}</span><span class="q-ibadge">${hasAns?ownerAnswers[q.id].livello:'—'}</span></div>
+      </div>
+    </li>`;
+  }).join('');
+
+  const pc = document.getElementById('page-content');
+  pc.innerHTML = `
+    <div class="breadcrumb">
+      <a onclick="renderOwnerDash()"><i class="fa-solid fa-house"></i> Dashboard</a>
+      <span class="sep">/</span><span class="current">${a.titolo}</span>
+    </div>
+    <div class="ph"><div class="ph-left"><div class="ph-bar"></div>
+      <div><div class="ph-title">Compilazione Risposte</div><div class="ph-sub">Owner · Rispondi alle domande assegnate dal Reviewer</div></div>
+    </div></div>
+    <div class="prog-sum">
+      <div class="ps-s"><div class="ps-v">${answered}</div><div class="ps-l">Risposte</div></div>
+      <div class="ps-d"></div>
+      <div class="ps-s"><div class="ps-v">${qs.length}</div><div class="ps-l">Totale</div></div>
+      <div class="ps-d"></div>
+      <div class="ps-pw">
+        <div class="ps-pl"><span>Progresso</span><span>${pct}%</span></div>
+        <div class="ps-pt"><div class="ps-pf" style="width:${pct}%"></div></div>
+      </div>
+    </div>
+    <div class="qa-layout">
+      <div class="q-panel">
+        <div class="q-panel-h"><div class="q-panel-label">NIS2 · Domande assegnate</div><div class="q-panel-title">Questionario Reviewer</div></div>
+        <ul class="q-list">${qListHtml}</ul>
+      </div>
+      <div class="a-panel">
+        <div class="a-hdr">
+          <div style="flex:1;min-width:0">
+            <div class="a-qid">${curQ.id}</div>
+            <div class="a-qtxt">${curQ.q}</div>
+          </div>
+          <div class="a-navs">
+            <button class="a-nav-btn" onclick="ownerNav(-1)" ${curIdx===0?'disabled':''}><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="a-nav-btn" onclick="ownerNav(1)" ${curIdx===qs.length-1?'disabled':''}><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+        </div>
+        <div class="a-body">
+          <div>
+            <div class="ev-label"><i class="fa-solid fa-gauge"></i> Livello di Maturità</div>
+            <div class="cmmi-row">
+              ${cmmi.map(v=>`<div class="cmmi-r ${curAns.livello===v?'on':''}" onclick="setOwnerLivello('${v}')">
+                <div class="cmmi-circle"></div><span class="cmmi-lbl">${v}</span>
+              </div>`).join('')}
+            </div>
+          </div>
+          <div>
+            <div class="ev-label"><i class="fa-solid fa-file-lines"></i> Evidenza Testuale</div>
+            <textarea class="ev-ta" id="owner-ev-ta" placeholder="Descrivi le evidenze e i processi adottati...">${curAns.evidenza||''}</textarea>
+          </div>
+          <div class="dropzone" style="min-height:100px" onclick="showToast('File caricato','evidenza.pdf','📎')">
+            <div class="dz-icon" style="width:40px;height:40px;font-size:16px"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+            <div class="dz-title" style="font-size:13px">Carica Evidenza</div>
+            <div class="dz-formats"><span class="dz-fmt">PDF</span><span class="dz-fmt">DOCX</span><span class="dz-fmt">PNG</span></div>
+          </div>
+        </div>
+        <div class="owner-next-bar">
+          <button class="btn-outline btn-sm" onclick="ownerSave()" style="margin-right:8px"><i class="fa-solid fa-floppy-disk"></i> Salva</button>
+          ${answered === qs.length?`<button class="btn-primary" onclick="showToast('Risposte inviate!','L\'Auditor può ora validare','✅');renderOwnerDash()"><i class="fa-solid fa-paper-plane"></i> Invia all'Auditor</button>`:'<button class="btn-primary" onclick="ownerNav(1)">Prossima <i class="fa-solid fa-arrow-right"></i></button>'}
+        </div>
+      </div>
+    </div>`;
+}
+
+function ownerSelectQ(qid) {
+  currentOwnerQ = qid;
+  renderOwnerWorkspace(1);
+}
+
+function ownerNav(dir) {
+  const qs = selectedQuestions.length > 0
+    ? NIS2_QUESTIONS.filter(q=>selectedQuestions.includes(q.id))
+    : NIS2_QUESTIONS;
+  const curIdx = qs.findIndex(q=>q.id===currentOwnerQ);
+  const next = qs[curIdx+dir];
+  if (next) { currentOwnerQ = next.id; ownerSave(); renderOwnerWorkspace(1); }
+}
+
+function setOwnerLivello(v) {
+  if (!ownerAnswers[currentOwnerQ]) ownerAnswers[currentOwnerQ] = {};
+  ownerAnswers[currentOwnerQ].livello = v;
+  renderOwnerWorkspace(1);
+}
+
+function ownerSave() {
+  if (!ownerAnswers[currentOwnerQ]) ownerAnswers[currentOwnerQ] = {};
+  const ta = document.getElementById('owner-ev-ta');
+  if (ta) ownerAnswers[currentOwnerQ].evidenza = ta.value;
+  if (!ownerAnswers[currentOwnerQ].livello) ownerAnswers[currentOwnerQ].livello = 'N/A';
+}
+
+// --- AUDITOR ---
+function renderAuditorWorkspace(id) {
+  const a = MOCK_ASSESSMENTS_ROA.find(x=>x.id===id);
+  const qs = selectedQuestions.length > 0
+    ? NIS2_QUESTIONS.filter(q=>selectedQuestions.includes(q.id))
+    : NIS2_QUESTIONS;
+
+  if (!currentAuditorQ) currentAuditorQ = qs[0].id;
+  const validated = Object.keys(auditorValidations).length;
+  const pct = Math.round(validated/qs.length*100);
+  const curQ = qs.find(q=>q.id===currentAuditorQ) || qs[0];
+  const curIdx = qs.findIndex(q=>q.id===currentAuditorQ);
+  const curVal = auditorValidations[currentAuditorQ] || {};
+  const ownerAns = ownerAnswers[currentAuditorQ] || {livello:'Definito', evidenza:'L\'azienda ha implementato procedure documentate per la gestione del rischio, con revisione trimestrale approvata dal CDA.'};
+
+  const validClass = {conforme:'val-acc',parziale:'val-wrn','non-conforme':'val-rej'};
+
+  const qListHtml = qs.map((q,i) => {
+    const v = auditorValidations[q.id];
+    const cls = v ? validClass[v.esito]||'' : '';
+    return `<li class="q-it ${cls} ${q.id===currentAuditorQ?'sel':''}" onclick="audSelectQ('${q.id}')">
+      <div class="q-num">${v?'<i class="fa-solid fa-check" style="font-size:8px"></i>':i+1}</div>
+      <div class="q-ib">
+        <div class="q-itxt">${q.q.substring(0,55)}...</div>
+        <div class="q-imeta"><span class="q-iid">${q.id}</span><span class="q-ibadge">${v?v.esito:'—'}</span></div>
+      </div>
+    </li>`;
+  }).join('');
+
+  const pc = document.getElementById('page-content');
+  pc.innerHTML = `
+    <div class="breadcrumb">
+      <a onclick="renderAuditorDash()"><i class="fa-solid fa-house"></i> Dashboard</a>
+      <span class="sep">/</span><span class="current">${a.titolo}</span>
+    </div>
+    <div class="ph"><div class="ph-left"><div class="ph-bar"></div>
+      <div><div class="ph-title">Validazione Auditor</div><div class="ph-sub">Verifica le risposte dell\'Owner</div></div>
+    </div></div>
+    <div class="prog-sum">
+      <div class="ps-s"><div class="ps-v">${validated}</div><div class="ps-l">Validate</div></div>
+      <div class="ps-d"></div>
+      <div class="ps-s"><div class="ps-v">${qs.length}</div><div class="ps-l">Totale</div></div>
+      <div class="ps-d"></div>
+      <div class="ps-s"><div class="ps-v" style="color:var(--green)">${Object.values(auditorValidations).filter(v=>v.esito==='conforme').length}</div><div class="ps-l">Conformi</div></div>
+      <div class="ps-d"></div>
+      <div class="ps-s"><div class="ps-v" style="color:var(--red)">${Object.values(auditorValidations).filter(v=>v.esito==='non-conforme').length}</div><div class="ps-l">Non Conf.</div></div>
+      <div class="ps-d"></div>
+      <div class="ps-pw">
+        <div class="ps-pl"><span>Progresso</span><span>${pct}%</span></div>
+        <div class="ps-pt"><div class="ps-pf" style="width:${pct}%"></div></div>
+      </div>
+    </div>
+    <div class="qa-layout">
+      <div class="q-panel">
+        <div class="q-panel-h"><div class="q-panel-label">NIS2 · Validazione</div><div class="q-panel-title">Domande da validare</div></div>
+        <ul class="q-list">${qListHtml}</ul>
+      </div>
+      <div class="a-panel">
+        <div class="a-hdr">
+          <div style="flex:1;min-width:0">
+            <div class="a-qid">${curQ.id}</div>
+            <div class="a-qtxt">${curQ.q}</div>
+          </div>
+          <div class="a-navs">
+            <button class="a-nav-btn" onclick="audNav(-1)" ${curIdx===0?'disabled':''}><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="a-nav-btn" onclick="audNav(1)" ${curIdx===qs.length-1?'disabled':''}><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+        </div>
+        <div class="a-body">
+          <div class="oav-box">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+              <span class="oav-badge-role"><i class="fa-solid fa-user-tie"></i> Risposta Owner</span>
+            </div>
+            <div class="oav-cmmi-val"><i class="fa-solid fa-gauge"></i> ${ownerAns.livello||'Non risposto'}</div>
+            <div class="oav-ans-txt">${ownerAns.evidenza||'<em style="color:var(--muted)">Nessuna evidenza inserita</em>'}</div>
+          </div>
+          <div>
+            <div class="ev-label"><i class="fa-solid fa-gavel"></i> Esito Validazione</div>
+            <div class="mvr-row">
+              <div class="mvr ${curVal.esito==='conforme'?'on-acc':''}" onclick="setAudEsito('conforme',this)">
+                <div class="mvr-circle"></div> ✅ Conforme
+              </div>
+              <div class="mvr ${curVal.esito==='parziale'?'on-wrn':''}" onclick="setAudEsito('parziale',this)">
+                <div class="mvr-circle"></div> ⚠️ Parziale
+              </div>
+              <div class="mvr ${curVal.esito==='non-conforme'?'on-rej':''}" onclick="setAudEsito('non-conforme',this)">
+                <div class="mvr-circle"></div> ❌ Non Conforme
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="ev-label"><i class="fa-solid fa-pen-to-square"></i> Note Auditor</div>
+            <textarea class="man-val-note" id="aud-note" placeholder="Inserisci note di validazione, raccomandazioni...">${curVal.note||''}</textarea>
+          </div>
+        </div>
+        <div class="owner-next-bar">
+          <button class="btn-outline btn-sm" onclick="audSave()" style="margin-right:8px"><i class="fa-solid fa-floppy-disk"></i> Salva</button>
+          ${validated === qs.length?`<button class="btn-primary" onclick="renderReport()"><i class="fa-solid fa-chart-bar"></i> Genera Relazione</button>`:'<button class="btn-primary" onclick="audNav(1)">Prossima <i class="fa-solid fa-arrow-right"></i></button>'}
+        </div>
+      </div>
+    </div>`;
+}
+
+function audSelectQ(qid) {
+  audSave();
+  currentAuditorQ = qid;
+  renderAuditorWorkspace(1);
+}
+
+function audNav(dir) {
+  const qs = selectedQuestions.length > 0
+    ? NIS2_QUESTIONS.filter(q=>selectedQuestions.includes(q.id))
+    : NIS2_QUESTIONS;
+  const curIdx = qs.findIndex(q=>q.id===currentAuditorQ);
+  const next = qs[curIdx+dir];
+  if (next) { audSave(); currentAuditorQ = next.id; renderAuditorWorkspace(1); }
+}
+
+function setAudEsito(esito, el) {
+  if (!auditorValidations[currentAuditorQ]) auditorValidations[currentAuditorQ] = {};
+  auditorValidations[currentAuditorQ].esito = esito;
+  renderAuditorWorkspace(1);
+}
+
+function audSave() {
+  if (!auditorValidations[currentAuditorQ]) auditorValidations[currentAuditorQ] = {};
+  const note = document.getElementById('aud-note');
+  if (note) auditorValidations[currentAuditorQ].note = note.value;
+}
+
+// =====================================================================
+// REPORT
+// =====================================================================
+function renderReport() {
+  audSave();
+  const qs = selectedQuestions.length > 0
+    ? NIS2_QUESTIONS.filter(q=>selectedQuestions.includes(q.id))
+    : NIS2_QUESTIONS;
+  const tot = qs.length;
+  const validated = Object.keys(auditorValidations).length;
+  const acc = Object.values(auditorValidations).filter(v=>v.esito==='conforme').length;
+  const wrn = Object.values(auditorValidations).filter(v=>v.esito==='parziale').length;
+  const rej = Object.values(auditorValidations).filter(v=>v.esito==='non-conforme').length;
+
+  // Calcola score per area
+  const areas = [...new Set(qs.map(q=>q.area))];
+  const areaScores = areas.map(area => {
+    const areaQs = qs.filter(q=>q.area===area);
+    const areaValidated = areaQs.filter(q=>auditorValidations[q.id]);
+    if (areaValidated.length === 0) return {area, score: 50};
+    const areaAcc = areaValidated.filter(q=>auditorValidations[q.id]?.esito==='conforme').length;
+    const areaWrn = areaValidated.filter(q=>auditorValidations[q.id]?.esito==='parziale').length;
+    const score = Math.round((areaAcc * 100 + areaWrn * 50) / areaValidated.length);
+    return {area, score};
+  });
+
+  const overallScore = Math.round(areaScores.reduce((s,a)=>s+a.score,0)/areaScores.length);
+
+  const scoreTable = areaScores.map(({area,score}) => {
+    const cfg = score >= 80 ? {l:'Conforme',c:'var(--green)'} :
+                score >= 60 ? {l:'Parziale',c:'var(--yellow)'} :
+                score >= 40 ? {l:'Non Conf.',c:'var(--red)'} : {l:'Critico',c:'#8b0000'};
+    return `<tr>
+      <td style="font-weight:700">${area}</td>
+      <td style="font-weight:800;color:${cfg.c}">${score}%</td>
+      <td><div class="score-bar"><div class="score-bar-fill" style="width:${score}%;background:${cfg.c}"></div></div></td>
+      <td><span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:99px;background:${cfg.c}18;color:${cfg.c};border:1px solid ${cfg.c}33">${cfg.l}</span></td>
+    </tr>`;
+  }).join('');
+
+  const pc = document.getElementById('page-content');
+  pc.innerHTML = `
+    <div class="breadcrumb">
+      <a onclick="renderAuditorDash()"><i class="fa-solid fa-house"></i> Dashboard</a>
+      <span class="sep">/</span><span class="current">Relazione NIS2</span>
+    </div>
+    <div class="report-hero">
+      <div>
+        <div class="rh-logo"><em>3Audit</em>Flow</div>
+        <div class="rh-title">Relazione Assessment NIS2 Q2-2025</div>
+        <div class="rh-sub">Acme S.r.l. · Generata il ${new Date().toLocaleDateString('it-IT')} · Auditor: Sofia Ricci</div>
+        <div class="rh-badges">
+          <span class="rh-badge">NIS2</span>
+          <span class="rh-badge">Score Optimize 5 Livelli</span>
+          <span class="rh-badge g">Score: ${overallScore}%</span>
+        </div>
+      </div>
+    </div>
+    <div class="report-grid">
+      <div class="rep-card">
+        <h4><i class="fa-solid fa-chart-pie"></i> Riepilogo Validazioni</h4>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)">
+            <span style="display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600"><span style="width:10px;height:10px;border-radius:50%;background:var(--green);display:inline-block"></span>Conformi</span>
+            <span style="font-weight:800;color:var(--green)">${acc} (${tot>0?Math.round(acc/tot*100):0}%)</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)">
+            <span style="display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600"><span style="width:10px;height:10px;border-radius:50%;background:var(--yellow);display:inline-block"></span>Parziali</span>
+            <span style="font-weight:800;color:var(--yellow)">${wrn} (${tot>0?Math.round(wrn/tot*100):0}%)</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)">
+            <span style="display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600"><span style="width:10px;height:10px;border-radius:50%;background:var(--red);display:inline-block"></span>Non Conformi</span>
+            <span style="font-weight:800;color:var(--red)">${rej} (${tot>0?Math.round(rej/tot*100):0}%)</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0">
+            <span style="display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600"><span style="width:10px;height:10px;border-radius:50%;background:var(--muted);display:inline-block"></span>Non validate</span>
+            <span style="font-weight:800;color:var(--muted)">${tot-validated}</span>
+          </div>
+          <div style="margin-top:8px;padding:12px;background:var(--bg);border-radius:9px;text-align:center">
+            <div style="font-size:36px;font-weight:800;color:var(--text)">${overallScore}%</div>
+            <div style="font-size:11px;color:var(--muted)">Score Globale NIS2</div>
+          </div>
+        </div>
+      </div>
+      <div class="rep-card">
+        <h4><i class="fa-solid fa-table"></i> Score per Area</h4>
+        <table class="score-table">
+          <thead><tr><th>Area</th><th>Score</th><th>Barra</th><th>Livello</th></tr></thead>
+          <tbody>${scoreTable}</tbody>
+        </table>
+      </div>
+    </div>
+    <div class="rep-card" style="margin-bottom:14px">
+      <h4><i class="fa-solid fa-magnifying-glass-chart"></i> Principali Findings</h4>
+      <div class="finding crit"><span>🔴</span><div><div class="finding-title">Governance & Risk — Aggiornamento piano</div><div class="finding-desc">Il piano di gestione del rischio non risulta aggiornato nel periodo di riferimento. Azione correttiva urgente entro 30 giorni.</div></div></div>
+      <div class="finding warn"><span>🟡</span><div><div class="finding-title">Protezione Sistemi — Segmentazione parziale</div><div class="finding-desc">La segmentazione OT/IT è parzialmente implementata. Piano di remediation previsto Q4 2025.</div></div></div>
+      <div class="finding ok"><span>🟢</span><div><div class="finding-title">Business Continuity — Ottimale</div><div class="finding-desc">BCP aggiornato e testato regolarmente. Backup verificati ogni trimestre con esito positivo.</div></div></div>
+    </div>
+    <div style="text-align:center;padding:20px;background:rgba(29,158,117,.06);border:1px solid rgba(29,158,117,.2);border-radius:14px;margin-bottom:14px">
+      <button class="btn-primary" onclick="showToast('PDF generato','Relazione_NIS2_Q2-2025.pdf scaricato','📄')">
+        <i class="fa-solid fa-file-pdf"></i> Scarica Relazione PDF
+      </button>
+      <div style="font-size:11px;color:var(--green);margin-top:8px">PDF ufficiale con Executive Summary, Findings e Grafici</div>
+    </div>
+    <div style="text-align:center;font-size:11px;color:var(--muted);padding:16px;border-top:1px solid var(--border)">
+      <strong>3AuditFlow</strong> by 3A Informatica · Assessment Cybersecurity NIS2 Q2-2025 · Documento riservato<br>
+      Generato il ${new Date().toLocaleDateString('it-IT')} alle ${new Date().toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'})}
+    </div>`;
+}
+
+// =====================================================================
+// MODALS
+// =====================================================================
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+function selPlan(el) {
+  document.querySelectorAll('.plan-opt').forEach(e=>e.classList.remove('on'));
+  el.classList.add('on');
+  selectedPlan = el.dataset.plan;
+}
+
+function selAI(el) {
+  document.querySelectorAll('.ai-opt').forEach(e=>e.classList.remove('on'));
+  el.classList.add('on');
+  selectedAI = el.dataset.ai;
+}
+
+function saveLicenza() {
+  const rs = document.getElementById('lic-rs').value;
+  if (!rs) { showToast('Errore','Inserisci la ragione sociale','⚠️'); return; }
+  const oggi = new Date();
+  const scad = new Date(oggi);
+  scad.setFullYear(scad.getFullYear()+1);
+  MOCK_LICENZE.push({
+    id: MOCK_LICENZE.length+1,
+    azienda: rs,
+    piva: document.getElementById('lic-piva').value || '—',
+    piano: selectedPlan.charAt(0).toUpperCase()+selectedPlan.slice(1),
+    consumo: '0/'+(selectedPlan==='single'?1:selectedPlan==='bronze'?5:selectedPlan==='silver'?10:selectedPlan==='gold'?15:selectedPlan==='premium'?20:'∞'),
+    scadenza: scad.toISOString().split('T')[0],
+    stato: 'Attiva',
+    ai: selectedAI==='si'?'Sì':'No'
+  });
+  closeModal('modal-licenza');
+  ['lic-rs','lic-piva','lic-nome','lic-cognome','lic-email'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  renderLicenze();
+  showToast('Licenza creata!','La nuova licenza è attiva','✅');
+}
+
+function saveAssessmentAdmin() {
+  const nome = document.getElementById('aa-nome').value;
+  if (!nome) { showToast('Errore','Inserisci il nome','⚠️'); return; }
+  const tipo = document.getElementById('aa-tipo').value === 'multi' ? 'Multi Assessment' : 'Assessment Normale';
+  MOCK_ASSESSMENT_ADMINS.push({
+    id: MOCK_ASSESSMENT_ADMINS.length+1,
+    nome: nome + ' ' + (document.getElementById('aa-cognome').value||''),
+    email: document.getElementById('aa-email').value || '—',
+    tel: document.getElementById('aa-tel').value || '—',
+    azienda: document.getElementById('aa-rs').value || 'N/D',
+    tipo, stato:'Configurazione', progresso:0
+  });
+  closeModal('modal-aa');
+  renderCorporationAdmin();
+  showToast('Assessment Admin creato!','Credenziali inviate via email','✅');
+}
+
+function saveUtente() {
+  closeModal('modal-utente');
+  showToast('Utente salvato','','✅');
+}
+
+// =====================================================================
+// TOAST
+// =====================================================================
+function showToast(title, sub, icon='✅') {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-title').textContent = title;
+  document.getElementById('toast-sub').textContent = sub;
+  document.getElementById('toast-icon').textContent = icon;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 3200);
+}
+
+// Close modal clicking bg
+document.querySelectorAll('.modal-bg').forEach(bg => {
+  bg.addEventListener('click', e => { if (e.target === bg) bg.classList.remove('open'); });
+});
+document.addEventListener('keydown', e => { if(e.key==='Escape') { document.querySelectorAll('.modal-bg.open').forEach(m=>m.classList.remove('open')); closeRoleDropdown(); } });
+</script>
+</body>
+</html>
