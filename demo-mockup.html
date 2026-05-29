@@ -1085,8 +1085,10 @@ body:has([id*="auditor"]:not([style*="display: none"])) [class*="banner"] {
 }
 </style>
 </head>
+<body>
 <!-- POPUP VALIDAZIONE OWNER -->
-<!--<div style="background:#fff;border-radius:16px;width:100%;max-width:520px;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 60px rgba(6,14,31,.4);font-family:'Plus Jakarta Sans',sans-serif">
+<div id="owner-validation-popup" style="display:none;position:fixed;inset:0;z-index:600;background:rgba(6,14,31,.75);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:16px">
+  <div style="background:#fff;border-radius:16px;width:100%;max-width:520px;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 60px rgba(6,14,31,.4);font-family:'Plus Jakarta Sans',sans-serif">
     <div style="background:linear-gradient(135deg,#D85A30,#b84020);padding:16px 20px;display:flex;align-items:center;gap:12px;flex-shrink:0">
       <div style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">⚠️</div>
       <div>
@@ -1100,9 +1102,8 @@ body:has([id*="auditor"]:not([style*="display: none"])) [class*="banner"] {
     <div style="padding:12px 20px;border-top:1px solid #e2e5ee;display:flex;justify-content:flex-end;flex-shrink:0">
       <button onclick="closeOwnerPopup()" style="padding:10px 20px;border-radius:8px;border:1.5px solid #e2e5ee;background:#fff;color:#7b8ab8;font-size:13px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Chiudi e correggi</button>
     </div>
-  </div>-->
-<body>
-
+  </div>
+</div>
 <div class="area-notif-banner" id="area-notif-banner">
   <div class="anb-icon">✅</div>
   <div class="anb-text">
@@ -1379,14 +1380,14 @@ body:has([id*="auditor"]:not([style*="display: none"])) [class*="banner"] {
                 <div class="ev-lbl"><i class="fa-solid fa-file-lines"></i> Evidenza</div>
                 <div class="ev-cols">
                   <textarea class="ev-ta" id="owner-a-ev" placeholder="Descrivi le evidenze, i processi adottati, i riferimenti documentali..."></textarea>
-                  <div class="pdf-zone" id="owner-pdf-z"></div>
+                  <div class="pdf-zone" id="owner-pdf-z">
                     <input type="file" class="pdf-hidden-inp" id="owner-pdf-inp" accept="*/*" onchange="ownerHandleFile(event)">
                     <div class="pdf-ic" id="owner-pdf-ic"><i class="fa-solid fa-cloud-arrow-up"></i></div>
                     <div class="pdf-nm" id="owner-pdf-nm">Trascina il file o fai click</div>
                     <div class="pdf-sub" id="owner-pdf-sb">PDF, DOCX, XLSX, PNG... tutti i formati</div>
                     <div id="owner-pdf-fi" style="display:none;flex-direction:column;align-items:center;gap:3px"><div class="pdf-fn" id="owner-pdf-fn"></div><div class="pdf-fs" id="owner-pdf-fs"></div></div>
                     <button class="pdf-rm" id="owner-pdf-rm" style="display:none" onclick="ownerRemoveFile(event)"><i class="fa-solid fa-xmark"></i></button>
-                  </div>
+                </div>
                 </div>
               </div>
             </div>
