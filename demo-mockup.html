@@ -22,7 +22,19 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);height:100%;overflow:hidden;-webkit-tap-highlight-color:transparent}
-
+.save-q-popup-ov{display:none;position:fixed;inset:0;z-index:600;background:rgba(6,14,31,.65);backdrop-filter:blur(5px);align-items:center;justify-content:center;padding:16px}
+.save-q-popup-ov.open{display:flex}
+.save-q-box{background:#fff;border-radius:16px;width:100%;max-width:420px;overflow:hidden;box-shadow:0 24px 60px rgba(6,14,31,.35);font-family:'Plus Jakarta Sans',sans-serif;animation:caIn .28s cubic-bezier(.4,0,.2,1)}
+.save-q-box-top{background:linear-gradient(135deg,#1D9E75,#158f68);padding:20px;display:flex;align-items:center;gap:14px}
+.save-q-icon{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.save-q-box-top h3{font-size:15px;font-weight:800;color:#fff;margin:0 0 3px}
+.save-q-box-top p{font-size:11px;color:rgba(255,255,255,.75);margin:0}
+.save-q-body{padding:20px 22px}
+.save-q-info{background:#f0f2f7;border-radius:10px;padding:14px 16px;margin-bottom:16px;font-size:12px;color:var(--text);line-height:1.7}
+.save-q-info strong{color:var(--accent)}
+.save-q-tag{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:99px;font-size:10px;font-weight:700;background:rgba(0,198,255,.1);border:1px solid rgba(0,198,255,.25);color:var(--accent)}
+.save-q-close{width:100%;padding:11px;border:none;border-radius:9px;background:linear-gradient(135deg,#1D9E75,#158f68);color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:7px;transition:opacity .2s}
+.save-q-close:hover{opacity:.88}
 /* OVERLAY */
 .ov{position:fixed;inset:0;z-index:9999;background:radial-gradient(ellipse at 60% 40%,#0d1f4e 0%,#060e1f 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;padding:24px 20px}
 .ov-badge{display:flex;align-items:center;gap:8px;background:rgba(0,198,255,.1);border:1px solid rgba(0,198,255,.25);border-radius:99px;padding:6px 16px;font-size:11px;color:#00c6ff;font-weight:700;letter-spacing:.6px}
@@ -294,7 +306,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .dom-chk.on{background:var(--accent);border-color:var(--accent);color:#fff}
 .dom-num{font-size:10px;font-weight:700;color:var(--muted);min-width:15px;flex-shrink:0;margin-top:1px}
 .dom-cnt{flex:1}
-/*.dom-tags{display:flex;gap:4px;margin-bottom:3px;flex-wrap:wrap}
+.dom-tags{display:flex;gap:4px;margin-bottom:3px;flex-wrap:wrap}
 .dtag{font-size:9px;padding:1px 6px;border-radius:99px;font-weight:700}
 .dtag-id{background:rgba(0,198,255,.08);border:1px solid rgba(0,198,255,.18);color:var(--accent);font-family:monospace}
 .dtag-norm{background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.2);color:#6d28d9}
@@ -386,7 +398,10 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .q-iid{font-size:9px;font-weight:700;color:var(--muted)}
 .q-ibadge{font-size:9px;font-weight:700;padding:2px 6px;border-radius:99px;background:var(--bg);color:var(--muted);border:1px solid var(--border)}
 .q-it.ans .q-ibadge{background:rgba(29,158,117,.1);color:var(--green);border-color:rgba(29,158,117,.2)}
-
+.q-it.ans-warn{background:rgba(212,160,23,.06)}
+.q-it.ans-warn.sel{background:rgba(212,160,23,.12);border-left-color:var(--yellow)}
+.q-it.ans-warn .q-num{background:rgba(212,160,23,.15);border-color:var(--yellow);color:var(--yellow)}
+.q-it.ans-warn .q-ibadge{background:rgba(212,160,23,.1);color:var(--yellow);border-color:rgba(212,160,23,.2)}
 /* ANSWER PANEL */
 .a-panel{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
 .a-hdr{padding:12px 16px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(26,42,108,.04),rgba(0,198,255,.03));display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
@@ -1049,23 +1064,21 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 </style>
 </head>
 <!-- POPUP VALIDAZIONE OWNER -->
-<div id="owner-validation-popup" style="display:none;position:fixed;inset:0;z-index:600;background:rgba(6,14,31,.75);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:16px">
-  <div style="background:#fff;border-radius:16px;width:100%;max-width:520px;overflow:hidden;box-shadow:0 24px 60px rgba(6,14,31,.4);font-family:'Plus Jakarta Sans',sans-serif">
-    <div style="background:linear-gradient(135deg,#D85A30,#b84020);padding:16px 20px;display:flex;align-items:center;gap:12px">
+<div style="background:#fff;border-radius:16px;width:100%;max-width:520px;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 60px rgba(6,14,31,.4);font-family:'Plus Jakarta Sans',sans-serif">
+    <div style="background:linear-gradient(135deg,#D85A30,#b84020);padding:16px 20px;display:flex;align-items:center;gap:12px;flex-shrink:0">
       <div style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">⚠️</div>
       <div>
         <div style="font-size:14px;font-weight:800;color:#fff">Compilazione incompleta</div>
         <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px">Risolvi i problemi prima di procedere</div>
       </div>
     </div>
-    <div style="padding:20px">
-      <div id="owner-popup-issues" style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px"></div>
-      <div style="display:flex;justify-content:flex-end;gap:10px">
-        <button onclick="closeOwnerPopup()" style="padding:10px 20px;border-radius:8px;border:1.5px solid var(--border);background:#fff;color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Chiudi e correggi</button>
-      </div>
+    <div style="padding:20px 20px 8px;overflow-y:auto;flex:1">
+      <div id="owner-popup-issues" style="display:flex;flex-direction:column;gap:8px"></div>
+    </div>
+    <div style="padding:12px 20px;border-top:1px solid #e2e5ee;display:flex;justify-content:flex-end;flex-shrink:0">
+      <button onclick="closeOwnerPopup()" style="padding:10px 20px;border-radius:8px;border:1.5px solid #e2e5ee;background:#fff;color:#7b8ab8;font-size:13px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Chiudi e correggi</button>
     </div>
   </div>
-</div>
 <body>
 
 <div class="area-notif-banner" id="area-notif-banner">
@@ -1223,7 +1236,9 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
         <div class="sel-all-row" style="margin-bottom:14px">
             <button class="btn-sel-all" onclick="selectAll()"><i class="fa-solid fa-check-double"></i> Seleziona tutte (192)</button>
             <button class="btn-clr-all" onclick="clearAll()"><i class="fa-solid fa-xmark"></i> Deseleziona tutto</button>
-            
+            <button class="btn-sel-all" onclick="salvaSelezione()" style="background:#1D9E7515;border-color:#1D9E75;color:#1D9E75">
+              <i class="fa-solid fa-floppy-disk"></i> Salva Questionario
+            </button>
             <button class="btn-sel-all" id="btn-all-obbl" onclick="setAllObbligatorio(true)">
               <i class="fa-solid fa-flag"></i> Tutte Obbligatorie
             </button>
@@ -1342,7 +1357,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
                 <div class="ev-lbl"><i class="fa-solid fa-file-lines"></i> Evidenza</div>
                 <div class="ev-cols">
                   <textarea class="ev-ta" id="owner-a-ev" placeholder="Descrivi le evidenze, i processi adottati, i riferimenti documentali..."></textarea>
-                  <div class="pdf-zone" id="owner-pdf-z" onclick="ownerTrigPdf()">
+                  <div class="pdf-zone" id="owner-pdf-z"></div>
                     <input type="file" class="pdf-hidden-inp" id="owner-pdf-inp" accept="*/*" onchange="ownerHandleFile(event)">
                     <div class="pdf-ic" id="owner-pdf-ic"><i class="fa-solid fa-cloud-arrow-up"></i></div>
                     <div class="pdf-nm" id="owner-pdf-nm">Trascina il file o fai click</div>
@@ -1464,6 +1479,29 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
         </div>
       </div>
     </div><!-- /step-auditor -->
+
+        <div class="save-q-popup-ov" id="save-q-popup">
+      <div class="save-q-box">
+        <div class="save-q-box-top">
+          <div class="save-q-icon">💾</div>
+          <div>
+            <h3>Questionario salvato!</h3>
+            <p>Il questionario è stato salvato con successo</p>
+          </div>
+        </div>
+        <div class="save-q-body">
+          <div class="save-q-info">
+            Il questionario con le domande selezionate è stato salvato nell'area
+            <strong>Questionari</strong> e può essere riutilizzato per futuri assessment.<br><br>
+            <span class="save-q-tag"><i class="fa-solid fa-clipboard-list"></i> Questionari</span>
+            &nbsp; <span style="font-size:11px;color:var(--muted)">NIS2 — Assessment Cybersecurity Q2-2025</span>
+          </div>
+          <button class="save-q-close" onclick="closeSaveQPopup()">
+            <i class="fa-solid fa-check"></i> Perfetto, ho capito
+          </button>
+        </div>
+      </div>
+    </div>
 
     <!-- ==================== REPORT ==================== -->
     <div id="step-report" style="display:none"></div>
@@ -2711,58 +2749,38 @@ function selectAll(){
   renderGrid();renderSelSb();refreshEntraOwnerBtns();
 }
 function clearAll(){selDom={};renderGrid();renderSelSb();refreshEntraOwnerBtns();}
-
-function matchQ(d, area, sub){
-  // Filtro per Area (dal pannello sinistro)
-  if(activeFilters.size > 0 && !activeFilters.has(area)) return false;
-
-  // Filtri Tag
-  if(activeTagFilters.size > 0){
-    const norm = (d.normativa || '').toLowerCase();
-    const nis  = (d.livello_nis2 || '').toLowerCase();
-    const comp = (d.compliance || '').toLowerCase().trim();
-
-    for(const tf of activeTagFilters){
-      switch(tf){
-        case 'compliance':
-          if(comp !== 'compliance' && comp !== 'compliant') return false;
-          break;
-        case 'no-compliance':
-          if(!comp.includes('no') && comp !== 'non conforme') return false;
-          break;
-        case 'essenziale':
-          if(!nis.includes('essenziale')) return false;
-          break;
-        case 'importante':
-          if(!nis.includes('importante')) return false;
-          break;
-        case 'nis2-norm':
-          if(!norm.includes('nis2')) return false;
-          break;
-        case 'psnc':
-          if(!norm.includes('psnc')) return false;
-          break;
-        case 'general':
-          if(norm !== 'general') return false;
-          break;
-      }
+function matchTagFilters(d){
+  if(!activeTagFilters.size) return true;
+  const norm = (d.normativa||'').toLowerCase();
+  const nis  = (d.livello_nis2||'').toLowerCase();
+  const comp = (d.compliance||'').toLowerCase().trim();
+  for(const tf of activeTagFilters){
+    switch(tf){
+      case 'compliance':    if(comp!=='compliance'&&comp!=='compliant') return false; break;
+      case 'no-compliance': if(!comp.includes('no')) return false; break;
+      case 'essenziale':    if(!nis.includes('essenziale')) return false; break;
+      case 'importante':    if(!nis.includes('importante')) return false; break;
+      case 'nis2-norm':     if(!norm.includes('nis2')) return false; break;
+      case 'psnc':          if(!norm.includes('psnc')) return false; break;
+      case 'general':       if(norm!=='general') return false; break;
     }
   }
-
-  // Ricerca testuale
-  if(!searchTxt) return true;
-
-  const search = searchTxt.toLowerCase();
-  return (
-    (d.id || '').toLowerCase().includes(search) ||
-    (d.domanda || '').toLowerCase().includes(search) ||
-    area.toLowerCase().includes(search) ||
-    sub.toLowerCase().includes(search) ||
-    norm.includes(search) ||
-    nis.includes(search) ||
-    comp.includes(search)
-  );
+  return true;
 }
+function matchQ(d, area, sub){
+  const norm = (d.normativa||'').toLowerCase();
+  const nis  = (d.livello_nis2||'').toLowerCase();
+  const comp = (d.compliance||'').toLowerCase().trim();
+  if(activeFilters.size > 0 && !activeFilters.has(area)) return false;
+  if(!matchTagFilters(d)) return false;
+  if(!searchTxt) return true;
+  const s = searchTxt.toLowerCase();
+  return (d.id||'').toLowerCase().includes(s)||
+         (d.domanda||'').toLowerCase().includes(s)||
+         area.toLowerCase().includes(s)||sub.toLowerCase().includes(s)||
+         norm.includes(s)||nis.includes(s)||comp.includes(s);
+}
+
 
 // Miglioramento filtri - normalizzazione
 function toggleTagFilter(t, el){
@@ -2785,7 +2803,10 @@ function renderGrid(){
     const cfg=AREA_CFG[area]||{col:'#666',bg:'#eee',icon:'📋'};
     const locked=LOCKED_AREAS.has(area);
     let anyMatch=false;let selArea=0,totArea=0;
-    Object.entries(subs).forEach(([sub,doms])=>{doms.forEach(d=>{totArea++;if(selDom[d.id])selArea++;if(matchQ(d,area,sub))anyMatch=true;});});
+    Object.entries(subs).forEach(([sub,doms])=>{doms.forEach(d=>{
+      if(!matchTagFilters(d))return;
+      totArea++;if(selDom[d.id])selArea++;anyMatch=true;
+    });});
     totalDom+=totArea;
     if(searchTxt&&!anyMatch)return;
     if(activeTagFilters.size>0&&!anyMatch)return;
@@ -2797,7 +2818,8 @@ function renderGrid(){
     Object.entries(subs).forEach(([sub,doms],si)=>{
       const subMatch=doms.some(d=>matchQ(d,area,sub));
       if((searchTxt||activeTagFilters.size>0)&&!subMatch)return;
-      const selS=doms.filter(d=>selDom[d.id]).length,totS=doms.length,pct=totS>0?Math.round(selS/totS*100):0;
+      const visDoms=activeTagFilters.size>0?doms.filter(matchTagFilters):doms;
+      const selS=visDoms.filter(d=>selDom[d.id]).length,totS=visDoms.length,pct=totS>0?Math.round(selS/totS*100):0;
       const card=document.createElement('div');
       card.className='ac'+(selS>0?' has-sel':'')+(locked?' locked-area':'');
       if(!locked)card.onclick=()=>openModal(area,si);
@@ -2976,7 +2998,7 @@ function renderModalDom(){
 
   let shown=0;
   doms.forEach((d,di)=>{
-    const match=!q||(d.id.toLowerCase().includes(q)||d.domanda.toLowerCase().includes(q)||d.normativa.toLowerCase().includes(q)||d.livello_nis2.toLowerCase().includes(q));
+    const match=matchTagFilters(d)&&(!q||(d.id.toLowerCase().includes(q)||d.domanda.toLowerCase().includes(q)||d.normativa.toLowerCase().includes(q)||d.livello_nis2.toLowerCase().includes(q)));
     const isSel=!!selDom[d.id];
     const isObbl=selDom[d.id] ? selDom[d.id].obbligatorio !== false : true;
 
@@ -2988,12 +3010,12 @@ function renderModalDom(){
       <div class="dom-chk${isSel?' on':''}">${isSel?'<i class="fa-solid fa-check" style="font-size:8px"></i>':''}</div>
       <div class="dom-num">${di+1}</div>
       <div class="dom-cnt">
-        <!-- <div class="dom-tags">
+        <div class="dom-tags">
           <span class="dtag dtag-id">${d.id}</span>
-          <span class="dtag dtag-norm">${d.normativa}</span>
-          ${d.livello_nis2?`<span class="dtag dtag-nis2">${d.livello_nis2}</span>`:''}
-          <span class="dtag ${d.compliance==='Compliance'?'dtag-comp':'dtag-nocomp'}">${d.compliance}</span>
-        </div> -->
+          ${d.normativa ? d.normativa.split(';').map(t=>`<span class="dtag dtag-norm">${t.trim()}</span>`).join('') : ''}
+          ${d.livello_nis2 ? d.livello_nis2.split(';').map(t=>`<span class="dtag dtag-nis2">${t.trim()}</span>`).join('') : ''}
+          <span class="dtag ${d.compliance==='Compliance'||d.compliance==='compliance'?'dtag-comp':'dtag-nocomp'}">${d.compliance}</span>
+        </div>
         <div class="dom-txt">${d.domanda}</div>
       </div>
       <div onclick="event.stopImmediatePropagation();" style="margin-left:10px;flex-shrink:0;">
@@ -3206,16 +3228,20 @@ function renderOwnerList(){
 
     items.forEach(({ d, i }) => {
       const ans = ownerAnswers[i];
-      const hasAns = ans && (ans.answer || ans.cmmi);
+      const hasCmmi = !!(ans && ans.cmmi);
+      const hasText = !!(ans && ans.answer && ans.answer.trim());
+      const hasAns  = hasCmmi || hasText;
+      const isGreen = hasCmmi && hasText;
+      const isWarn  = hasAns && !isGreen;
       const sel = i === ownerCurQ;
       const isObbl = d.obbligatorio !== false;
 
       const li = document.createElement('li');
-      li.className = `q-it${sel ? ' sel' : ''}${hasAns ? ' ans' : ''}`;
+      li.className = `q-it${sel?' sel':''}${isGreen?' ans':''}${isWarn?' ans-warn':''}`;
       li.style.listStyle = 'none';
       li.onclick = () => ownerSelectQ(i);
       li.innerHTML = `
-        <div class="q-num">${hasAns ? '<i class="fa-solid fa-check"></i>' : i + 1}</div>
+        <div class="q-num">${isGreen ? '<i class="fa-solid fa-check"></i>' : isWarn ? '!' : i + 1}</div>
         <div class="q-ib">
           <div class="q-itxt">${d.domanda.length > 70 ? d.domanda.slice(0, 70) + '…' : d.domanda}</div>
           <div class="q-imeta">
@@ -4270,6 +4296,11 @@ function renderRemediationPlan(){
     items.forEach(({ d, i, v }) => {
       const racId = 'RAC' + String(racCounter).padStart(2,'0');
       racCounter++;
+      const critDays = d.criticita === 4 ? 10 : d.criticita === 3 ? 25 : d.criticita === 2 ? 35 : 60;
+      const critLabel = d.criticita === 4 ? 'Molto Alto' : d.criticita === 3 ? 'Alto' : d.criticita === 2 ? 'Moderato' : 'Basso';
+      const dueDate = new Date();
+      dueDate.setDate(dueDate.getDate() + critDays);
+      const dueDateStr = dueDate.toLocaleDateString('it-IT');
       html += `
         <div style="border:1.5px solid rgba(216,90,48,.25);border-radius:10px;margin-bottom:10px;overflow:hidden">
           <div style="background:rgba(216,90,48,.06);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
@@ -4277,9 +4308,14 @@ function renderRemediationPlan(){
               <span style="font-size:10px;font-weight:800;padding:2px 10px;border-radius:99px;background:rgba(216,90,48,.15);color:#D85A30;border:1px solid rgba(216,90,48,.3)">${racId}</span>
               <span style="font-size:10px;font-weight:700;color:var(--muted);font-family:monospace">${d.id}</span>
             </div>
-            <span style="font-size:10px;font-weight:700;padding:2px 10px;border-radius:99px;background:rgba(216,90,48,.1);color:#D85A30;border:1px solid rgba(216,90,48,.2)">
-              <i class="fa-solid fa-circle-xmark"></i> Non Conforme
-            </span>
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span style="font-size:10px;font-weight:700;padding:2px 10px;border-radius:99px;background:rgba(216,90,48,.1);color:#D85A30;border:1px solid rgba(216,90,48,.2)">
+                <i class="fa-solid fa-circle-xmark"></i> Non Conforme
+              </span>
+              <span style="font-size:10px;font-weight:700;padding:2px 10px;border-radius:99px;background:rgba(212,160,23,.1);color:#D4A017;border:1px solid rgba(212,160,23,.25)">
+                <i class="fa-solid fa-calendar-xmark"></i> ${critLabel} — entro ${dueDateStr}
+              </span>
+            </div>
           </div>
           <div style="padding:12px 14px">
             <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Domanda</div>
@@ -4792,7 +4828,13 @@ function buildRadar(areaScores){
   const labels=areaScores.map(({area,score},i)=>{const ang=-Math.PI/2+i*step;const d=r+18;const lx=cx+d*Math.cos(ang);const ly=cy+d*Math.sin(ang);const cfg=AREA_CFG[area]||{col:'#666'};return`<text x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="middle" font-size="8" font-weight="700" fill="${cfg.col}">${cfg.icon} ${area}</text>`;}).join('');
   return`<svg viewBox="0 0 260 240" width="260" height="240">${gridLines}${spokes}<polygon points="${polyPts}" fill="rgba(0,198,255,.15)" stroke="#00c6ff" stroke-width="2"/>${pts.map(p=>`<circle cx="${p.x}" cy="${p.y}" r="4" fill="#00c6ff"/>`).join('')}${labels}</svg>`;
 }
-
+function salvaSelezione(){
+  if(Object.keys(selDom).length === 0) return;
+  document.getElementById('save-q-popup').classList.add('open');
+}
+function closeSaveQPopup(){
+  document.getElementById('save-q-popup').classList.remove('open');
+}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 </script>
 </body>
