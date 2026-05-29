@@ -39,20 +39,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .tb-ic{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.7);font-size:14px;cursor:pointer;transition:all .2s;position:relative;flex-shrink:0}
 .tb-ic:hover{background:rgba(0,198,255,.2);border-color:rgba(0,198,255,.4);color:#00c6ff}
 .notif-dot{position:absolute;top:3px;right:3px;width:8px;height:8px;border-radius:50%;background:#ef4444;border:2px solid #060e1f}
-.tb-user{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  background:rgba(0,198,255,.12);
-  border:1.5px solid rgba(0,198,255,.35);
-  border-radius:20px;           /* più stondato */
-  padding:6px 16px 6px 6px;
-  cursor:pointer;
-  transition:all .2s;
-  flex-shrink:0;
-  margin-left:4px;
-  min-width:160px;              /* più lungo */
-}
+.tb-user{display:flex;align-items:center;gap:10px;background:rgba(0,198,255,.12);border:1.5px solid rgba(0,198,255,.35);border-radius:20px;padding:6px 16px 6px 6px;cursor:pointer;transition:all .2s;flex-shrink:0;margin-left:4px;min-width:160px}
 .tb-user:hover{background:rgba(0,198,255,.22)}
 .tb-av{width:30px;height:30px;border-radius:8px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;flex-shrink:0}
 .tb-user-info{display:flex;flex-direction:column;line-height:1.2}
@@ -60,7 +47,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .tb-urole{font-size:9px;font-weight:600;color:rgba(0,198,255,.8);white-space:nowrap;letter-spacing:.3px;text-transform:uppercase}
 @media(max-width:480px){.tb-user-info{display:none}.tb-user{padding:5px}}
 
-/* SIDEBAR — mirrors demo-mockup.html */
+/* SIDEBAR */
 .sidebar{position:fixed;top:var(--th);left:0;width:var(--sw);height:calc(100dvh - var(--th));background:var(--sb);display:flex;flex-direction:column;overflow-y:auto;z-index:90;transition:transform .28s cubic-bezier(.4,0,.2,1),width .25s;scrollbar-width:thin;scrollbar-color:rgba(0,198,255,.2) transparent}
 .sidebar::-webkit-scrollbar{width:3px}
 .sidebar::-webkit-scrollbar-thumb{background:rgba(0,198,255,.2);border-radius:3px}
@@ -100,14 +87,10 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .main.col{margin-left:var(--swc)}
 @media(max-width:767px){.main{margin-left:0!important}}
 
-/* ACTION BAR — sticky */
+/* ACTION BAR */
 .ca-action-bar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);box-shadow:0 2px 12px rgba(26,42,108,.06)}
 .ca-action-bar-inner{padding:10px 32px;display:flex;align-items:center;gap:16px}
 @media(max-width:600px){.ca-action-bar-inner{padding:10px 14px}}
-.ca-back-btn{display:flex;align-items:center;gap:7px;padding:8px 14px;border-radius:9px;border:1px solid var(--border);background:#fff;color:#555;font-size:13px;font-weight:600;font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;transition:all .2s;flex-shrink:0}
-.ca-back-btn i{font-size:12px;color:var(--text)}
-.ca-back-btn:hover{background:var(--text);color:#fff;border-color:var(--text)}
-.ca-back-btn:hover i{color:var(--accent)}
 .ca-action-bar-center{flex:1;display:flex;align-items:center;justify-content:center}
 .ca-progress-pill{position:relative;height:24px;width:min(400px,100%);background:#f0f2f5;border-radius:20px;overflow:hidden;display:flex;align-items:center;flex-shrink:1;margin-right:20px}
 .ca-progress-fill{position:absolute;left:0;top:0;bottom:0;background:var(--grad);border-radius:20px;transition:width .4s ease}
@@ -140,14 +123,33 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .ca-field input::placeholder{color:var(--muted)}
 .ca-field select:disabled{background:#f4f6fb;color:#aaa;cursor:not-allowed}
 .ca-field input[readonly]{background:#f8faff;color:#555;cursor:default;border-color:rgba(0,198,255,.2)}
-.ca-field .field-locked-badge{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:700;color:var(--accent);margin-top:2px;opacity:.7}
 
 /* INPUT+BTN */
 .ca-input-btn{display:flex;gap:8px}
 .ca-input-btn input{flex:1}
-.ca-input-btn button{background:var(--grad);color:#fff;border:none;width:40px;height:40px;border-radius:9px;cursor:pointer;font-size:13px;flex-shrink:0;transition:opacity .2s;display:flex;align-items:center;justify-content:center}
-.ca-input-btn button:hover{opacity:.85}
-
+.ca-input-btn button{
+  background:rgba(0,198,255,.13);
+  color:var(--accent);
+  border:1.5px solid rgba(0,198,255,.3);
+  width:40px;height:40px;border-radius:9px;
+  cursor:pointer;font-size:13px;flex-shrink:0;
+  transition:all .2s;display:flex;align-items:center;justify-content:center;
+}
+.ca-input-btn button:hover{
+  background:var(--accent);color:#fff;border-color:var(--accent);
+}
+.add-email-box{
+  margin-top:14px;padding:14px 16px;
+  background:linear-gradient(135deg,rgba(0,198,255,.04),rgba(26,42,108,.03));
+  border:1.5px dashed rgba(0,198,255,.28);
+  border-radius:12px;
+}
+.add-email-box-header{
+  display:flex;align-items:center;gap:7px;
+  font-size:10px;font-weight:800;text-transform:uppercase;
+  letter-spacing:.9px;color:var(--accent);margin-bottom:10px;
+}
+.add-email-box-header i{font-size:11px;}
 /* TAGS */
 .ca-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
 .ca-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(26,42,108,.07);color:var(--text);font-size:12px;font-weight:600;padding:4px 10px;border-radius:20px}
@@ -159,19 +161,27 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .ca-check{font-size:13px;color:#444;display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:500}
 .ca-check input[type="checkbox"]{width:15px;height:15px;accent-color:var(--text);cursor:pointer}
 
-/* UTENZE — generic, unified */
-.ca-utenze-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:16px}
-@media(max-width:900px){.ca-utenze-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.ca-utenze-grid{grid-template-columns:1fr}}
-
-/* ROLE TABS inside utenze */
+/* ROLE TABS */
 .role-tabs{display:flex;gap:6px;margin-bottom:18px;background:var(--bg);border-radius:10px;padding:5px;border:1px solid var(--border)}
 .role-tab{flex:1;padding:8px 10px;border-radius:7px;border:none;background:transparent;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap}
 .role-tab:hover{color:var(--text);background:rgba(0,198,255,.06)}
 .role-tab.active{background:var(--grad);color:#fff;font-weight:700;box-shadow:0 2px 10px rgba(0,198,255,.25)}
 .role-tab i{font-size:11px}
 
-/* AI FLAG — auditor only, more visible */
+/* EMAIL POOL — lista email disponibili */
+.email-pool-row{margin-top:14px;padding:12px 14px;background:#f8faff;border-radius:10px;border:1px solid var(--border)}
+.email-pool-header{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.email-pool-header i{color:var(--accent);font-size:10px}
+.email-pool-list{display:flex;flex-wrap:wrap;gap:7px}
+.ep-chip{display:inline-flex;align-items:center;gap:6px;background:#fff;color:var(--text);font-size:12px;font-weight:600;padding:4px 10px;border-radius:20px;border:1px solid var(--border)}
+.ep-chip .role-badge{font-size:9px;color:#fff;padding:1px 5px;border-radius:99px}
+.ep-chip .role-badge.fp{background:var(--accent)}
+.ep-chip .role-badge.del{background:#6d28d9}
+.ep-chip-rm{font-size:10px;cursor:pointer;color:#bbb;border:none;background:none;padding:0;line-height:1;transition:color .2s;margin-left:2px}
+.ep-chip-rm:hover{color:var(--red)}
+.ep-empty{font-size:12px;color:var(--muted);font-style:italic}
+
+/* AI FLAG */
 .ai-flag-wrap{display:flex;align-items:center;gap:10px;margin-top:14px;padding:12px 14px;background:rgba(0,198,255,.04);border:1.5px solid rgba(0,198,255,.15);border-radius:10px}
 .ca-ai-flag{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:9px;border:2px solid rgba(0,198,255,.3);background:rgba(0,198,255,.06);color:var(--muted);font-size:13px;font-weight:700;cursor:pointer;transition:all .25s;user-select:none;white-space:nowrap}
 .ca-ai-flag i{font-size:13px;color:rgba(0,198,255,.5);transition:all .25s}
@@ -199,7 +209,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .ca-completa-btn.on{background:linear-gradient(135deg,#28a745,#1e7e34);box-shadow:0 8px 25px rgba(40,167,69,.3);cursor:pointer;opacity:1}
 .ca-completa-btn.on:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(40,167,69,.4)}
 
-/* LOCKED FIELD INDICATOR */
+/* LOCKED */
 .locked-note{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--accent);font-weight:600;margin-top:4px;opacity:.8}
 .locked-note i{font-size:9px}
 
@@ -217,6 +227,15 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .ca-yes{background:#28a745;color:#fff}
 .ca-no{background:var(--red);color:#fff}
 
+/* UTENZE GRID */
+.ca-utenze-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:16px}
+@media(max-width:600px){.ca-utenze-grid{grid-template-columns:1fr}}
+
+/* ADD EMAIL SECTION */
+.add-email-row{display:flex;align-items:flex-end;gap:12px;margin-top:4px;flex-wrap:wrap}
+.add-email-field{flex:1;min-width:200px}
+.add-email-field label{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px}
+
 /* ===================== TOUR SYSTEM ===================== */
 #tour-overlay{position:fixed;inset:0;z-index:10000;pointer-events:none;display:none}
 #tour-overlay.active{display:block;pointer-events:all}
@@ -229,7 +248,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .tour-card{position:fixed;z-index:10003;width:320px;max-width:calc(100vw - 32px);border-radius:14px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.07);font-family:'Plus Jakarta Sans',sans-serif;display:none;animation:tour-card-in .3s cubic-bezier(.34,1.56,.64,1)}
 .tour-card.visible{display:block}
 @keyframes tour-card-in{from{opacity:0;transform:scale(.94) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
-
 .tour-card.var-dark{background:linear-gradient(145deg,#0a1628 0%,#0d1f4e 100%);border:1px solid rgba(0,198,255,.25)}
 .tour-card.var-dark .tc-header{padding:16px 18px 0;display:flex;align-items:center;gap:10px}
 .tour-card.var-dark .tc-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:99px;font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;background:rgba(0,198,255,.12);color:#00c6ff;border:1px solid rgba(0,198,255,.25)}
@@ -247,7 +265,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .tour-card.var-dark .tc-btn-skip:hover{color:rgba(255,255,255,.85);background:rgba(255,255,255,.1)}
 .tour-card.var-dark .tc-btn-next{padding:7px 16px;border-radius:7px;font-size:11px;font-weight:700;background:linear-gradient(135deg,#00c6ff,#1a2a6c);color:#fff;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s;display:flex;align-items:center;gap:5px}
 .tour-card.var-dark .tc-btn-next:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,198,255,.4)}
-
 .tour-card.var-light{background:#fff;border:1px solid var(--border)}
 .tour-card.var-light .tc-accent-bar{height:3px;background:linear-gradient(90deg,#00c6ff,#1a2a6c)}
 .tour-card.var-light .tc-icon-row{padding:14px 18px 0;display:flex;align-items:center;gap:9px}
@@ -267,61 +284,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .tour-card.var-light .tc-btn-skip:hover{border-color:var(--accent);color:var(--accent)}
 .tour-card.var-light .tc-btn-next{padding:7px 16px;border-radius:7px;font-size:11px;font-weight:700;background:var(--grad);color:#fff;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s;display:flex;align-items:center;gap:5px}
 .tour-card.var-light .tc-btn-next:hover{transform:translateY(-1px)}
-/* MULTI-SELECT CHIP */
-.ms-field { display:flex; flex-direction:column; gap:6px; }
-.ms-field label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted); }
-.ms-wrap { position:relative; }
-
-.ms-box {
-  min-height:54px; border:2px dashed var(--border); border-radius:9px;
-  background:#f8faff; padding:6px 8px; display:flex; flex-wrap:wrap;
-  gap:6px; align-items:flex-start; transition:border-color .2s, background .2s;
-}
-.ms-box.drag-over {
-  border-color:var(--accent); background:rgba(0,198,255,.07);
-}
-.ms-box .drop-hint {
-  font-size:11px; color:var(--muted); align-self:center;
-  display:flex; align-items:center; gap:5px; padding:2px 4px;
-}
-.ms-chip {
-  display:inline-flex; align-items:center; gap:5px;
-  background:rgba(26,42,108,.09); color:var(--text);
-  font-size:11px; font-weight:600; padding:4px 9px; border-radius:20px;
-  cursor:grab; user-select:none; border:1px solid rgba(26,42,108,.12);
-  transition:background .15s, box-shadow .15s;
-}
-.ms-chip:active { cursor:grabbing; box-shadow:0 2px 8px rgba(0,0,0,.15); }
-.ms-chip.dragging { opacity:.45; }
-.ms-chip-rm {
-  font-size:10px; cursor:pointer; color:#aaa; border:none;
-  background:none; padding:0; line-height:1; transition:color .2s;
-}
-.ms-chip-rm:hover { color:var(--red); }
-
-/* pool di email trascinabili */
-.email-pool {
-  display:flex; flex-wrap:wrap; gap:7px; margin-top:10px;
-  padding:10px 12px; background:#f0f2f7; border-radius:9px;
-  border:1px dashed var(--border); min-height:38px;
-}
-.email-pool-label {
-  width:100%; font-size:10px; color:var(--muted); margin-bottom:2px;
-  display:flex; align-items:center; gap:5px;
-}
-.pool-chip {
-  display:inline-flex; align-items:center; gap:6px;
-  background:#fff; color:var(--text); font-size:11px; font-weight:600;
-  padding:4px 10px; border-radius:20px; border:1px solid var(--border);
-  cursor:grab; user-select:none; transition:box-shadow .15s, opacity .15s;
-}
-.pool-chip:active { cursor:grabbing; }
-.pool-chip.dragging { opacity:.4; }
-.pool-chip .pc-rm {
-  font-size:10px; cursor:pointer; color:#bbb; border:none;
-  background:none; padding:0; line-height:1; margin-left:2px; transition:color .2s;
-}
-.pool-chip .pc-rm:hover { color:var(--red); }
 </style>
 </head>
 <body>
@@ -366,7 +328,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
     </div>
   </header>
 
-  <!-- SIDEBAR — same as demo-mockup.html with locks + collapsible -->
+  <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
     <button class="sb-toggle" onclick="toggleDsk()"><i class="fa-solid fa-angles-left" id="dsk-ic"></i></button>
     <ul class="sb-nav">
@@ -397,7 +359,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   <!-- MAIN -->
   <main class="main" id="main">
 
-    <!-- ACTION BAR — senza pulsante Indietro -->
+    <!-- ACTION BAR -->
     <div class="ca-action-bar" id="action-bar">
       <div class="ca-action-bar-inner">
         <div class="ca-action-bar-center">
@@ -456,7 +418,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
             </div>
             <div class="ca-field">
               <label>Relazione *</label>
-              <select id="f-relazione" onchange="onRelazioneChange()" disabled>
+              <select id="f-relazione" onchange="updateProgress()" disabled>
                 <option value="NIS2" selected>NIS2</option>
               </select>
               <span class="locked-note"><i class="fa-solid fa-lock"></i> Bloccato su NIS2</span>
@@ -499,120 +461,127 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
           </div>
         </div>
 
-        <!-- UTENZE (unified for all roles) -->
-         <!-- UTENZE -->
-<div class="ca-card" id="card-utenze">
-  <div class="ca-card-title"><i class="fa-solid fa-users"></i> Utenze</div>
+        <!-- UTENZE -->
+        <div class="ca-card" id="card-utenze">
+          <div class="ca-card-title"><i class="fa-solid fa-users"></i> Utenze</div>
 
-  <div class="role-tabs">
-    <button class="role-tab active" id="rtab-rev" onclick="switchRole('rev')">
-      <i class="fa-solid fa-eye"></i> Reviewer
-    </button>
-    <button class="role-tab" id="rtab-own" onclick="switchRole('own')">
-      <i class="fa-solid fa-user-tie"></i> Owner
-    </button>
-    <button class="role-tab" id="rtab-aud" onclick="switchRole('aud')">
-      <i class="fa-solid fa-user-check"></i> Auditor
-    </button>
-  </div>
+          <div class="role-tabs">
+            <button class="role-tab active" id="rtab-rev" onclick="switchRole('rev')">
+              <i class="fa-solid fa-eye"></i> Reviewer
+            </button>
+            <button class="role-tab" id="rtab-own" onclick="switchRole('own')">
+              <i class="fa-solid fa-user-tie"></i> Owner
+            </button>
+            <button class="role-tab" id="rtab-aud" onclick="switchRole('aud')">
+              <i class="fa-solid fa-user-check"></i> Auditor
+            </button>
+          </div>
 
-  <!-- REV -->
-  <div id="pane-rev">
-    <div class="ca-utenze-grid">
-      <div class="ms-field">
-        <label>Focal Point *</label>
-        <div class="ms-wrap" id="wrap-fp-rev">
-          <div class="ms-box" onclick="openDropdown('fp-rev')" id="box-fp-rev"></div>
-          <div class="ms-dropdown" id="dd-fp-rev"></div>
-        </div>
-      </div>
-      <div class="ms-field">
-        <label>Delegato</label>
-        <div class="ms-wrap" id="wrap-del-rev">
-          <div class="ms-box" onclick="openDropdown('del-rev')" id="box-del-rev"></div>
-          <div class="ms-dropdown" id="dd-del-rev"></div>
-        </div>
-      </div>
-    </div>
-    <div class="ca-field" style="max-width:360px;margin-top:4px">
-      <label>Aggiungi Email</label>
-      <div class="ca-input-btn">
-        <input type="email" id="new-email-rev" placeholder="email@esempio.com"
-               onkeydown="if(event.key==='Enter')aggiungiEmail('rev')">
-        <button onclick="aggiungiEmail('rev')"><i class="fa-solid fa-plus"></i></button>
-      </div>
-    </div>
-    <div class="ca-tags" id="tags-rev"></div>
-  </div>
+          <!-- PANE REVIEWER -->
+          <div id="pane-rev">
+            <div class="ca-utenze-grid">
+              <div class="ca-field">
+                <label>Focal Point *</label>
+                <select id="sel-fp-rev" onchange="onSelChange('fp-rev')">
+                  <option value="">— Seleziona —</option>
+                </select>
+              </div>
+              <div class="ca-field">
+                <label>Delegato</label>
+                <select id="sel-del-rev" onchange="onSelChange('del-rev')">
+                  <option value="">— Nessuno —</option>
+                </select>
+              </div>
+            </div>
+            <div class="add-email-box">
+              <div class="add-email-box-header">
+                <i class="fa-solid fa-envelope-open-text"></i> Aggiungi Email
+              </div>
+              <div class="ca-input-btn">
+                <input type="email" id="new-email-rev" placeholder="email@esempio.com"
+                      onkeydown="if(event.key==='Enter')aggiungiEmail('rev')">
+                <button onclick="aggiungiEmail('rev')"><i class="fa-solid fa-plus"></i></button>
+              </div>
+            </div>
+            <div class="email-pool-row" id="pool-rev" style="display:none">
+              <div class="email-pool-header"><i class="fa-solid fa-users"></i> Email disponibili</div>
+              <div class="email-pool-list" id="pool-list-rev"></div>
+            </div>
+          </div>
 
-  <!-- OWN -->
-  <div id="pane-own" style="display:none">
-    <div class="ca-utenze-grid">
-      <div class="ms-field">
-        <label>Focal Point *</label>
-        <div class="ms-wrap" id="wrap-fp-own">
-          <div class="ms-box" onclick="openDropdown('fp-own')" id="box-fp-own"></div>
-          <div class="ms-dropdown" id="dd-fp-own"></div>
-        </div>
-      </div>
-      <div class="ms-field">
-        <label>Delegato</label>
-        <div class="ms-wrap" id="wrap-del-own">
-          <div class="ms-box" onclick="openDropdown('del-own')" id="box-del-own"></div>
-          <div class="ms-dropdown" id="dd-del-own"></div>
-        </div>
-      </div>
-    </div>
-    <div class="ca-field" style="max-width:360px;margin-top:4px">
-      <label>Aggiungi Email</label>
-      <div class="ca-input-btn">
-        <input type="email" id="new-email-own" placeholder="email@esempio.com"
-               onkeydown="if(event.key==='Enter')aggiungiEmail('own')">
-        <button onclick="aggiungiEmail('own')"><i class="fa-solid fa-plus"></i></button>
-      </div>
-    </div>
-    <div class="ca-tags" id="tags-own"></div>
-  </div>
+          <!-- PANE OWNER -->
+          <div id="pane-own" style="display:none">
+            <div class="ca-utenze-grid">
+              <div class="ca-field">
+                <label>Focal Point *</label>
+                <select id="sel-fp-own" onchange="onSelChange('fp-own')">
+                  <option value="">— Seleziona —</option>
+                </select>
+              </div>
+              <div class="ca-field">
+                <label>Delegato</label>
+                <select id="sel-del-own" onchange="onSelChange('del-own')">
+                  <option value="">— Nessuno —</option>
+                </select>
+              </div>
+            </div>
+            <div class="add-email-box">
+              <div class="add-email-box-header">
+                <i class="fa-solid fa-envelope-open-text"></i> Aggiungi Email
+              </div>
+              <div class="ca-input-btn">
+                <input type="email" id="new-email-rev" placeholder="email@esempio.com"
+                      onkeydown="if(event.key==='Enter')aggiungiEmail('rev')">
+                <button onclick="aggiungiEmail('rev')"><i class="fa-solid fa-plus"></i></button>
+              </div>
+            </div>
+            <div class="email-pool-row" id="pool-own" style="display:none">
+              <div class="email-pool-header"><i class="fa-solid fa-users"></i> Email disponibili</div>
+              <div class="email-pool-list" id="pool-list-own"></div>
+            </div>
+          </div>
 
-  <!-- AUD -->
-  <div id="pane-aud" style="display:none">
-    <div class="ca-utenze-grid">
-      <div class="ms-field">
-        <label>Focal Point</label>
-        <div class="ms-wrap" id="wrap-fp-aud">
-          <div class="ms-box" onclick="openDropdown('fp-aud')" id="box-fp-aud"></div>
-          <div class="ms-dropdown" id="dd-fp-aud"></div>
+          <!-- PANE AUDITOR -->
+          <div id="pane-aud" style="display:none">
+            <div class="ca-utenze-grid">
+              <div class="ca-field">
+                <label>Focal Point</label>
+                <select id="sel-fp-aud" onchange="onSelChange('fp-aud')">
+                  <option value="">— Seleziona —</option>
+                </select>
+              </div>
+              <div class="ca-field">
+                <label>Delegato</label>
+                <select id="sel-del-aud" onchange="onSelChange('del-aud')">
+                  <option value="">— Nessuno —</option>
+                </select>
+              </div>
+            </div>
+            <div class="add-email-box">
+              <div class="add-email-box-header">
+                <i class="fa-solid fa-envelope-open-text"></i> Aggiungi Email
+              </div>
+              <div class="ca-input-btn">
+                <input type="email" id="new-email-rev" placeholder="email@esempio.com"
+                      onkeydown="if(event.key==='Enter')aggiungiEmail('rev')">
+                <button onclick="aggiungiEmail('rev')"><i class="fa-solid fa-plus"></i></button>
+              </div>
+            </div>
+            <div class="email-pool-row" id="pool-aud" style="display:none">
+              <div class="email-pool-header"><i class="fa-solid fa-users"></i> Email disponibili</div>
+              <div class="email-pool-list" id="pool-list-aud"></div>
+            </div>
+            <div class="ai-flag-wrap" id="ai-flag-wrap">
+              <div class="ca-ai-flag" id="ai-aud" onclick="toggleAI('aud')">
+                <i class="fa-solid fa-robot"></i> AI Assistenza
+              </div>
+              <div class="ai-flag-desc">
+                <strong>Abilita AI per l'Auditor</strong><br>
+                L'AI analizzerà automaticamente le risposte dell'Owner durante la fase di audit.
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="ms-field">
-        <label>Delegato</label>
-        <div class="ms-wrap" id="wrap-del-aud">
-          <div class="ms-box" onclick="openDropdown('del-aud')" id="box-del-aud"></div>
-          <div class="ms-dropdown" id="dd-del-aud"></div>
-        </div>
-      </div>
-    </div>
-    <div class="ca-field" style="max-width:360px;margin-top:4px">
-      <label>Aggiungi Email</label>
-      <div class="ca-input-btn">
-        <input type="email" id="new-email-aud" placeholder="email@esempio.com"
-               onkeydown="if(event.key==='Enter')aggiungiEmail('aud')">
-        <button onclick="aggiungiEmail('aud')"><i class="fa-solid fa-plus"></i></button>
-      </div>
-    </div>
-    <div class="ca-tags" id="tags-aud"></div>
-    <div class="ai-flag-wrap" id="ai-flag-wrap">
-      <div class="ca-ai-flag" id="ai-aud" onclick="toggleAI('aud')">
-        <i class="fa-solid fa-robot"></i> AI Assistenza
-      </div>
-      <div class="ai-flag-desc">
-        <strong>Abilita AI per l'Auditor</strong><br>
-        L'AI analizzerà automaticamente le risposte dell'Owner durante la fase di audit.
-      </div>
-    </div>
-  </div>
-</div>
-
 
         <!-- GIORNI CRITICITÀ -->
         <div class="ca-card" id="card-giorni">
@@ -653,6 +622,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 
 <script>
 // ===================== SIDEBAR =====================
+let dskCol = false;
 function toggleDsk() {
   dskCol = !dskCol;
   document.getElementById('sidebar').classList.toggle('col', dskCol);
@@ -672,91 +642,55 @@ function closeMob() {
 }
 
 // ===================== STATE =====================
+// Pool di email per ogni ruolo
 const emails = {
   rev: ['mario.rossi@3ainformatica.it'],
   own: ['paolo.bianchi@3ainformatica.it'],
   aud: ['silvia.verdi@3ainformatica.it']
 };
+
+// Selezione singola per focal point e delegato
 const msSelected = {
-  'fp-rev': ['mario.rossi@3ainformatica.it'], 'del-rev': [],
-  'fp-own': ['paolo.bianchi@3ainformatica.it'], 'del-own': [],
-  'fp-aud': ['silvia.verdi@3ainformatica.it'],  'del-aud': []
+  'fp-rev': 'mario.rossi@3ainformatica.it', 'del-rev': '',
+  'fp-own': 'paolo.bianchi@3ainformatica.it', 'del-own': '',
+  'fp-aud': 'silvia.verdi@3ainformatica.it',  'del-aud': ''
 };
+
 const aiEnabled = { aud: false };
 let curRole = 'rev';
-let dskCol = false;
 
-// ===================== MULTI-SELECT =====================
+// ===================== ROLE OF =====================
 function roleOf(fid) { return fid.split('-')[1]; }
 
-function renderBox(fid) {
-  const box = document.getElementById('box-' + fid);
-  if (!box) return;
-  box.innerHTML = '';
-  const sel = msSelected[fid];
-  if (sel.length === 0) {
-    box.innerHTML = '<span style="font-size:12px;color:var(--muted);padding:2px 4px">Seleziona...</span>';
-    return;
-  }
-  sel.forEach(email => {
-    const chip = document.createElement('span');
-    chip.className = 'ms-chip';
-    chip.innerHTML = `${email} <button class="ms-chip-rm" onclick="removeSelected('${fid}','${email}');event.stopPropagation()">✕</button>`;
-    box.appendChild(chip);
-  });
-}
-
-function renderDropdown(fid) {
+// ===================== SELECT MANAGEMENT =====================
+function populateSelect(fid) {
   const role = roleOf(fid);
-  const dd = document.getElementById('dd-' + fid);
-  if (!dd) return;
-  const sel = msSelected[fid];
-  const opts = emails[role];
-  dd.innerHTML = '';
-  if (opts.length === 0) {
-    dd.innerHTML = '<div class="ms-empty">Nessuna email disponibile</div>';
-    return;
-  }
-  opts.forEach(email => {
-    const isSel = sel.includes(email);
-    const div = document.createElement('div');
-    div.className = 'ms-opt' + (isSel ? ' sel' : '');
-    div.innerHTML = `<div class="ms-chk">${isSel ? '✓' : ''}</div><span>${email}</span>`;
-    div.onclick = e => { e.stopPropagation(); toggleSelected(fid, email); };
-    dd.appendChild(div);
+  const sel = document.getElementById('sel-' + fid);
+  if (!sel) return;
+  const cur = msSelected[fid];
+  const isOptional = fid.startsWith('del-');
+  sel.innerHTML = `<option value="">${isOptional ? '— Nessuno —' : '— Seleziona —'}</option>`;
+  emails[role].forEach(email => {
+    const opt = document.createElement('option');
+    opt.value = email;
+    opt.textContent = email;
+    if (email === cur) opt.selected = true;
+    sel.appendChild(opt);
   });
 }
 
-function openDropdown(fid) {
-  document.querySelectorAll('.ms-dropdown').forEach(d => d.classList.remove('open'));
-  const dd = document.getElementById('dd-' + fid);
-  if (!dd) return;
-  renderDropdown(fid);
-  dd.classList.add('open');
+function populateSelects(role) {
+  ['fp', 'del'].forEach(p => populateSelect(p + '-' + role));
 }
 
-document.addEventListener('click', () => {
-  document.querySelectorAll('.ms-dropdown').forEach(d => d.classList.remove('open'));
-});
-
-function toggleSelected(fid, email) {
-  const sel = msSelected[fid];
-  const idx = sel.indexOf(email);
-  if (idx === -1) sel.push(email); else sel.splice(idx, 1);
-  renderBox(fid);
-  renderDropdown(fid);
-  renderTags(roleOf(fid));  // ← aggiunto
+function onSelChange(fid) {
+  const sel = document.getElementById('sel-' + fid);
+  msSelected[fid] = sel ? sel.value : '';
+  renderPool(roleOf(fid));
   updateProgress();
 }
 
-function removeSelected(fid, email) {
-  msSelected[fid] = msSelected[fid].filter(e => e !== email);
-  renderBox(fid);
-  renderTags(roleOf(fid));  // ← aggiunto
-  updateProgress();
-}
-
-// ===================== EMAIL =====================
+// ===================== EMAIL POOL =====================
 function aggiungiEmail(tipo) {
   const inp = document.getElementById('new-email-' + tipo);
   if (!inp) return;
@@ -764,67 +698,66 @@ function aggiungiEmail(tipo) {
   if (!email) return;
   if (!email.includes('@')) { inp.style.borderColor = 'var(--red)'; return; }
   if (emails[tipo].includes(email)) { inp.value = ''; return; }
-
   emails[tipo].push(email);
   inp.value = '';
   inp.style.borderColor = '';
-
-  // NON auto-selezionare: l'utente sceglie dal dropdown
-  renderTags(tipo);
-  updateProgress();
+  populateSelects(tipo);
+  renderPool(tipo);
 }
 
 function rimuoviEmail(tipo, email) {
   emails[tipo] = emails[tipo].filter(e => e !== email);
+  // Reset selezione se era quella rimossa
   ['fp', 'del'].forEach(p => {
-    msSelected[p + '-' + tipo] = msSelected[p + '-' + tipo].filter(e => e !== email);
-    renderBox(p + '-' + tipo);
+    const fid = p + '-' + tipo;
+    if (msSelected[fid] === email) msSelected[fid] = '';
   });
-  renderTags(tipo);
+  populateSelects(tipo);
+  renderPool(tipo);
   updateProgress();
 }
 
-function renderTags(tipo) {
-  const cont = document.getElementById('tags-' + tipo);
-  if (!cont) return;
-  cont.innerHTML = '';
+function renderPool(tipo) {
+  const pool = document.getElementById('pool-' + tipo);
+  const list = document.getElementById('pool-list-' + tipo);
+  if (!pool || !list) return;
 
-  if (emails[tipo].length === 0) return;
+  // Mostra il pool solo se ci sono più email del default (ovvero aggiunte dall'utente)
+  const extra = emails[tipo].filter((_, i) => i > 0);
+  pool.style.display = emails[tipo].length > 1 ? 'block' : 'none';
 
-  // Label guida
-  const hint = document.createElement('div');
-  hint.style.cssText = 'width:100%;font-size:10px;color:var(--muted);margin-bottom:4px;display:flex;align-items:center;gap:5px;';
-  hint.innerHTML = '<i class="fa-solid fa-circle-info" style="color:var(--accent)"></i>&nbsp; Apri <strong style="color:var(--text)">Focal Point</strong> o <strong style="color:var(--text)">Delegato</strong> qui sopra per assegnare queste email';
-  cont.appendChild(hint);
-
+  list.innerHTML = '';
+  if (emails[tipo].length === 0) {
+    list.innerHTML = '<span class="ep-empty">Nessuna email</span>';
+    return;
+  }
   emails[tipo].forEach(e => {
-    const isFp  = msSelected['fp-'  + tipo].includes(e);
-    const isDel = msSelected['del-' + tipo].includes(e);
-    const span = document.createElement('span');
-    span.className = 'ca-tag';
-    span.style.background = isFp || isDel ? 'rgba(0,198,255,.12)' : 'rgba(26,42,108,.07)';
-    span.style.border = isFp || isDel ? '1px solid rgba(0,198,255,.3)' : '1px solid transparent';
-    span.innerHTML = `
-      ${isFp  ? '<span style="font-size:9px;background:var(--accent);color:#fff;padding:1px 5px;border-radius:99px;margin-right:3px">FP</span>'  : ''}
-      ${isDel ? '<span style="font-size:9px;background:#6d28d9;color:#fff;padding:1px 5px;border-radius:99px;margin-right:3px">DEL</span>' : ''}
+    const isFp  = msSelected['fp-'  + tipo] === e;
+    const isDel = msSelected['del-' + tipo] === e;
+    const chip = document.createElement('span');
+    chip.className = 'ep-chip';
+    chip.innerHTML = `
+      ${isFp  ? '<span class="role-badge fp">FP</span>'  : ''}
+      ${isDel ? '<span class="role-badge del">DEL</span>' : ''}
       ${e}
-      <i class="fa-solid fa-xmark" onclick="rimuoviEmail('${tipo}','${e}')"></i>
+      <button class="ep-chip-rm" onclick="rimuoviEmail('${tipo}','${e}')">✕</button>
     `;
-    cont.appendChild(span);
+    list.appendChild(chip);
   });
 }
 
-function initMultiSelects() {
-  ['rev','own','aud'].forEach(tipo => {
-    ['fp','del'].forEach(p => renderBox(p + '-' + tipo));
-    renderTags(tipo);
+// ===================== INIT =====================
+function initSelects() {
+  ['rev', 'own', 'aud'].forEach(role => {
+    populateSelects(role);
+    renderPool(role);
   });
 }
 
 // ===================== ROLE TABS =====================
 function switchRole(role) {
   curRole = role;
-  ['rev','own','aud'].forEach(r => {
+  ['rev', 'own', 'aud'].forEach(r => {
     document.getElementById('rtab-' + r).classList.toggle('active', r === role);
     document.getElementById('pane-' + r).style.display = r === role ? 'block' : 'none';
   });
@@ -839,8 +772,8 @@ function countCompiled() {
   if (document.getElementById('f-processo').value) n++;
   if (document.getElementById('f-relazione').value) n++;
   if (document.getElementById('f-modello').value) n++;
-  if (msSelected['fp-rev'].length > 0) n++;
-  if (msSelected['fp-own'].length > 0) n++;
+  if (msSelected['fp-rev']) n++;
+  if (msSelected['fp-own']) n++;
   return n;
 }
 function updateProgress() {
@@ -856,9 +789,6 @@ function checkFormValid() {
   btn.classList.toggle('on', valid);
   btn.disabled = !valid;
 }
-
-// ===================== RELAZIONE =====================
-function onRelazioneChange() { updateProgress(); }
 
 // ===================== AI FLAG =====================
 function toggleAI(tipo) {
@@ -935,7 +865,7 @@ const TOUR_STEPS = [
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row"><div class="tc-icon-wrap" style="background:rgba(0,198,255,.1)"><i class="fa-solid fa-users" style="color:#00c6ff"></i></div><span class="tc-step-label">Passo 3</span></div>
       <div class="tc-title">Utenze (Reviewer, Owner, Auditor)</div>
-      <div class="tc-body">Usa i <strong>tab</strong> per navigare tra i tre ruoli. Per ognuno puoi aggiungere più email e selezionare più <strong>Focal Point</strong> e <strong>Delegati</strong>.</div>
+      <div class="tc-body">Usa i <strong>tab</strong> per navigare tra i tre ruoli. Per ognuno seleziona un <strong>Focal Point</strong> e opzionalmente un <strong>Delegato</strong> dal menu a tendina.</div>
       ${footerLight(step, total)}`
   },
   {
@@ -1012,30 +942,6 @@ function tourPositionCard(card, targetRect, position) {
   return { top, left, width: cw, height: card.offsetHeight };
 }
 
-function tourDrawArrow(cardRect, targetRect, position) {
-  const svg = document.getElementById('tour-arrow');
-  const path = document.getElementById('tour-arrow-path');
-  if (!targetRect || !cardRect) { svg.classList.remove('active'); return; }
-  let x1, y1, x2, y2;
-  const tc = targetRect;
-  const tx = tc.left + tc.width / 2, ty = tc.top + tc.height / 2;
-  switch (position) {
-    case 'bottom': x1 = cardRect.left + cardRect.width / 2; y1 = cardRect.top; x2 = tx; y2 = tc.bottom + 4; break;
-    case 'top': x1 = cardRect.left + cardRect.width / 2; y1 = cardRect.top + cardRect.height; x2 = tx; y2 = tc.top - 4; break;
-    case 'right': x1 = cardRect.left; y1 = cardRect.top + cardRect.height / 2; x2 = tc.right + 4; y2 = ty; break;
-    case 'left': x1 = cardRect.left + cardRect.width; y1 = cardRect.top + cardRect.height / 2; x2 = tc.left - 4; y2 = ty; break;
-    default: svg.classList.remove('active'); return;
-  }
-  const minX = Math.min(x1, x2) - 15, minY = Math.min(y1, y2) - 15;
-  const w2 = Math.abs(x2 - x1) + 30, h2 = Math.abs(y2 - y1) + 30;
-  svg.setAttribute('viewBox', `${minX} ${minY} ${w2} ${h2}`);
-  svg.style.left = '0'; svg.style.top = '0';
-  svg.style.width = window.innerWidth + 'px'; svg.style.height = window.innerHeight + 'px';
-  const midY = (y1 + y2) / 2;
-  path.setAttribute('d', `M${x1},${y1} C${x1},${midY} ${x2},${midY} ${x2},${y2}`);
-  svg.classList.add('active');
-}
-
 function tourRenderStep() {
   const s = TOUR_STEPS[guideStep];
   const card = document.getElementById('tour-card');
@@ -1049,9 +955,8 @@ function tourRenderStep() {
   }
   setTimeout(() => {
     const tRect = tourSpotlight(s.target, 10);
-    const cRect = tourPositionCard(card, tRect, s.position);
-    if (s.arrow && tRect) tourDrawArrow(cRect, tRect, s.position);
-    else document.getElementById('tour-arrow').classList.remove('active');
+    tourPositionCard(card, tRect, s.position);
+    document.getElementById('tour-arrow').classList.remove('active');
   }, 380);
 }
 
@@ -1073,9 +978,27 @@ function tourEnd() {
   card.className = 'tour-card';
 }
 
-// ===================== UNICO DOMContentLoaded =====================
+// ===================== BLINK PROCESSO =====================
+let processoBlinkInterval = null;
+function startProcessoBlink() {
+  const select = document.getElementById('f-processo');
+  if (!select) return;
+  let blink = false;
+  processoBlinkInterval = setInterval(() => {
+    blink = !blink;
+    select.style.boxShadow = blink ? '0 0 0 4px rgba(0,198,255,0.5)' : 'none';
+    select.style.borderColor = blink ? '#00c6ff' : 'var(--border)';
+  }, 800);
+}
+function stopProcessoBlink() {
+  if (processoBlinkInterval) { clearInterval(processoBlinkInterval); processoBlinkInterval = null; }
+  const select = document.getElementById('f-processo');
+  if (select) { select.style.boxShadow = 'none'; select.style.borderColor = ''; }
+}
+
+// ===================== DOM READY =====================
 window.addEventListener('DOMContentLoaded', () => {
-  initMultiSelects();
+  initSelects();
   updateProgress();
   startProcessoBlink();
 
@@ -1097,24 +1020,6 @@ window.addEventListener('DOMContentLoaded', () => {
     tourRenderStep();
   }, 700);
 });
-
-// ===================== BLINK PROCESSO =====================
-let processoBlinkInterval = null;
-function startProcessoBlink() {
-  const select = document.getElementById('f-processo');
-  if (!select) return;
-  let blink = false;
-  processoBlinkInterval = setInterval(() => {
-    blink = !blink;
-    select.style.boxShadow = blink ? '0 0 0 4px rgba(0,198,255,0.5)' : 'none';
-    select.style.borderColor = blink ? '#00c6ff' : 'var(--border)';
-  }, 800);
-}
-function stopProcessoBlink() {
-  if (processoBlinkInterval) { clearInterval(processoBlinkInterval); processoBlinkInterval = null; }
-  const select = document.getElementById('f-processo');
-  if (select) { select.style.boxShadow = 'none'; select.style.borderColor = ''; }
-}
 </script>
 </body>
 </html>
