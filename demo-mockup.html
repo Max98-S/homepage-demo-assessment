@@ -652,7 +652,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .area-notif-banner {
   position: fixed; top: calc(var(--th) + 12px); right: 20px;
   transform: translateX(120%);
-  z-index: 9000; background: linear-gradient(135deg, #0d7a5a, #1D9E75);
+  z-index: 10050; background: linear-gradient(135deg, #0d7a5a, #1D9E75);
   color: #fff; border-radius: 12px; padding: 13px 18px;
   display: flex; align-items: center; gap: 12px;
   box-shadow: 0 8px 32px rgba(29,158,117,.4), 0 0 0 1px rgba(255,255,255,.1);
@@ -661,6 +661,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   opacity: 0; pointer-events: none; max-width: 360px;
 }
 .area-notif-banner.show {
+  display: flex !important;
   transform: translateX(0); opacity: 1;
 }
 .area-notif-banner .anb-icon {
@@ -1061,28 +1062,125 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .btn-sel-all.non-obbl-btn:hover {
   background:#D85A3015 !important;
 }
-/* ==========================================
-   FIX DEFINITIVO: Rimozione Banner in Reviewer
-   ========================================== */
 
-/* Se la vista viene attivata tramite classi sul body o contenitori */
-body[class*="reviewer"] [class*="banner"],
-body[class*="reviewer"] [class*="alert"],
-body[class*="auditor"] [class*="banner"],
-body[class*="auditor"] [class*="alert"],
-
-/* Se il banner è dentro o adiacente a sezioni specifiche del reviewer */
-[id*="reviewer"] [class*="banner"],
-[class*="reviewer"] [class*="banner"],
-[id*="auditor"] [class*="banner"],
-[class*="auditor"] [class*="banner"],
-
-/* Se la modalità cambia via Javascript mostrando/nascondendo blocchi */
-body:has([id*="reviewer"]:not([style*="display: none"])) [class*="banner"],
-body:has([class*="reviewer"]:not([style*="display: none"])) [class*="banner"],
-body:has([id*="auditor"]:not([style*="display: none"])) [class*="banner"] {
-    display: none !important;
+.gemini-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
 }
+.gemini-header {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(26,42,108,.05), rgba(66,133,244,.05));
+  display: flex; align-items: center; gap: 12px;
+}
+.gemini-logo {
+  width: 36px; height: 36px; border-radius: 9px;
+  background: linear-gradient(135deg, #4285f4, #34a853, #fbbc04, #ea4335);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.gemini-title { font-size: 14px; font-weight: 800; color: var(--text); }
+.gemini-sub   { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.gemini-key-row {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(66,133,244,.03);
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+}
+.gemini-key-inp {
+  flex: 1; min-width: 220px;
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg); border: 1.5px solid var(--border);
+  border-radius: 8px; padding: 8px 12px; transition: border .2s;
+}
+.gemini-key-inp:focus-within { border-color: #4285f4; }
+.gemini-key-inp i { font-size: 12px; color: var(--muted); }
+.gemini-key-inp input {
+  border: none; background: transparent;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; color: var(--text); width: 100%; outline: none;
+}
+.gemini-key-inp input::placeholder { color: var(--muted); }
+.gemini-key-link {
+  font-size: 11px; color: #4285f4; text-decoration: none;
+  display: flex; align-items: center; gap: 5px; white-space: nowrap;
+}
+.gemini-key-link:hover { text-decoration: underline; }
+.btn-gemini {
+  padding: 11px 24px; border-radius: 9px; font-size: 13px; font-weight: 700;
+  background: linear-gradient(135deg, #4285f4, #0d47a1);
+  color: #fff; border: none; cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  display: inline-flex; align-items: center; gap: 8px;
+  box-shadow: 0 4px 16px rgba(66,133,244,.35); transition: all .2s;
+}
+.btn-gemini:hover { transform: translateY(-1px); box-shadow: 0 6px 22px rgba(66,133,244,.5); }
+.btn-gemini:disabled { opacity: .4; cursor: not-allowed; transform: none; box-shadow: none; }
+.gemini-progress {
+  padding: 20px; display: flex; flex-direction: column; align-items: center;
+  gap: 12px; text-align: center;
+}
+.gemini-spinner {
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 3px solid rgba(66,133,244,.2);
+  border-top-color: #4285f4;
+  animation: gspin 1s linear infinite;
+}
+@keyframes gspin { to { transform: rotate(360deg); } }
+.gemini-prog-label { font-size: 14px; font-weight: 700; color: var(--text); }
+.gemini-prog-sub   { font-size: 12px; color: var(--muted); }
+.gemini-result {
+  padding: 24px; animation: fadeIn .4s ease;
+  font-size: 13px; color: var(--text); line-height: 1.8;
+}
+.gemini-result h2 {
+  font-size: 17px; font-weight: 800; color: var(--text);
+  margin: 20px 0 8px; padding-bottom: 6px;
+  border-bottom: 2px solid rgba(66,133,244,.2);
+}
+.gemini-result h2:first-child { margin-top: 0; }
+.gemini-result h3 {
+  font-size: 13px; font-weight: 700; color: var(--text); margin: 14px 0 5px;
+}
+.gemini-result ul  { padding-left: 18px; margin: 6px 0 10px; }
+.gemini-result li  { margin-bottom: 5px; }
+.gemini-result strong { color: var(--text); font-weight: 700; }
+.gemini-result em { color: var(--muted); font-style: italic; }
+.gemini-result p  { margin-bottom: 10px; }
+.gemini-result table {
+  width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0 16px;
+}
+.gemini-result th {
+  text-align: left; padding: 7px 10px;
+  font-size: 9px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: .7px; color: var(--muted);
+  border-bottom: 2px solid var(--border);
+  background: var(--bg);
+}
+.gemini-result td {
+  padding: 8px 10px; border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.gemini-result tr:last-child td { border-bottom: none; }
+.gemini-error {
+  padding: 20px; text-align: center; color: var(--red);
+  font-size: 13px; font-weight: 600;
+}
+.gemini-error i { font-size: 24px; margin-bottom: 8px; display: block; }
+.btn-gemini-dl {
+  padding: 10px 22px; border-radius: 9px; font-size: 12px; font-weight: 700;
+  background: linear-gradient(135deg, #4285f4, #0d47a1);
+  color: #fff; border: none; cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  display: inline-flex; align-items: center; gap: 8px;
+  box-shadow: 0 4px 14px rgba(66,133,244,.3); transition: all .2s;
+  margin-top: 8px;
+}
+.btn-gemini-dl:hover { transform: translateY(-1px); }
 </style>
 </head>
 <body>
@@ -1605,7 +1703,7 @@ body:has([id*="auditor"]:not([style*="display: none"])) [class*="banner"] {
 
   addHeader(); addFooter();
 
-  // ── Intestazione domanda ──
+  //Intestazione domanda
   doc.setFillColor(245,247,252);
   doc.roundedRect(12, y, w-24, 22, 3, 3, 'F');
   doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(0,198,255);
@@ -1614,7 +1712,7 @@ body:has([id*="auditor"]:not([style*="display: none"])) [class*="banner"] {
   doc.splitTextToSize(d.domanda, w-34).forEach((line,li)=>{ doc.text(line, 17, y+13+(li*5)); });
   y += 26;
 
-  // ── Badge esito ──
+  // Badge esito
   doc.setFillColor(...statusColor);
   doc.roundedRect(12, y, 55, 10, 2, 2, 'F');
   doc.setFontSize(9); doc.setFont('helvetica','bold'); doc.setTextColor(255,255,255);
@@ -1693,7 +1791,7 @@ body:has([id*="auditor"]:not([style*="display: none"])) [class*="banner"] {
     y += rH + 8;
   }
 
-  // ── Risposta Owner (box grigio) ──
+  // Risposta Owner (box grigio) 
   checkPage(30);
   doc.setFontSize(9); doc.setFont('helvetica','bold'); doc.setTextColor(80,80,80);
   doc.text('RISPOSTA OWNER', 15, y); y += 6;
@@ -1782,6 +1880,70 @@ const MOCK_ANS={
   'ID.RA-05-01':{status:'warning',score:2,abs:'Risk assessment eseguito ma con frequenza non conforme. Alcune categorie non incluse.',fbs:[{t:'warn',d:'Conformità parziale',m:'Risk assessment presente ma non aggiornato nei termini richiesti da NIS2 (>12 mesi).'},{t:'warn',d:'Gap supply chain',m:'I rischi derivanti dalla supply chain non sono integrati nel piano.'},{t:'ok',d:'Metodologia',m:'Approccio ISO 27005 corretto.'}]},
   'GV-RM-03':{status:'rejected',score:4,abs:'Piano di gestione del rischio scaduto (>14 mesi). Gap critico — azione correttiva obbligatoria urgente.',fbs:[{t:'ko',d:'Gap critico',m:'Piano scaduto da oltre 14 mesi. Frequenza di revisione NIS2 non rispettata.'},{t:'ko',d:'Scenari mancanti',m:'Rischi supply chain non inclusi.'},{t:'ko',d:'Azione obbligatoria',m:'Aggiornamento urgente richiesto prima della chiusura assessment.'}]},
 };
+// ── Mappa criticità estratta dall'Excel (col "Livello di criticità") ──
+const CRITICITA_MAP = {
+  "GV-OC-01":1,"GV-OC-02":3,"GV-OC-03":4,"GV-OC-04":4,"GV-OC-05":4,
+  "GV-RM-01":4,"GV-RM-02":4,"GV-RM-03":4,"GV-RM-04":4,"GV-RM-05":4,
+  "GV-RM-06":4,"GV-RM-07":4,"GV.RR-01":4,"GV.RR-02-01":4,"GV.RR-02-02":4,
+  "GV.RR-02-03":4,"GV.RR-02-04":4,"GV.RR-03":4,"GV.RR-04-01":4,"GV.RR-04-02":4,
+  "GV.RR-05":4,"GV.PO-01-01":4,"GV.PO-01-02":4,"GV.PO-01-03":4,"GV.PO-02":4,
+  "GV.OV-01":4,"GV.OV-02":4,"GV.OV-03":4,"GV.SC-01-01":4,"GV.SC-01-02":4,
+  "GV.SC-01-03":4,"GV.SC-02":4,"GV.SC-03":4,"GV.SC-04":4,"GV.SC-05":4,
+  "GV.SC-06":4,"GV.SC-07-01":4,"GV.SC-07-02":4,"GV.SC-07-03":4,"GV.SC-08":4,
+  "GV.SC-09":4,"GV.SC-10":4,"ID.AM-01-01":4,"ID.AM-01-02":4,"ID.AM-02-01":4,
+  "ID.AM-02-02":4,"ID.AM-03-01":4,"ID.AM-03-02":4,"ID.AM-04":4,"ID.AM-05":4,
+  "ID.AM-07":4,"ID.AM-08":4,"DP-ID.AM-09":4,"ID.RA-01-01":4,"ID.RA-01-02":4,
+  "ID.RA-02":4,"ID.RA-03":4,"ID.RA-04":4,"ID.RA-05-01":4,"ID.RA-05-02":4,
+  "ID.RA-05-03":4,"ID.RA-06-01":4,"ID.RA-06-02":4,"ID.RA-06-03":4,"ID.RA-07":4,
+  "ID.RA-08-01":4,"ID.RA-08-02":4,"ID.RA-08-03":4,"ID.RA-09":4,"ID.RA-10":4,
+  "DP-ID.RA-11":4,"ID.IM-01-01":4,"ID.IM-01-02":4,"ID.IM-02":4,"ID.IM-03":4,
+  "DP-ID.DM-01":4,"DP-ID.DM-02":4,"DP-ID.DM-03":4,"DP-ID.DM-04":4,"DP-ID.DM-05":4,
+  "ID.IM-04-01":4,"ID.IM-04-02":4,"ID.IM-04-03":4,"ID.IM-04-04":4,"ID.IM-04-05":4,
+  "ID.IM-04-06":4,"PR.AA-01-01":4,"PR.AA-01-02":4,"PR.AA-01-03":4,"PR.AA-01-04":4,
+  "PR.AA-01-05":4,"PR.AA-02":4,"PR.AA-03-01":4,"PR.AA-03-02":4,"PR.AA-03-03":4,
+  "PR.AA-04":4,"PR.AA-05-01":4,"PR.AA-05-02":4,"PR.AA-05-03":4,"PR.AA-05-04":4,
+  "PR.AA-06":4,"PR.AT-01-01":4,"PR.AT-01-02":4,"PR.AT-01-03":4,"PR.AT-02-01":4,
+  "PR.AT-02-02":4,"PR.DS-01-01":4,"PR.DS-01-02":4,"PR.DS-01-03":4,"PR.DS-01-04":4,
+  "PR.DS-01-05":4,"PR.DS-01-06":4,"PR.DS-01-07":4,"PR.DS-01-08":4,"PR.DS-02":4,
+  "PR.DS-10-01":4,"PR.DS-10-02":4,"PR.DS-10-03":4,"PR.DS-11-01":4,"PR.DS-11-02":4,
+  "PR.DS-11-03":4,"PR.DS-11-04":4,"PR.PS-01-01":4,"PR.PS-01-02":4,"PR.PS-02-01":4,
+  "PR.PS-02-02":4,"PR.PS-02-03":4,"PR.PS-02-04":4,"PR.PS-03-01":4,"PR.PS-03-02":4,
+  "PR.PS-03-03":4,"PR.PS-04-01":4,"PR.PS-04-02":4,"PR.PS-04-03":4,"PR.PS-05":4,
+  "PR.PS-06":4,"PR.IR-01-01":4,"PR.IR-01-02":4,"PR.IR-01-03":4,"PR.IR-01-04":4,
+  "PR.IR-01-05":4,"PR.IR-01-06":4,"PR.IR-01-07":4,"PR.IR-02":4,"PR.IR-03-01":4,
+  "PR.IR-03-02":4,"PR.IR-04":4,"DE.CM-01-01":4,"DE.CM-01-02":4,"DE.CM-01-03":4,
+  "DE.CM-01-04":4,"DE.CM-01-05":4,"DE.CM-02":4,"DE.CM-03":4,"DE.CM-06-01":4,
+  "DE.CM-06-02":4,"DE.CM-06-03":4,"DE.CM-06-04":4,"DE.CM-06-05":4,"DE.CM-09-01":4,
+  "DE.CM-09-02":4,"DE.AE-02":4,"DE.AE-03-01":4,"DE.AE-03-02":4,"DE.AE-04":4,
+  "DE.AE-06":4,"DE.AE-07":4,"DE.AE-08":4,"RS.MA-01-01":4,"RS.MA-01-02":4,
+  "RS.MA-01-03":4,"RS.MA-02":4,"RS.MA-03":4,"RS.MA-04":4,"RS.MA-05":4,
+  "RS.AN-03":4,"RS.AN-06":4,"RS.AN-07":4,"RS.AN-08":4,"RS.CO-02":4,
+  "RS.CO-03":4,"DP-RS.CO-06":4,"RS.MI-01":4,"RS.MI-02":4,"RC.RP-01":4,
+  "RC.RP-02":4,"RC.RP-03":4,"RC.RP-04":4,"RC.RP-05":4,"RC.RP-06":4,
+  "RC.CO-03":4,"RC.CO-04":4
+};
+
+// ── Helper: dati criticità per una domanda ───────────────────────────
+function getCriticita(questionId) {
+  const val = CRITICITA_MAP[questionId] ?? 4;           // default 4 se non trovato
+  const labels = { 1:'Basso', 2:'Moderato', 3:'Alto', 4:'Molto Alto' };
+  const days   = { 1:65,      2:60,         3:45,     4:30           };
+  const colors = {
+    1: [34,197,94],    // verde
+    2: [234,179,8],    // giallo
+    3: [249,115,22],   // arancione
+    4: [239,68,68]     // rosso
+  };
+  const dueDate = new Date();
+  dueDate.setDate(dueDate.getDate() + days[val]);
+  return {
+    val,
+    label: labels[val],
+    days:  days[val],
+    rgb:   colors[val],
+    dueDateStr: dueDate.toLocaleDateString('it-IT')
+  };
+}
 
 function getMockAns(){
   const s=Math.random();
@@ -3194,6 +3356,14 @@ function setupOwner(){
   renderOwnerList();
   if(ownerQs.length > 0) ownerSelectQ(0);
   updateOwnerProg();
+
+  document.getElementById('owner-a-ev').oninput = function(){
+    if(!ownerAnswers[ownerCurQ]) ownerAnswers[ownerCurQ] = {};
+    ownerAnswers[ownerCurQ].answer = this.value;
+    renderOwnerList();
+    updateOwnerProg();
+  };
+
 }
 function renderOwnerList(){
   const list = document.getElementById('owner-q-list');
@@ -3211,7 +3381,7 @@ function renderOwnerList(){
 
     const answeredCount = items.filter(({ i }) => {
       const ans = ownerAnswers[i];
-      return ans && (ans.answer || ans.cmmi);
+      return ans && ans.cmmi && ans.answer && ans.answer.trim() && uploadedFiles[i];
     }).length;
 
     const allAnswered = answeredCount === items.length;
@@ -3241,11 +3411,15 @@ function renderOwnerList(){
       </div>
       <button class="btn-area-done ${btnCls}" 
               id="btn-area-done-${area}"
-              ${allAnswered && !areaCompleted ? `onclick="markAreaDone('${area}')"` : ''}>
+              >
         ${btnHtml}
       </button>
     `;
     list.appendChild(hdr);
+    if(allAnswered && !areaCompleted) {
+      hdr.querySelector('.btn-area-done')
+        .addEventListener('click', () => markAreaDone(area));
+    }
 
     // Wrapper domande con bordo colorato laterale
     const itemsWrap = document.createElement('div');
@@ -3256,8 +3430,9 @@ function renderOwnerList(){
       const ans = ownerAnswers[i];
       const hasCmmi = !!(ans && ans.cmmi);
       const hasText = !!(ans && ans.answer && ans.answer.trim());
-      const hasAns  = hasCmmi || hasText;
-      const isGreen = hasCmmi && hasText;
+      const hasFile = !!uploadedFiles[i];
+      const hasAns  = hasCmmi || hasText || hasFile;
+      const isGreen = hasCmmi && hasText && hasFile;
       const isWarn  = hasAns && !isGreen;
       const sel = i === ownerCurQ;
       const isObbl = d.obbligatorio !== false;
@@ -3292,7 +3467,7 @@ function markAreaDone(area) {
   const cfg = AREA_CFG[area] || { icon: '📋' };
   const banner = document.getElementById('area-notif-banner');
   document.getElementById('anb-title').textContent = `${cfg.icon}  Area "${area}" completata`;
-  document.getElementById('anb-sub').textContent = 'Il Reviewer è stato notificato e può già rispondere a questa area';
+  document.getElementById('anb-sub').textContent = `L'Auditor può già visualizzare e validare le risposte di quest'area`;
   banner.classList.add('show');
 
   // Chiudi automaticamente dopo 5s
@@ -3357,7 +3532,7 @@ function updateOwnerProg(){
   document.getElementById('ps-pf').style.width=pct+'%';
 }
 function ownerTrigPdf(){document.getElementById('owner-pdf-inp').click();}
-function ownerHandleFile(e){const f=e.target.files[0];if(!f)return;uploadedFiles[ownerCurQ]=f;ownerShowPdfFile(f.name,f.size);}
+function ownerHandleFile(e){const f=e.target.files[0];if(!f)return;uploadedFiles[ownerCurQ]=f;ownerShowPdfFile(f.name,f.size);renderOwnerList();updateOwnerProg();}
 function ownerShowPdfFile(name,size){
   const z=document.getElementById('owner-pdf-z');z.classList.add('done');
   document.getElementById('owner-pdf-ic').innerHTML='<i class="fa-solid fa-circle-check"></i>';
@@ -3374,7 +3549,7 @@ function ownerResetPdfZ(){
   document.getElementById('owner-pdf-fi').style.display='none';document.getElementById('owner-pdf-rm').style.display='none';
   document.getElementById('owner-pdf-inp').value='';
 }
-function ownerRemoveFile(e){e.stopPropagation();delete uploadedFiles[ownerCurQ];ownerResetPdfZ();}
+function ownerRemoveFile(e){e.stopPropagation();delete uploadedFiles[ownerCurQ];ownerResetPdfZ();renderOwnerList();updateOwnerProg();}
 
 // ===================== GOTO AUDITOR =====================
 function goToAuditor(){
@@ -3409,38 +3584,41 @@ function setupAuditor(){
   auditorCurQ=0;
   document.getElementById('aud-ps-t').textContent=ownerQs.length;
   document.getElementById('aud-q-panel-title').textContent=ownerQs.length+' domande da validare';
-  renderAuditorList();if(ownerQs.length>0)auditorSelectQ(0);
+  renderAuditorList();
+  if(ownerQs.length > 0) auditorSelectQ(0);
   updateAuditorProg();
 }
+
 function renderAuditorList(){
   const list = document.getElementById('aud-q-list');
   list.innerHTML = '';
-
+ 
   const byArea = {};
   ownerQs.forEach((d, i) => {
     if(!byArea[d.area]) byArea[d.area] = [];
     byArea[d.area].push({ d, i });
   });
-
+ 
   Object.entries(byArea).forEach(([area, items]) => {
     const cfg = AREA_CFG[area] || { col: '#00c6ff', icon: '📋' };
     const areaCompleted = completedAreas.has(area);
-
+ 
     const validatedCount = items.filter(({ i }) => auditorValidations[i]).length;
-    const allValidated = validatedCount === items.length;
-
+    const allValidated   = validatedCount === items.length && items.length > 0;
+ 
     let btnCls, btnHtml;
     if(areaCompleted) {
-      btnCls = 'sent';
-      btnHtml = '<i class="fa-solid fa-check"></i> Validata';
+      btnCls   = 'sent';
+      btnHtml  = '<i class="fa-solid fa-check"></i> Validata';
     } else if(allValidated) {
-      btnCls = 'ready';
-      btnHtml = '<i class="fa-solid fa-paper-plane"></i> Completa area';
+      btnCls   = 'ready';
+      btnHtml  = '<i class="fa-solid fa-paper-plane"></i> Completa area';
     } else {
-      btnCls = '';
-      btnHtml = `<i class="fa-solid fa-lock"></i> ${validatedCount}/${items.length} validate`;
+      btnCls   = '';
+      btnHtml  = `<i class="fa-solid fa-lock"></i> ${validatedCount}/${items.length} validate`;
     }
-
+ 
+    /*  Header area  */
     const hdr = document.createElement('div');
     hdr.className = 'owner-area-hdr';
     hdr.style.borderTopColor = cfg.col;
@@ -3450,32 +3628,45 @@ function renderAuditorList(){
         <span class="owner-area-hdr-name" style="color:${areaCompleted ? '#1D9E75' : '#fff'}">${area}</span>
         <span class="owner-area-hdr-count" style="background:${cfg.col}22;color:${cfg.col}">${validatedCount}/${items.length}</span>
       </div>
-      <button class="btn-area-done ${btnCls}"
-              id="btn-aud-area-done-${area}"
-              ${allValidated && !areaCompleted ? `onclick="markAuditorAreaDone('${area}')"` : ''}>
+      <button class="btn-area-done ${btnCls}" id="btn-aud-area-done-${area.replace(/\s/g,'_')}">
         ${btnHtml}
       </button>
     `;
     list.appendChild(hdr);
-
+ 
+    
+    if(allValidated && !areaCompleted) {
+      const btn = hdr.querySelector('.btn-area-done');
+      btn.addEventListener('click', () => markAuditorAreaDone(area));
+    }
+ 
+    /*  Wrapper domande  */
     const itemsWrap = document.createElement('div');
     itemsWrap.className = 'owner-area-items';
     itemsWrap.style.borderLeftColor = areaCompleted ? '#1D9E75' : cfg.col + '66';
-
+ 
     items.forEach(({ d, i }) => {
-      const v = auditorValidations[i];
+      const v   = auditorValidations[i];
       const sel = i === auditorCurQ;
       let vCls = '', numCont = i + 1, badge = d.id;
+ 
       if(v){
-        vCls = v.status === 'accepted' ? ' val-acc' : v.status === 'warning' ? ' val-wrn' : ' val-rej';
-        numCont = v.status === 'accepted' ? '<i class="fa-solid fa-check"></i>' : v.status === 'rejected' ? '<i class="fa-solid fa-xmark"></i>' : '~';
-        badge = v.status === 'accepted' ? '✅ Conforme' : v.status === 'rejected' ? '❌ Non conf.' : '⚠️ Parziale';
+        vCls     = v.status === 'accepted' ? ' val-acc' : v.status === 'warning' ? ' val-wrn' : ' val-rej';
+        numCont  = v.status === 'accepted'
+                   ? '<i class="fa-solid fa-check"></i>'
+                   : v.status === 'rejected'
+                     ? '<i class="fa-solid fa-xmark"></i>'
+                     : '~';
+        badge    = v.status === 'accepted' ? '✅ Conforme'
+                 : v.status === 'rejected' ? '❌ Non conf.'
+                 : '⚠️ Parziale';
       }
+ 
       const li = document.createElement('li');
-      li.className = `q-it${sel ? ' sel' : ''}${vCls}`;
+      li.className   = `q-it${sel ? ' sel' : ''}${vCls}`;
       li.style.listStyle = 'none';
-      li.onclick = () => auditorSelectQ(i);
-      li.innerHTML = `
+      li.onclick     = () => auditorSelectQ(i);
+      li.innerHTML   = `
         <div class="q-num">${numCont}</div>
         <div class="q-ib">
           <div class="q-itxt">${d.domanda.length > 75 ? d.domanda.slice(0, 75) + '…' : d.domanda}</div>
@@ -3486,7 +3677,7 @@ function renderAuditorList(){
         </div>`;
       itemsWrap.appendChild(li);
     });
-
+ 
     list.appendChild(itemsWrap);
   });
 }
@@ -4263,13 +4454,19 @@ function switchReportTab(t){
     document.getElementById('tab-remed').classList.add('done-tab');
   }
 }
+function remToggle(id) {
+  const body = document.getElementById(id);
+  const chv  = document.getElementById('chv-' + id);
+  if (!body) return;
+  const open = body.style.display !== 'none';
+  body.style.display = open ? 'none' : 'block';
+  if (chv) chv.style.transform = open ? 'rotate(180deg)' : 'rotate(0deg)';
+}
 function renderRemediationPlan(){
   const rejected = [];
   ownerQs.forEach((d, i) => {
     const v = auditorValidations[i];
-    if(v && v.status === 'rejected'){
-      rejected.push({ d, i, v });
-    }
+    if(v && v.status === 'rejected') rejected.push({ d, i, v });
   });
 
   const container = document.getElementById('report-tab-remed');
@@ -4322,43 +4519,82 @@ function renderRemediationPlan(){
     items.forEach(({ d, i, v }) => {
       const racId = 'RAC' + String(racCounter).padStart(2,'0');
       racCounter++;
-      const critDays = d.criticita === 4 ? 10 : d.criticita === 3 ? 25 : d.criticita === 2 ? 35 : 60;
-      const critLabel = d.criticita === 4 ? 'Molto Alto' : d.criticita === 3 ? 'Alto' : d.criticita === 2 ? 'Moderato' : 'Basso';
-      const dueDate = new Date();
-      dueDate.setDate(dueDate.getDate() + critDays);
-      const dueDateStr = dueDate.toLocaleDateString('it-IT');
+
+      // ── CRITICITÀ REALE dal questionario ──
+      const crit = getCriticita(d.id);
+
+      const raccomandazione = (v._aiData && v._aiData.raccomandazione)
+        ? v._aiData.raccomandazione
+        : 'Si raccomanda di implementare le misure correttive necessarie per garantire la conformità ai requisiti NIS2 (Art. 21).';
+      const noteAuditor = v.note || '';
+      const bodyId = `rb-${racId}-${area.replace(/[^a-z0-9]/gi,'_')}`;
+
+      // Colori badge per criticità
+      const critBadgeStyle = `background:rgba(${crit.rgb.join(',')},0.12);border:1px solid rgba(${crit.rgb.join(',')},0.4);color:rgb(${crit.rgb.join(',')})`;
+
       html += `
-        <div style="border:1.5px solid rgba(216,90,48,.25);border-radius:10px;margin-bottom:10px;overflow:hidden">
-          <div style="background:rgba(216,90,48,.06);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
-            <div style="display:flex;align-items:center;gap:8px">
-              <span style="font-size:10px;font-weight:800;padding:2px 10px;border-radius:99px;background:rgba(216,90,48,.15);color:#D85A30;border:1px solid rgba(216,90,48,.3)">${racId}</span>
-              <span style="font-size:10px;font-weight:700;color:var(--muted);font-family:monospace">${d.id}</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-              <span style="font-size:10px;font-weight:700;padding:2px 10px;border-radius:99px;background:rgba(216,90,48,.1);color:#D85A30;border:1px solid rgba(216,90,48,.2)">
-                <i class="fa-solid fa-circle-xmark"></i> Non Conforme
+        <div style="border:1px solid rgba(255,255,255,.1);border-radius:10px;margin-bottom:10px;overflow:hidden;background:#12141d;border-left:3px solid rgb(${crit.rgb.join(',')})">
+
+          <!-- Accordion Header -->
+          <div onclick="remToggle('${bodyId}')"
+               style="background:#1a1e35;padding:13px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.07);user-select:none">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <span style="font-size:12px;font-weight:700;color:#fff;font-family:monospace;letter-spacing:.3px">${racId} - ${d.id}</span>
+              <!-- Badge criticità reale -->
+              <span style="font-size:9px;font-weight:700;padding:2px 9px;border-radius:99px;${critBadgeStyle}">
+                Criticità ${crit.val} — ${crit.label}
               </span>
-              <span style="font-size:10px;font-weight:700;padding:2px 10px;border-radius:99px;background:rgba(212,160,23,.1);color:#D4A017;border:1px solid rgba(212,160,23,.25)">
-                <i class="fa-solid fa-calendar-xmark"></i> ${critLabel} — entro ${dueDateStr}
+              <span style="font-size:9px;font-weight:700;padding:2px 9px;border-radius:99px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.5)">
+                <i class="fa-regular fa-clock"></i> ${crit.days} giorni · Scadenza ${crit.dueDateStr}
               </span>
             </div>
+            <i id="chv-${bodyId}" class="fa-solid fa-chevron-up" style="color:rgba(255,255,255,.45);font-size:11px;transition:transform .25s"></i>
           </div>
-          <div style="padding:12px 14px">
-            <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Domanda</div>
-            <div style="font-size:12px;color:var(--text);line-height:1.6;margin-bottom:10px">${d.domanda}</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-              <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px">
-                <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:5px">Risposta Owner</div>
-                <div style="font-size:11px;color:var(--text);line-height:1.6">${(ownerAnswers[i] && ownerAnswers[i].answer) ? ownerAnswers[i].answer : '<em style="color:var(--muted)">Nessuna evidenza fornita</em>'}</div>
+
+          <!-- Accordion Body -->
+          <div id="${bodyId}" style="padding:18px;display:block">
+
+            <!-- Testo domanda -->
+            <div style="font-weight:800;font-size:12px;color:#fff;margin-bottom:6px;font-family:monospace">${d.id}</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.65);line-height:1.75;margin-bottom:16px">${d.domanda}</div>
+
+            <!-- Nota rifiuto -->
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+              <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,.5)">Nota rifiuto</span>
+              <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:7px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);font-size:11px;font-weight:600;color:rgba(255,255,255,.85);">
+                <i class="fa-solid fa-align-left" style="font-size:10px;opacity:.6"></i> Note
               </div>
-              <div style="background:rgba(216,90,48,.04);border:1px solid rgba(216,90,48,.15);border-radius:8px;padding:10px">
-                <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#D85A30;margin-bottom:5px">Note Auditor</div>
-                <div style="font-size:11px;color:var(--text);line-height:1.6">${v.note ? v.note : '<em style="color:var(--muted)">Nessuna nota aggiunta</em>'}</div>
+              ${noteAuditor ? `<span style="font-size:11px;color:rgba(255,255,255,.45);font-style:italic;max-width:320px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${noteAuditor}</span>` : ''}
+            </div>
+
+            <!-- Criticità + Inclusa + Scadenza -->
+            <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:16px">
+              <span style="font-size:12px;color:rgba(255,255,255,.55)">
+                Criticità: <strong style="color:rgb(${crit.rgb.join(',')});font-size:14px">${crit.val} — ${crit.label}</strong>
+              </span>
+              <div style="display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:#1D9E75">
+                <i class="fa-solid fa-check"></i>
+                <span>Inclusa nel remediation plan</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;margin-left:auto">
+                <span style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:rgba(255,255,255,.3)">Scadenza (${crit.days}gg)</span>
+                <div style="display:flex;align-items:center;gap:8px;background:rgba(${crit.rgb.join(',')},0.12);border:1px solid rgba(${crit.rgb.join(',')},0.35);border-radius:8px;padding:7px 14px">
+                  <span style="font-size:12px;font-weight:700;color:rgb(${crit.rgb.join(',')})">${crit.dueDateStr}</span>
+                  <i class="fa-regular fa-calendar" style="color:rgba(255,255,255,.35);font-size:11px"></i>
+                </div>
               </div>
             </div>
+
+            <!-- Raccomandazione -->
+            <div>
+              <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:rgba(255,255,255,.3);margin-bottom:7px">Raccomandazione</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.65);line-height:1.75;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:12px 14px">${raccomandazione}</div>
+            </div>
+
           </div>
         </div>`;
     });
+
     html += `</div>`;
   });
 
@@ -4366,6 +4602,7 @@ function renderRemediationPlan(){
   container.innerHTML = html;
 }
 
+// ── downloadRemediationPDF — usa criticità reale ──────────────────────
 function downloadRemediationPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF('p', 'mm', 'a4');
@@ -4373,345 +4610,192 @@ function downloadRemediationPDF() {
   const pageH = doc.internal.pageSize.getHeight();
   let y = 20;
 
-  // Usa le immagini già nel DOM invece di Base64 lunghi
   const iconImg = document.querySelector('.tb-logo-icon');
   const textImg = document.querySelector('.tb-logo-text');
 
   function addLogos() {
-    try {
-      if (iconImg) doc.addImage(iconImg, 'PNG', 15, 6, 16, 18);
-      if (textImg) doc.addImage(textImg, 'PNG', 33, 9, 60, 14);
-    } catch(e) { /* ignora se immagine non disponibile */ }
+    try { if(iconImg) doc.addImage(iconImg,'PNG',15,6,16,18); } catch(e){}
+    try { if(textImg) doc.addImage(textImg,'PNG',33,9,60,14); } catch(e){}
   }
   function addFooter() {
-    doc.setFontSize(8);
-    doc.setTextColor(150, 150, 150);
-    doc.line(15, pageH - 14, w - 15, pageH - 14);
-    doc.text(
-      '3AuditFlow by 3A Informatica  |  Remediation Plan NIS2  |  Documento riservato',
-      w / 2, pageH - 8, { align: 'center' }
-    );
-    doc.text(
-      new Date().toLocaleDateString('it-IT'),
-      w - 15, pageH - 8, { align: 'right' }
-    );
+    doc.setFontSize(8); doc.setTextColor(150,150,150);
+    doc.line(15, pageH-14, w-15, pageH-14);
+    doc.text('3AuditFlow by 3A Informatica  |  Remediation Plan NIS2  |  Documento riservato', w/2, pageH-8, {align:'center'});
+    doc.text(new Date().toLocaleDateString('it-IT'), w-15, pageH-8, {align:'right'});
   }
-
-  function checkPage(extra = 20) {
-    if (y + extra > pageH - 18) {
-      doc.addPage();
-      y = 20;
-      addFooter();
-      addLogos();
-    }
+  function checkPage(extra=20){
+    if(y+extra > pageH-18){ doc.addPage(); y=20; addFooter(); addLogos(); }
   }
-
-  function sectionTitle(t) {
+  function sectionTitle(t){
     checkPage(22);
-    doc.setFillColor(26, 42, 108);
-    doc.rect(15, y - 4, w - 30, 10, 'F');
-    doc.setFontSize(13);
-    doc.setTextColor(255, 255, 255);
-    doc.setFont('helvetica', 'bold');
-    doc.text(t, 20, y + 3);
-    y += 14;
-    doc.setFont('helvetica', 'normal');
+    doc.setFillColor(26,42,108); doc.rect(15,y-4,w-30,10,'F');
+    doc.setFontSize(13); doc.setFont('helvetica','bold'); doc.setTextColor(255,255,255);
+    doc.text(t,20,y+3); y+=14; doc.setFont('helvetica','normal');
+  }
+  function bodyText(t,x=20,maxW=170,lh=6){
+    doc.setFontSize(10); doc.setTextColor(60,60,60); doc.setFont('helvetica','normal');
+    doc.splitTextToSize(t,maxW).forEach(line=>{ checkPage(lh); doc.text(line,x,y); y+=lh; });
   }
 
-  function bodyText(t, x = 20, maxW = 170, lh = 6) {
-    doc.setFontSize(10);
-    doc.setTextColor(60, 60, 60);
-    doc.setFont('helvetica', 'normal');
-    doc.splitTextToSize(t, maxW).forEach(line => {
-      checkPage(lh);
-      doc.text(line, x, y);
-      y += lh;
-    });
-  }
-  // Prendi solo le domande rifiutate
   const rejected = [];
-  ownerQs.forEach((d, i) => {
+  ownerQs.forEach((d,i)=>{
     const v = auditorValidations[i];
-    if (v && v.status === 'rejected') {
-      rejected.push({ d, i, v });
-    }
+    if(v && v.status==='rejected') rejected.push({d,i,v});
   });
-
-  // Raggruppa per area
   const byArea = {};
-  rejected.forEach(item => {
-    if (!byArea[item.d.area]) byArea[item.d.area] = [];
-    byArea[item.d.area].push(item);
-  });
-  // Sfondo scuro copertina
-  doc.setFillColor(6, 14, 31);
-  doc.rect(0, 0, w, pageH, 'F');
+  rejected.forEach(item=>{ if(!byArea[item.d.area]) byArea[item.d.area]=[]; byArea[item.d.area].push(item); });
 
+  // ── COPERTINA ──
+  doc.setFillColor(6,14,31); doc.rect(0,0,w,pageH,'F');
   addLogos();
+  doc.setFontSize(26); doc.setFont('helvetica','bold'); doc.setTextColor(255,255,255);
+  doc.text('Remediation Plan', w/2, 90, {align:'center'});
+  doc.setFontSize(16); doc.setTextColor(0,198,255);
+  doc.text('NIS2 — Non Conformità e Azioni Correttive', w/2, 105, {align:'center'});
+  doc.setFillColor(20,40,90); doc.roundedRect(30,120,w-60,28,4,4,'F');
+  doc.setFontSize(10); doc.setTextColor(0,198,255); doc.setFont('helvetica','bold');
+  doc.text('AZIENDA', w/2, 130, {align:'center'});
+  doc.setFontSize(13); doc.setTextColor(255,255,255);
+  doc.text('3AInformatica S.r.l.', w/2, 141, {align:'center'});
+  doc.setFillColor(20,40,90); doc.roundedRect(30,158,w-60,20,4,4,'F');
+  doc.setFontSize(10); doc.setTextColor(255,255,255); doc.setFont('helvetica','normal');
+  doc.text(`Non conformità rilevate: ${rejected.length}  |  Data: ${new Date().toLocaleDateString('it-IT')}`, w/2, 170, {align:'center'});
+  doc.setDrawColor(0,198,255); doc.line(15,pageH-28,w-28,pageH-28);
+  doc.setFontSize(8); doc.setTextColor(120,120,120); doc.setFont('helvetica','normal');
+  doc.text('3AuditFlow by 3A Informatica  |  www.3auditflow.com', w/2, pageH-20, {align:'center'});
+  doc.text(new Date().toLocaleDateString('it-IT'), w/2, pageH-14, {align:'center'});
 
-  // Titolo principale
-  doc.setFontSize(26);
-  doc.setFont('helvetica', 'bold');
-  doc.setTextColor(255, 255, 255);
-  doc.text('Remediation Plan', w / 2, 90, { align: 'center' });
-
-  doc.setFontSize(16);
-  doc.setTextColor(0, 198, 255);
-  doc.text('NIS2 — Non Conformità e Azioni Correttive', w / 2, 105, { align: 'center' });
-
-  // Box info
-  doc.setFillColor(20, 40, 90);
-  doc.roundedRect(30, 120, w - 60, 28, 4, 4, 'F');
-  doc.setFontSize(10);
-  doc.setTextColor(0, 198, 255);
-  doc.setFont('helvetica', 'bold');
-  doc.text('AZIENDA', w / 2, 130, { align: 'center' });
-  doc.setFontSize(13);
-  doc.setTextColor(255, 255, 255);
-  doc.text('3AInformatica S.r.l.', w / 2, 141, { align: 'center' });
-
-  // Box statistiche
-  doc.setFillColor(20, 40, 90);
-  doc.roundedRect(30, 158, w - 60, 20, 4, 4, 'F');
-  doc.setFontSize(10);
-  doc.setTextColor(255, 255, 255);
-  doc.setFont('helvetica', 'normal');
-  doc.text(
-    `Non conformità rilevate: ${rejected.length}  |  Data: ${new Date().toLocaleDateString('it-IT')}`,
-    w / 2, 170, { align: 'center' }
-  );
-
-  // Footer copertina
-  doc.setDrawColor(0, 198, 255);
-  doc.line(15, pageH - 28, w - 28, pageH - 28);
-  doc.setFontSize(8);
-  doc.setTextColor(120, 120, 120);
-  doc.setFont('helvetica', 'normal');
-  doc.text('3AuditFlow by 3A Informatica  |  www.3auditflow.com', w / 2, pageH - 20, { align: 'center' });
-  doc.text(new Date().toLocaleDateString('it-IT'), w / 2, pageH - 14, { align: 'center' });
-  doc.addPage();
-  y = 20;
-  addFooter();
-  addLogos();
-  y = 30;
-
+  // ── PAG 2 — INTRODUZIONE ──
+  doc.addPage(); y=20; addFooter(); addLogos(); y=30;
   sectionTitle('Introduzione al Remediation Plan');
+  bodyText('Il presente Remediation Plan riassume tutte le domande valutate come "Non Conformi" durante la fase di validazione dell\'Auditor nell\'ambito dell\'Assessment Cybersecurity NIS2.');
+  y+=4;
+  bodyText('Per ciascuna non conformità vengono riportati: l\'area di controllo, il codice domanda, la criticità reale derivante dal questionario NIS2, la scadenza calcolata e la raccomandazione.');
+  y+=4;
+  bodyText('Le azioni correttive devono essere implementate entro i termini indicati per garantire la conformità ai requisiti NIS2 (Art. 21) e PSNC 2024.');
+  y+=8;
 
-  bodyText(
-    'Il presente Remediation Plan riassume tutte le domande valutate come "Non Conformi" ' +
-    'durante la fase di validazione dell\'Auditor nell\'ambito dell\'Assessment Cybersecurity NIS2.'
-  );
-  y += 4;
-
-  bodyText(
-    'Per ciascuna non conformità vengono riportati: l\'area di controllo, la domanda, ' +
-    'la risposta fornita dall\'Owner e le note dell\'Auditor.'
-  );
-  y += 4;
-
-  bodyText(
-    'Le azioni correttive devono essere implementate entro i termini indicati ' +
-    'per garantire la conformità ai requisiti NIS2 (Art. 21) e PSNC 2024.'
-  );
-  y += 8;
-
-  // Tabella severity
-  sectionTitle('Tempi di Remediation per Severity');
-
-  const severityRows = [
-    ['Basso',      [34, 197, 94],  'Azioni di remediation entro 60 giorni'],
-    ['Moderato',   [234, 179, 8],  'Azioni di remediation entro 35 giorni'],
-    ['Alto',       [249, 115, 22], 'Azioni di remediation entro 25 giorni'],
-    ['Molto alto', [239, 68, 68],  'Azioni di remediation entro 10 giorni'],
+  // ── Tabella severity con mapping reale ──
+  sectionTitle('Tempi di Remediation per Livello di Criticità');
+  const sevRows = [
+    [1,'Basso',    [34,197,94],  '65 giorni dalla generazione del piano'],
+    [2,'Moderato', [234,179,8],  '60 giorni dalla generazione del piano'],
+    [3,'Alto',     [249,115,22], '45 giorni dalla generazione del piano'],
+    [4,'Molto Alto',[239,68,68], '30 giorni dalla generazione del piano'],
   ];
-
-  severityRows.forEach(([lev, rgb, txt]) => {
+  sevRows.forEach(([lev,label,rgb,txt])=>{
     checkPage(12);
-    doc.setFillColor(...rgb);
-    doc.roundedRect(20, y - 4, 22, 7, 2, 2, 'F');
-    doc.setFontSize(9);
-    doc.setTextColor(255, 255, 255);
-    doc.setFont('helvetica', 'bold');
-    doc.text(lev, 31, y, { align: 'center' });
-    doc.setTextColor(60, 60, 60);
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(10);
-    doc.text(txt, 47, y);
-    y += 10;
+    doc.setFillColor(...rgb); doc.roundedRect(20,y-4,28,7,2,2,'F');
+    doc.setFontSize(9); doc.setTextColor(255,255,255); doc.setFont('helvetica','bold');
+    doc.text(`${lev} — ${label}`, 34, y, {align:'center'});
+    doc.setTextColor(60,60,60); doc.setFont('helvetica','normal'); doc.setFontSize(10);
+    doc.text(txt, 52, y); y+=10;
   });
-  // Per ogni area con domande rifiutate
-  Object.entries(byArea).forEach(([area, items]) => {
-    doc.addPage();
-    y = 20;
-    addFooter();
-    addLogos();
-    y = 30;
 
-    const cfg = AREA_CFG[area] || { col: '#666', icon: '📋' };
-
+  // ── Una pagina per area ──
+  Object.entries(byArea).forEach(([area, items])=>{
+    doc.addPage(); y=20; addFooter(); addLogos(); y=30;
+    const cfg = AREA_CFG[area] || {col:'#666',icon:'📋'};
     sectionTitle(`Ambito: ${area}  ${cfg.icon}`);
 
-    items.forEach((item, idx) => {
-      const { d, i, v } = item;
-      const racId = 'RAC' + String(idx + 1).padStart(2, '0');
+    items.forEach((item, idx)=>{
+      const {d, i, v} = item;
+      const racId = 'RAC' + String(idx+1).padStart(2,'0');
       const ownerAns = ownerAnswers[i] || {};
+      const crit = getCriticita(d.id);   // ← criticità reale
+      checkPage(65);
 
-      checkPage(60);
+      // Header domanda con bordo colorato a sinistra
+      doc.setFillColor(240,242,247); doc.rect(15,y-4,w-30,8,'F');
+      doc.setFillColor(...crit.rgb); doc.rect(15,y-4,3,8,'F');  // barra sinistra
+      doc.setFontSize(10); doc.setFont('helvetica','bold'); doc.setTextColor(26,42,108);
+      doc.text(`${racId}  —  ${d.id}`, 21, y+1);
 
-      // Header domanda
-      doc.setFillColor(240, 242, 247);
-      doc.rect(15, y - 4, w - 30, 8, 'F');
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(26, 42, 108);
-      doc.text(`${racId}  —  ${d.id}`, 18, y + 1);
-
-      // Badge Non Conforme
-      doc.setFillColor(216, 90, 48);
-      doc.roundedRect(w - 55, y - 3, 38, 6, 2, 2, 'F');
-      doc.setFontSize(8);
-      doc.setTextColor(255, 255, 255);
-      doc.text('Non Conforme', w - 36, y + 1, { align: 'center' });
-
-      y += 10;
+      // Badge criticità
+      doc.setFillColor(...crit.rgb); doc.roundedRect(w-65, y-3, 48, 6, 2, 2, 'F');
+      doc.setFontSize(8); doc.setTextColor(255,255,255);
+      doc.text(`Crit. ${crit.val} — ${crit.label}`, w-41, y+1, {align:'center'});
+      y+=11;
 
       // Testo domanda
-      doc.setFontSize(9);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(100, 100, 100);
-      doc.text('DOMANDA:', 18, y);
-      y += 5;
-      doc.setFont('helvetica', 'normal');
-      doc.setTextColor(40, 40, 40);
-      doc.setFontSize(10);
-      doc.splitTextToSize(d.domanda, w - 36).forEach(line => {
-        checkPage(6);
-        doc.text(line, 18, y);
-        y += 5;
-      });
-      y += 3;
+      doc.setFontSize(9); doc.setFont('helvetica','bold'); doc.setTextColor(100,100,100);
+      doc.text('DOMANDA:', 18, y); y+=5;
+      doc.setFont('helvetica','normal'); doc.setTextColor(40,40,40); doc.setFontSize(10);
+      doc.splitTextToSize(d.domanda, w-36).forEach(line=>{ checkPage(6); doc.text(line,18,y); y+=5; });
+      y+=3;
 
       // Risposta Owner
-      doc.setFontSize(9);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(100, 100, 100);
-      doc.text('RISPOSTA OWNER:', 18, y);
-      y += 5;
-      const ansText = ownerAns.answer
-        ? ownerAns.answer
-        : 'Nessuna evidenza fornita dall\'Owner.';
-      doc.setFont('helvetica', 'normal');
-      doc.setTextColor(40, 40, 40);
-      doc.setFontSize(10);
-      doc.splitTextToSize(ansText, w - 36).forEach(line => {
-        checkPage(6);
-        doc.text(line, 18, y);
-        y += 5;
-      });
-      y += 3;
+      doc.setFontSize(9); doc.setFont('helvetica','bold'); doc.setTextColor(100,100,100);
+      doc.text('RISPOSTA OWNER:', 18, y); y+=5;
+      const ansText = ownerAns.answer || 'Nessuna evidenza fornita dall\'Owner.';
+      doc.setFont('helvetica','normal'); doc.setTextColor(40,40,40); doc.setFontSize(10);
+      doc.splitTextToSize(ansText, w-36).forEach(line=>{ checkPage(6); doc.text(line,18,y); y+=5; });
+      y+=3;
 
       // Note Auditor
-      if (v.note) {
-        doc.setFontSize(9);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(216, 90, 48);
-        doc.text('NOTE AUDITOR:', 18, y);
-        y += 5;
-        doc.setFont('helvetica', 'italic');
-        doc.setTextColor(60, 60, 60);
-        doc.setFontSize(10);
-        doc.splitTextToSize(v.note, w - 36).forEach(line => {
-          checkPage(6);
-          doc.text(line, 18, y);
-          y += 5;
-        });
-        y += 3;
+      if(v.note){
+        doc.setFontSize(9); doc.setFont('helvetica','bold'); doc.setTextColor(...crit.rgb);
+        doc.text('NOTE AUDITOR:', 18, y); y+=5;
+        doc.setFont('helvetica','italic'); doc.setTextColor(60,60,60); doc.setFontSize(10);
+        doc.splitTextToSize(v.note, w-36).forEach(line=>{ checkPage(6); doc.text(line,18,y); y+=5; });
+        y+=3;
       }
 
-      // Livello CMMI
-      if (ownerAns.cmmi) {
-        doc.setFontSize(9);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(100, 100, 100);
-        doc.text(`LIVELLO CMMI: `, 18, y);
-        doc.setTextColor(26, 42, 108);
-        doc.text(ownerAns.cmmi, 52, y);
-        y += 8;
-      }
+      // Scadenza
+      doc.setFontSize(9); doc.setFont('helvetica','bold'); doc.setTextColor(...crit.rgb);
+      doc.text(`SCADENZA (${crit.days} giorni): `, 18, y);
+      doc.setFont('helvetica','normal'); doc.setTextColor(40,40,40);
+      doc.text(crit.dueDateStr, 72, y); y+=10;
 
-      // Linea separatrice
-      doc.setDrawColor(220, 220, 220);
-      doc.line(15, y, w - 15, y);
-      y += 8;
+      doc.setDrawColor(220,220,220); doc.line(15,y,w-15,y); y+=8;
     });
   });
-  // Pagina riepilogo finale
-  doc.addPage();
-  y = 20;
-  addFooter();
-  addLogos();
-  y = 30;
 
+  // ── Riepilogo finale ──
+  doc.addPage(); y=20; addFooter(); addLogos(); y=30;
   sectionTitle('Riepilogo Azioni Richieste');
 
-  // Tabella riepilogativa
-  const tableHeaders = ['ID', 'Area', 'Domanda', 'Priorità'];
-  const colWidths    = [15,   40,     85,         25];
-  const colStarts    = [15,   30,     70,          155];
+  // Intestazione tabella
+  doc.setFillColor(26,42,108); doc.rect(13,y-4,w-26,9,'F');
+  doc.setFontSize(9); doc.setFont('helvetica','bold'); doc.setTextColor(255,255,255);
+  ['ID','Area','Domanda','Criticità','Scadenza'].forEach((h,i)=>{
+    const xs = [15,27,65,130,155];
+    doc.text(h, xs[i], y+2);
+  });
+  y+=11;
 
-  // Header tabella
-  doc.setFillColor(26, 42, 108);
-  doc.rect(13, y - 4, w - 26, 9, 'F');
-  doc.setFontSize(9);
-  doc.setFont('helvetica', 'bold');
-  doc.setTextColor(255, 255, 255);
-  tableHeaders.forEach((h, i) => doc.text(h, colStarts[i], y + 2));
-  y += 11;
-
-  let racCounter = 1;
-  rejected.forEach((item, ri) => {
+  let racCounter2 = 1;
+  rejected.forEach((item,ri)=>{
     checkPage(14);
-    const { d } = item;
+    const {d} = item;
+    const crit = getCriticita(d.id);
     const rowH = 10;
+    doc.setFillColor(ri%2===0?248:255, ri%2===0?248:255, ri%2===0?248:255);
+    doc.rect(13,y-4,w-26,rowH,'F');
+    // barra sinistra colorata per criticità
+    doc.setFillColor(...crit.rgb); doc.rect(13,y-4,2,rowH,'F');
 
-    doc.setFillColor(ri % 2 === 0 ? 248 : 255, ri % 2 === 0 ? 248 : 255, ri % 2 === 0 ? 248 : 255);
-    doc.rect(13, y - 4, w - 26, rowH, 'F');
-
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(26, 42, 108);
-    doc.setFontSize(8);
-    doc.text('RAC' + String(racCounter).padStart(2, '0'), colStarts[0], y + 2);
-    racCounter++;
-
-    doc.setFont('helvetica', 'normal');
-    doc.setTextColor(60, 60, 60);
-    doc.text(d.area, colStarts[1], y + 2, { maxWidth: colWidths[1] });
-    doc.text(
-      d.domanda.length > 55 ? d.domanda.slice(0, 55) + '…' : d.domanda,
-      colStarts[2], y + 2, { maxWidth: colWidths[2] }
-    );
-
-    // Pallino priorità
-    doc.setFillColor(216, 90, 48);
-    doc.circle(colStarts[3] + 4, y, 3, 'F');
-    doc.setTextColor(216, 90, 48);
-    doc.setFont('helvetica', 'bold');
-    doc.text('Alta', colStarts[3] + 9, y + 2);
-
-    y += rowH;
+    doc.setFont('helvetica','bold'); doc.setTextColor(26,42,108); doc.setFontSize(8);
+    doc.text('RAC'+String(racCounter2).padStart(2,'0'), 15, y+2);
+    racCounter2++;
+    doc.setFont('helvetica','normal'); doc.setTextColor(60,60,60);
+    doc.text(d.area, 27, y+2, {maxWidth:36});
+    doc.text(d.domanda.length>55?d.domanda.slice(0,55)+'…':d.domanda, 65, y+2, {maxWidth:62});
+    // badge criticità
+    doc.setFillColor(...crit.rgb); doc.roundedRect(130,y-2,22,6,2,2,'F');
+    doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(7);
+    doc.text(`${crit.val}-${crit.label.slice(0,6)}`, 141, y+2, {align:'center'});
+    doc.setFont('helvetica','normal'); doc.setTextColor(60,60,60); doc.setFontSize(8);
+    doc.text(crit.dueDateStr, 155, y+2);
+    y+=rowH;
   });
 
-  y += 10;
-  bodyText(
-    `Totale non conformità rilevate: ${rejected.length}. ` +
-    'Tutte le azioni correttive devono essere implementate secondo i tempi definiti ' +
-    'nel piano di remediation approvato dagli organi di amministrazione.'
-  );
+  y+=10;
+  bodyText(`Totale non conformità rilevate: ${rejected.length}. Tutte le azioni correttive devono essere implementate secondo i tempi definiti nel piano di remediation approvato dagli organi di amministrazione.`);
 
-  // SALVA IL PDF
-  const fileName = `RemediationPlan_NIS2_${new Date().toISOString().slice(0, 10)}.pdf`;
-  doc.save(fileName);
+  doc.save(`RemediationPlan_NIS2_${new Date().toISOString().slice(0,10)}.pdf`);
 }
+
 
 function renderReport(){
   const vals = Object.values(auditorValidations);
@@ -4730,7 +4814,7 @@ function renderReport(){
     return {area: a, score: isNaN(score) ? Math.round(Math.random() * 40 + 40) : score};
   });
 
-  document.getElementById('report-tab-relazione').innerHTML = `
+  document.getElementById('report-tab-relazione').innerHTML = buildRelazionePanelHTML(areaScores, acc, wrn, rej, done, tot); `
 <div class="report-wrap">
 
   <!-- HERO -->
@@ -4862,6 +4946,108 @@ function closeSaveQPopup(){
   document.getElementById('save-q-popup').classList.remove('open');
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+function buildRelazionePanelHTML(areaScores, acc, wrn, rej, done, tot) {
+  return `
+    <div class="report-wrap">
+
+      <div class="report-hero">
+        <div>
+          <a href="#" class="tb-logo">
+            <img src="logo.png" class="tb-logo-icon3" alt="logo">
+            <img src="logo-text.png" class="tb-logo-text3" alt="logo text">
+          </a>
+          <div style="font-size:10px;color:rgba(255,255,255,.4);margin-top:2px">by 3A Informatica</div>
+        </div>
+        <div class="rh-info">
+          <div class="rh-title">Relazione Finale — Assessment NIS2</div>
+          <div class="rh-sub">3AInformatica S.r.l. · Assessment Cybersecurity Q2-2025 · ${new Date().toLocaleDateString('it-IT')}<br>Elaborata da 3AuditFlow · Documento riservato</div>
+          <div class="rh-badges">
+            <div class="rh-badge">NIS2 Art. 21</div>
+            <div class="rh-badge">PSNC 2024</div>
+            <div class="rh-badge g">Assessment completato</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="report-grid">
+        <div class="rep-card">
+          <h4><i class="fa-solid fa-chart-pie"></i> Distribuzione Risposte</h4>
+          <div class="donut-wrap">
+            ${buildDonut(acc,wrn,rej,done,tot)}
+            <div class="donut-legend">
+              <div class="dl-item"><div class="dl-dot" style="background:#1D9E75"></div><div class="dl-lbl">Conformi</div><div class="dl-val">${acc}</div><div class="dl-pct">${done>0?Math.round(acc/done*100):0}%</div></div>
+              <div class="dl-item"><div class="dl-dot" style="background:#D4A017"></div><div class="dl-lbl">Parziali</div><div class="dl-val">${wrn}</div><div class="dl-pct">${done>0?Math.round(wrn/done*100):0}%</div></div>
+              <div class="dl-item"><div class="dl-dot" style="background:#D85A30"></div><div class="dl-lbl">Non conformi</div><div class="dl-val">${rej}</div><div class="dl-pct">${done>0?Math.round(rej/done*100):0}%</div></div>
+              <div class="dl-item"><div class="dl-dot" style="background:#7b8ab8"></div><div class="dl-lbl">Non validate</div><div class="dl-val">${tot-done}</div><div class="dl-pct">${tot>0?Math.round((tot-done)/tot*100):0}%</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="rep-card">
+          <h4><i class="fa-solid fa-chart-radar"></i> Score per Area</h4>
+          <div class="radar-wrap">${buildRadar(areaScores)}</div>
+        </div>
+      </div>
+
+      <div class="report-grid">
+        <div class="rep-card">
+          <h4><i class="fa-solid fa-table"></i> Dettaglio per Area</h4>
+          <table class="score-table">
+            <thead><tr><th>Area</th><th>Score</th><th>Barra</th><th>Livello</th></tr></thead>
+            <tbody>
+              ${areaScores.map(({area,score})=>{
+                const lvl = score>=80?{l:'Conforme',c:'#1D9E75'}:score>=60?{l:'Parziale',c:'#D4A017'}:score>=40?{l:'Non conf.',c:'#D85A30'}:{l:'Critico',c:'#8b0000'};
+                return `<tr>
+                  <td style="font-weight:700">${area}</td>
+                  <td style="font-weight:800;color:${lvl.c}">${score}%</td>
+                  <td><div class="score-bar"><div class="score-bar-fill" style="width:${score}%;background:${lvl.c}"></div></div></td>
+                  <td><span class="score-badge" style="background:${lvl.c}18;color:${lvl.c};border:1px solid ${lvl.c}33">${lvl.l}</span></td>
+                </tr>`;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>
+        <div class="rep-card">
+          <h4><i class="fa-solid fa-magnifying-glass-chart"></i> Principali Findings</h4>
+          <div class="finding-list">
+            <div class="finding crit"><div class="finding-ic">🔴</div><div><div class="finding-title">Piano di Gestione del Rischio — Gap critico</div><div class="finding-desc">Il piano non è stato aggiornato negli ultimi 14 mesi. Azione correttiva urgente entro 30 giorni.</div></div></div>
+            <div class="finding warn"><div class="finding-ic">🟡</div><div><div class="finding-title">Monitoraggio — Integrazione SIEM parziale</div><div class="finding-desc">Il monitoraggio fisico non è integrato con il SIEM aziendale. Piano di remediation Q4.</div></div></div>
+            <div class="finding ok"><div class="finding-ic">🟢</div><div><div class="finding-title">SIEM & Incident Detection — Eccellente</div><div class="finding-desc">SIEM enterprise H24 con correlazione real-time e threat intelligence integrata.</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PULSANTE DOWNLOAD DIRETTO -->
+      <div style="background:linear-gradient(135deg,rgba(26,42,108,.06),rgba(0,198,255,.04));border:1px solid rgba(0,198,255,.2);border-radius:14px;padding:24px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:16px">
+        <div>
+          <div style="font-size:14px;font-weight:800;color:var(--text);margin-bottom:4px"><i class="fa-solid fa-file-pdf" style="color:#D85A30;margin-right:8px"></i>Documento di Chiusura Assessment</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6">
+            PDF ufficiale con Executive Summary, Score per area, Grafici, Raccomandazioni e Piano d'Azione.<br>
+            Generato direttamente dai dati dell'assessment — nessuna connessione esterna richiesta.
+          </div>
+          <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+            <span style="font-size:9px;font-weight:700;padding:2px 8px;border-radius:99px;background:rgba(0,198,255,.1);border:1px solid rgba(0,198,255,.2);color:#00c6ff">Executive Summary</span>
+            <span style="font-size:9px;font-weight:700;padding:2px 8px;border-radius:99px;background:rgba(0,198,255,.1);border:1px solid rgba(0,198,255,.2);color:#00c6ff">Score & Gauge</span>
+            <span style="font-size:9px;font-weight:700;padding:2px 8px;border-radius:99px;background:rgba(0,198,255,.1);border:1px solid rgba(0,198,255,.2);color:#00c6ff">Raccomandazioni</span>
+            <span style="font-size:9px;font-weight:700;padding:2px 8px;border-radius:99px;background:rgba(0,198,255,.1);border:1px solid rgba(0,198,255,.2);color:#00c6ff">Analisi per Area</span>
+          </div>
+        </div>
+        <button onclick="generateClosingPDF()"
+          style="padding:14px 32px;border-radius:11px;font-size:14px;font-weight:800;background:linear-gradient(135deg,#00c6ff,#1a2a6c);color:#fff;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;display:inline-flex;align-items:center;gap:10px;box-shadow:0 4px 22px rgba(0,198,255,.4);transition:all .2s;white-space:nowrap"
+          onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 32px rgba(0,198,255,.6)'"
+          onmouseout="this.style.transform='none';this.style.boxShadow='0 4px 22px rgba(0,198,255,.4)'">
+          <i class="fa-solid fa-file-arrow-down"></i> Scarica Relazione PDF
+        </button>
+      </div>
+
+      <div class="report-footer">
+        <strong>3AuditFlow</strong> by 3A Informatica · Assessment Cybersecurity NIS2 Q2-2025 · Documento riservato<br>
+        Generato il ${new Date().toLocaleDateString('it-IT')} alle ${new Date().toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'})} · © 2025 3AuditFlow
+      </div>
+
+    </div>`;
+}
+
+
 </script>
 </body>
 </html>
