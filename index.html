@@ -910,10 +910,10 @@ const PAGES=['vetrina','prodotto','accesso'];
 function showPage(n){PAGES.forEach(p=>{document.getElementById('page-'+p).classList.toggle('active',p===n);const t=document.getElementById('tab-'+p);if(t)t.classList.toggle('active',p===n)});document.querySelector('.menu-toggle').classList.remove('open');document.getElementById('nav-center').classList.remove('mobile-open');window.scrollTo({top:0,behavior:'smooth'})}
 function scrollContact(){showPage('vetrina');setTimeout(()=>{const s=document.getElementById('contact-vetrina');if(s)s.scrollIntoView({behavior:'smooth'})},300)}
 let cur=0,total=3,timer;
-function goTo(n){document.getElementById('s'+cur).classList.remove('active');document.querySelectorAll('.dot')[cur].classList.remove('active');cur=n;document.getElementById('s'+cur).classList.add('active');document.querySelectorAll('.dot')[cur].classList.add('active');document.getElementById('slides').style.transform='translateX(-'+cur*100+'%)';clearInterval(timer);timer=setInterval(next,12000)}
+function goTo(n){document.getElementById('s'+cur).classList.remove('active');document.querySelectorAll('.dot')[cur].classList.remove('active');cur=n;document.getElementById('s'+cur).classList.add('active');document.querySelectorAll('.dot')[cur].classList.add('active');document.getElementById('slides').style.transform='translateX(-'+cur*100+'%)';clearInterval(timer);/*timer=setInterval(next,12000)*/}
 function next(){goTo((cur+1)%total)}
 function prev(){goTo((cur-1+total)%total)}
-timer=setInterval(next,12000);
+//timer=setInterval(next,12000);
 function switchMedia(t){document.querySelectorAll('.mtab').forEach((b,i)=>b.classList.toggle('active',['video','foto'][i]===t));document.getElementById('mpanel-video').classList.toggle('active',t==='video');document.getElementById('mpanel-foto').classList.toggle('active',t==='foto')}
 function openVideo(src){const lb=document.getElementById('lightbox');const vid=document.getElementById('lb-video');const img=document.getElementById('lb-img');img.style.display='none';img.src='';vid.style.display='block';vid.src=src;vid.load();vid.play().catch(()=>{});lb.classList.add('open')}
 function openImage(src){const lb=document.getElementById('lightbox');const vid=document.getElementById('lb-video');const img=document.getElementById('lb-img');vid.style.display='none';vid.pause();vid.src='';img.src=src;img.style.display='block';lb.classList.add('open')}

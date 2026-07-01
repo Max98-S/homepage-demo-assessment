@@ -21,7 +21,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);height:100%;overflow:hidden;-webkit-tap-highlight-color:transparent}
 
-/* ===== OVERLAY INTRO ===== */
+/*  OVERLAY INTRO  */
 .ov{position:fixed;inset:0;z-index:9999;background:radial-gradient(ellipse at 60% 40%,#0d1f4e 0%,#060e1f 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;padding:24px 20px}
 .ov-badge{display:flex;align-items:center;gap:8px;background:rgba(0,198,255,.1);border:1px solid rgba(0,198,255,.25);border-radius:99px;padding:6px 16px;font-size:11px;color:#00c6ff;font-weight:700;letter-spacing:.6px}
 .ov-dot{width:8px;height:8px;border-radius:50%;background:#00c6ff;animation:pulse 2s infinite}
@@ -35,12 +35,12 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .ov-role-btn.super{border-color:rgba(212,160,23,.4);color:#D4A017;background:rgba(212,160,23,.08)}
 .ov-role-btn.super:hover{background:rgba(212,160,23,.2)}
 
-/* ===== SHELL ===== */
+/*  SHELL  */
 .shell{display:flex;height:100dvh;overflow:hidden}
 .sb-ov{display:none;position:fixed;inset:0;z-index:89;background:rgba(0,0,0,.55);backdrop-filter:blur(2px)}
 .sb-ov.open{display:block}
 
-/* ===== TOPBAR ===== */
+/*  TOPBAR  */
 .topbar{position:fixed;top:0;left:0;right:0;height:var(--th);background:var(--top);border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;padding:0 16px;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.5);gap:12px}
 .tb-burger{display:none;width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);align-items:center;justify-content:center;color:rgba(255,255,255,.7);font-size:16px;cursor:pointer;flex-shrink:0;transition:all .2s}
 .tb-burger:hover{background:rgba(0,198,255,.2);color:#00c6ff}
@@ -62,7 +62,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .tb-urole{font-size:9px;font-weight:600;color:rgba(0,198,255,.8);white-space:nowrap;letter-spacing:.3px;text-transform:uppercase}
 @media(max-width:480px){.tb-user-info{display:none}.tb-user{padding:5px}}
 
-/* ===== ROLE DROPDOWN ===== */
+/*  ROLE DROPDOWN  */
 .role-dropdown{position:absolute;top:calc(100% + 8px);right:0;width:220px;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:0 16px 48px rgba(0,0,0,.18);z-index:200;overflow:hidden;display:none}
 .role-dropdown.open{display:block;animation:fadeSlideDown .2s ease}
 @keyframes fadeSlideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
@@ -76,7 +76,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .rd-item.active .rd-name{color:var(--accent);font-weight:700}
 .rd-check{font-size:11px;color:var(--accent)}
 
-/* ===== SIDEBAR ===== */
+/*  SIDEBAR  */
 .sidebar{position:fixed;top:var(--th);left:0;width:var(--sw);height:calc(100dvh - var(--th));background:var(--sb);display:flex;flex-direction:column;overflow-y:auto;z-index:90;transition:transform .28s cubic-bezier(.4,0,.2,1),width .25s;scrollbar-width:thin;scrollbar-color:rgba(0,198,255,.2) transparent}
 .sidebar::-webkit-scrollbar{width:3px}
 .sidebar::-webkit-scrollbar-thumb{background:rgba(0,198,255,.2);border-radius:3px}
@@ -101,13 +101,13 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .sidebar.col .sb-sub li .sbl span{display:none}
 .sb-bottom{padding:10px 8px;border-top:1px solid rgba(255,255,255,.08);margin-top:auto}
 
-/* ===== MAIN ===== */
+/*  MAIN  */
 .main{margin-left:0;margin-top:var(--th);flex:1;height:calc(100dvh - var(--th));overflow-y:auto;overflow-x:hidden;padding:20px 22px 80px;background:var(--bg);-webkit-overflow-scrolling:touch}
 .main.with-sb{margin-left:var(--sw)}
 .main.with-sb.col{margin-left:var(--swc)}
 @media(max-width:767px){.main{margin-left:0!important;padding:14px 14px 80px}}
 
-/* ===== PAGE HEADER ===== */
+/*  PAGE HEADER  */
 .ph{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;gap:10px;flex-wrap:wrap}
 .ph-left{display:flex;align-items:center;gap:11px}
 .ph-bar{width:4px;height:36px;border-radius:2px;background:var(--grad);flex-shrink:0}
@@ -115,7 +115,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .ph-sub{font-size:12px;color:var(--muted);margin-top:2px}
 .ph-right{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 
-/* ===== BUTTONS ===== */
+/*  BUTTONS  */
 .btn-primary{padding:10px 20px;border-radius:9px;font-size:13px;font-weight:700;background:var(--grad);color:#fff;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;display:inline-flex;align-items:center;gap:8px;transition:all .2s;box-shadow:0 4px 14px rgba(0,198,255,.25)}
 .btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,198,255,.4)}
 .btn-outline{padding:10px 20px;border-radius:9px;font-size:13px;font-weight:700;background:var(--surface);color:var(--text);border:1.5px solid var(--border);cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
@@ -124,7 +124,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .btn-danger:hover{background:rgba(216,90,48,.18)}
 .btn-sm{padding:7px 14px;font-size:12px}
 
-/* ===== TABLES ===== */
+/*  TABLES  */
 .table-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
 .table-card table{width:100%;border-collapse:collapse;font-size:12.5px}
 .table-card th{padding:10px 14px;text-align:left;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);border-bottom:2px solid var(--border);background:linear-gradient(135deg,rgba(26,42,108,.03),transparent);white-space:nowrap}
@@ -136,7 +136,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .act-btn:hover{border-color:var(--accent);color:var(--accent)}
 .act-btn.danger:hover{border-color:var(--red);color:var(--red)}
 
-/* ===== BADGES ===== */
+/*  BADGES  */
 .badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:99px;font-size:10px;font-weight:700;white-space:nowrap}
 .badge-green{background:rgba(29,158,117,.1);color:var(--green);border:1px solid rgba(29,158,117,.2)}
 .badge-blue{background:rgba(0,198,255,.1);color:#0099cc;border:1px solid rgba(0,198,255,.2)}
@@ -145,7 +145,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .badge-muted{background:var(--bg);color:var(--muted);border:1px solid var(--border)}
 .badge-gold{background:rgba(212,160,23,.12);color:#a07a00;border:1px solid rgba(212,160,23,.3)}
 
-/* ===== STATS CARDS ===== */
+/*  STATS CARDS  */
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-bottom:20px}
 .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px}
 .stat-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:4px}
@@ -155,7 +155,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .delta-up{color:var(--green)}
 .delta-down{color:var(--red)}
 
-/* ===== MODAL ===== */
+/*  MODAL  */
 .modal-bg{position:fixed;inset:0;z-index:500;background:rgba(6,14,31,.7);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:16px}
 .modal-bg.open{display:flex}
 .modal{background:var(--surface);border-radius:16px;width:100%;max-width:580px;max-height:90dvh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.35);border:1px solid var(--border);animation:modalIn .25s cubic-bezier(.34,1.56,.64,1)}
@@ -168,7 +168,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .modal-body{padding:20px}
 .modal-footer{padding:14px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px}
 
-/* ===== FORM ===== */
+/*  FORM  */
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .form-grid.cols1{grid-template-columns:1fr}
 @media(max-width:500px){.form-grid{grid-template-columns:1fr}}
@@ -183,7 +183,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .form-divider{grid-column:1/-1;height:1px;background:var(--border);margin:6px 0}
 .form-section-title{grid-column:1/-1;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-top:4px}
 
-/* ===== PLAN SELECTOR ===== */
+/*  PLAN SELECTOR  */
 .plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:4px}
 @media(max-width:500px){.plan-grid{grid-template-columns:1fr 1fr}}
 .plan-opt{border:1.5px solid var(--border);border-radius:9px;padding:10px 12px;cursor:pointer;transition:all .2s;background:var(--bg)}
@@ -197,7 +197,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .ai-opt:hover{border-color:rgba(0,198,255,.3)}
 .ai-opt.on{border-color:var(--accent);background:rgba(0,198,255,.1);color:var(--accent)}
 
-/* ===== ASSESSMENT CARDS ===== */
+/*  ASSESSMENT CARDS  */
 .assess-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
 .assess-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;box-shadow:var(--shadow);cursor:pointer;transition:all .2s}
 .assess-card:hover{border-color:rgba(0,198,255,.35);box-shadow:0 8px 28px rgba(26,42,108,.12);transform:translateY(-2px)}
@@ -215,7 +215,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .ac-prog-bar{height:5px;border-radius:99px;background:var(--bg);border:1px solid var(--border);overflow:hidden}
 .ac-prog-fill{height:100%;border-radius:99px;background:var(--grad);transition:width .5s}
 
-/* ===== WIZARD ===== */
+/*  WIZARD  */
 .wizard-steps{display:flex;align-items:center;gap:0;margin-bottom:20px;overflow-x:auto;scrollbar-width:none;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:12px 16px;box-shadow:var(--shadow)}
 .wizard-steps::-webkit-scrollbar{display:none}
 .wz-step{display:flex;align-items:center;gap:7px;flex-shrink:0}
@@ -231,7 +231,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .wizard-card-title{font-size:13px;font-weight:800;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
 .wizard-card-title i{color:var(--accent)}
 
-/* ===== TOGGLE ROW ===== */
+/*  TOGGLE ROW  */
 .toggle-row{display:flex;gap:8px;flex-wrap:wrap}
 .toggle-opt{padding:8px 16px;border-radius:8px;border:1.5px solid var(--border);background:var(--bg);font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .2s}
 .toggle-opt:hover{border-color:rgba(0,198,255,.35)}
@@ -242,7 +242,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .check-box{width:16px;height:16px;border-radius:4px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:9px;color:transparent;flex-shrink:0;transition:all .15s}
 .check-row.on .check-box{background:var(--accent);border-color:var(--accent);color:#fff}
 
-/* ===== CRITICALITY TABLE ===== */
+/*  CRITICALITY TABLE  */
 .crit-table{width:100%;border-collapse:collapse}
 .crit-table th{padding:8px 12px;text-align:left;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);border-bottom:2px solid var(--border)}
 .crit-table td{padding:8px 12px;border-bottom:1px solid var(--border)}
@@ -250,7 +250,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .crit-input{width:80px;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;padding:6px 10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:700;color:var(--text);outline:none;text-align:center;transition:border .2s}
 .crit-input:focus{border-color:var(--accent)}
 
-/* ===== DROPZONE ===== */
+/*  DROPZONE  */
 .dropzone{border:2.5px dashed rgba(0,198,255,.35);border-radius:14px;background:rgba(0,198,255,.02);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:180px;cursor:pointer;transition:all .25s;padding:28px 20px;text-align:center}
 .dropzone:hover{border-color:var(--accent);background:rgba(0,198,255,.07);transform:translateY(-2px)}
 .dz-icon{width:56px;height:56px;border-radius:14px;background:rgba(0,198,255,.1);border:1.5px solid rgba(0,198,255,.2);display:flex;align-items:center;justify-content:center;font-size:22px;color:#00c6ff}
@@ -259,7 +259,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .dz-formats{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
 .dz-fmt{font-size:9px;font-weight:700;padding:2px 8px;border-radius:99px;background:var(--bg);border:1px solid var(--border);color:var(--muted)}
 
-/* ===== QA WORKSPACE ===== */
+/*  QA WORKSPACE  */
 .prog-sum{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:11px 16px;margin-bottom:14px;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow);flex-wrap:wrap}
 .ps-s{display:flex;flex-direction:column}
 .ps-v{font-size:20px;font-weight:800;color:var(--text)}
@@ -314,7 +314,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .ev-ta:focus{border-color:var(--accent)}
 .owner-next-bar{display:flex;justify-content:flex-end;padding:12px 16px;border-top:1px solid var(--border);background:rgba(26,42,108,.02)}
 
-/* ===== AUDITOR PANEL ===== */
+/*  AUDITOR PANEL  */
 .mvr-row{display:flex;gap:8px;flex-wrap:wrap}
 .mvr{display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:9px;border:1.5px solid var(--border);background:var(--bg);cursor:pointer;transition:all .2s;font-size:12px;font-weight:600;color:var(--muted)}
 .mvr:hover{border-color:var(--accent);color:var(--text)}
@@ -332,7 +332,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .q-it.val-wrn .q-num{background:rgba(212,160,23,.15);border-color:var(--yellow);color:var(--yellow)}
 .q-it.val-rej .q-num{background:rgba(216,90,48,.15);border-color:var(--red);color:var(--red)}
 
-/* ===== REPORT ===== */
+/*  REPORT  */
 .report-hero{background:linear-gradient(135deg,#060e1f 0%,#1a2a6c 100%);border-radius:16px;padding:24px;margin-bottom:16px;color:#fff}
 .rh-logo{font-family:'DM Serif Display',serif;font-size:26px;letter-spacing:-1px;margin-bottom:8px}
 .rh-logo em{color:#00c6ff;font-style:italic}
@@ -357,29 +357,29 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .score-bar{height:6px;border-radius:99px;background:var(--bg);overflow:hidden;width:80px}
 .score-bar-fill{height:100%;border-radius:99px}
 
-/* ===== TOAST ===== */
+/*  TOAST  */
 .toast{position:fixed;bottom:24px;right:24px;z-index:9999;background:linear-gradient(135deg,#0d7a5a,#1D9E75);color:#fff;border-radius:12px;padding:13px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 32px rgba(29,158,117,.4);font-family:'Plus Jakarta Sans',sans-serif;transform:translateX(120%);transition:transform .4s cubic-bezier(.34,1.56,.64,1),opacity .3s;opacity:0;pointer-events:none;max-width:340px}
 .toast.show{transform:translateX(0);opacity:1}
 .toast-icon{font-size:16px}
 .toast-title{font-size:13px;font-weight:800}
 .toast-sub{font-size:11px;opacity:.8;margin-top:2px}
 
-/* ===== EMPTY STATE ===== */
+/*  EMPTY STATE  */
 .empty-state{text-align:center;padding:48px 20px;color:var(--muted)}
 .empty-state i{font-size:40px;margin-bottom:14px;opacity:.3;display:block}
 .empty-state p{font-size:14px;font-weight:600}
 .empty-state small{font-size:12px;opacity:.7}
 
-/* ===== OWNER ANS VIEW (auditor) ===== */
+/*  OWNER ANS VIEW (auditor)  */
 .oav-box{background:var(--bg);border:1.5px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:8px}
 .oav-badge-role{font-size:9px;font-weight:700;padding:2px 8px;border-radius:99px;background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.2);color:#6d28d9;display:inline-flex;align-items:center;gap:4px}
 .oav-cmmi-val{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:7px;border:1.5px solid rgba(0,198,255,.3);background:rgba(0,198,255,.08);font-size:11px;font-weight:700;color:var(--accent);margin-top:6px}
 .oav-ans-txt{font-size:12px;color:var(--text);line-height:1.7;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-top:6px;min-height:50px}
 
-/* ===== MULTI ASSESSMENT UPLOAD ===== */
+/*  MULTI ASSESSMENT UPLOAD  */
 .excel-template-bar{background:linear-gradient(135deg,rgba(29,158,117,.08),rgba(29,158,117,.04));border:1.5px solid rgba(29,158,117,.25);border-radius:10px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
 
-/* ===== ACTOR ASSIGN CARD ===== */
+/*  ACTOR ASSIGN CARD  */
 .actor-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);margin-bottom:14px}
 .actor-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(26,42,108,.04),rgba(0,198,255,.02))}
 .actor-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
@@ -387,7 +387,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .actor-sub{font-size:11px;color:var(--muted);margin-top:1px}
 .actor-body{padding:16px}
 
-/* ===== BREADCRUMB ===== */
+/*  BREADCRUMB  */
 .breadcrumb{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);margin-bottom:12px;flex-wrap:wrap}
 .breadcrumb a{color:var(--muted);text-decoration:none;cursor:pointer;transition:color .2s}
 .breadcrumb a:hover{color:var(--accent)}
@@ -406,7 +406,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <!-- ROLE DROPDOWN OVERLAY (chiude il dropdown cliccando fuori) -->
 <div id="rd-ov" style="position:fixed;inset:0;z-index:150;display:none" onclick="closeRoleDropdown()"></div>
 
-<!-- ========== OVERLAY INTRO ========== -->
+<!--  OVERLAY INTRO  -->
 <div class="ov" id="ov">
   <div class="ov-badge"><div class="ov-dot"></div>3AuditFlow · Piattaforma NIS2</div>
   <div class="ov-logo-text"><em>3Audit</em>Flow</div>
@@ -422,7 +422,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   </div>
 </div>
 
-<!-- ========== SHELL ========== -->
+<!--  SHELL  -->
 <div class="shell" id="shell" style="display:none">
   <div class="sb-ov" id="sb-ov" onclick="closeMob()"></div>
 
@@ -506,7 +506,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   </main>
 </div>
 
-<!-- ========== MODALS ========== -->
+<!--  MODALS  -->
 <!-- Modal Nuova Licenza -->
 <div class="modal-bg" id="modal-licenza">
   <div class="modal">
@@ -652,9 +652,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 </div>
 
 <script>
-// =====================================================================
 // STATE
-// =====================================================================
 let currentRole = 'super-admin';
 let sidebarCollapsed = false;
 let currentSaSection = 'licenze';
@@ -742,9 +740,7 @@ let wizardStep = 1;
 let wizardConfig = {processo:'completo', relazione:'NIS2', tipo:'assessment', evidenze:'obbligatorie', monitoraggio:'con', rip_ass:false, rip_mon:false, rif_rel:false};
 let assessmentCreating = null; // 'normale' o 'multi'
 
-// =====================================================================
 // ENTRY
-// =====================================================================
 function enterAs(role) {
   document.getElementById('ov').style.display = 'none';
   document.getElementById('shell').style.display = 'flex';
@@ -788,9 +784,7 @@ function switchRole(role) {
   showToast('Ruolo cambiato', ROLE_LABELS[role], '🔄');
 }
 
-// =====================================================================
 // SIDEBAR
-// =====================================================================
 function toggleDsk() {
   sidebarCollapsed = !sidebarCollapsed;
   const sb = document.getElementById('sidebar');
@@ -808,9 +802,7 @@ function closeMob() {
   document.getElementById('sb-ov').classList.remove('open');
 }
 
-// =====================================================================
 // ROLE DROPDOWN
-// =====================================================================
 function toggleRoleDropdown(e) {
   const dd = document.getElementById('role-dropdown');
   const ov = document.getElementById('rd-ov');
@@ -822,9 +814,7 @@ function closeRoleDropdown() {
   document.getElementById('rd-ov').style.display = 'none';
 }
 
-// =====================================================================
 // DASHBOARD ROUTER
-// =====================================================================
 function renderDashboard() {
   switch(currentRole) {
     case 'super-admin':      renderSuperAdmin(); break;
@@ -836,9 +826,7 @@ function renderDashboard() {
   }
 }
 
-// =====================================================================
 // SUPER ADMIN
-// =====================================================================
 function saNav(section) {
   currentSaSection = section;
   ['licenze','corpadmin','auditor','reviewer','owner'].forEach(k => {
@@ -962,9 +950,7 @@ function deleteLicenza(id) {
   if (idx > -1) { MOCK_LICENZE.splice(idx, 1); renderLicenze(); showToast('Licenza eliminata','','🗑️'); }
 }
 
-// =====================================================================
 // CORPORATION ADMIN
-// =====================================================================
 function renderCorporationAdmin() {
   const pc = document.getElementById('page-content');
   pc.innerHTML = `
@@ -1248,9 +1234,8 @@ function wizardPrev() {
   else { renderCorporationAdmin(); }
 }
 
-// =====================================================================
+
 // ASSESSMENT ADMIN
-// =====================================================================
 function renderAssessmentAdmin() {
   const pc = document.getElementById('page-content');
   pc.innerHTML = `
@@ -1357,9 +1342,7 @@ function aaViewAssessment(id) {
     </div>`;
 }
 
-// =====================================================================
 // REVIEWER / OWNER / AUDITOR DASHBOARD
-// =====================================================================
 function renderReviewerDash() { renderRoaDash('reviewer'); }
 function renderOwnerDash() { renderRoaDash('owner'); }
 function renderAuditorDash() { renderRoaDash('auditor'); }
@@ -1393,9 +1376,7 @@ function renderRoaDash(role) {
     </div>`;
 }
 
-// =====================================================================
 // WORKSPACE (Reviewer, Owner, Auditor)
-// =====================================================================
 function enterWorkspace(role, id) {
   selectedQuestions = [];
   ownerAnswers = {};
@@ -1749,9 +1730,7 @@ function audSave() {
   if (note) auditorValidations[currentAuditorQ].note = note.value;
 }
 
-// =====================================================================
 // REPORT
-// =====================================================================
 function renderReport() {
   audSave();
   const qs = selectedQuestions.length > 0
@@ -1859,9 +1838,7 @@ function renderReport() {
     </div>`;
 }
 
-// =====================================================================
 // MODALS
-// =====================================================================
 function openModal(id) { document.getElementById(id).classList.add('open'); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
@@ -1921,9 +1898,7 @@ function saveUtente() {
   showToast('Utente salvato','','✅');
 }
 
-// =====================================================================
 // TOAST
-// =====================================================================
 function showToast(title, sub, icon='✅') {
   const t = document.getElementById('toast');
   document.getElementById('toast-title').textContent = title;

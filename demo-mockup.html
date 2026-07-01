@@ -265,7 +265,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .btn-entra-owner.on{opacity:1;pointer-events:all}
 .btn-entra-owner.on:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,198,255,.5)}
 
-/* ===================== MODAL ===================== */
+/*  MODAL  */
 .modal-ov{display:none;position:fixed;inset:0;z-index:500;background:rgba(6,14,31,.7);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:16px;animation:fadeIn .2s ease}
 .modal-ov.open{display:flex}
 .modal-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;width:100%;max-width:820px;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 60px rgba(6,14,31,.4)}
@@ -321,7 +321,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .btn-modal-close{padding:7px 16px;border-radius:7px;border:1px solid var(--border);background:var(--surface);color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .15s}
 .btn-modal-close:hover{border-color:var(--accent);color:var(--accent)}
 
-/* ===================== DOCUMENTAZIONE — SINGLE UPLOAD ===================== */
+/*  DOCUMENTAZIONE — SINGLE UPLOAD  */
 .doc-single-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);margin-bottom:16px}
 .doc-single-hdr{padding:14px 20px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(26,42,108,.05),rgba(0,198,255,.03));display:flex;align-items:center;gap:10px}
 .doc-single-hdr h3{font-size:14px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:8px}
@@ -359,7 +359,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .piano-date-inp::-webkit-calendar-picker-indicator{opacity:.5;cursor:pointer}
 @media(max-width:700px){.piano-date-hdr{grid-template-columns:1fr 130px 130px}.piano-date-row{grid-template-columns:1fr 130px 130px}.piano-date-inp{font-size:11px;padding:6px 8px}}
 
-/* ===================== OWNER STEP — solo risposta ===================== */
+/*  OWNER STEP — solo risposta  */
 .prog-sum{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:11px 16px;margin-bottom:14px;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow);flex-wrap:wrap}
 .ps-s{display:flex;flex-direction:column}
 .ps-v{font-size:20px;font-weight:800;color:var(--text)}
@@ -455,7 +455,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .btn-owner-next{padding:12px 28px;border-radius:10px;font-size:14px;font-weight:800;background:linear-gradient(135deg,#00c6ff,#1a2a6c);color:#fff;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;display:inline-flex;align-items:center;gap:9px;box-shadow:0 4px 20px rgba(0,198,255,.35);transition:all .2s}
 .btn-owner-next:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,198,255,.55)}
 
-/* ===================== AUDITOR STEP ===================== */
+/*  AUDITOR STEP  */
 .aud-prog-sum{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:11px 16px;margin-bottom:14px;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow);flex-wrap:wrap}
 
 /* AUDITOR QA LAYOUT */
@@ -682,7 +682,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 
 /* AREA GROUP in Owner */
 .owner-area-group { margin-bottom: 0; }
-/* AREA GROUP in Owner */
 .owner-area-hdr {
   display: flex; align-items: center; justify-content: space-between;
   background: linear-gradient(135deg, #0d1f4e, #1a2a6c);
@@ -694,7 +693,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   margin-top: 14px;
   top:0;
   z-index: 10;
-  /* NIENTE sticky — evita sovrapposizioni */
 }
 .owner-area-hdr:first-child { margin-top: 0; }
 .owner-area-hdr-left { display: flex; align-items: center; gap: 9px; }
@@ -708,7 +706,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   border: 1.5px solid rgba(255,255,255,.2); background: rgba(255,255,255,.07);
   color: rgba(255,255,255,.5); cursor: not-allowed; font-family: 'Plus Jakarta Sans', sans-serif;
   transition: all .2s; white-space: nowrap; opacity: .5;
-  /* default: bloccato finché non risposte tutte */
 }
 .btn-area-done.ready {
   border-color: rgba(29,158,117,.6); background: rgba(29,158,117,.12);
@@ -754,16 +751,14 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   border-color: rgba(255,255,255,.2); background: rgba(255,255,255,.06);
   color: rgba(255,255,255,.5); cursor: default; transform: none; pointer-events: none;
 }
-/* ===================== GUIDED TOUR — SPOTLIGHT SYSTEM ===================== */
+/*  GUIDED TOUR  */
 
-/* Dark overlay with cutout hole via box-shadow */
 #tour-overlay {
   position: fixed; inset: 0; z-index: 10000;
   pointer-events: none; display: none;
 }
 #tour-overlay.active { display: block; pointer-events: all; }
 
-/* The spotlight hole — a transparent box with massive box-shadow */
 #tour-spotlight {
   position: fixed; z-index: 10001;
   border-radius: 10px;
@@ -777,7 +772,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 }
 #tour-spotlight.active { display: block; }
 
-/* Pulse ring around spotlight */
 #tour-spotlight::after {
   content: '';
   position: absolute; inset: -8px;
@@ -790,7 +784,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   50%{opacity:.9;transform:scale(1.015)}
 }
 
-/* Freccia tour — linea tratteggiata CSS */
+/* Freccia tour  */
 #tour-arrow {
   position: fixed; inset: 0; z-index: 10002; pointer-events: none;
   display: none;
@@ -820,7 +814,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   border-top: 8px solid rgba(0,198,255,.85);
 }
 
-/* ---- TOUR CARD VARIANTS ---- */
+/* TOUR CARD VARIANTS*/
 .tour-card {
   position: fixed; z-index: 10003;
   width: 340px; max-width: calc(100vw - 32px);
@@ -890,7 +884,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 }
 .tour-card.var-dark .tc-btn-next:hover { transform: translateY(-1px); box-shadow: 0 6px 22px rgba(0,198,255,.4); }
 
-/* Variant B — White card (feature callout) */
+/* Variant B — White card  */
 .tour-card.var-light {
   background: #fff;
   border: 1px solid var(--border);
@@ -1002,7 +996,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   transition: all .2s; display: flex; align-items: center; gap: 6px;
 }
 .tour-card.var-role .tc-btn-next:hover { transform: translateY(-1px); }
-/* ===================== EVIDENZE - OBBLIGATORIO ===================== */
+/*  EVIDENZE - OBBLIGATORIO  */
 .ev-box-wrap {
   display: inline-flex;
   align-items: center;
@@ -1328,7 +1322,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
       <div class="sp-s" id="sp6"><div class="sp-c" id="sp6c">6</div><div class="sp-info"><div class="sp-label">Chiusura</div><div class="sp-sub">Certificato</div></div></div>
     </div>
 
-    <!-- ==================== REVIEWER STEP ==================== -->
+    <!--  REVIEWER STEP  -->
     <div id="step-reviewer">
       <div class="tabs-bar">
         <button class="tab-btn active" id="tab-q" onclick="switchTab('q')"><span class="tab-check" id="tabchk-q"></span><i class="fa-solid fa-clipboard-list"></i><span class="tab-lbl">Questionario</span></button>
@@ -1424,7 +1418,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
       </div>
     </div><!-- /step-reviewer -->
 
-    <!-- ==================== OWNER STEP ==================== -->
+    <!--  OWNER STEP  -->
     <div id="step-owner" style="display:none">
       <div class="prog-sum">
         <div class="ps-s"><div class="ps-v" id="ps-a">0</div><div class="ps-l">Risposte</div></div>
@@ -1500,7 +1494,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
       </div>
     </div><!-- /step-owner -->
 
-    <!-- ==================== AUDITOR STEP ==================== -->
+    <!--  AUDITOR STEP  -->
     <div id="step-auditor" style="display:none">
       <div class="aud-prog-sum">
         <div class="ps-s"><div class="ps-v" id="aud-ps-v">0</div><div class="ps-l">Validate</div></div>
@@ -1624,7 +1618,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
       </div>
     </div>
 
-    <!-- ==================== REPORT ==================== -->
+    <!--  REPORT  -->
     <div id="step-report" style="display:none"></div>
 
   </main>
@@ -1725,7 +1719,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   doc.text(`Livello ${aiData.score||'—'}/4 — ${scoreLabel}`, 94, y+6.5, {align:'center'});
   y += 18;
 
-  // ── Abstract ──
+  // Abstract
   doc.setFillColor(240,246,255);
   doc.setDrawColor(0,198,255);
   doc.setLineWidth(0.3);
@@ -1738,7 +1732,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   absLines.forEach((line,li)=>{ doc.text(line, 17, y+13+(li*6)); });
   y += absH + 8;
 
-  // ── Punti Salienti ──
+  // Punti Salienti
   if(aiData.punti_salienti && aiData.punti_salienti.length > 0){
     checkPage(20);
     doc.setFontSize(9); doc.setFont('helvetica','bold'); doc.setTextColor(26,42,108);
@@ -1757,7 +1751,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
     y += 4;
   }
 
-  // ── Gap ──
+  // Gap
   if(aiData.gap && aiData.gap.length > 0){
     checkPage(20);
     doc.setFontSize(9); doc.setFont('helvetica','bold'); doc.setTextColor(216,90,48);
@@ -1776,7 +1770,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
     y += 4;
   }
 
-  // ── Raccomandazione ──
+  // Raccomandazione
   if(aiData.raccomandazione){
     checkPage(20);
     doc.setFontSize(9); doc.setFont('helvetica','bold'); doc.setTextColor(0,150,200);
@@ -1802,7 +1796,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 
   doc.save(`AbstractAI_${d.id}_${new Date().toISOString().slice(0,10)}.pdf`);
 }
-// ===================== OWNER VALIDATION POPUP =====================
+//  OWNER VALIDATION POPUP 
 function validateOwnerBeforeAuditor(){
   ownerSaveEdits();
   const issues = [];
@@ -1851,7 +1845,7 @@ function validateOwnerBeforeAuditor(){
 function closeOwnerPopup(){
   document.getElementById('owner-validation-popup').style.display = 'none';
 }
-// ===================== DATA =====================
+//  DATA 
 const NIS2_DATA={"GOVERN":{"Organizational Context":[{"id":"GV-OC-01","domanda":"È previsto un piano di business continuity?","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"compliance"},{"id":"GV-OC-02","domanda":"La missione dell'organizzazione è compresa e informa la gestione del rischio di cybersecurity.","criticita":1,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV-OC-03","domanda":"Gli stakeholder interni ed esterni sono noti e le loro esigenze e aspettative riguardo la gestione del rischio di cybersecurity sono comprese e considerate.","criticita":3,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV-OC-04","domanda":"I requisiti legali, normativi e contrattuali riguardanti la cybersecurity, compresi gli obblighi in materia di privacy e libertà civili, sono compresi e gestiti.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV-OC-05","domanda":"È mantenuto un elenco aggiornato dei sistemi informativi e di rete rilevanti.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV-OC-06","domanda":"I risultati, le capacità e i servizi dai quali l'organizzazione dipende sono compresi e comunicati.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}],"Risk Management Strategy":[{"id":"GV-RM-01","domanda":"Gli obiettivi di gestione del rischio sono stabiliti e accettati dagli stakeholder dell'organizzazione.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV-RM-02","domanda":"Esiste un documento aggiornato di dettaglio che identifica e descrive il rischio tollerato dal soggetto.","criticita":4,"normativa":"PSNC","livello_nis2":"","compliance":"Compliance"},{"id":"GV-RM-03","domanda":"È definito, attuato, aggiornato e documentato un piano di gestione del rischio di cybersecurity all'interno dell'organizzazione","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV-RM-04","domanda":"È stabilita e comunicata la direzione strategica che descrive le opzioni appropriate di risposta al rischio.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV-RM-05","domanda":"Sono stabiliti canali di comunicazione in tutta l'organizzazione per il rischio di cybersecurity.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV-RM-06","domanda":"È stabilito e comunicato un metodo standardizzato per calcolare, documentare, categorizzare e prioritizzare i rischi.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV-RM-07","domanda":"Le opportunità strategiche sono caratterizzate e incluse nelle discussioni sul rischio di cybersecurity.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}],"Roles, Responsibilities, and Authorities":[{"id":"GV.RR-01","domanda":"Gli organi di amministrazione e direttivi sono responsabili per il rischio di cybersecurity e promuovono una cultura consapevole del rischio.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV.RR-02-01","domanda":"È definita e resa nota all'interno del soggetto l'organizzazione di cybersecurity e ne sono stabiliti ruoli e responsabilità.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.RR-02-02","domanda":"Esiste un elenco aggiornato del personale avente ruoli e responsabilità in ambito cybersecurity.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.RR-02-03","domanda":"Sono designati ruoli specifici coerentemente con quanto richiesto dalle normative applicabili.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.RR-02-04","domanda":"I ruoli e le responsabilità sono riesaminati e aggiornati periodicamente.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.RR-03","domanda":"Sono allocate risorse adeguate, commisurate alla strategia di gestione del rischio.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV.RR-04-01","domanda":"È verificata l'affidabilità del personale autorizzato ad accedere ai sistemi critici.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.RR-04-02","domanda":"Sono definiti a livello contrattuale gli obblighi di sicurezza dopo la cessazione del rapporto di lavoro.","criticita":4,"normativa":"NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"GV.RR-05","domanda":"I ruoli, le responsabilità e i poteri inerenti al trattamento dei dati personali sono stabiliti e comunicati.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}],"Policy":[{"id":"GV.PO-01-01","domanda":"Sono adottate e documentate politiche di cybersecurity in coerenza con gli obblighi normativi applicabili.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.PO-01-02","domanda":"Le politiche di cybersecurity sono approvate dagli organi di amministrazione o da una figura da loro formalmente delegata.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.PO-01-03","domanda":"Le politiche di cybersecurity sono riesaminate e aggiornate periodicamente e comunque almeno con cadenza annuale.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.PO-02","domanda":"Gli esiti delle attività di riesame delle politiche di cybersecurity sono tracciati all'interno di un registro.","criticita":4,"normativa":"NIS2","livello_nis2":"Essenziale","compliance":"Compliance"}],"Oversight":[{"id":"GV.OV-01","domanda":"I risultati della strategia di gestione del rischio di cybersecurity sono revisionati per informare e adeguare la strategia.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV.OV-02","domanda":"La strategia di gestione del rischio di cybersecurity è revisionata e adeguata per garantire la copertura dei requisiti.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV.OV-03","domanda":"Le prestazioni relative alla gestione del rischio di cybersecurity sono valutate e revisionate.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}],"Cybersecurity Supply Chain Risk Management":[{"id":"GV.SC-01-01","domanda":"In merito all'affidamento di forniture di sistemi informativi sono previsti requisiti di sicurezza coerenti con le misure applicate dal soggetto.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.SC-01-02","domanda":"Sono definiti i requisiti di sicurezza per le forniture esterne.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"GV.SC-02","domanda":"Sono definiti i ruoli e le responsabilità in materia di sicurezza informatica di eventuali terze parti.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.SC-03","domanda":"È realizzato e mantenuto un inventario dei fornitori e partner terzi rilevanti ai fini della sicurezza.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV.SC-04","domanda":"I fornitori sono noti e prioritizzati in base alla criticità.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.SC-05","domanda":"I requisiti di sicurezza sono inseriti nei contratti relativi alle forniture rilevanti.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.SC-06","domanda":"Pianificazione e due diligence sono svolte per ridurre i rischi prima di intraprendere rapporti con fornitori.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV.SC-07-01","domanda":"È valutato il rischio associato alle forniture considerando almeno il livello di accesso del fornitore ai sistemi.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.SC-07-02","domanda":"È effettuata e documentata la valutazione periodica dei fornitori e partner terzi.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"GV.SC-08","domanda":"I fornitori e le altre terze parti rilevanti sono inclusi nelle attività di pianificazione e risposta agli incidenti.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"GV.SC-09","domanda":"Le pratiche di sicurezza della catena di approvvigionamento sono integrate nei programmi di gestione del rischio.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}]},"IDENTIFY":{"Asset Management":[{"id":"ID.AM-01-01","domanda":"È realizzato e mantenuto un inventario aggiornato degli apparati fisici (hardware) approvati.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.AM-01-02","domanda":"È consentito esclusivamente l'uso di apparati fisici (hardware) approvati da attori interni al soggetto.","criticita":4,"normativa":"PSNC","livello_nis2":"","compliance":"Compliance"},{"id":"ID.AM-02-01","domanda":"È realizzato e mantenuto un inventario aggiornato dei servizi, dei sistemi e delle applicazioni software approvati.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.AM-02-02","domanda":"È consentito esclusivamente l'uso di servizi, sistemi e applicazioni software approvati.","criticita":4,"normativa":"PSNC","livello_nis2":"","compliance":"Compliance"},{"id":"ID.AM-03-01","domanda":"È realizzato e mantenuto un inventario aggiornato dei flussi di dati approvati.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"ID.AM-04","domanda":"Sono mantenuti gli inventari dei servizi erogati dai fornitori.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.AM-05","domanda":"Gli asset sono prioritizzati in base alla categorizzazione, alla criticità, alle risorse e all'impatto sulla missione.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.AM-07","domanda":"Sono mantenuti gli inventari dei dati e dei relativi metadati.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.AM-08","domanda":"I sistemi, l'hardware, il software, i servizi e i dati sono gestiti durante il loro intero ciclo di vita.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}],"Risk Assessment":[{"id":"ID.RA-01-01","domanda":"Sono eseguite periodicamente attività per l'identificazione delle vulnerabilità e predisposte apposite relazioni.","criticita":4,"normativa":"PSNC","livello_nis2":"","compliance":"Compliance"},{"id":"ID.RA-01-02","domanda":"Sono eseguiti e documentati penetration test e/o vulnerability assessment sui sistemi.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"ID.RA-02","domanda":"Le informazioni di cyber threat intelligence sono ricevute da forum e fonti di condivisione delle informazioni.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.RA-03","domanda":"Le minacce interne ed esterne all'organizzazione sono identificate e registrate.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.RA-04","domanda":"I potenziali impatti e le probabilità di sfruttamento delle vulnerabilità sono identificati e registrati.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.RA-05-01","domanda":"È eseguita e documentata la valutazione del rischio della sicurezza dei sistemi informativi e di rete.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.RA-05-02","domanda":"La valutazione del rischio è eseguita a intervalli pianificati e qualora si verifichino incidenti significativi.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.RA-05-03","domanda":"La valutazione del rischio è effettuata considerando le minacce interne ed esterne e le vulnerabilità non risolte.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"ID.RA-06-01","domanda":"È definito un piano di trattamento del rischio che comprende le opzioni di trattamento e le misure da attuare.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.RA-06-02","domanda":"Il piano di trattamento del rischio, ivi compresa l'accettazione di eventuali rischi residui, è approvato dagli organi direttivi.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.RA-06-03","domanda":"Sono monitorati i canali di comunicazione del CSIRT Italia e di eventuali CERT di riferimento.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.RA-07","domanda":"Le modifiche e le eccezioni sono gestite, valutate per il loro impatto sul rischio, registrate e tracciate.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.RA-08-01","domanda":"Le vulnerabilità sono prontamente risolte attraverso aggiornamenti di sicurezza o misure di mitigazione.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.RA-08-02","domanda":"È definito, attuato e documentato un piano di gestione delle vulnerabilità e relative procedure.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.RA-08-03","domanda":"Il piano di gestione delle vulnerabilità è approvato dagli organi di amministrazione e direttivi.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"}],"Improvement":[{"id":"ID.IM-01-01","domanda":"È definito e documentato un piano per il riesame periodico della conformità e un piano di adeguamento.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.IM-01-02","domanda":"È definito e documentato un piano per il monitoraggio e la misura dell'efficacia delle misure di gestione del rischio.","criticita":4,"normativa":"NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"ID.IM-02","domanda":"Sono identificati miglioramenti in esito ai test e alle esercitazioni di sicurezza.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.IM-03","domanda":"Sono identificati miglioramenti dall'esecuzione di processi, procedure e attività operativi.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"ID.IM-04-01","domanda":"Sono definiti, attuati, aggiornati e documentati piani di continuità operativa.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.IM-04-02","domanda":"Sono definiti, attuati, aggiornati e documentati piani di disaster recovery.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.IM-04-03","domanda":"È definito, attuato, aggiornato e documentato un piano per la gestione delle crisi.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"ID.IM-04-04","domanda":"I piani di continuità operativa, disaster recovery e gestione delle crisi sono approvati e riesaminati.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"}]},"PROTECT":{"Identity Management, Authentication, and Access Control":[{"id":"PR.AA-01-01","domanda":"Tutte le utenze sono censite e sono individuali per gli utenti.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AA-01-02","domanda":"Le credenziali di accesso relative alle utenze sono robuste e aggiornate con una cadenza proporzionata ai privilegi.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AA-01-03","domanda":"Sono verificate periodicamente le utenze e le credenziali di accesso, aggiornandole/revocandole in caso di variazioni.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AA-01-04","domanda":"Sono attuate e documentate procedure relative alla gestione delle utenze e delle credenziali.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AA-03-01","domanda":"Le modalità di autenticazione sono commisurate al rischio connesso ai privilegi delle utenze.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AA-03-02","domanda":"Sono impiegate modalità di autenticazione multifattore.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AA-05-01","domanda":"I permessi sono assegnati alle utenze in accordo ai principi del minimo privilegio e della separazione delle funzioni.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AA-05-02","domanda":"È assicurata la completa distinzione tra utenze con e senza privilegi degli amministratori di sistema.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.AA-06","domanda":"Sono attuate e documentate procedure relative alla modalità di gestione degli accessi fisici.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"}],"Data Security":[{"id":"PR.DS-01-01","domanda":"I dati memorizzati, in particolare sui dispositivi portatili e removibili, sono cifrati con protocolli allo stato dell'arte.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.DS-01-02","domanda":"Sono attuate e documentate procedure relative alla cifratura dei dati sia in transit che at rest.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.DS-11-01","domanda":"Sono effettuati periodicamente i backup dei dati e delle configurazioni.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.DS-11-02","domanda":"È assicurata la riservatezza delle informazioni contenute nei backup mediante adeguata protezione.","criticita":4,"normativa":"NIS2","livello_nis2":"Essenziale","compliance":"Compliance"}],"Platform Security":[{"id":"PR.PS-01-01","domanda":"Sono definite e documentate le configurazioni di riferimento sicure (hardened) per i sistemi informativi.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Essenziale","compliance":"Compliance"},{"id":"PR.PS-02-01","domanda":"È installato esclusivamente software per il quale il fornitore garantisce la disponibilità di aggiornamenti di sicurezza.","criticita":4,"normativa":"NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"PR.PS-04-01","domanda":"Sono conservati in modo sicuro e centralizzato almeno i log necessari ai fini del monitoraggio.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"}]},"DETECT":{"Continuous Monitoring":[{"id":"DE.CM-01-01","domanda":"Sono presenti, aggiornati, mantenuti e ben configurati sistemi di rilevamento dei possibili incidenti significativi.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"DE.CM-01-02","domanda":"Sono definiti e documentati i livelli di servizio atteso (SLA) dei sistemi informativi e di rete.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"DE.CM-09-01","domanda":"Sono presenti, aggiornati, mantenuti e ben configurati sistemi di protezione delle postazioni terminali per il rilevamento del codice malevolo.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"}],"Adverse Event Analysis":[{"id":"DE.AE-02","domanda":"Gli eventi potenzialmente avversi sono analizzati per meglio comprenderne le attività associate.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"DE.AE-03-01","domanda":"Sono eseguite attività di analisi e correlazione ai fini di rilevare tempestivamente incidenti di sicurezza.","criticita":4,"normativa":"PSNC","livello_nis2":"","compliance":"Compliance"}]},"RESPOND":{"Incident Management":[{"id":"RS.MA-01-01","domanda":"È definito, attuato, aggiornato e documentato un piano per la gestione degli incidenti di sicurezza informatica.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"RS.MA-01-02","domanda":"Il piano per la gestione degli incidenti è approvato dagli organi di amministrazione e riesaminato periodicamente.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"RS.MA-02","domanda":"I report sugli incidenti sono sottoposti a triage e convalidati.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}],"Incident Analysis":[{"id":"RS.AN-03","domanda":"È eseguita un'analisi per stabilire cosa è avvenuto durante un incidente e la causa principale.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"},{"id":"RS.AN-06","domanda":"Le azioni eseguite durante un'investigazione sono registrate e l'integrità delle registrazioni è preservata.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}]},"RECOVER":{"Incident Recovery Plan Execution":[{"id":"RC.RP-01","domanda":"Sono adottate e documentate procedure per il ripristino del normale funzionamento dei sistemi informativi.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Importante; Essenziale","compliance":"Compliance"},{"id":"RC.RP-02","domanda":"Le azioni di ripristino sono selezionate, contestualizzate, prioritizzate ed eseguite.","criticita":4,"normativa":"GENERAL","livello_nis2":"","compliance":"No Compliance"}],"Incident Recovery Communication":[{"id":"RC.CO-03","domanda":"Le attività di ripristino a seguito di un incidente sono comunicate alle parti interne ed esterne interessate.","criticita":4,"normativa":"PSNC;NIS2","livello_nis2":"Essenziale","compliance":"Compliance"}]}};
 
 const AREA_CFG={
@@ -1880,7 +1874,7 @@ const MOCK_ANS={
   'ID.RA-05-01':{status:'warning',score:2,abs:'Risk assessment eseguito ma con frequenza non conforme. Alcune categorie non incluse.',fbs:[{t:'warn',d:'Conformità parziale',m:'Risk assessment presente ma non aggiornato nei termini richiesti da NIS2 (>12 mesi).'},{t:'warn',d:'Gap supply chain',m:'I rischi derivanti dalla supply chain non sono integrati nel piano.'},{t:'ok',d:'Metodologia',m:'Approccio ISO 27005 corretto.'}]},
   'GV-RM-03':{status:'rejected',score:4,abs:'Piano di gestione del rischio scaduto (>14 mesi). Gap critico — azione correttiva obbligatoria urgente.',fbs:[{t:'ko',d:'Gap critico',m:'Piano scaduto da oltre 14 mesi. Frequenza di revisione NIS2 non rispettata.'},{t:'ko',d:'Scenari mancanti',m:'Rischi supply chain non inclusi.'},{t:'ko',d:'Azione obbligatoria',m:'Aggiornamento urgente richiesto prima della chiusura assessment.'}]},
 };
-// ── Mappa criticità estratta dall'Excel (col "Livello di criticità") ──
+// Mappa criticità estratta dall'Excel ("Livello di criticità") 
 const CRITICITA_MAP = {
   "GV-OC-01":1,"GV-OC-02":3,"GV-OC-03":4,"GV-OC-04":4,"GV-OC-05":4,
   "GV-RM-01":4,"GV-RM-02":4,"GV-RM-03":4,"GV-RM-04":4,"GV-RM-05":4,
@@ -1923,7 +1917,7 @@ const CRITICITA_MAP = {
   "RC.CO-03":4,"RC.CO-04":4
 };
 
-// ── Helper: dati criticità per una domanda ───────────────────────────
+//  Helper: dati criticità per una domanda 
 function getCriticita(questionId) {
   const val = CRITICITA_MAP[questionId] ?? 4;           // default 4 se non trovato
   const labels = { 1:'Basso', 2:'Moderato', 3:'Alto', 4:'Molto Alto' };
@@ -1952,7 +1946,7 @@ function getMockAns(){
   return{status:'rejected',score:4,abs:'Gap significativo. Misure assenti o non documentate. Azione correttiva obbligatoria urgente.',fbs:[{t:'ko',d:'Gap critico',m:'Assenza di misure adeguate o documentazione.'},{t:'ko',d:'Azione obbligatoria',m:'Inserire nel piano di remediation con priorità alta.'}]};
 }
 
-// ===================== STATE =====================
+//  STATE 
 let selDom={};
 let modalState={area:null,subIdx:0};
 let ownerQs=[];
@@ -1971,7 +1965,7 @@ let tabDone={q:false,d:false,p:false};
 let docSingleFile=null;
 let manValCurChoice=null;
 
-// ===================== BOOT =====================
+//  BOOT 
 function goCreaAssessment() {
     window.location.href = 'crea-assessment2.html';
 }
@@ -1987,7 +1981,7 @@ function startDemo() {
     setTimeout(() => { showGuideModal(); }, 800);
 }
 
-  // Controlla se arriviamo da crea-assessment2.html
+  // Controllo se arrivano da crea-assessment2.html
 window.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
     if (params.get('fromAdmin') === '1') {
@@ -1995,7 +1989,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// ===================== GUIDED TOUR =====================
+//  GUIDED TOUR 
 let guideStep = 0;
 let tourActive = false;
 
@@ -2631,7 +2625,7 @@ const TOUR_REPORT = [
   }
 ];
 
-// ---- Helper footer ----
+//  Helper footer
 function footerDark(step, total, label, showSkip) {
   const dots = Array.from({length:total},(_,i)=>`<span class="tc-dot${i===step?' on':''}"></span>`).join('');
   return `<div class="tc-footer">
@@ -2663,7 +2657,7 @@ function footerRole(step, total) {
   </div>`;
 }
 
-// ---- Stato tour corrente ----
+// Stato tour corrente
 let activeTour = [];
 
 function tourSpotlight(selector, pad=8) {
@@ -2692,7 +2686,6 @@ function tourPositionCard(card, targetRect, position) {
     switch(position){
       case 'bottom':
         top  = targetRect.bottom + 14;
-        // allinea a destra del target se vicino al bordo destro
         if(targetRect.right > vw - cw - pad){
           left = targetRect.right - cw;
         } else {
@@ -2716,7 +2709,7 @@ function tourPositionCard(card, targetRect, position) {
         left = targetRect.left - cw - 14;
         break;
     }
-    // clamp finale
+
     top  = Math.max(pad, Math.min(top,  vh - card.offsetHeight - pad));
     left = Math.max(pad, Math.min(left, vw - cw - pad));
   }
@@ -2810,13 +2803,13 @@ function tourEnd() {
 
 window.addEventListener('resize', ()=>{ if(tourActive) tourRenderStep(); });
 
-// Shims per compatibilità con chiamate esistenti nel codice
+
 function showGuideModal() { startTour(TOUR_REVIEWER); }
 function nextGuideStep()  { tourNext(); }
 function closeGuideModal(){ tourEnd(); }
 function skipGuide()      { tourEnd(); }
 
-// ===================== SIDEBAR =====================
+//  SIDEBAR 
 function toggleDsk(){
   dskCol=!dskCol;
   document.getElementById('sidebar').classList.toggle('col',dskCol);
@@ -2835,7 +2828,7 @@ function closeMob(){
   document.getElementById('hb-ic').className='fa-solid fa-bars';
 }
 
-// ===================== STEP BAR =====================
+//  STEP BAR 
 function updateStepBar(step){
   if(step>=2){
     const sp2=document.getElementById('sp2');
@@ -2867,7 +2860,7 @@ function updateStepBar(step){
   }
 }
 
-// ===================== TABS =====================
+//  TABS 
 function switchTab(t){
   curTab=t;
   ['q','d','p'].forEach(id=>{
@@ -2890,7 +2883,7 @@ function refreshEntraOwnerBtns(){
   const pe=document.getElementById('piano-owner-btn');if(pe)pe.classList.toggle('on',enabled);
 }
 
-// ===================== FILTERS =====================
+//  FILTERS 
 function buildAreaFilters(){
   const el = document.getElementById('area-filters');
   el.innerHTML = ''; // reset per sicurezza
@@ -2924,7 +2917,7 @@ function onSearch(){
   renderGrid();
 }
 
-// ===================== SELECT ALL =====================
+//  SELECT ALL
 function selectAll(){
   Object.entries(NIS2_DATA).forEach(([area,subs])=>{
     if(LOCKED_AREAS.has(area))return;
@@ -2980,7 +2973,7 @@ function toggleTagFilter(t, el){
   renderGrid();
 }
 
-// ===================== RENDER GRID =====================
+//  RENDER GRID 
 function renderGrid(){
   const body=document.getElementById('sel-body');body.innerHTML='';
   let totalDom=0;
@@ -3042,7 +3035,7 @@ function toggleAreaAll(area){
   renderGrid();
 }
 
-// ===================== SIDEBAR SELECTION (grouped by area) =====================
+//  SIDEBAR SELECTION (grouped by area) 
 function renderSelSb(){
   const list = document.getElementById('sel-q-list');
   const n = Object.keys(selDom).length;
@@ -3058,7 +3051,7 @@ function renderSelSb(){
     return;
   }
 
-  // Costruisci lista piatta ordinata per area
+  // Costruisci lista ordinata per area
   const allItems = [];
   const grouped = {};
   Object.values(selDom).forEach(d => {
@@ -3136,7 +3129,7 @@ function sbNavPage(d){
   renderSelSb();
 }
 
-// ===================== MODAL =====================
+//  MODAL 
 function openModal(area,si){
   if(LOCKED_AREAS.has(area))return;
   const subs=NIS2_DATA[area];if(!subs)return;
@@ -3243,7 +3236,7 @@ function toggleDom(id){
 }
 function closeModal(){document.getElementById('modal-ov').classList.remove('open');}
 
-// ===================== DOCUMENTAZIONE =====================
+//  DOCUMENTAZIONE 
 function docDragOver(e){e.preventDefault();document.getElementById('doc-upload-zone').classList.add('dragover');}
 function docDragLeave(e){document.getElementById('doc-upload-zone').classList.remove('dragover');}
 function docDrop(e){e.preventDefault();document.getElementById('doc-upload-zone').classList.remove('dragover');const f=e.dataTransfer.files[0];if(f)applyDocSingle(f);}
@@ -3273,48 +3266,56 @@ function removeDocSingle(e){
   document.getElementById('doc-file-inp').value='';
 }
 
-// ===================== PIANO =====================
+//  PIANO 
 function buildPianoTable(){
-  const rows=document.getElementById('piano-date-rows');rows.innerHTML='';
-  PIANO_PHASES.forEach(p=>{
-    const row=document.createElement('div');row.className='piano-date-row';
-    row.innerHTML=`<div class="piano-phase-info"><div class="piano-phase-icon">${p.icon}</div><div><div class="piano-phase-name">${p.name}</div></div></div><div><input type="date" class="piano-date-inp" id="piano-start-${p.id}" onchange="checkPianoDates()"></div><div><input type="date" class="piano-date-inp" id="piano-end-${p.id}" onchange="checkPianoDates()"></div>`;
+  const rows = document.getElementById('piano-date-rows');
+  rows.innerHTML = '';
+  
+  PIANO_PHASES.forEach(p => {
+    const isBlocked = (p.id === 'mon');
+
+    const rowStyle = isBlocked ? 'opacity: 0.4; pointer-events: none;' : '';
+
+    const disabledAttr = isBlocked ? 'disabled' : '';
+
+    const row = document.createElement('div');
+    row.className = 'piano-date-row';
+    row.style.cssText = rowStyle; 
+    
+    row.innerHTML = `
+      <div class="piano-phase-info">
+        <div class="piano-phase-icon">${p.icon}</div>
+        <div><div class="piano-phase-name">${p.name}</div></div>
+      </div>
+      <div>
+        <input type="date" class="piano-date-inp" id="piano-start-${p.id}" onchange="checkPianoDates()" ${disabledAttr}>
+      </div>
+      <div>
+        <input type="date" class="piano-date-inp" id="piano-end-${p.id}" onchange="checkPianoDates()" ${disabledAttr}>
+      </div>
+    `;
     rows.appendChild(row);
   });
 }
 function checkPianoDates(){
-  const filled=PIANO_PHASES.filter(p=>document.getElementById('piano-start-'+p.id).value||document.getElementById('piano-end-'+p.id).value).length;
-  if(filled>=3&&!tabDone.p)markTabDone('p');refreshEntraOwnerBtns();
-  function checkPianoDates(){
-  // controlla se monitoraggio è flaggato
-  const monitoraggioFlag = document.getElementById('flag-monitoraggio')?.checked;
-    
-    if(monitoraggioFlag){
-      ['mon','chi'].forEach(id => {
-        const s = document.getElementById('piano-start-'+id);
-        const e = document.getElementById('piano-end-'+id);
-        if(s){ s.disabled = true; s.value = ''; s.style.opacity = '0.4'; }
-        if(e){ e.disabled = true; e.value = ''; e.style.opacity = '0.4'; }
-      });
-    } else {
-      ['mon','chi'].forEach(id => {
-        const s = document.getElementById('piano-start-'+id);
-        const e = document.getElementById('piano-end-'+id);
-        if(s){ s.disabled = false; s.style.opacity = '1'; }
-        if(e){ e.disabled = false; e.style.opacity = '1'; }
-      });
-    }
-    
-    const filled = PIANO_PHASES.filter(p => 
-      document.getElementById('piano-start-'+p.id).value || 
-      document.getElementById('piano-end-'+p.id).value
-    ).length;
-    if(filled >= 3 && !tabDone.p) markTabDone('p');
-    refreshEntraOwnerBtns();
-  }
-}
 
-// ===================== GOTO OWNER =====================
+  const filled = PIANO_PHASES.filter(p => {
+
+    if (p.id === 'mon') return false; 
+    
+    const start = document.getElementById('piano-start-'+p.id);
+    const end = document.getElementById('piano-end-'+p.id);
+    return (start && start.value) || (end && end.value);
+  }).length;
+  
+
+  if(filled >= 3 && !tabDone.p) {
+    markTabDone('p');
+  }
+  
+  refreshEntraOwnerBtns();
+}
+//  GOTO OWNER 
 function goToOwner(){
   if(Object.keys(selDom).length===0)return;
   closeOwnerPopup();
@@ -3343,8 +3344,7 @@ function backToReviewer(){
   document.getElementById('sp2c').textContent='2';
 }
 
-// ===================== OWNER =====================
-// ===================== OWNER =====================
+//  OWNER 
 let completedAreas = new Set();
 
 function setupOwner(){
@@ -3551,7 +3551,7 @@ function ownerResetPdfZ(){
 }
 function ownerRemoveFile(e){e.stopPropagation();delete uploadedFiles[ownerCurQ];ownerResetPdfZ();renderOwnerList();updateOwnerProg();}
 
-// ===================== GOTO AUDITOR =====================
+//  GOTO AUDITOR 
 function goToAuditor(){
   ownerSaveEdits();
   completedAreas = new Set();
@@ -3579,7 +3579,7 @@ function backToOwner(){
   document.getElementById('sp3c').textContent='3';
 }
 
-// ===================== AUDITOR =====================
+//  AUDITOR 
 function setupAuditor(){
   auditorCurQ=0;
   document.getElementById('aud-ps-t').textContent=ownerQs.length;
@@ -3793,415 +3793,280 @@ function setAllObbligatorio(isObbl){
   if(modalState.area) renderModalDom();
   // Nessun lock sui pulsanti — rimangono sempre cliccabili
 }
-// ===================== DOCUMENTO DI CHIUSURA PDF =====================
+//  DOCUMENTO DI CHIUSURA PDF 
 async function generateClosingPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF('p', 'mm', 'a4');
   const w = doc.internal.pageSize.getWidth();
   const pageH = doc.internal.pageSize.getHeight();
-  let y = 0;
+  let y = 20;
 
-  // ===== DATI DALL'APPLICATIVO =====
-  const total = ownerQs.length;
-  const vals  = Object.values(auditorValidations);
-  const done  = vals.length;
-  const acc   = vals.filter(v => v?.status === 'accepted').length;
-  const rej   = vals.filter(v => v?.status === 'rejected').length;
-  const wrn   = vals.filter(v => v?.status === 'warning').length;
+  // 1. ELABORAZIONE DATI DALL'APPLICATIVO
+  const cmmiMap = { 'N/A': 0, 'Iniziale': 1, 'Ripetibile': 2, 'Definito': 3, 'Gestito': 4, 'Ottimizzato': 5 };
+  const cmmiLabels = { 1: '1-Iniziale', 2: '2-Ripetibile', 3: '3-Definito', 4: '4-Gestito', 5: '5-Ottimizzato' };
+  
+  // Colori per i domini (estratti dal tuo PDF di esempio)
+  const domainColors = {
+    'GOVERN': [245, 222, 54],   // Giallo
+    'IDENTIFY': [0, 150, 180],  // Blu
+    'PROTECT': [104, 34, 139],  // Viola
+    'DETECT': [240, 171, 0],    // Arancione
+    'RESPOND': [226, 6, 19],    // Rosso
+    'RECOVER': [0, 168, 89]     // Verde
+  };
 
-  // Score calcolato come media dei livelli CMMI (1-5) normalizzata su 4
-  const cmmiMap = { 'N/A':0,'Iniziale':1,'Ripetibile':2,'Definito':3,'Gestito':4,'Ottimizzato':4 };
-  const cmmiVals = Object.values(ownerAnswers).map(a => cmmiMap[a?.cmmi] || 0).filter(v=>v>0);
-  const avgCmmi  = cmmiVals.length > 0 ? cmmiVals.reduce((a,b)=>a+b,0)/cmmiVals.length : 2.74;
-  const scorePre  = Math.min(4, Math.max(0, (avgCmmi * 0.78))).toFixed(2);
-  const scorePost = Math.min(4, Math.max(0, (avgCmmi * 0.99))).toFixed(2);
-  const riskPre  = (4 - parseFloat(scorePre)).toFixed(2);
-  const riskPost = (4 - parseFloat(scorePost)).toFixed(2);
-  const riskPctPre  = ((parseFloat(riskPre)/4)*100).toFixed(2);
-  const riskPctPost = ((parseFloat(riskPost)/4)*100).toFixed(2);
-  const abbattimento = (parseFloat(riskPctPre) - parseFloat(riskPctPost)).toFixed(2);
+  // Struttura dati per le tabelle
+  const reportData = { 'GOVERN': {}, 'IDENTIFY': {}, 'PROTECT': {}, 'DETECT': {}, 'RESPOND': {}, 'RECOVER': {} };
+  let totalScore = 0;
+  let scoreCount = 0;
 
-  // Score per area
-  const areaNames = Object.keys(NIS2_DATA);
-  const areaScores = areaNames.map(a => {
-    const adoms = ownerQs.filter(d => d.area === a);
-    const vi = adoms.map(d => ownerQs.indexOf(d)).filter(i => auditorValidations[i]);
-    const ac2 = vi.filter(i => auditorValidations[i]?.status === 'accepted').length;
-    const score = adoms.length > 0 ? Math.round((ac2 / Math.max(adoms.length,1))*100) : Math.round(40+Math.random()*30);
-    return { area: a, score };
-  });
-
-  // Raccomandazioni dalle risposte non conformi
-  const recs = [];
   ownerQs.forEach((d, i) => {
-    const v = auditorValidations[i];
-    if(v && (v.status === 'rejected' || v.status === 'warning')) {
-      const critLabel = v.status === 'rejected' ? 'Alto' : 'Moderato';
-      const critNum   = v.status === 'rejected' ? 4 : 3;
-      const dueDate   = v.status === 'rejected' ? '30 giorni' : '45 giorni';
-      recs.push({ id: 'RAC'+(recs.length+1).toString().padStart(2,'0'),
-                  ambito: d.area, rac: d.domanda.slice(0,60)+'…',
-                  crit: critNum, label: critLabel, due: dueDate,
-                  note: v.note || '' });
+    const ans = ownerAnswers[i] || {};
+    const val = auditorValidations[i] || {};
+    const score = cmmiMap[ans.cmmi] || 0;
+    
+    if (score > 0) {
+      totalScore += score;
+      scoreCount++;
+    }
+
+    if (!reportData[d.area][d.sub]) {
+      reportData[d.area][d.sub] = { scores: [], evidenze: [], raccomandazioni: [] };
+    }
+
+    if (score > 0) reportData[d.area][d.sub].scores.push(score);
+    
+    // Evidenze (Testo o Nome file)
+    let evidenza = `${d.id}`;
+    if (uploadedFiles[i]) evidenza += ` (Doc: ${uploadedFiles[i].name})`;
+    else if (ans.answer) evidenza += ` ok`;
+    reportData[d.area][d.sub].evidenze.push(evidenza);
+
+    // Raccomandazioni (Solo se non conforme o warning)
+    if (val.status === 'rejected' || val.status === 'warning') {
+      const rac = val._aiData?.raccomandazione || val.note || "Azione correttiva necessaria";
+      reportData[d.area][d.sub].raccomandazioni.push(`• ${rac}`);
     }
   });
-  // fallback se nessuna non conforme
-  if(recs.length === 0) {
-    recs.push({id:'RAC01',ambito:'CONTROLLI ORGANIZZATIVI',rac:'Aggiornamento periodico piano di gestione del rischio',crit:3,label:'Alto',due:'45 giorni',note:''});
-    recs.push({id:'RAC02',ambito:'CONTROLLI SULLE PERSONE',rac:'Formazione awareness cybersecurity per tutto il personale',crit:4,label:'Molto Alto',due:'30 giorni',note:''});
-    recs.push({id:'RAC03',ambito:'CONTROLLI TECNOLOGICI',rac:'Implementazione MFA su tutti i sistemi critici',crit:3,label:'Alto',due:'45 giorni',note:''});
-  }
 
-  // ===== HELPERS =====
-  function checkPage(extra=20){
-    if(y + extra > pageH - 18){ doc.addPage(); y = 20; addFooter(); }
-  }
-  function sectionTitle(t){
-    checkPage(22);
-    doc.setFillColor(26,42,108);
-    doc.rect(15, y-4, w-30, 10, 'F');
-    doc.setFontSize(13); doc.setTextColor(255,255,255); doc.setFont('helvetica','bold');
-    doc.text(t, 20, y+3);
-    y += 14; doc.setFont('helvetica','normal');
-  }
-  function bodyText(t, x=20, maxW=170, lh=6){
-    doc.setFontSize(10); doc.setTextColor(60,60,60); doc.setFont('helvetica','normal');
-    doc.splitTextToSize(t, maxW).forEach(line=>{ checkPage(lh); doc.text(line,x,y); y+=lh; });
-  }
-  function addFooter(){
-    doc.setFontSize(8); doc.setTextColor(150,150,150);
-    doc.line(15, pageH-14, w-15, pageH-14);
-    doc.text('3AuditFlow by 3A Informatica  |  Assessment NIS2  |  Documento riservato', w/2, pageH-8, {align:'center'});
-    doc.text(new Date().toLocaleDateString('it-IT'), w-15, pageH-8, {align:'right'});
-  }
+  const overallAvg = scoreCount > 0 ? (totalScore / scoreCount).toFixed(1) : "0.0";
 
-  // ===== PAG 1 — COPERTINA =====
-  doc.setFillColor(6,14,31);
-  doc.rect(0,0,w,pageH,'F');
-
-  // Logo icona
-  const iconImg = document.querySelector('.tb-logo-icon');
-  const textImg = document.querySelector('.tb-logo-text');
-  try { doc.addImage(iconImg, 'PNG', 15, 12, 30, 34); } catch(e) {}
-  try { doc.addImage(textImg, 'PNG', 48, 18, 90, 22); } catch(e) {}
-
-  // Titolo
-  doc.setFontSize(26); doc.setFont('helvetica','bold'); doc.setTextColor(255,255,255);
-  doc.text('Assessment', w/2, 90, {align:'center'});
-  doc.setFontSize(20); doc.setTextColor(0,198,255);
-  doc.text('ASSESSMENT RESULTS', w/2, 108, {align:'center'});
-
-  // Destinatario box
-  doc.setFillColor(20,40,90);
-  doc.roundedRect(30,122,w-60,28,4,4,'F');
-  doc.setFontSize(10); doc.setTextColor(0,198,255); doc.setFont('helvetica','bold');
-  doc.text('DESTINATARIO', w/2, 131, {align:'center'});
-  doc.setFontSize(13); doc.setTextColor(255,255,255);
-  doc.text('PROVA. srl  PER CONTO DI  3AuditFlow', w/2, 141, {align:'center'});
-
-  // Certificazioni
-  doc.setFontSize(10); doc.setTextColor(200,200,200); doc.setFont('helvetica','normal');
-  doc.text('CERTIFICAZIONI', w/2, 165, {align:'center'});
-  doc.setFontSize(11); doc.setTextColor(0,198,255); doc.setFont('helvetica','bold');
-  doc.text('PRESENTE CERTIFICAZIONE NIS2', w/2, 173, {align:'center'});
-
-  // Footer copertina
-  doc.setDrawColor(0,198,255); doc.line(15, pageH-28, w-15, pageH-28);
-  doc.setFontSize(8); doc.setTextColor(120,120,120); doc.setFont('helvetica','normal');
-  doc.text('3AuditFlow by 3A Informatica  |  www.3auditflow.com', w/2, pageH-20, {align:'center'});
-  doc.text(new Date().toLocaleDateString('it-IT'), w/2, pageH-14, {align:'center'});
-
-  // ===== PAG 2 — INDICE =====
-  doc.addPage(); y = 20; addFooter();
-
-  // Logo header
-  try { doc.addImage(iconImg, 'PNG', 15, 12, 30, 34); } catch(e) {}
-  try { doc.addImage(textImg, 'PNG', 48, 18, 90, 22); } catch(e) {}
-  y = 30;
-  doc.setFontSize(18); doc.setFont('helvetica','bold'); doc.setTextColor(26,42,108);
-  doc.text('Indice dei contenuti', 20, y); y += 14;
-
-  const tocItems = [
-    ['Background & Scope', '3'],
-    ['Executive Summary', '4'],
-    ['Recommendations: Topics & Severity', '5'],
-    ['Recommendations list', '6'],
-    ['Score & Grafici', '7'],
-    ['Dettaglio criticità per area', '8'],
-    ['Score assessment finale', '9'],
-  ];
-  tocItems.forEach(([label, pg]) => {
-    doc.setFontSize(11); doc.setFont('helvetica','bold'); doc.setTextColor(26,42,108);
-    doc.text(label, 22, y);
-    doc.setTextColor(0,198,255); doc.text(pg, w-25, y, {align:'right'});
-    doc.setDrawColor(200,200,200); doc.line(22, y+1, w-25, y+1);
-    y += 9;
-  });
-
-  // ===== PAG 3 — BACKGROUND =====
-  doc.addPage(); y = 20; addFooter();
-  try { doc.addImage(iconImg, 'PNG', 15, 12, 30, 34); } catch(e) {}
-  try { doc.addImage(textImg, 'PNG', 48, 18, 90, 22); } catch(e) {}
-  y = 30;
-  sectionTitle('Background & Scope');
-  bodyText('Il presente Assessment, richiesto da 3AuditFlow e concordato con il destinatario PROVA. srl, è stato effettuato sul perimetro del servizio che l\'owner eroga per 3AuditFlow.');
-  y += 3;
-  bodyText('Nell\'ambito del contratto oggetto del presente Assessment, PROVA. srl eroga servizi IT e di cybersecurity per conto di 3AuditFlow.');
-  y += 3;
-  bodyText('Il rapporto contrattuale tra 3AuditFlow e PROVA. srl si basa su accordi formalizzati nei contratti di servizio e nei relativi allegati, utilizzati come input per il presente Assessment.');
-  y += 3;
-  bodyText('Di seguito si riassumono i risultati del Security Assessment che ha l\'obiettivo di verificare il livello di maturità dei controlli sui rischi IT e Cyber implementati dal Destinatario al fine di proteggere gli asset e le informazioni di 3AuditFlow.');
-
-  // ===== PAG 4 — EXECUTIVE SUMMARY =====
-  doc.addPage(); y = 20; addFooter();
-  try { doc.addImage(iconImg, 'PNG', 15, 12, 30, 34); } catch(e) {}
-  try { doc.addImage(textImg, 'PNG', 48, 18, 90, 22); } catch(e) {}
-  y = 30;
-  sectionTitle('Executive Summary');
-  bodyText('Le raccomandazioni sono state classificate secondo una scala a 4 livelli.');
-  y += 4;
-  bodyText('In funzione della Severity assegnata a ciascuna Raccomandazione vengono definiti i Tempi di Remediation:');
-  y += 2;
-
-  const severityRows = [
-    ['Basso',     '#22c55e', 'Azioni di remediation entro 60 giorni'],
-    ['Moderato',  '#eab308', 'Azioni di remediation entro 35 giorni'],
-    ['Alto',      '#f97316', 'Azioni di remediation entro 25 giorni'],
-    ['Molto alto','#ef4444', 'Azioni di remediation entro 10 giorni'],
-  ];
-  severityRows.forEach(([lev, hex, txt]) => {
-    checkPage(10);
-    const rgb = parseInt(hex.slice(1),16);
-    const r=(rgb>>16)&255, g=(rgb>>8)&255, b=rgb&255;
-    doc.setFillColor(r,g,b);
-    doc.roundedRect(20,y-4,22,7,2,2,'F');
-    doc.setFontSize(9); doc.setTextColor(255,255,255); doc.setFont('helvetica','bold');
-    doc.text(lev, 31, y, {align:'center'});
-    doc.setTextColor(60,60,60); doc.setFont('helvetica','normal'); doc.setFontSize(10);
-    doc.text(txt, 47, y);
-    y += 9;
-  });
-
-  y += 4;
-  bodyText(`I tempi delle azioni di remediation sono definiti a partire dalla generazione del remediation plan (${new Date().toLocaleDateString('it-IT')}).`);
-
-  // ===== PAG 5 — TOPICS & SEVERITY =====
-  doc.addPage(); y = 20; addFooter();
-  try { doc.addImage(iconImg, 'PNG', 15, 12, 30, 34); } catch(e) {}
-  try { doc.addImage(textImg, 'PNG', 48, 18, 90, 22); } catch(e) {}
-  y = 30;
-  sectionTitle('Recommendations: Topics & Severity');
-
-  // Calcola counts per ambito
-  const ambitiMap = {'CONTROLLI ORGANIZZATIVI':0,'CONTROLLI SULLE PERSONE':0,'CONTROLLI TECNOLOGICI':0};
-  const sevMap    = {'Molto Alto':0,'Alto':0,'Moderato':0,'Basso':0};
-  recs.forEach(r => {
-    const amb = r.ambito.includes('GOVERN')||r.ambito.includes('IDENTIFY') ? 'CONTROLLI ORGANIZZATIVI'
-              : r.ambito.includes('PROTECT')||r.ambito.includes('RECOVER') ? 'CONTROLLI TECNOLOGICI'
-              : 'CONTROLLI SULLE PERSONE';
-    if(ambitiMap[amb]!==undefined) ambitiMap[amb]++;
-    const sev = r.label==='Molto Alto'?'Molto Alto':r.label==='Alto'?'Alto':r.label==='Moderato'?'Moderato':'Basso';
-    sevMap[sev]++;
-  });
-
-  // Tabella
-  const cols  = [55,30,25,25,25];
-  const colX  = [20, 75,105,130,155];
-  const headers = ['Ambito','Molto Alto','Alto','Moderato','Basso'];
-  const ambRows = [
-    ['CONTROLLI ORGANIZZATIVI', ambitiMap['CONTROLLI ORGANIZZATIVI'], 0,0,0],
-    ['CONTROLLI SULLE PERSONE', 0, ambitiMap['CONTROLLI SULLE PERSONE'],0,0],
-    ['CONTROLLI TECNOLOGICI',   0, ambitiMap['CONTROLLI TECNOLOGICI'],0,0],
-    ['Total Recommendations', sevMap['Molto Alto'], sevMap['Alto'], sevMap['Moderato'], sevMap['Basso']],
-  ];
-
-  // Header
-  doc.setFillColor(26,42,108);
-  doc.rect(colX[0]-2, y-4, 172, 9, 'F');
-  doc.setFontSize(9); doc.setFont('helvetica','bold'); doc.setTextColor(255,255,255);
-  headers.forEach((h,i) => doc.text(h, colX[i], y, {maxWidth:cols[i]}));
-  y += 10;
-
-  ambRows.forEach((row, ri) => {
-    doc.setFillColor(ri===3?240:ri%2===0?248:255, ri===3?240:ri%2===0?248:255, ri===3?240:ri%2===0?248:255);
-    doc.rect(colX[0]-2, y-4, 172, 9, 'F');
-    doc.setTextColor(ri===3?26:60, ri===3?42:60, ri===3?108:60);
-    doc.setFont('helvetica', ri===3?'bold':'normal'); doc.setFontSize(9);
-    row.forEach((cell,ci) => {
-      const val = ci===0 ? String(cell) : `(${cell})${cell}`;
-      doc.text(ci===0?String(cell):val, colX[ci], y, {maxWidth:cols[ci]});
+  // Calcolo medie per dominio per il Radar Chart
+  const domainAverages = {};
+  Object.keys(reportData).forEach(domain => {
+    let dScore = 0, dCount = 0;
+    Object.values(reportData[domain]).forEach(sub => {
+      sub.scores.forEach(s => { dScore += s; dCount++; });
     });
-    y += 10;
+    domainAverages[domain] = dCount > 0 ? (dScore / dCount) : 0;
   });
 
-  // ===== PAG 6 — RECOMMENDATIONS LIST =====
-  doc.addPage(); y = 20; addFooter();
-  try { doc.addImage(iconImg, 'PNG', 15, 12, 30, 34); } catch(e) {}
-  try { doc.addImage(textImg, 'PNG', 48, 18, 90, 22); } catch(e) {}
-  y = 30;
-  sectionTitle('Recommendations list');
-
-  const recCols  = [12,38,55,15,22,12,36];
-  const recColX  = [15,27,65,120,135,157,169];
-  const recHdr   = ['N°','Ambito','Raccomandazione','Criticità','Due date','Stato','Evidenza'];
-  doc.setFillColor(26,42,108);
-  doc.rect(13, y-4, 184, 9, 'F');
-  doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(255,255,255);
-  recHdr.forEach((h,i)=>doc.text(h, recColX[i], y, {maxWidth:recCols[i]}));
-  y += 10;
-
-  recs.forEach((r, ri) => {
-    checkPage(22);
-    const rowH = 18;
-    doc.setFillColor(ri%2===0?248:255, ri%2===0?248:255, ri%2===0?248:255);
-    doc.rect(13, y-4, 184, rowH, 'F');
-    doc.setFont('helvetica','bold'); doc.setTextColor(26,42,108); doc.setFontSize(8);
-    doc.text(r.id, recColX[0], y);
-    doc.setFont('helvetica','normal'); doc.setTextColor(60,60,60);
-    doc.text(r.ambito, recColX[1], y, {maxWidth:recCols[1]});
-    doc.text(r.rac,    recColX[2], y, {maxWidth:recCols[2]});
-    doc.text(String(r.crit), recColX[3], y);
-    doc.text(r.due,  recColX[4], y);
-    // Pallino stato
-    const sc = r.label==='Alto'||r.label==='Molto Alto' ? [216,90,48] : [29,158,117];
-    doc.setFillColor(...sc); doc.circle(recColX[5]+3, y-1, 3, 'F');
-    doc.setFont('helvetica','italic'); doc.setFontSize(7);
-    doc.text(r.note||'In lavorazione', recColX[6], y, {maxWidth:recCols[6]});
-    y += rowH;
-  });
-
-  // ===== PAG 7 — GAUGE SCORE =====
-  doc.addPage(); y = 20; addFooter();
-  try { doc.addImage(iconImg, 'PNG', 15, 12, 30, 34); } catch(e) {}
-  try { doc.addImage(textImg, 'PNG', 48, 18, 90, 22); } catch(e) {}
-  y = 30;
-
-  function drawGauge(cx, cy, r, score, label){
-    const startAngle = Math.PI;
-    const endAngle   = 2 * Math.PI;
-    const segments = [
-      {col:[216,90,48],  from:0,   to:0.25},
-      {col:[212,160,23], from:0.25,to:0.5},
-      {col:[212,160,23], from:0.5, to:0.75},
-      {col:[29,158,117], from:0.75,to:1},
-    ];
-    const steps = 60;
-    segments.forEach(seg=>{
-      const aFrom = startAngle + seg.from * Math.PI;
-      const aTo   = startAngle + seg.to   * Math.PI;
-      doc.setFillColor(...seg.col);
-      for(let s=0;s<steps;s++){
-        const a1 = aFrom + (aTo-aFrom)*s/steps;
-        const a2 = aFrom + (aTo-aFrom)*(s+1)/steps;
-        const pts = [[cx,cy],
-          [cx+(r-4)*Math.cos(a1)*0.9, cy+(r-4)*Math.sin(a1)*0.55],
-          [cx+r*Math.cos((a1+a2)/2)*0.9, cy+r*Math.sin((a1+a2)/2)*0.55],
-          [cx+r*Math.cos(a2)*0.9, cy+r*Math.sin(a2)*0.55],
-        ];
-        doc.triangle(pts[0][0],pts[0][1],pts[1][0],pts[1][1],pts[2][0],pts[2][1],'F');
-        doc.triangle(pts[0][0],pts[0][1],pts[2][0],pts[2][1],pts[3][0],pts[3][1],'F');
-      }
-    });
-    // Lancetta
-    const pct = score/4;
-    const needleAngle = Math.PI + pct * Math.PI;
-    const nx = cx + (r-6)*Math.cos(needleAngle)*0.9;
-    const ny = cy + (r-6)*Math.sin(needleAngle)*0.55;
-    doc.setDrawColor(30,30,30); doc.setLineWidth(1.2);
-    doc.line(cx, cy, nx, ny);
-    doc.setFillColor(30,30,30); doc.circle(cx, cy, 2, 'F');
-    // Score
-    doc.setFontSize(16); doc.setFont('helvetica','bold'); doc.setTextColor(26,42,108);
-    doc.text(String(score), cx, cy+12, {align:'center'});
-    doc.setFontSize(9); doc.setFont('helvetica','normal'); doc.setTextColor(100,100,100);
-    doc.text(label, cx, cy+19, {align:'center'});
+  // HELPERS PER DISEGNO PDF
+  function checkPage(extra = 20) {
+    if (y + extra > pageH - 18) { doc.addPage(); y = 20; addFooter(); }
   }
-
-  doc.setFontSize(14); doc.setFont('helvetica','bold'); doc.setTextColor(26,42,108);
-  doc.text('Score prima delle azioni', 55, y, {align:'center'});
-  doc.text('Score dopo le azioni', 155, y, {align:'center'});
-  y += 6;
-  drawGauge(55, y+32, 35, parseFloat(scorePre), 'Score prima: '+scorePre+' / 4');
-  drawGauge(155, y+32, 35, parseFloat(scorePost), 'Score dopo: '+scorePost+' / 4');
-  y += 72;
-
-  // ===== PAG 8 — GRAFICO BARRE CRITICITÀ =====
-  doc.addPage(); y = 20; addFooter();
-  try { doc.addImage(iconImg, 'PNG', 15, 12, 30, 34); } catch(e) {}
-  try { doc.addImage(textImg, 'PNG', 48, 18, 90, 22); } catch(e) {}
-  y = 30;
-  sectionTitle('Dettaglio criticità per area');
-
-  const barAreas = [
-    {label:'CONTROLLI ORGANIZZATIVI', v1:3.1,  v2:3.55},
-    {label:'CONTROLLI SULLE PERSONE', v1:1.33, v2:3.33},
-    {label:'CONTROLLI FISICI',        v1:3.0,  v2:3.0},
-    {label:'CONTROLLI TECNOLOGICI',   v1:2.71, v2:4.0},
-  ];
-  const bMaxW = 100; const bH = 7; const labelX = 20; const barX = 80;
-  barAreas.forEach(ba => {
+  function addFooter() {
+    doc.setFontSize(8); doc.setTextColor(150, 150, 150); doc.setFont('helvetica', 'normal');
+    doc.line(15, pageH - 14, w - 15, pageH - 14);
+    doc.text('3AuditFlow | Report Assessment NIS2', 15, pageH - 8);
+    doc.text('Copyright © 2026 3A Informatica S.r.l. All rights reserved.', w - 15, pageH - 8, { align: 'right' });
+  }
+  function drawSectionTitle(title, color = [26, 42, 108]) {
     checkPage(20);
-    doc.setFontSize(8); doc.setFont('helvetica','normal'); doc.setTextColor(60,60,60);
-    doc.text(ba.label, labelX, y+bH/2+1, {maxWidth:57});
-    // Series1 (before)
-    doc.setFillColor(212,160,23);
-    doc.rect(barX, y, (ba.v1/4)*bMaxW, bH, 'F');
-    doc.setFontSize(7); doc.setTextColor(80,80,80);
-    doc.text(String(ba.v1), barX+(ba.v1/4)*bMaxW+2, y+bH/2+1);
-    y += bH+2;
-    // Series2 (after)
-    doc.setFillColor(29,158,117);
-    doc.rect(barX, y, (ba.v2/4)*bMaxW, bH, 'F');
-    doc.text(String(ba.v2), barX+(ba.v2/4)*bMaxW+2, y+bH/2+1);
-    y += bH+6;
-  });
-  // Legenda
-  y+=4;
-  doc.setFillColor(212,160,23); doc.rect(20,y,8,5,'F');
-  doc.setFontSize(8); doc.setTextColor(60,60,60); doc.text('Score prima delle azioni', 31, y+4);
-  doc.setFillColor(29,158,117); doc.rect(90,y,8,5,'F');
-  doc.text('Score dopo le azioni', 101, y+4);
+    doc.setFillColor(...color);
+    doc.rect(15, y, w - 30, 10, 'F');
+    doc.setFontSize(12); doc.setTextColor(255, 255, 255); doc.setFont('helvetica', 'bold');
+    doc.text(title, 20, y + 7);
+    y += 16; doc.setTextColor(60, 60, 60); doc.setFont('helvetica', 'normal');
+  }
 
-  // ===== PAG 9 — SCORE ASSESSMENT (barre verticali) =====
+  // --- PAGINA 1: Framework e Scala di Valutazione (Equivalente Pag 5 PDF Originale) ---
+  addFooter();
+  doc.setFontSize(16); doc.setTextColor(26, 42, 108); doc.setFont('helvetica', 'bold');
+  doc.text('Assessment NIS2 - Framework e Scala di Valutazione', 15, y); y += 10;
+  doc.setFontSize(10); doc.setTextColor(60, 60, 60); doc.setFont('helvetica', 'normal');
+  doc.text("L'Assessment NIS2 è stato valutato tramite un Framework di controlli basato sugli obblighi ACN.", 15, y); y += 15;
+
+  drawSectionTitle('Scala di Valutazione');
+  const scaleDef = [
+    { level: '1-Iniziale', desc: "Requisito non implementato né dal punto di vista documentale, né tecnologico." },
+    { level: '2-Ripetibile', desc: "Requisito parzialmente implementato, l'attuazione è frammentaria e non documentata." },
+    { level: '3-Definito', desc: "Requisito formalmente coperto a livello documentale, ma l'applicazione è discontinua." },
+    { level: '4-Gestito', desc: "Requisito implementato sia documentalmente sia operativamente, integrato nei processi." },
+    { level: '5-Ottimizzato', desc: "Requisito implementato e gestito in ottica di ottimizzazione e miglioramento continuo." }
+  ];
+
+  scaleDef.forEach(sc => {
+    checkPage(15);
+    // Badge livello
+    doc.setFillColor(240, 240, 240); doc.setDrawColor(200, 200, 200);
+    doc.roundedRect(15, y, 35, 8, 1, 1, 'FD');
+    doc.setFontSize(9); doc.setFont('helvetica', 'bold'); doc.setTextColor(26, 42, 108);
+    doc.text(sc.level, 18, y + 5.5);
+    
+    // Descrizione
+    doc.setFontSize(9); doc.setFont('helvetica', 'normal'); doc.setTextColor(80, 80, 80);
+    const lines = doc.splitTextToSize(sc.desc, w - 60);
+    doc.text(lines, 55, y + 4);
+    y += (lines.length * 5) + 6;
+  });
+
+  // --- PAGINA 2: Executive Summary (Equivalente Pag 6 PDF Originale) ---
   doc.addPage(); y = 20; addFooter();
-  try { doc.addImage(iconImg, 'PNG', 15, 12, 30, 34); } catch(e) {}
-  try { doc.addImage(textImg, 'PNG', 48, 18, 90, 22); } catch(e) {}
-  y = 30;
-  sectionTitle('Score assessment');
+  doc.setFontSize(16); doc.setTextColor(26, 42, 108); doc.setFont('helvetica', 'bold');
+  doc.text('Assessment NIS2 - Executive Summary', 15, y); y += 10;
+  
+  doc.setDrawColor(200, 0, 0); doc.setLineDashPattern([2, 2], 0);
+  doc.rect(15, y, 90, 15, 'S'); doc.setLineDashPattern([], 0);
+  doc.setFontSize(10); doc.setTextColor(60, 60, 60);
+  doc.text("La valutazione complessiva del livello di preparazione è", 60, y + 6, {align:'center'});
+  doc.setFontSize(12); doc.setFont('helvetica', 'bold');
+  doc.text(`pari a ${Math.round(overallAvg)}`, 60, y + 12, {align:'center'});
+  
+  // Radar Chart Manuale
+  const cx = 60, cy = y + 70, r = 40;
+  const angles = [ -Math.PI/2, -Math.PI/6, Math.PI/6, Math.PI/2, 5*Math.PI/6, 7*Math.PI/6 ];
+  const domains = ['GOVERN', 'IDENTIFY', 'PROTECT', 'DETECT', 'RESPOND', 'RECOVER'];
+  
+  // Griglia radar
+  doc.setDrawColor(220, 220, 220); doc.setLineWidth(0.5);
+  for(let step=1; step<=5; step++) {
+    const stepR = (step/5)*r;
+    let pts = angles.map(a => [cx + stepR * Math.cos(a), cy + stepR * Math.sin(a)]);
+    doc.lines(pts.map((p, i) => [i===0?0:p[0]-pts[i-1][0], i===0?0:p[1]-pts[i-1][1]]), pts[0][0], pts[0][1], [1,1], 'S', true);
+  }
+  angles.forEach(a => doc.line(cx, cy, cx + r * Math.cos(a), cy + r * Math.sin(a)));
 
-  const chartLeft=40, chartTop=y+5, chartW=130, chartH=70;
-  doc.setDrawColor(200,200,200); doc.setLineWidth(0.3);
-  [0,1,2,3,4].forEach(v=>{
-    const gx = chartLeft + (v/4)*chartW;
-    doc.line(gx, chartTop, gx, chartTop+chartH);
-    doc.setFontSize(7); doc.setTextColor(120,120,120);
-    doc.text(String(v), gx, chartTop+chartH+5, {align:'center'});
+  // Poligono Valori
+  let valPts = domains.map((dom, i) => {
+    const score = domainAverages[dom] || 0;
+    const dist = (score/5) * r;
+    return [cx + dist * Math.cos(angles[i]), cy + dist * Math.sin(angles[i])];
   });
-  // Barra pre
-  const preW = (parseFloat(scorePre)/4)*chartW;
-  doc.setFillColor(212,160,23);
-  doc.rect(chartLeft, chartTop+10, preW, 20, 'F');
-  doc.setFontSize(9); doc.setFont('helvetica','bold'); doc.setTextColor(60,60,60);
-  doc.text('Score prima delle azioni', chartLeft-2, chartTop+22, {align:'right',maxWidth:38});
-  doc.text(scorePre, chartLeft+preW+2, chartTop+22);
-  // Barra post
-  const postW = (parseFloat(scorePost)/4)*chartW;
-  doc.setFillColor(29,158,117);
-  doc.rect(chartLeft, chartTop+40, postW, 20, 'F');
-  doc.text('Score dopo le azioni', chartLeft-2, chartTop+52, {align:'right',maxWidth:38});
-  doc.text(scorePost, chartLeft+postW+2, chartTop+52);
+  doc.setFillColor(0, 198, 255, 0.4); doc.setDrawColor(0, 198, 255); doc.setLineWidth(1);
+  doc.lines(valPts.map((p, i) => [i===0?0:p[0]-valPts[i-1][0], i===0?0:p[1]-valPts[i-1][1]]), valPts[0][0], valPts[0][1], [1,1], 'FD', true);
 
-  y = chartTop + chartH + 18;
+  // Etichette radar
+  doc.setFontSize(8); doc.setTextColor(100, 100, 100);
+  domains.forEach((dom, i) => {
+    doc.text(dom, cx + (r+10) * Math.cos(angles[i]), cy + (r+5) * Math.sin(angles[i]), {align:'center'});
+  });
 
-  // Testo analitico
-  bodyText(`L'Assessment ha prodotto uno score di ${scorePre} su 4 ottenendo un rischio potenziale di ${riskPre} ovvero del ${riskPctPre}% rispetto all'assessment.`);
-  y+=3;
-  bodyText(`Lo score dopo il remediation plan è risultato di ${scorePost} su 4 comportando un rischio effettivo di ${riskPost} ovvero del ${riskPctPost}% rispetto all'assessment, pertanto ${abbattimento}% risulta essere l'abbattimento in fase di monitoraggio del rischio residuo.`);
+  // Lista Gap sulla destra
+  let gapY = y;
+  domains.forEach(dom => {
+    doc.setFillColor(...domainColors[dom]);
+    doc.roundedRect(120, gapY, 30, 10, 1, 1, 'F');
+    doc.setFontSize(9); doc.setTextColor(255, 255, 255); doc.setFont('helvetica', 'bold');
+    doc.text(dom, 135, gapY + 5.5, {align:'center'});
+    
+    let domAvg = Math.round(domainAverages[dom] || 0);
+    doc.setFillColor(255, 255, 255); doc.setDrawColor(...domainColors[dom]);
+    doc.roundedRect(122, gapY + 6.5, 26, 4, 1, 1, 'FD');
+    doc.setFontSize(7); doc.setTextColor(0, 0, 0);
+    doc.text(`${domAvg} - ${cmmiLabels[domAvg] ? cmmiLabels[domAvg].split('-')[1] : 'N/A'}`, 135, gapY + 9.5, {align:'center'});
 
-  // ===== SALVA =====
-  doc.save(`Assessment_3AuditFlow_${new Date().toISOString().slice(0,10)}.pdf`);
+    doc.setDrawColor(200, 200, 200); doc.setLineWidth(0.3);
+    doc.rect(155, gapY, w - 170, 14, 'S');
+    doc.setFontSize(8); doc.setTextColor(100, 100, 100); doc.setFont('helvetica', 'normal');
+    
+    // Trova la prima raccomandazione del dominio come GAP
+    let gapText = "Nessun GAP critico rilevato.";
+    for (let sub in reportData[dom]) {
+      if (reportData[dom][sub].raccomandazioni.length > 0) {
+        gapText = reportData[dom][sub].raccomandazioni[0].replace('• ', '');
+        break;
+      }
+    }
+    const gLines = doc.splitTextToSize(`GAP: ${gapText}`, w - 175);
+    doc.text(gLines.slice(0,3), 157, gapY + 4);
+    gapY += 18;
+  });
+
+  y = cy + r + 20;
+
+  // --- PAGINE 3+: Dettaglio per ogni Dominio (Equivalente Pagg 7-12) ---
+  domains.forEach(domain => {
+    const categories = Object.keys(reportData[domain]);
+    if (categories.length === 0) return;
+
+    doc.addPage(); y = 20; addFooter();
+    doc.setFontSize(14); doc.setTextColor(26, 42, 108); doc.setFont('helvetica', 'bold');
+    doc.text(`Assessment NIS2: Evidenze e Azioni di Rimedio - ${domain}`, 15, y); y += 8;
+    doc.setFontSize(9); doc.setTextColor(100, 100, 100); doc.setFont('helvetica', 'normal');
+    doc.text(`Di seguito il dettaglio delle evidenze raccolte per il dominio ${domain} e le azioni di rimedio.`, 15, y); y += 10;
+
+    // Intestazione Tabella
+    doc.setFillColor(...domainColors[domain]);
+    doc.rect(15, y, w - 30, 8, 'F');
+    doc.setFontSize(9); doc.setTextColor(255, 255, 255); doc.setFont('helvetica', 'bold');
+    doc.text('Category', 17, y + 5);
+    doc.text('Valutazione', 65, y + 5);
+    doc.text('Evidenze', 105, y + 5);
+    doc.text('Azioni di Rimedio Suggerite', 150, y + 5);
+    y += 8;
+
+    categories.forEach((cat, idx) => {
+      const data = reportData[domain][cat];
+      const avgSubScore = data.scores.length > 0 ? Math.round(data.scores.reduce((a,b)=>a+b,0)/data.scores.length) : 0;
+      const valText = avgSubScore > 0 ? cmmiLabels[avgSubScore] : 'N/A';
+      
+      const evText = data.evidenze.join('\n');
+      const racText = data.raccomandazioni.length > 0 ? data.raccomandazioni.join('\n') : 'Nessuna azione richiesta';
+
+      const catLines = doc.splitTextToSize(cat, 45);
+      const evLines = doc.splitTextToSize(evText, 40);
+      const racLines = doc.splitTextToSize(racText, 40);
+      
+      const rowHeight = Math.max(catLines.length, evLines.length, racLines.length) * 5 + 4;
+      checkPage(rowHeight);
+
+      // Sfondo riga alternato
+      if (idx % 2 === 0) {
+        doc.setFillColor(248, 249, 250);
+        doc.rect(15, y, w - 30, rowHeight, 'F');
+      }
+
+      doc.setDrawColor(220, 220, 220); doc.setLineWidth(0.2);
+      doc.line(15, y + rowHeight, w - 15, y + rowHeight);
+
+      doc.setFontSize(8); doc.setTextColor(40, 40, 40);
+      doc.setFont('helvetica', 'bold');
+      doc.text(catLines, 17, y + 5);
+      
+      // Badge Valutazione
+      if(avgSubScore > 0) {
+        doc.setFillColor(240, 240, 240); doc.setDrawColor(180, 180, 180);
+        doc.roundedRect(65, y + 2, 35, 5, 1, 1, 'FD');
+        doc.text(valText, 67, y + 6);
+      } else {
+        doc.text('-', 67, y + 6);
+      }
+
+      doc.setFont('helvetica', 'normal');
+      doc.text(evLines, 105, y + 5);
+      doc.setTextColor(racText === 'Nessuna azione richiesta' ? 150 : 220, racText === 'Nessuna azione richiesta' ? 150 : 50, 50);
+      doc.text(racLines, 150, y + 5);
+
+      y += rowHeight;
+    });
+
+    y += 10;
+    // Legenda Valori a fondo pagina
+    doc.setFontSize(8); doc.setTextColor(100, 100, 100); doc.setFont('helvetica', 'bold');
+    doc.text('Scala di Valutazione:', 15, y);
+    doc.setFont('helvetica', 'normal');
+    doc.setFillColor(216, 90, 48); doc.rect(45, y-3, 4, 4, 'F'); doc.text('1-Iniziale', 51, y);
+    doc.setFillColor(212, 160, 23); doc.rect(70, y-3, 4, 4, 'F'); doc.text('2-Ripetibile', 76, y);
+    doc.setFillColor(245, 222, 54); doc.rect(98, y-3, 4, 4, 'F'); doc.text('3-Definito', 104, y);
+    doc.setFillColor(29, 158, 117); doc.rect(125, y-3, 4, 4, 'F'); doc.text('4-Gestito', 131, y);
+    doc.setFillColor(0, 168, 89); doc.rect(150, y-3, 4, 4, 'F'); doc.text('5-Ottimizzato', 156, y);
+  });
+
+  // SALVATAGGIO
+  doc.save(`Relazione_NIS2_3AuditFlow_${new Date().toISOString().slice(0, 10)}.pdf`);
 }
-// ===================== AI VALIDATION =====================
+//  AI VALIDATION 
 function doValAI(){
   const d = ownerQs[auditorCurQ]; if(!d) return;
   const btn = document.getElementById('aud-btn-val-ai');
@@ -4261,7 +4126,7 @@ ${isObbl && !hasFile ? 'ATTENZIONE: documento obbligatorio MANCANTE — penalizz
   .then(data => {
     const text = data.content?.map(i => i.text || '').join('').replace(/```json|```/g, '').trim();
     const aiAns = JSON.parse(text);
-    // Normalizza fbs se non presente
+    // Normalizza  se non presente
     if(!aiAns.fbs || !aiAns.fbs.length){
       aiAns.fbs = [
         { t: aiAns.status === 'accepted' ? 'ok' : 'ko', d: 'Valutazione complessiva', m: aiAns.abs }
@@ -4382,7 +4247,7 @@ function showAIResult(status, score, abs, fbs, puntiSalienti=[], gap=[], raccoma
       ${dlBtn}
     </div>`;
 }
-// ===================== MANUAL VALIDATION =====================
+//  MANUAL VALIDATION 
 function setManVal(v,el){
   manValCurChoice=v;
   document.getElementById('mvr-acc').className='mvr';
@@ -4403,7 +4268,7 @@ function saveManVal(){
   updateAuditorProg();renderAuditorList();
 }
 
-// ===================== REPORT =====================
+//  REPORT 
 function showReport(){
   document.getElementById('step-auditor').style.display = 'none';
   document.getElementById('step-report').style.display  = 'block';
@@ -4520,7 +4385,7 @@ function renderRemediationPlan(){
       const racId = 'RAC' + String(racCounter).padStart(2,'0');
       racCounter++;
 
-      // ── CRITICITÀ REALE dal questionario ──
+      //  CRITICITÀ REALE dal questionario 
       const crit = getCriticita(d.id);
 
       const raccomandazione = (v._aiData && v._aiData.raccomandazione)
@@ -4602,7 +4467,7 @@ function renderRemediationPlan(){
   container.innerHTML = html;
 }
 
-// ── downloadRemediationPDF — usa criticità reale ──────────────────────
+//  downloadRemediationPDF — usa criticità reale 
 function downloadRemediationPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF('p', 'mm', 'a4');
@@ -4645,7 +4510,7 @@ function downloadRemediationPDF() {
   const byArea = {};
   rejected.forEach(item=>{ if(!byArea[item.d.area]) byArea[item.d.area]=[]; byArea[item.d.area].push(item); });
 
-  // ── COPERTINA ──
+  //  COPERTINA 
   doc.setFillColor(6,14,31); doc.rect(0,0,w,pageH,'F');
   addLogos();
   doc.setFontSize(26); doc.setFont('helvetica','bold'); doc.setTextColor(255,255,255);
@@ -4665,7 +4530,7 @@ function downloadRemediationPDF() {
   doc.text('3AuditFlow by 3A Informatica  |  www.3auditflow.com', w/2, pageH-20, {align:'center'});
   doc.text(new Date().toLocaleDateString('it-IT'), w/2, pageH-14, {align:'center'});
 
-  // ── PAG 2 — INTRODUZIONE ──
+  // PAG 2 — INTRODUZIONE
   doc.addPage(); y=20; addFooter(); addLogos(); y=30;
   sectionTitle('Introduzione al Remediation Plan');
   bodyText('Il presente Remediation Plan riassume tutte le domande valutate come "Non Conformi" durante la fase di validazione dell\'Auditor nell\'ambito dell\'Assessment Cybersecurity NIS2.');
@@ -4675,7 +4540,7 @@ function downloadRemediationPDF() {
   bodyText('Le azioni correttive devono essere implementate entro i termini indicati per garantire la conformità ai requisiti NIS2 (Art. 21) e PSNC 2024.');
   y+=8;
 
-  // ── Tabella severity con mapping reale ──
+  //  Tabella
   sectionTitle('Tempi di Remediation per Livello di Criticità');
   const sevRows = [
     [1,'Basso',    [34,197,94],  '65 giorni dalla generazione del piano'],
@@ -4692,7 +4557,7 @@ function downloadRemediationPDF() {
     doc.text(txt, 52, y); y+=10;
   });
 
-  // ── Una pagina per area ──
+  // Una pagina per area
   Object.entries(byArea).forEach(([area, items])=>{
     doc.addPage(); y=20; addFooter(); addLogos(); y=30;
     const cfg = AREA_CFG[area] || {col:'#666',icon:'📋'};
@@ -4702,7 +4567,7 @@ function downloadRemediationPDF() {
       const {d, i, v} = item;
       const racId = 'RAC' + String(idx+1).padStart(2,'0');
       const ownerAns = ownerAnswers[i] || {};
-      const crit = getCriticita(d.id);   // ← criticità reale
+      const crit = getCriticita(d.id);
       checkPage(65);
 
       // Header domanda con bordo colorato a sinistra
@@ -4751,7 +4616,7 @@ function downloadRemediationPDF() {
     });
   });
 
-  // ── Riepilogo finale ──
+  // Riepilogo finale
   doc.addPage(); y=20; addFooter(); addLogos(); y=30;
   sectionTitle('Riepilogo Azioni Richieste');
 

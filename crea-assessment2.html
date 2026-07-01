@@ -236,7 +236,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .add-email-field{flex:1;min-width:200px}
 .add-email-field label{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px}
 
-/* ===================== TOUR SYSTEM ===================== */
+/*  TOUR SYSTEM  */
 #tour-overlay{position:fixed;inset:0;z-index:10000;pointer-events:none;display:none}
 #tour-overlay.active{display:block;pointer-events:all}
 #tour-spotlight{position:fixed;z-index:10001;border-radius:10px;box-shadow:0 0 0 9999px rgba(6,14,31,.82);transition:top .38s cubic-bezier(.4,0,.2,1),left .38s cubic-bezier(.4,0,.2,1),width .38s cubic-bezier(.4,0,.2,1),height .38s cubic-bezier(.4,0,.2,1);pointer-events:none;display:none;outline:2px solid rgba(0,198,255,.55);outline-offset:3px}
@@ -448,15 +448,21 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
             </div>
             <div class="ca-field">
               <label>Monitoraggio</label>
-              <select id="f-monit">
-                <option value="si" selected>Con Monitoraggio</option>
+                <select id="f-monit" disabled>
+                  <option value="no" selected>Senza Monitoraggio</option>
+                </select>
+
+                <input type="hidden" name="monitoraggio" value="no">
                 <option value="no">Senza Monitoraggio</option>
               </select>
             </div>
           </div>
           <div class="ca-checkbox-row">
             <label class="ca-check"><input type="checkbox" id="chk-ripian-ass"> Assessment ripianificabile</label>
-            <label class="ca-check"><input type="checkbox" id="chk-ripian-mon"> Monitoring ripianificabile</label>
+            <label class="ca-check">
+              <input type="checkbox" id="chk-ripian-mon" disabled>
+              Monitoring ripianificabile
+            </label>
             <label class="ca-check"><input type="checkbox" id="chk-rifiut"> Relazione rifiutabile</label>
           </div>
         </div>
@@ -621,7 +627,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 </div>
 
 <script>
-// ===================== SIDEBAR =====================
+//  SIDEBAR 
 let dskCol = false;
 function toggleDsk() {
   dskCol = !dskCol;
@@ -641,7 +647,7 @@ function closeMob() {
   document.getElementById('hb-ic').className = 'fa-solid fa-bars';
 }
 
-// ===================== STATE =====================
+//  STATE 
 // Pool di email per ogni ruolo
 const emails = {
   rev: ['mario.rossi@3ainformatica.it'],
@@ -659,10 +665,10 @@ const msSelected = {
 const aiEnabled = { aud: false };
 let curRole = 'rev';
 
-// ===================== ROLE OF =====================
+//  ROLE OF 
 function roleOf(fid) { return fid.split('-')[1]; }
 
-// ===================== SELECT MANAGEMENT =====================
+//  SELECT MANAGEMENT 
 function populateSelect(fid) {
   const role = roleOf(fid);
   const sel = document.getElementById('sel-' + fid);
@@ -690,7 +696,7 @@ function onSelChange(fid) {
   updateProgress();
 }
 
-// ===================== EMAIL POOL =====================
+//  EMAIL POOL 
 function aggiungiEmail(tipo) {
   const inp = document.getElementById('new-email-' + tipo);
   if (!inp) return;
@@ -746,7 +752,7 @@ function renderPool(tipo) {
   });
 }
 
-// ===================== INIT =====================
+//  INIT 
 function initSelects() {
   ['rev', 'own', 'aud'].forEach(role => {
     populateSelects(role);
@@ -754,7 +760,7 @@ function initSelects() {
   });
 }
 
-// ===================== ROLE TABS =====================
+//  ROLE TABS 
 function switchRole(role) {
   curRole = role;
   ['rev', 'own', 'aud'].forEach(r => {
@@ -763,7 +769,7 @@ function switchRole(role) {
   });
 }
 
-// ===================== PROGRESS =====================
+//  PROGRESS 
 function countCompiled() {
   let n = 0;
   if (document.getElementById('f-reviewer').value.trim()) n++;
@@ -790,7 +796,7 @@ function checkFormValid() {
   btn.disabled = !valid;
 }
 
-// ===================== AI FLAG =====================
+//  AI FLAG 
 function toggleAI(tipo) {
   aiEnabled[tipo] = !aiEnabled[tipo];
   const el = document.getElementById('ai-' + tipo);
@@ -805,18 +811,18 @@ function toggleAI(tipo) {
   }
 }
 
-// ===================== MODALE =====================
+//  MODALE 
 function apriModale() { document.getElementById('modal-uscita').classList.add('open'); }
 function chiudiModale() { document.getElementById('modal-uscita').classList.remove('open'); }
 function procediRitorno() { window.location.href = 'demo-mockup.html'; }
 
-// ===================== COMPLETA FASE =====================
+//  COMPLETA FASE 
 function completaFase() {
   if (countCompiled() < 8) return;
   window.location.href = 'demo-mockup.html?fromAdmin=1';
 }
 
-// ===================== TOUR =====================
+//  TOUR 
 let guideStep = 0;
 let tourActive = false;
 const TOTAL_STEPS = 6;
@@ -978,7 +984,7 @@ function tourEnd() {
   card.className = 'tour-card';
 }
 
-// ===================== BLINK PROCESSO =====================
+//  BLINK PROCESSO 
 let processoBlinkInterval = null;
 function startProcessoBlink() {
   const select = document.getElementById('f-processo');
@@ -996,7 +1002,7 @@ function stopProcessoBlink() {
   if (select) { select.style.boxShadow = 'none'; select.style.borderColor = ''; }
 }
 
-// ===================== DOM READY =====================
+//  DOM READY 
 window.addEventListener('DOMContentLoaded', () => {
   initSelects();
   updateProgress();
