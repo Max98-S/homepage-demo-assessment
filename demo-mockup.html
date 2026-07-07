@@ -2878,32 +2878,37 @@ function setAuditorStepBar(){
   document.getElementById('sp5c').textContent='5';
 }
 
-// Fine validazione auditor: la fase Assessment si chiude ROSSA se ci sono rilievi
-// di non conformità (altrimenti verde) e ci si ferma a Post-Assessment (celeste/attivo).
+// Fine validazione auditor
 function completeAuditorStepBar(){
-  const hasFindings=Object.values(auditorValidations).some(v=>v&&v.status==='rejected');
+  // Assessment -> completato: verde con spunta
   const sp3=document.getElementById('sp3');
+  sp3.classList.remove('active','fail');
+  sp3.classList.add('done');
+  document.getElementById('sp3c').innerHTML='<i class="fa-solid fa-check"></i>';
   const spline4=document.getElementById('spline4');
-  sp3.classList.remove('active');
-  if(hasFindings){
-    // Rilievi di non conformità → Assessment in ROSSO (non verde)
-    sp3.classList.remove('done');sp3.classList.add('fail');
-    document.getElementById('sp3c').innerHTML='<i class="fa-solid fa-xmark"></i>';
-    spline4.classList.remove('done');spline4.classList.add('fail');
-  }else{
-    // Nessun rilievo → Assessment completato regolarmente (verde)
-    sp3.classList.remove('fail');sp3.classList.add('done');
-    document.getElementById('sp3c').innerHTML='<i class="fa-solid fa-check"></i>';
-    spline4.classList.remove('fail');spline4.classList.add('done');
-  }
-  // Ci si ferma a Post-Assessment: step attivo (celeste)
+  spline4.classList.remove('fail');
+  spline4.classList.add('done');
+
+  // Post-Assessment -->  attivo (celeste)
   const sp4=document.getElementById('sp4');
-  sp4.classList.remove('done','fail');sp4.classList.add('active');
+  sp4.classList.remove('done','fail');
+  sp4.classList.add('active');
   document.getElementById('sp4c').textContent='4';
-  // Monitoraggio e Chiusura NON raggiunti (nessun verde oltre Post-Assessment)
-  document.getElementById('spline5').classList.remove('done','fail');
-  const sp5=document.getElementById('sp5');sp5.classList.remove('active','done','fail');
-  document.getElementById('sp5c').textContent='5';
+
+  // Monitoraggio --> NON previsto: X rossa
+  const spline5=document.getElementById('spline5');
+  spline5.classList.remove('done');
+  spline5.classList.add('fail');
+  const sp5=document.getElementById('sp5');
+  sp5.classList.remove('active','done');
+  sp5.classList.add('fail');
+  document.getElementById('sp5c').innerHTML='<i class="fa-solid fa-xmark"></i>';
+
+  // Chiusura --> non raggiunta (grigio)
+  document.getElementById('spline6').classList.remove('done','fail');
+  const sp6=document.getElementById('sp6');
+  sp6.classList.remove('active','done','fail');
+  document.getElementById('sp6c').textContent='6';
 }
 
 //  TABS 
