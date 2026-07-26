@@ -1178,6 +1178,239 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   margin-top: 8px;
 }
 .btn-gemini-dl:hover { transform: translateY(-1px); }
+
+/* ══════════════════════════════════════════════════════════
+   AI OWNER · HUB DOCUMENTALE
+   ══════════════════════════════════════════════════════════ */
+
+/* barra di ingresso nella fase Owner */
+.ai-owner-bar{display:none;align-items:center;gap:14px;padding:13px 16px;margin-bottom:12px;border-radius:var(--r);
+  background:linear-gradient(120deg,rgba(0,198,255,.10),rgba(26,42,108,.06));
+  border:1.5px solid rgba(0,198,255,.28);box-shadow:0 2px 14px rgba(0,198,255,.10)}
+.ai-owner-bar-ic{width:40px;height:40px;border-radius:11px;background:var(--grad);color:#fff;display:flex;
+  align-items:center;justify-content:center;font-size:17px;flex-shrink:0;box-shadow:0 3px 14px rgba(0,198,255,.4)}
+.ai-owner-bar-tx{flex:1;min-width:0}
+.ai-owner-bar-t{font-size:13px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ai-owner-bar-pill{font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;padding:2px 8px;
+  border-radius:99px;background:rgba(0,198,255,.14);color:var(--accent);border:1px solid rgba(0,198,255,.3)}
+.ai-owner-bar-s{font-size:11px;color:var(--muted);line-height:1.5;margin-top:3px}
+.btn-ai-hub{padding:10px 18px;border:none;border-radius:9px;background:var(--grad);color:#fff;font-size:12.5px;
+  font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;display:inline-flex;align-items:center;
+  gap:8px;white-space:nowrap;box-shadow:0 4px 16px rgba(0,198,255,.34);transition:all .2s;flex-shrink:0}
+.btn-ai-hub:hover{transform:translateY(-1px);box-shadow:0 7px 22px rgba(0,198,255,.5)}
+@media(max-width:640px){.ai-owner-bar{flex-wrap:wrap}.btn-ai-hub{width:100%;justify-content:center}}
+
+/* chip nel pannello risposta */
+.owner-ai-chip{display:none;align-items:center;gap:6px;font-size:9.5px;font-weight:800;letter-spacing:.4px;
+  text-transform:uppercase;padding:3px 9px;border-radius:99px;margin-top:5px;
+  background:rgba(0,198,255,.12);color:var(--accent);border:1px solid rgba(0,198,255,.3)}
+
+/* badge robot nella lista domande */
+.q-ai-badge{display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:800;padding:2px 7px;
+  border-radius:99px;background:rgba(0,198,255,.13);color:#00c6ff;border:1px solid rgba(0,198,255,.28)}
+
+/* ── OVERLAY HUB ───────────────────────────────────────── */
+.ai-hub-ov{display:none;position:fixed;inset:0;z-index:700;background:rgba(6,14,31,.72);backdrop-filter:blur(6px);
+  align-items:center;justify-content:center;padding:16px}
+.ai-hub-ov.open{display:flex}
+.ai-hub-box{position:relative;background:var(--bg);border-radius:18px;width:100%;max-width:900px;height:min(88vh,860px);display:flex;
+  flex-direction:column;overflow:hidden;box-shadow:0 30px 80px rgba(6,14,31,.5);animation:aiIn .26s cubic-bezier(.4,0,.2,1)}
+@keyframes aiIn{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
+.ai-hub-hd{background:var(--top);padding:15px 20px;display:flex;align-items:center;gap:13px;flex-shrink:0}
+.ai-hub-hd-ic{width:40px;height:40px;border-radius:11px;background:rgba(0,198,255,.18);border:1px solid rgba(0,198,255,.35);
+  display:flex;align-items:center;justify-content:center;color:#00c6ff;font-size:17px;flex-shrink:0}
+.ai-hub-hd-tx{flex:1;min-width:0}
+.ai-hub-hd-t{font-size:14.5px;font-weight:800;color:#fff}
+.ai-hub-hd-s{font-size:10.5px;color:rgba(255,255,255,.55);margin-top:2px}
+.ai-hub-crumb{font-size:10px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;padding:4px 10px;
+  border-radius:99px;background:rgba(0,198,255,.14);color:#00c6ff;border:1px solid rgba(0,198,255,.3);white-space:nowrap}
+.ai-hub-x{width:34px;height:34px;border-radius:9px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);
+  color:rgba(255,255,255,.7);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:all .18s}
+.ai-hub-x:hover{background:rgba(216,90,48,.25);color:#fff}
+.ai-hub-body{flex:1;overflow-y:auto;padding:18px 20px 22px;scrollbar-width:thin}
+.ai-hub-body::-webkit-scrollbar{width:7px}
+.ai-hub-body::-webkit-scrollbar-thumb{background:rgba(26,42,108,.2);border-radius:7px}
+.ai-hub-foot{flex-shrink:0;padding:12px 20px;border-top:1px solid var(--border);background:var(--surface);
+  display:flex;align-items:center;gap:12px}
+.ai-hub-foot:empty{display:none}
+.ai-foot-info{flex:1;font-size:11.5px;color:var(--muted)}
+.ai-foot-info strong{color:var(--text)}
+
+/* toast */
+.ai-hub-toast{position:absolute;bottom:78px;left:50%;transform:translate(-50%,14px);opacity:0;pointer-events:none;
+  background:#060e1f;color:#fff;font-size:11.5px;font-weight:600;padding:9px 16px;border-radius:99px;
+  border:1px solid rgba(0,198,255,.3);transition:all .25s;z-index:5;display:flex;align-items:center;gap:8px}
+.ai-hub-toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ── BOTTONI ───────────────────────────────────────────── */
+.ai-btn{padding:9px 16px;border-radius:9px;font-size:12px;font-weight:700;cursor:pointer;
+  font-family:'Plus Jakarta Sans',sans-serif;display:inline-flex;align-items:center;gap:7px;transition:all .18s;
+  border:1.5px solid var(--border);background:var(--surface);color:var(--text)}
+.ai-btn:hover{border-color:var(--accent);color:var(--accent)}
+.ai-btn.primary{border:none;background:var(--grad);color:#fff;box-shadow:0 4px 16px rgba(0,198,255,.32);font-weight:800}
+.ai-btn.primary:hover{transform:translateY(-1px);box-shadow:0 7px 22px rgba(0,198,255,.46);color:#fff}
+.ai-btn.primary:disabled{background:#c9d0e4;box-shadow:none;cursor:not-allowed;transform:none;color:#fff;opacity:.75}
+.ai-btn.ghost{background:var(--surface)}
+.ai-btn.danger{color:var(--red);border-color:rgba(216,90,48,.3)}
+.ai-btn.danger:hover{background:rgba(216,90,48,.08);border-color:var(--red);color:var(--red)}
+.ai-btn.mini{padding:7px 13px;font-size:11px}
+.ai-btn.ok{background:rgba(29,158,117,.1);border-color:rgba(29,158,117,.35);color:var(--green);font-weight:800}
+.ai-btn.ok:hover{background:var(--green);color:#fff;border-color:var(--green)}
+
+/* ── HERO + AREE ───────────────────────────────────────── */
+.ai-hero{display:flex;gap:14px;padding:15px 16px;border-radius:13px;margin-bottom:16px;
+  background:linear-gradient(120deg,rgba(0,198,255,.09),rgba(26,42,108,.05));border:1.5px solid rgba(0,198,255,.22)}
+.ai-hero-ico{width:42px;height:42px;border-radius:12px;background:var(--grad);color:#fff;display:flex;align-items:center;
+  justify-content:center;font-size:18px;flex-shrink:0;box-shadow:0 4px 16px rgba(0,198,255,.4)}
+.ai-hero-t{font-size:14px;font-weight:800;color:var(--text);margin-bottom:4px}
+.ai-hero-s{font-size:11.5px;color:var(--muted);line-height:1.65}
+.ai-hero-s strong{color:var(--text)}
+
+.ai-area-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.ai-area-card{background:var(--surface);border:1.5px solid var(--border);border-radius:13px;padding:14px;cursor:pointer;
+  transition:all .2s;border-top:3px solid var(--ac);position:relative;overflow:hidden}
+.ai-area-card:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(26,42,108,.13);border-color:var(--ac)}
+.ai-area-card.locked{cursor:not-allowed;opacity:.62;background:#f7f8fc}
+.ai-area-card.locked:hover{transform:none;box-shadow:none;border-color:var(--border);border-top-color:var(--ac)}
+.ai-area-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.ai-area-ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px}
+.ai-area-pill{font-size:9px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;padding:3px 9px;border-radius:99px;
+  background:rgba(123,138,184,.12);color:var(--muted);display:inline-flex;align-items:center;gap:4px}
+.ai-area-pill.open{background:rgba(29,158,117,.12);color:var(--green)}
+.ai-area-name{font-size:14px;font-weight:800;color:var(--text);letter-spacing:-.2px}
+.ai-area-meta{font-size:10.5px;color:var(--muted);margin-top:2px}
+.ai-area-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:11px;padding-top:10px;
+  border-top:1px dashed var(--border)}
+.ai-area-stat{font-size:10.5px;font-weight:700;color:var(--text);display:inline-flex;align-items:center;gap:5px}
+.ai-area-stat.done{color:var(--green)}
+.ai-area-stat.muted{color:var(--muted);font-weight:600}
+.ai-area-arrow{font-size:11px;color:var(--accent)}
+.ai-mock-note{margin-top:14px;padding:10px 13px;border-radius:9px;font-size:11px;color:var(--muted);line-height:1.6;
+  background:rgba(0,198,255,.05);border:1px dashed rgba(0,198,255,.3)}
+.ai-mock-note strong{color:var(--accent)}
+
+/* ── UPLOAD ────────────────────────────────────────────── */
+.ai-up-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.ai-up-badge{font-size:12px;font-weight:800;padding:7px 13px;border-radius:9px;white-space:nowrap}
+.ai-up-t{font-size:14px;font-weight:800;color:var(--text)}
+.ai-up-s{font-size:11px;color:var(--muted);margin-top:2px}
+.ai-drop{border:2px dashed rgba(0,198,255,.35);border-radius:13px;padding:26px 18px;text-align:center;cursor:pointer;
+  background:rgba(0,198,255,.03);transition:all .2s}
+.ai-drop:hover,.ai-drop.over{border-color:var(--accent);background:rgba(0,198,255,.08)}
+.ai-drop-ic{font-size:28px;color:var(--accent);margin-bottom:8px}
+.ai-drop-t{font-size:13px;font-weight:800;color:var(--text)}
+.ai-drop-s{font-size:11px;color:var(--muted);margin-top:3px}
+.ai-demo-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
+.ai-doc-list-h{margin-top:18px;margin-bottom:8px;font-size:10px;font-weight:800;letter-spacing:.7px;text-transform:uppercase;
+  color:var(--muted);display:flex;align-items:center;gap:6px}
+.ai-doc-list{display:flex;flex-direction:column;gap:7px}
+.ai-doc-row{display:flex;align-items:center;gap:11px;background:var(--surface);border:1.5px solid var(--border);
+  border-radius:10px;padding:9px 11px}
+.ai-doc-ic{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.ai-doc-info{flex:1;min-width:0}
+.ai-doc-nm{font-size:12px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ai-doc-sub{font-size:10px;color:var(--muted);margin-top:2px}
+.ai-doc-rm{width:28px;height:28px;border-radius:8px;border:1px solid var(--border);background:var(--surface);
+  color:var(--muted);cursor:pointer;flex-shrink:0;transition:all .18s}
+.ai-doc-rm:hover{background:rgba(216,90,48,.1);border-color:var(--red);color:var(--red)}
+.ai-empty{text-align:center;padding:26px 16px;font-size:12px;color:var(--muted);background:var(--surface);
+  border:1.5px dashed var(--border);border-radius:12px;margin-top:14px}
+.ai-empty i{display:block;font-size:22px;margin-bottom:8px;opacity:.5}
+
+/* ── PROCESSING ────────────────────────────────────────── */
+.ai-proc{max-width:520px;margin:20px auto;text-align:center}
+.ai-proc-orb{width:70px;height:70px;border-radius:50%;margin:0 auto 16px;background:var(--grad);color:#fff;font-size:28px;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 0 rgba(0,198,255,.55);animation:aiPulse 1.8s infinite}
+@keyframes aiPulse{0%{box-shadow:0 0 0 0 rgba(0,198,255,.5)}70%{box-shadow:0 0 0 20px rgba(0,198,255,0)}100%{box-shadow:0 0 0 0 rgba(0,198,255,0)}}
+.ai-proc-t{font-size:16px;font-weight:800;color:var(--text)}
+.ai-proc-s{font-size:11.5px;color:var(--muted);margin-top:4px}
+.ai-proc-bar{height:6px;border-radius:99px;background:rgba(26,42,108,.1);overflow:hidden;margin:16px 0 18px}
+.ai-proc-fill{height:100%;width:0;background:var(--grad);border-radius:99px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+.ai-proc-steps{list-style:none;text-align:left;display:flex;flex-direction:column;gap:7px}
+.ai-proc-step{display:flex;align-items:center;gap:11px;padding:10px 13px;border-radius:10px;background:var(--surface);
+  border:1.5px solid var(--border);opacity:.5;transition:all .3s}
+.ai-proc-step.run{opacity:1;border-color:rgba(0,198,255,.35)}
+.ai-proc-step.done{opacity:1;border-color:rgba(29,158,117,.3);background:rgba(29,158,117,.04)}
+.ai-ps-ic{width:28px;height:28px;border-radius:8px;background:rgba(0,198,255,.1);color:var(--accent);display:flex;
+  align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.ai-proc-step.done .ai-ps-ic{background:rgba(29,158,117,.12);color:var(--green)}
+.ai-ps-t{flex:1;font-size:11.5px;font-weight:600;color:var(--text)}
+.ai-ps-st{font-size:13px;color:var(--muted)}
+.ai-proc-step.done .ai-ps-st{color:var(--green)}
+
+/* ── RISULTATI ─────────────────────────────────────────── */
+.ai-res-head{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:13px;margin-bottom:12px;
+  background:linear-gradient(120deg,rgba(0,198,255,.09),rgba(26,42,108,.05));border:1.5px solid rgba(0,198,255,.22)}
+.ai-res-h-l{flex:1;min-width:0}
+.ai-res-h-t{font-size:13.5px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:8px}
+.ai-res-h-t i{color:var(--accent)}
+.ai-res-h-s{font-size:11px;color:var(--muted);line-height:1.6;margin-top:4px}
+.ai-res-h-r{text-align:center;flex-shrink:0;padding-left:14px;border-left:1px solid rgba(0,198,255,.25)}
+.ai-conf-big{font-size:24px;font-weight:800;color:var(--accent);line-height:1}
+.ai-conf-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-top:3px}
+.ai-res-actions{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:14px}
+.ai-res-list{display:flex;flex-direction:column;gap:12px}
+
+.ai-qcard{background:var(--surface);border:1.5px solid var(--border);border-radius:13px;padding:14px;
+  border-left:4px solid var(--accent);transition:all .2s}
+.ai-qcard.confirmed{border-left-color:var(--green);background:rgba(29,158,117,.035)}
+.ai-qcard.rejected{border-left-color:var(--red);opacity:.66}
+.ai-qc-head{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:8px}
+.ai-qc-spacer{flex:1}
+.ai-qc-id{font-family:monospace;font-size:10.5px;font-weight:800;padding:3px 9px;border-radius:99px}
+.ai-qc-sub{font-size:9.5px;font-weight:700;color:var(--muted);padding:3px 8px;border-radius:99px;background:rgba(123,138,184,.1)}
+.ai-qc-obbl{font-size:9px;font-weight:800;padding:3px 8px;border-radius:99px}
+.ai-qc-conf{font-size:10px;font-weight:800;padding:3px 9px;border-radius:99px;border:1px solid;display:inline-flex;align-items:center;gap:4px}
+.ai-chip{font-size:9.5px;font-weight:800;padding:3px 9px;border-radius:99px;display:inline-flex;align-items:center;gap:4px}
+.ai-chip.ok{background:rgba(29,158,117,.12);color:var(--green)}
+.ai-chip.ko{background:rgba(216,90,48,.12);color:var(--red)}
+.ai-chip.pend{background:rgba(212,160,23,.12);color:var(--yellow)}
+.ai-qc-q{font-size:12.5px;font-weight:700;color:var(--text);line-height:1.55;margin-bottom:12px}
+
+.ai-qc-block{margin-bottom:11px}
+.ai-qc-lbl{font-size:9.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);
+  margin-bottom:7px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.ai-lbl-hint{text-transform:none;letter-spacing:0;font-weight:600;font-size:9.5px;opacity:.85}
+.ai-tag{font-size:9px;font-weight:800;padding:2px 8px;border-radius:99px;display:inline-flex;align-items:center;gap:4px;letter-spacing:.2px}
+.ai-tag.ai{background:rgba(0,198,255,.12);color:var(--accent)}
+.ai-tag.edit{background:rgba(124,58,237,.12);color:#7c3aed}
+
+.ai-att{display:flex;align-items:center;gap:11px;background:rgba(0,198,255,.04);border:1.5px solid rgba(0,198,255,.2);
+  border-radius:10px;padding:9px 11px}
+.ai-att-ic{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.ai-att-info{flex:1;min-width:0}
+.ai-att-nm{font-size:11.5px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ai-att-sub{font-size:10px;color:var(--muted);margin-top:2px}
+.ai-att-sel{max-width:150px;padding:6px 8px;border-radius:8px;border:1.5px solid var(--border);background:var(--surface);
+  font-size:10.5px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;flex-shrink:0}
+.ai-att-sel:focus{outline:none;border-color:var(--accent)}
+
+.ai-lvl-row{display:flex;gap:6px;flex-wrap:wrap}
+.ai-lvl{position:relative;padding:7px 13px;border-radius:99px;border:1.5px solid var(--border);background:var(--surface);
+  font-size:11px;font-weight:700;color:var(--muted);cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .16s}
+.ai-lvl:hover{border-color:var(--accent);color:var(--accent)}
+.ai-lvl.on{border-color:var(--accent);background:rgba(0,198,255,.12);color:var(--accent);font-weight:800;
+  box-shadow:0 0 0 3px rgba(0,198,255,.12)}
+.ai-lvl.na.on{border-color:#7c3aed;background:rgba(124,58,237,.1);color:#7c3aed;box-shadow:0 0 0 3px rgba(124,58,237,.12)}
+.ai-lvl-bot{font-size:8.5px;margin-right:5px;color:var(--accent);opacity:.8}
+.ai-why{margin-top:9px;font-size:11px;color:var(--text);line-height:1.6;background:rgba(212,160,23,.06);
+  border:1px solid rgba(212,160,23,.22);border-radius:9px;padding:8px 11px;display:flex;gap:8px}
+.ai-why i{color:var(--yellow);margin-top:2px;flex-shrink:0}
+
+.ai-note{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:10px 12px;font-size:11.5px;
+  color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;resize:vertical;background:var(--surface)}
+.ai-note:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,198,255,.1)}
+
+.ai-qc-foot{display:flex;align-items:center;gap:8px;padding-top:11px;border-top:1px solid var(--border)}
+
+@media(max-width:640px){
+  .ai-hub-box{height:94vh;max-width:100%}
+  .ai-hub-hd-s,.ai-hub-crumb{display:none}
+  .ai-res-h-r{display:none}
+  .ai-att-sel{max-width:110px}
+}
+
 </style>
 </head>
 <body>
@@ -1199,6 +1432,25 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
     </div>
   </div>
 </div>
+<!-- ══════ AI OWNER · HUB DOCUMENTALE ══════ -->
+<div class="ai-hub-ov" id="ai-hub-ov">
+  <div class="ai-hub-box">
+    <div class="ai-hub-hd">
+      <div class="ai-hub-hd-ic"><i class="fa-solid fa-robot"></i></div>
+      <div class="ai-hub-hd-tx">
+        <div class="ai-hub-hd-t">Hub Documentale AI &mdash; Owner</div>
+        <div class="ai-hub-hd-s">Carica i documenti per area: l'AI li associa alle domande e propone le risposte</div>
+      </div>
+      <span class="ai-hub-crumb" id="ai-hub-crumb"></span>
+      <button class="ai-hub-x" onclick="aiHubBack()" title="Indietro"><i class="fa-solid fa-arrow-left"></i></button>
+      <button class="ai-hub-x" onclick="closeAIHub()" title="Chiudi"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="ai-hub-body" id="ai-hub-body"></div>
+    <div class="ai-hub-foot" id="ai-hub-foot"></div>
+    <div class="ai-hub-toast" id="ai-hub-toast"></div>
+  </div>
+</div>
+
 <div class="area-notif-banner" id="area-notif-banner">
   <div class="anb-icon">✅</div>
   <div class="anb-text">
@@ -1423,6 +1675,20 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 
     <!--  OWNER STEP  -->
     <div id="step-owner" style="display:none">
+
+      <!-- AI OWNER: visibile solo se l'Admin ha abilitato il flag AI sull'utenza Owner -->
+      <div class="ai-owner-bar" id="ai-owner-bar">
+        <div class="ai-owner-bar-ic"><i class="fa-solid fa-robot"></i></div>
+        <div class="ai-owner-bar-tx">
+          <div class="ai-owner-bar-t">Hub Documentale AI
+            <span class="ai-owner-bar-pill">AI attiva sull'Owner</span></div>
+          <div class="ai-owner-bar-s" id="ai-owner-bar-sub"></div>
+        </div>
+        <button class="btn-ai-hub" onclick="openAIHub()">
+          <i class="fa-solid fa-folder-open"></i> Apri Hub Documentale
+        </button>
+      </div>
+
       <div class="prog-sum">
         <div class="ps-s"><div class="ps-v" id="ps-a">0</div><div class="ps-l">Risposte</div></div>
         <div class="ps-d"></div>
@@ -1451,6 +1717,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
             <div style="flex:1;min-width:0">
               <div class="a-qid" id="owner-a-qid">—</div>
               <div class="a-qtxt" id="owner-a-qtxt">Seleziona una domanda dalla lista.</div>
+              <span class="owner-ai-chip" id="owner-ai-chip"></span>
             </div>
             <div class="a-navs">
               <button class="a-nav-btn" id="owner-btn-prev" onclick="ownerNavQ(-1)" disabled><i class="fa-solid fa-chevron-left"></i></button>
@@ -3379,7 +3646,7 @@ function goToOwner(){
   document.getElementById('tb-uname').textContent='Paolo Bianchi';
   document.getElementById('tb-urole').textContent='Owner';
   setupOwner();
-  setTimeout(() => { startTour(TOUR_OWNER); }, 700);
+  setTimeout(() => { startTour(aiOwnerEnabled ? buildOwnerAITour() : TOUR_OWNER); }, 700);
 }
 function backToReviewer(){
   closeOwnerPopup();
@@ -3415,6 +3682,7 @@ function setupOwner(){
     updateOwnerProg();
   };
 
+  initAIOwner();
 }
 function renderOwnerList(){
   const list = document.getElementById('owner-q-list');
@@ -3501,6 +3769,7 @@ function renderOwnerList(){
             <span class="q-ibadge" style="background:${isObbl ? '#1D9E75' : '#D85A30'};color:#fff;font-size:9px;padding:2px 8px;">
               ${isObbl ? 'Obbl.' : 'Non obbl.'}
             </span>
+            ${ans && ans.aiAssisted ? '<span class="q-ai-badge"><i class="fa-solid fa-robot"></i> AI</span>' : ''}
           </div>
         </div>
       `;
@@ -3557,6 +3826,7 @@ function ownerSelectQ(idx){
   if(uploadedFiles[idx]){const f=uploadedFiles[idx];ownerShowPdfFile(f.name,f.size);}
   document.getElementById('owner-btn-prev').disabled=idx===0;
   document.getElementById('owner-btn-next').disabled=idx===ownerQs.length-1;
+  updateOwnerAIChip();
   renderOwnerList();
 }
 function ownerSaveEdits(){
@@ -3569,6 +3839,9 @@ function ownerSaveEdits(){
 }
 function setCmmi(v,el){
   if(!ownerAnswers[ownerCurQ])ownerAnswers[ownerCurQ]={};
+  if(ownerAnswers[ownerCurQ].aiAssisted && ownerAnswers[ownerCurQ].cmmi!==v){
+    ownerAnswers[ownerCurQ].aiEdited=true; updateOwnerAIChip();
+  }
   ownerAnswers[ownerCurQ].cmmi=v;
   document.querySelectorAll('.cmmi-r').forEach(b=>b.classList.remove('on'));
   el.classList.add('on');
@@ -4977,6 +5250,715 @@ function buildRelazionePanelHTML(areaScores, acc, wrn, rej, done, tot) {
       </div>
 
     </div>`;
+}
+
+/*  Tour Owner con lo step dedicato all'Hub Documentale AI  */
+function buildOwnerAITour(){
+  const aiStep = {
+    target: '#ai-owner-bar', variant: 'light', position: 'bottom', arrow: false,
+    render: (step, total) => `
+      <div class="tc-accent-bar"></div>
+      <div class="tc-icon-row">
+        <div class="tc-icon-wrap" style="background:rgba(0,198,255,.1)"><i class="fa-solid fa-robot" style="color:#00c6ff"></i></div>
+        <span class="tc-step-label">AI Assistenza Owner</span>
+      </div>
+      <div class="tc-title">Hub Documentale AI</div>
+      <div class="tc-body">
+        L'Admin ha abilitato l'<strong>AI sull'Owner</strong>. Invece di rispondere domanda per domanda,
+        puoi caricare <strong>tutti i documenti di un'area NIS2</strong> in un colpo solo:
+        l'AI li legge, li <strong>associa alla domanda di pertinenza</strong>, imposta il
+        <strong>livello di risposta</strong> e scrive una nota motivata.<br><br>
+        Nulla viene salvato senza il tuo via libera: <strong>l'ultima parola è sempre tua</strong>.
+      </div>
+      ${footerLight(step, total)}
+    `
+  };
+  return [TOUR_OWNER[0], aiStep].concat(TOUR_OWNER.slice(1));
+}
+
+/*  ══════════════════════════════════════════════════════════════════════════
+    AI OWNER · HUB DOCUMENTALE  (mockup)
+    Attivo solo se l'Admin ha abilitato "AI Assistenza" sull'utenza Owner
+    (crea-assessment2.html → tab Owner → flag AI  →  ?aiOwn=1)
+    ══════════════════════════════════════════════════════════════════════════ */
+
+/*  Profili documentali: servono all'AI (simulata) per capire quale file
+    caricato dall'Owner risponde a quale controllo NIS2.                     */
+const AI_DOC_PROFILES = {
+  policy: { label:'Politiche di Cybersecurity', icon:'fa-shield-halved', col:'#2563eb',
+            demo:'Policy_Cybersecurity_ISMS_v3.2.pdf', size:1842000,
+            kw:['policy','polic','politic','isms','sgsi','iso','27001','sicurezza'] },
+  bcp:    { label:'Continuità Operativa',       icon:'fa-life-ring',    col:'#0d9488',
+            demo:'Piano_Continuita_Operativa_BCP_2025.pdf', size:2640000,
+            kw:['continu','bcp','bia','disaster','recovery','crisi','ripristino'] },
+  risk:   { label:'Gestione del Rischio',       icon:'fa-chart-line',   col:'#d97706',
+            demo:'Risk_Management_Plan_2025.pdf', size:3120000,
+            kw:['risk','rischi','rischio','valutazione','trattamento','assessment'] },
+  org:    { label:'Ruoli e Responsabilità',     icon:'fa-sitemap',      col:'#7c3aed',
+            demo:'Organigramma_Ruoli_Cyber_2025.pdf', size:940000,
+            kw:['organigramma','ruoli','responsab','mansion','nomina','delegh','ciso','job'] },
+  asset:  { label:'Inventari e Registri',       icon:'fa-table-list',   col:'#059669',
+            demo:'Inventario_Sistemi_Informativi.xlsx', size:1210000,
+            kw:['inventar','asset','registro','elenco','cmdb','sistemi','censiment'] },
+  supply: { label:'Supply Chain e Fornitori',   icon:'fa-truck-fast',   col:'#e11d48',
+            demo:'Registro_Fornitori_Due_Diligence.xlsx', size:1530000,
+            kw:['fornitor','supply','vendor','terze','appalt','due','diligence'] },
+  gov:    { label:'Governance e Riesami',       icon:'fa-gavel',        col:'#1a2a6c',
+            demo:'Verbale_Riesame_Direzione_Q4_2025.pdf', size:760000,
+            kw:['verbale','riesame','cda','direzione','consiglio','oversight','kpi','audit','board'] },
+  legal:  { label:'Requisiti Legali',           icon:'fa-scale-balanced', col:'#00c6ff',
+            demo:'Registro_Requisiti_Legali_GDPR.pdf', size:1080000,
+            kw:['legal','requisit','normativ','gdpr','privacy','compliance','conformit','contratt'] }
+};
+
+/*  Proposte AI per OGNI domanda dell'area GOVERN.
+    d = profilo documentale · l = livello proposto · c = confidenza
+    n = nota/evidenza scritta dall'AI · w = motivazione del livello         */
+const AI_GOV_MAP = {
+  /* ---- Organizational Context ---- */
+  'GV-OC-01':{d:'bcp',l:'Gestito',c:96,
+    n:"È in vigore un piano di Business Continuity approvato dalla Direzione, con Business Impact Analysis aggiornata, RTO/RPO definiti per i processi critici e test di ripristino a cadenza semestrale registrati a verbale.",
+    w:"Il piano è formalizzato, testato periodicamente e i risultati sono misurati: coerente con il livello Gestito."},
+  'GV-OC-02':{d:'policy',l:'Definito',c:88,
+    n:"La missione e gli obiettivi aziendali sono richiamati nella Policy di Cybersecurity e costituiscono il criterio di prioritizzazione nell'analisi dei rischi cyber.",
+    w:"Il legame missione–rischio è documentato ma non ancora misurato con indicatori: livello Definito."},
+  'GV-OC-03':{d:'legal',l:'Ripetibile',c:79,
+    n:"È presente una mappatura degli stakeholder interni ed esterni con le relative aspettative in materia di sicurezza, aggiornata in occasione del riesame annuale.",
+    w:"La mappatura esiste ed è ripetuta, ma non è formalizzata in una procedura: livello Ripetibile."},
+  'GV-OC-04':{d:'legal',l:'Gestito',c:93,
+    n:"Il registro dei requisiti legali, normativi e contrattuali è mantenuto dall'ufficio Compliance e include gli obblighi GDPR e NIS2 con indicazione del presidio responsabile e della scadenza di verifica.",
+    w:"Registro aggiornato, con owner assegnati e revisione tracciata: livello Gestito."},
+  'GV-OC-05':{d:'asset',l:'Definito',c:90,
+    n:"È mantenuto un inventario dei sistemi informativi e di rete rilevanti, con classificazione di criticità, referente tecnico e collegamento ai servizi erogati.",
+    w:"Inventario completo e formalizzato; manca evidenza di riconciliazione automatica: livello Definito."},
+  'GV-OC-06':{d:'bcp',l:'Ripetibile',c:76,
+    n:"I servizi critici e le dipendenze da fornitori terzi sono descritti nella Business Impact Analysis allegata al piano di continuità operativa.",
+    w:"L'analisi delle dipendenze è presente ma la comunicazione interna non è tracciata: livello Ripetibile."},
+
+  /* ---- Risk Management Strategy ---- */
+  'GV-RM-01':{d:'risk',l:'Definito',c:89,
+    n:"Gli obiettivi di gestione del rischio sono formalizzati nel Risk Management Plan e sono stati accettati dalla Direzione in sede di riesame.",
+    w:"Obiettivi documentati e approvati, ma senza metriche di efficacia: livello Definito."},
+  'GV-RM-02':{d:'risk',l:'Gestito',c:94,
+    n:"Il documento di risk appetite definisce le soglie di rischio tollerato per ciascuna categoria di impatto ed è riesaminato con cadenza annuale dal Comitato Sicurezza.",
+    w:"Soglie quantificate e riesaminate periodicamente: livello Gestito."},
+  'GV-RM-03':{d:'risk',l:'Gestito',c:95,
+    n:"Il piano di gestione del rischio cyber è definito, attuato e documentato; include metodologia, registro dei rischi, piano di trattamento e stato di avanzamento delle misure.",
+    w:"Processo attuato e monitorato con stato di avanzamento: livello Gestito."},
+  'GV-RM-04':{d:'risk',l:'Definito',c:85,
+    n:"La direzione strategica sulle opzioni di risposta al rischio (mitigare, trasferire, accettare, evitare) è descritta nel capitolo dedicato del Risk Management Plan.",
+    w:"Le opzioni sono descritte ma non sempre applicate in modo tracciabile: livello Definito."},
+  'GV-RM-05':{d:'policy',l:'Ripetibile',c:74,
+    n:"I canali di comunicazione del rischio cyber verso le funzioni aziendali sono citati nella policy, con riunioni periodiche del Comitato Sicurezza.",
+    w:"Comunicazione ricorrente ma non formalizzata in un piano: livello Ripetibile."},
+  'GV-RM-06':{d:'risk',l:'Definito',c:91,
+    n:"È adottata una metodologia standardizzata di calcolo del rischio (probabilità × impatto) con scale documentate, categorizzazione e prioritizzazione dei rischi residui.",
+    w:"Metodo standardizzato e documentato, applicato su tutto il perimetro: livello Definito."},
+  'GV-RM-07':{d:'gov',l:'Iniziale',c:71,
+    n:"Le opportunità strategiche legate alla cybersecurity sono state discusse in sede di riesame della Direzione, senza una trattazione strutturata nel registro dei rischi.",
+    w:"Trattazione occasionale e non sistematica: livello Iniziale."},
+
+  /* ---- Roles, Responsibilities, and Authorities ---- */
+  'GV.RR-01':{d:'gov',l:'Definito',c:87,
+    n:"Il verbale di riesame della Direzione documenta l'assunzione di responsabilità degli organi direttivi sul rischio cyber e le iniziative di sensibilizzazione promosse.",
+    w:"Responsabilità formalizzata a verbale; cultura del rischio non ancora misurata: livello Definito."},
+  'GV.RR-02-01':{d:'org',l:'Gestito',c:95,
+    n:"L'organizzazione di cybersecurity è formalizzata nell'organigramma, con CISO, referenti di funzione e relative responsabilità, comunicata a tutto il personale via intranet.",
+    w:"Struttura formalizzata, comunicata e con responsabilità assegnate: livello Gestito."},
+  'GV.RR-02-02':{d:'org',l:'Definito',c:92,
+    n:"È mantenuto l'elenco nominativo del personale con ruoli e responsabilità in ambito cybersecurity, aggiornato a ogni variazione organizzativa.",
+    w:"Elenco completo e aggiornato, senza verifica indipendente: livello Definito."},
+  'GV.RR-02-03':{d:'org',l:'Definito',c:88,
+    n:"Sono designati formalmente i ruoli richiesti dalla normativa applicabile (punto di contatto NIS2, DPO, responsabile della sicurezza delle informazioni) con lettere di nomina agli atti.",
+    w:"Nomine formali presenti per tutti i ruoli richiesti: livello Definito."},
+  'GV.RR-02-04':{d:'gov',l:'Ripetibile',c:80,
+    n:"Il riesame di ruoli e responsabilità è effettuato in occasione della revisione annuale dell'organigramma e verbalizzato dalla Direzione.",
+    w:"Riesame ricorrente ma senza calendario formalizzato: livello Ripetibile."},
+  'GV.RR-03':{d:'gov',l:'Ripetibile',c:77,
+    n:"Il budget e le risorse dedicate alla cybersecurity sono approvati annualmente in sede di riesame della Direzione, con riferimento alle priorità del piano di trattamento del rischio.",
+    w:"Allocazione ricorrente ma non commisurata in modo documentato al profilo di rischio: livello Ripetibile."},
+  'GV.RR-04-01':{d:'org',l:'Definito',c:83,
+    n:"Le verifiche di affidabilità del personale con accesso ai sistemi critici sono previste dalla procedura HR e documentate all'atto dell'assunzione e del cambio mansione.",
+    w:"Procedura definita e applicata; manca evidenza di verifiche periodiche successive: livello Definito."},
+  'GV.RR-04-02':{d:'legal',l:'Definito',c:86,
+    n:"I contratti di lavoro e gli accordi di riservatezza prevedono espressamente gli obblighi di sicurezza persistenti dopo la cessazione del rapporto.",
+    w:"Clausole contrattuali standardizzate su tutti i profili: livello Definito."},
+  'GV.RR-05':{d:'legal',l:'Gestito',c:93,
+    n:"Ruoli e poteri in materia di trattamento dei dati personali (titolare, responsabili, autorizzati) sono definiti nel registro dei trattamenti e comunicati agli interessati e al personale.",
+    w:"Assetto privacy formalizzato, comunicato e mantenuto aggiornato: livello Gestito."},
+
+  /* ---- Policy ---- */
+  'GV.PO-01-01':{d:'policy',l:'Ottimizzato',c:97,
+    n:"Il corpo normativo interno di cybersecurity (policy generale + procedure attuative) è adottato, documentato e mappato sugli obblighi NIS2, PSNC e ISO/IEC 27001, con revisione guidata dagli esiti degli audit.",
+    w:"Framework completo, mappato sugli obblighi e migliorato sulla base delle evidenze di audit: livello Ottimizzato."},
+  'GV.PO-01-02':{d:'policy',l:'Gestito',c:94,
+    n:"Le politiche di cybersecurity sono approvate dal Consiglio di Amministrazione; la delibera di approvazione è riportata nel frontespizio del documento e nel verbale di riesame.",
+    w:"Approvazione formale dell'organo amministrativo tracciata: livello Gestito."},
+  'GV.PO-01-03':{d:'policy',l:'Gestito',c:91,
+    n:"Le politiche sono riesaminate con cadenza almeno annuale e ad ogni variazione significativa del contesto; il registro delle versioni riporta data e responsabile di ogni revisione.",
+    w:"Ciclo di revisione rispettato e versionato: livello Gestito."},
+  'GV.PO-02':{d:'gov',l:'Definito',c:85,
+    n:"Gli esiti dei riesami delle politiche sono tracciati in un registro dedicato che riporta data, partecipanti, decisioni assunte e azioni conseguenti.",
+    w:"Registro presente e alimentato; non ancora collegato a indicatori: livello Definito."},
+
+  /* ---- Oversight ---- */
+  'GV.OV-01':{d:'gov',l:'Definito',c:84,
+    n:"I risultati della strategia di gestione del rischio sono presentati alla Direzione nel riesame periodico e utilizzati per aggiornare le priorità del piano di trattamento.",
+    w:"Riesame documentato con ricadute sulla strategia: livello Definito."},
+  'GV.OV-02':{d:'gov',l:'Ripetibile',c:78,
+    n:"La strategia di gestione del rischio è rivista in occasione dell'aggiornamento del quadro normativo, verificando la copertura dei requisiti NIS2 applicabili.",
+    w:"Revisione reattiva ai cambiamenti normativi, non pianificata: livello Ripetibile."},
+  'GV.OV-03':{d:'gov',l:'Ripetibile',c:75,
+    n:"Le prestazioni del programma di cybersecurity sono valutate tramite indicatori qualitativi discussi nel riesame della Direzione.",
+    w:"Valutazione presente ma priva di KPI quantitativi consolidati: livello Ripetibile."},
+
+  /* ---- Cybersecurity Supply Chain Risk Management ---- */
+  'GV.SC-01-01':{d:'supply',l:'Definito',c:90,
+    n:"Il capitolato per l'affidamento di forniture ICT include i requisiti di sicurezza allineati alle misure adottate internamente, con checklist di verifica in fase di gara.",
+    w:"Requisiti formalizzati e applicati in modo uniforme alle nuove forniture: livello Definito."},
+  'GV.SC-01-02':{d:'supply',l:'Definito',c:88,
+    n:"I requisiti di sicurezza per le forniture esterne sono definiti per classe di fornitore e allegati alla documentazione contrattuale.",
+    w:"Requisiti definiti e differenziati per criticità: livello Definito."},
+  'GV.SC-02':{d:'supply',l:'Ripetibile',c:81,
+    n:"Ruoli e responsabilità in materia di sicurezza delle terze parti sono indicati nei contratti e negli allegati tecnici dei principali fornitori.",
+    w:"Copertura sui fornitori principali ma non estesa a tutto il parco: livello Ripetibile."},
+  'GV.SC-03':{d:'supply',l:'Gestito',c:93,
+    n:"È mantenuto un inventario dei fornitori e dei partner terzi rilevanti per la sicurezza, con classe di criticità, servizi erogati e referente interno.",
+    w:"Inventario completo, aggiornato e con owner assegnato: livello Gestito."},
+  'GV.SC-04':{d:'supply',l:'Definito',c:89,
+    n:"I fornitori sono classificati per criticità sulla base dell'impatto sui servizi essenziali e del livello di accesso ai sistemi informativi.",
+    w:"Criteri di prioritizzazione documentati e applicati: livello Definito."},
+  'GV.SC-05':{d:'legal',l:'Gestito',c:92,
+    n:"I contratti relativi alle forniture rilevanti contengono clausole di sicurezza, obblighi di notifica degli incidenti e diritto di audit sul fornitore.",
+    w:"Clausole standardizzate e presidiate dall'ufficio legale: livello Gestito."},
+  'GV.SC-06':{d:'supply',l:'Ripetibile',c:79,
+    n:"Le attività di due diligence precontrattuale sono svolte sui fornitori critici tramite questionario di sicurezza e verifica delle certificazioni.",
+    w:"Pratica consolidata sui fornitori critici ma non proceduralizzata: livello Ripetibile."},
+  'GV.SC-07-01':{d:'risk',l:'Definito',c:86,
+    n:"La valutazione del rischio di fornitura considera il livello di accesso del fornitore ai sistemi, la tipologia di dati trattati e la sostituibilità del servizio.",
+    w:"Criteri di valutazione documentati e applicati alle nuove forniture: livello Definito."},
+  'GV.SC-07-02':{d:'supply',l:'Definito',c:87,
+    n:"La valutazione periodica dei fornitori e dei partner terzi è effettuata annualmente e registrata nel relativo fascicolo, con esito e azioni richieste.",
+    w:"Ciclo annuale documentato con esiti tracciati: livello Definito."},
+  'GV.SC-08':{d:'bcp',l:'Iniziale',c:72,
+    n:"Alcuni fornitori critici sono citati nelle procedure di escalation del piano di continuità, senza un coinvolgimento formalizzato nelle esercitazioni di risposta agli incidenti.",
+    w:"Coinvolgimento episodico e non pianificato: livello Iniziale."},
+  'GV.SC-09':{d:'risk',l:'Ripetibile',c:76,
+    n:"I rischi di supply chain sono riportati nel registro dei rischi aziendale e discussi nel Comitato Sicurezza insieme agli altri rischi cyber.",
+    w:"Integrazione avviata ma non ancora sistematica nel programma di risk management: livello Ripetibile."}
+};
+
+const AI_CMMI_LEVELS = ['N/A','Iniziale','Ripetibile','Definito','Gestito','Ottimizzato'];
+const AI_UNLOCKED_AREAS = new Set(['GOVERN']);
+
+/*  ── STATO ────────────────────────────────────────────────────────────── */
+let aiOwnerEnabled = false;
+let aiHubDocs      = [];      // [{id,name,size,profile}]
+let aiDocSeq       = 0;
+let aiProposals    = {};      // idx domanda → proposta
+let aiAnalysisDone = false;
+let aiHubView      = 'areas'; // areas | upload | processing | results
+let aiHubArea      = 'GOVERN';
+
+/*  ── UTILITY ──────────────────────────────────────────────────────────── */
+function aiFmtSize(b){ const kb=b/1024; return kb>1024 ? (kb/1024).toFixed(1)+' MB' : Math.round(kb)+' KB'; }
+function aiNorm(s){ return (s||'').toLowerCase()
+  .replace(/[àáâä]/g,'a').replace(/[èéêë]/g,'e').replace(/[ìíîï]/g,'i')
+  .replace(/[òóôö]/g,'o').replace(/[ùúûü]/g,'u'); }
+function aiHash(s){ let h=0; for(let i=0;i<s.length;i++){ h=(h*31+s.charCodeAt(i))|0; } return Math.abs(h); }
+function aiRefFor(id){ const h=aiHash(id); return '§'+(1+h%9)+'.'+(1+h%7)+' · pag. '+(3+h%42); }
+function aiFileIcon(name){
+  const n=(name||'').toLowerCase();
+  if(n.endsWith('.xlsx')||n.endsWith('.xls')||n.endsWith('.csv')) return {i:'fa-file-excel',c:'#1D9E75'};
+  if(n.endsWith('.docx')||n.endsWith('.doc'))                     return {i:'fa-file-word', c:'#2563eb'};
+  if(n.match(/\.(png|jpe?g|gif|webp)$/))                          return {i:'fa-file-image',c:'#7c3aed'};
+  return {i:'fa-file-pdf', c:'#D85A30'};
+}
+function aiQuestionsOfArea(area){
+  const out=[];
+  ownerQs.forEach((d,i)=>{ if(d.area===area) out.push({d,i}); });
+  return out;
+}
+
+/*  ── ATTIVAZIONE ──────────────────────────────────────────────────────── */
+function initAIOwner(){
+  const p = new URLSearchParams(window.location.search);
+  let flag = p.get('aiOwn') === '1';
+  if(!flag){ try{ flag = sessionStorage.getItem('3af_ai_own') === '1'; }catch(e){} }
+  aiOwnerEnabled = flag;
+
+  const bar = document.getElementById('ai-owner-bar');
+  if(!bar) return;
+  bar.style.display = aiOwnerEnabled ? 'flex' : 'none';
+  if(aiOwnerEnabled) aiUpdateOwnerBar();
+}
+function aiUpdateOwnerBar(){
+  const gov = aiQuestionsOfArea('GOVERN').length;
+  const done = Object.keys(aiProposals).filter(k=>aiProposals[k].applied).length;
+  const el = document.getElementById('ai-owner-bar-sub');
+  if(!el) return;
+  el.innerHTML = done > 0
+    ? `<strong>${done}</strong> risposte precompilate dall'AI · sempre modificabili dalla tua postazione`
+    : `Carica i documenti per area NIS2: l'AI li associa alle domande, propone il livello e scrive la nota. <strong>${gov}</strong> domande GOVERN in attesa.`;
+}
+
+/*  ── APERTURA / CHIUSURA HUB ──────────────────────────────────────────── */
+function openAIHub(){
+  if(!aiOwnerEnabled) return;
+  aiHubView = aiAnalysisDone ? 'results' : 'areas';
+  document.getElementById('ai-hub-ov').classList.add('open');
+  renderAIHub();
+}
+function closeAIHub(){ document.getElementById('ai-hub-ov').classList.remove('open'); }
+function aiHubBack(){
+  if(aiHubView==='results'){ aiHubView='upload'; }
+  else if(aiHubView==='upload'){ aiHubView='areas'; }
+  else { closeAIHub(); return; }
+  renderAIHub();
+}
+
+function renderAIHub(){
+  const body = document.getElementById('ai-hub-body');
+  const foot = document.getElementById('ai-hub-foot');
+  const crumb= document.getElementById('ai-hub-crumb');
+  const map  = { areas:'Aree NIS2', upload:'GOVERN · Documenti', processing:'Analisi in corso', results:'GOVERN · Proposte AI' };
+  crumb.textContent = map[aiHubView] || '';
+  if(aiHubView==='areas')      { body.innerHTML = aiViewAreas();  foot.innerHTML = ''; }
+  else if(aiHubView==='upload'){ body.innerHTML = aiViewUpload();  foot.innerHTML = aiFootUpload(); }
+  else if(aiHubView==='processing'){ body.innerHTML = aiViewProcessing(); foot.innerHTML = ''; }
+  else                          { body.innerHTML = aiViewResults(); foot.innerHTML = aiFootResults(); aiUpdateResultsBar(); }
+  body.scrollTop = 0;
+}
+
+/*  ── VISTA 1 · AREE ───────────────────────────────────────────────────── */
+function aiViewAreas(){
+  const areas = Object.keys(AREA_CFG);
+  const cards = areas.map(area=>{
+    const cfg = AREA_CFG[area];
+    const qs  = aiQuestionsOfArea(area).length;
+    const unlocked = AI_UNLOCKED_AREAS.has(area);
+    const docs = unlocked ? aiHubDocs.length : 0;
+    const analysed = unlocked && aiAnalysisDone;
+    return `
+      <div class="ai-area-card ${unlocked?'':'locked'}" ${unlocked?`onclick="aiOpenArea('${area}')"`:`onclick="aiLockedToast()"`}
+           style="--ac:${cfg.col}">
+        <div class="ai-area-top">
+          <span class="ai-area-ico" style="background:${cfg.bg}">${cfg.icon}</span>
+          ${unlocked
+            ? `<span class="ai-area-pill open"><i class="fa-solid fa-lock-open"></i> Attiva</span>`
+            : `<span class="ai-area-pill"><i class="fa-solid fa-lock"></i> Bloccata</span>`}
+        </div>
+        <div class="ai-area-name">${area}</div>
+        <div class="ai-area-meta">${qs} domande assegnate dal Reviewer</div>
+        <div class="ai-area-foot">
+          ${unlocked
+            ? (analysed
+                ? `<span class="ai-area-stat done"><i class="fa-solid fa-circle-check"></i> Analisi completata</span>`
+                : `<span class="ai-area-stat"><i class="fa-solid fa-paperclip"></i> ${docs} documenti caricati</span>`)
+            : `<span class="ai-area-stat muted">Disponibile nella versione completa</span>`}
+          ${unlocked?`<i class="fa-solid fa-arrow-right ai-area-arrow"></i>`:''}
+        </div>
+      </div>`;
+  }).join('');
+
+  return `
+    <div class="ai-hero">
+      <div class="ai-hero-ico"><i class="fa-solid fa-robot"></i></div>
+      <div>
+        <div class="ai-hero-t">Carica i documenti per area NIS2</div>
+        <div class="ai-hero-s">Non devi indicare a quale domanda si riferiscono: l'AI legge gli allegati,
+          li associa al controllo di pertinenza, propone il livello di maturità e scrive una nota motivata.
+          <strong>Ogni proposta resta modificabile da te.</strong></div>
+      </div>
+    </div>
+    <div class="ai-area-grid">${cards}</div>
+    <div class="ai-mock-note"><i class="fa-solid fa-circle-info"></i>
+      In questo mockup è attiva la sola area <strong>GOVERN</strong>. Le altre cinque aree seguiranno la stessa logica.</div>`;
+}
+function aiOpenArea(area){
+  if(!AI_UNLOCKED_AREAS.has(area)) return aiLockedToast();
+  aiHubArea = area;
+  aiHubView = aiAnalysisDone ? 'results' : 'upload';
+  renderAIHub();
+}
+function aiLockedToast(){
+  const t = document.getElementById('ai-hub-toast');
+  t.innerHTML = '<i class="fa-solid fa-lock"></i> Area bloccata in questo mockup — è attiva solo GOVERN';
+  t.classList.add('show');
+  clearTimeout(window._aiToastT);
+  window._aiToastT = setTimeout(()=>t.classList.remove('show'), 2600);
+}
+
+/*  ── VISTA 2 · UPLOAD ─────────────────────────────────────────────────── */
+function aiViewUpload(){
+  const qs = aiQuestionsOfArea('GOVERN');
+  const docs = aiHubDocs.map(f=>{
+    const ic = aiFileIcon(f.name);
+    const pr = AI_DOC_PROFILES[f.profile];
+    return `
+      <div class="ai-doc-row">
+        <div class="ai-doc-ic" style="color:${ic.c};background:${ic.c}14"><i class="fa-solid ${ic.i}"></i></div>
+        <div class="ai-doc-info">
+          <div class="ai-doc-nm">${f.name}</div>
+          <div class="ai-doc-sub">${aiFmtSize(f.size)}${pr?` · riconosciuto come <strong style="color:${pr.col}">${pr.label}</strong>`:''}</div>
+        </div>
+        <button class="ai-doc-rm" onclick="aiRemoveDoc('${f.id}')" title="Rimuovi"><i class="fa-solid fa-xmark"></i></button>
+      </div>`;
+  }).join('');
+
+  return `
+    <div class="ai-up-head">
+      <span class="ai-up-badge" style="background:${AREA_CFG.GOVERN.bg};color:${AREA_CFG.GOVERN.col}">${AREA_CFG.GOVERN.icon} GOVERN</span>
+      <div>
+        <div class="ai-up-t">Documenti dell'area GOVERN</div>
+        <div class="ai-up-s">${qs.length} domande assegnate dal Reviewer per quest'area</div>
+      </div>
+    </div>
+
+    <div class="ai-drop" id="ai-drop"
+         ondragover="aiDragOver(event)" ondragleave="aiDragLeave(event)" ondrop="aiDrop(event)"
+         onclick="document.getElementById('ai-file-inp').click()">
+      <input type="file" id="ai-file-inp" multiple style="display:none" onchange="aiFilesPicked(event)">
+      <div class="ai-drop-ic"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+      <div class="ai-drop-t">Trascina qui i documenti o fai click</div>
+      <div class="ai-drop-s">Policy, piani, registri, verbali, inventari — PDF, DOCX, XLSX, immagini</div>
+    </div>
+
+    <div class="ai-demo-row">
+      <button class="ai-btn ghost" onclick="aiLoadDemoDocs()"><i class="fa-solid fa-wand-magic-sparkles"></i> Carica set documentale di esempio</button>
+      ${aiHubDocs.length?`<button class="ai-btn ghost danger" onclick="aiClearDocs()"><i class="fa-solid fa-trash"></i> Svuota</button>`:''}
+    </div>
+
+    ${aiHubDocs.length ? `
+      <div class="ai-doc-list-h"><i class="fa-solid fa-paperclip"></i> ${aiHubDocs.length} documenti pronti per l'analisi</div>
+      <div class="ai-doc-list">${docs}</div>` : `
+      <div class="ai-empty"><i class="fa-solid fa-folder-open"></i> Nessun documento caricato per quest'area</div>`}`;
+}
+function aiFootUpload(){
+  const n = aiHubDocs.length;
+  const q = aiQuestionsOfArea('GOVERN').length;
+  return `
+    <div class="ai-foot-info">${n?`<strong>${n}</strong> documenti · <strong>${q}</strong> domande GOVERN da coprire`:'Carica almeno un documento per avviare l\'analisi'}</div>
+    <button class="ai-btn primary" ${n?'':'disabled'} onclick="aiStartAnalysis()">
+      <i class="fa-solid fa-robot"></i> Avvia analisi AI
+    </button>`;
+}
+function aiDragOver(e){ e.preventDefault(); document.getElementById('ai-drop').classList.add('over'); }
+function aiDragLeave(e){ document.getElementById('ai-drop').classList.remove('over'); }
+function aiDrop(e){ e.preventDefault(); document.getElementById('ai-drop').classList.remove('over'); aiAddFiles(e.dataTransfer.files); }
+function aiFilesPicked(e){ aiAddFiles(e.target.files); e.target.value=''; }
+
+function aiDetectProfile(name){
+  const n = aiNorm(name);
+  for(const [key,p] of Object.entries(AI_DOC_PROFILES)){
+    if(p.kw.some(k=>n.includes(k))) return key;
+  }
+  return null;
+}
+function aiAddFiles(fileList){
+  Array.from(fileList||[]).forEach(f=>{
+    aiHubDocs.push({ id:'d'+(++aiDocSeq), name:f.name, size:f.size, profile:aiDetectProfile(f.name) });
+  });
+  renderAIHub();
+}
+function aiLoadDemoDocs(){
+  Object.entries(AI_DOC_PROFILES).forEach(([key,p])=>{
+    if(aiHubDocs.some(d=>d.name===p.demo)) return;
+    aiHubDocs.push({ id:'d'+(++aiDocSeq), name:p.demo, size:p.size, profile:key });
+  });
+  renderAIHub();
+}
+function aiRemoveDoc(id){ aiHubDocs = aiHubDocs.filter(d=>d.id!==id); renderAIHub(); }
+function aiClearDocs(){ aiHubDocs = []; renderAIHub(); }
+
+/*  ── VISTA 3 · ANALISI SIMULATA ───────────────────────────────────────── */
+const AI_STEPS = [
+  { i:'fa-file-lines',    t:'Lettura e OCR dei documenti caricati' },
+  { i:'fa-align-left',    t:'Estrazione di paragrafi, tabelle e riferimenti' },
+  { i:'fa-diagram-project',t:'Mappatura dei contenuti sui controlli NIS2 dell\'area GOVERN' },
+  { i:'fa-paperclip',     t:'Associazione di ogni allegato alla domanda di pertinenza' },
+  { i:'fa-gauge-high',    t:'Assegnazione del livello di maturità proposto' },
+  { i:'fa-pen-nib',       t:'Redazione delle note di risposta' }
+];
+function aiViewProcessing(){
+  return `
+    <div class="ai-proc">
+      <div class="ai-proc-orb"><i class="fa-solid fa-robot"></i></div>
+      <div class="ai-proc-t">Analisi documentale in corso</div>
+      <div class="ai-proc-s">${aiHubDocs.length} documenti · ${aiQuestionsOfArea('GOVERN').length} controlli GOVERN</div>
+      <div class="ai-proc-bar"><div class="ai-proc-fill" id="ai-proc-fill"></div></div>
+      <ul class="ai-proc-steps" id="ai-proc-steps">
+        ${AI_STEPS.map((s,i)=>`
+          <li class="ai-proc-step" id="ai-ps-${i}">
+            <span class="ai-ps-ic"><i class="fa-solid ${s.i}"></i></span>
+            <span class="ai-ps-t">${s.t}</span>
+            <span class="ai-ps-st"><i class="fa-solid fa-circle-notch fa-spin"></i></span>
+          </li>`).join('')}
+      </ul>
+    </div>`;
+}
+function aiStartAnalysis(){
+  if(!aiHubDocs.length) return;
+  aiHubView='processing'; renderAIHub();
+  const per = 620;
+  AI_STEPS.forEach((s,i)=>{
+    setTimeout(()=>{
+      const li = document.getElementById('ai-ps-'+i); if(!li) return;
+      li.classList.add('done');
+      li.querySelector('.ai-ps-st').innerHTML='<i class="fa-solid fa-circle-check"></i>';
+      const prev = document.getElementById('ai-ps-'+(i+1));
+      if(prev) prev.classList.add('run');
+      const fill = document.getElementById('ai-proc-fill');
+      if(fill) fill.style.width = Math.round((i+1)/AI_STEPS.length*100)+'%';
+    }, per*(i+1));
+  });
+  setTimeout(()=>{ aiBuildProposals(); aiAnalysisDone=true; aiHubView='results'; renderAIHub(); }, per*(AI_STEPS.length+1));
+}
+
+/*  ── COSTRUZIONE PROPOSTE ─────────────────────────────────────────────── */
+function aiPickDoc(profileKey, idx){
+  if(!aiHubDocs.length) return null;
+  const exact = aiHubDocs.find(d=>d.profile===profileKey);
+  if(exact) return exact;
+  const untyped = aiHubDocs.filter(d=>!d.profile);
+  if(untyped.length) return untyped[idx % untyped.length];
+  return aiHubDocs[idx % aiHubDocs.length];
+}
+function aiBuildProposals(){
+  aiProposals = {};
+  aiQuestionsOfArea('GOVERN').forEach(({d,i},k)=>{
+    const m = AI_GOV_MAP[d.id] || {
+      d:'policy', l:'Definito', c:80,
+      n:"L'evidenza documentale caricata copre il controllo richiesto; il processo risulta descritto e applicato in modo coerente con quanto previsto dalla normativa di riferimento.",
+      w:"Processo documentato e applicato, senza misurazione sistematica: livello Definito."
+    };
+    const doc = aiPickDoc(m.d, k);
+    const perfect = !!(doc && doc.profile === m.d);
+    aiProposals[i] = {
+      idx:i, qid:d.id, sub:d.sub||'', area:d.area,
+      docId: doc ? doc.id : null,
+      ref:   aiRefFor(d.id),
+      cmmi:  m.l,
+      aiCmmi:m.l,
+      note:  m.n,
+      why:   m.w,
+      conf:  perfect ? m.c : Math.max(58, m.c - 18),
+      status:'pending',   // pending | confirmed | rejected
+      edited:false,
+      applied:false
+    };
+  });
+}
+
+/*  ── VISTA 4 · RISULTATI ──────────────────────────────────────────────── */
+function aiViewResults(){
+  const items = aiQuestionsOfArea('GOVERN');
+  if(!items.length){
+    return `<div class="ai-empty"><i class="fa-solid fa-circle-info"></i>
+      Il Reviewer non ha selezionato domande dell'area GOVERN per questo assessment.</div>`;
+  }
+  const avg = Math.round(items.reduce((s,{i})=>s+(aiProposals[i]?.conf||0),0)/items.length);
+  const head = `
+    <div class="ai-res-head">
+      <div class="ai-res-h-l">
+        <div class="ai-res-h-t"><i class="fa-solid fa-robot"></i> ${items.length} proposte generate per l'area GOVERN</div>
+        <div class="ai-res-h-s">Per ogni domanda l'AI ha scelto l'allegato, impostato il livello e scritto la nota.
+          Modifica quello che non ti convince, poi conferma.</div>
+      </div>
+      <div class="ai-res-h-r">
+        <div class="ai-conf-big">${avg}%</div>
+        <div class="ai-conf-lbl">confidenza media</div>
+      </div>
+    </div>
+    <div class="ai-res-actions">
+      <button class="ai-btn ghost" onclick="aiConfirmAll()"><i class="fa-solid fa-check-double"></i> Conferma tutte</button>
+      <button class="ai-btn ghost" onclick="aiResetAll()"><i class="fa-solid fa-rotate-left"></i> Ripristina proposte AI</button>
+    </div>`;
+
+  return head + `<div class="ai-res-list" id="ai-res-list">` +
+    items.map(({d,i})=>aiCardHTML(i,d)).join('') + `</div>`;
+}
+
+function aiCardHTML(i, d){
+  d = d || ownerQs[i];
+  const p = aiProposals[i]; if(!p) return '';
+  const doc = aiHubDocs.find(x=>x.id===p.docId);
+  const ic  = doc ? aiFileIcon(doc.name) : {i:'fa-file-circle-question',c:'#7b8ab8'};
+  const cfg = AREA_CFG[d.area] || {col:'#00c6ff'};
+  const isObbl = d.obbligatorio !== false;
+
+  const confCol = p.conf>=88 ? '#1D9E75' : p.conf>=75 ? '#D4A017' : '#D85A30';
+
+  const levels = AI_CMMI_LEVELS.map(l=>{
+    const on = p.cmmi===l;
+    const isAi = p.aiCmmi===l;
+    return `<button class="ai-lvl${on?' on':''}${l==='N/A'?' na':''}" onclick="aiSetLevel(${i},'${l}')">
+              ${isAi?'<i class="fa-solid fa-robot ai-lvl-bot" title="Proposto dall&apos;AI"></i>':''}${l}
+            </button>`;
+  }).join('');
+
+  const docOpts = aiHubDocs.map(f=>
+    `<option value="${f.id}"${f.id===p.docId?' selected':''}>${f.name}</option>`).join('');
+
+  let stateChip = '';
+  if(p.status==='confirmed') stateChip = `<span class="ai-chip ok"><i class="fa-solid fa-circle-check"></i> Confermata</span>`;
+  else if(p.status==='rejected') stateChip = `<span class="ai-chip ko"><i class="fa-solid fa-circle-xmark"></i> Scartata</span>`;
+  else stateChip = `<span class="ai-chip pend"><i class="fa-solid fa-hourglass-half"></i> Da confermare</span>`;
+
+  return `
+  <div class="ai-qcard ${p.status}" id="aiq-${i}">
+    <div class="ai-qc-head">
+      <span class="ai-qc-id" style="background:${cfg.col}14;color:${cfg.col}">${d.id}</span>
+      ${d.sub?`<span class="ai-qc-sub">${d.sub}</span>`:''}
+      <span class="ai-qc-obbl" style="background:${isObbl?'#1D9E7515':'#D85A3015'};color:${isObbl?'#1D9E75':'#D85A30'}">${isObbl?'Obbligatoria':'Non obbl.'}</span>
+      <span class="ai-qc-spacer"></span>
+      <span class="ai-qc-conf" style="color:${confCol};background:${confCol}12;border-color:${confCol}33">
+        <i class="fa-solid fa-bullseye"></i> ${p.conf}%
+      </span>
+      ${stateChip}
+    </div>
+    <div class="ai-qc-q">${d.domanda}</div>
+
+    <div class="ai-qc-block">
+      <div class="ai-qc-lbl"><i class="fa-solid fa-paperclip"></i> Allegato associato dall'AI</div>
+      <div class="ai-att">
+        <div class="ai-att-ic" style="color:${ic.c};background:${ic.c}14"><i class="fa-solid ${ic.i}"></i></div>
+        <div class="ai-att-info">
+          <div class="ai-att-nm">${doc? doc.name : 'Nessun documento disponibile'}</div>
+          <div class="ai-att-sub">${doc? aiFmtSize(doc.size)+' · rif. '+p.ref : 'Carica un documento per l\'associazione'}</div>
+        </div>
+        ${aiHubDocs.length?`<select class="ai-att-sel" onchange="aiSetDoc(${i},this.value)" title="Cambia allegato">${docOpts}</select>`:''}
+      </div>
+    </div>
+
+    <div class="ai-qc-block">
+      <div class="ai-qc-lbl">
+        <i class="fa-solid fa-gauge-high"></i> Livello di risposta
+        ${p.edited
+          ? '<span class="ai-tag edit"><i class="fa-solid fa-user-pen"></i> modificato da te</span>'
+          : '<span class="ai-tag ai"><i class="fa-solid fa-robot"></i> impostato dall\'AI</span>'}
+      </div>
+      <div class="ai-lvl-row">${levels}</div>
+      <div class="ai-why"><i class="fa-solid fa-lightbulb"></i> <span>${p.why}</span></div>
+    </div>
+
+    <div class="ai-qc-block">
+      <div class="ai-qc-lbl"><i class="fa-solid fa-pen-nib"></i> Nota di risposta <span class="ai-lbl-hint">(modificabile — finirà nel campo Evidenza)</span></div>
+      <textarea class="ai-note" oninput="aiSetNote(${i},this.value)" rows="3">${p.note}</textarea>
+    </div>
+
+    <div class="ai-qc-foot">
+      <button class="ai-btn mini ghost" onclick="aiResetOne(${i})" title="Ripristina la proposta originale dell'AI"><i class="fa-solid fa-rotate-left"></i></button>
+      <span class="ai-qc-spacer"></span>
+      <button class="ai-btn mini danger" onclick="aiReject(${i})"><i class="fa-solid fa-xmark"></i> Scarta</button>
+      <button class="ai-btn mini ok" onclick="aiConfirm(${i})"><i class="fa-solid fa-check"></i> Conferma</button>
+    </div>
+  </div>`;
+}
+
+function aiRefreshCard(i){
+  const el = document.getElementById('aiq-'+i);
+  if(!el) return;
+  el.outerHTML = aiCardHTML(i);
+  aiUpdateResultsBar();
+}
+function aiSetLevel(i,l){
+  const p=aiProposals[i]; if(!p) return;
+  p.cmmi=l; p.edited = (l!==p.aiCmmi);
+  if(p.status==='rejected') p.status='pending';
+  aiRefreshCard(i);
+}
+function aiSetDoc(i,docId){
+  const p=aiProposals[i]; if(!p) return;
+  p.docId=docId; p.edited=true;
+  aiRefreshCard(i);
+}
+function aiSetNote(i,v){ if(aiProposals[i]) aiProposals[i].note=v; }
+function aiConfirm(i){ const p=aiProposals[i]; if(!p) return; p.status='confirmed'; aiRefreshCard(i); }
+function aiReject(i){  const p=aiProposals[i]; if(!p) return; p.status='rejected';  aiRefreshCard(i); }
+function aiResetOne(i){
+  const p=aiProposals[i]; if(!p) return;
+  const m=AI_GOV_MAP[p.qid];
+  if(m){ p.cmmi=m.l; p.note=m.n; p.why=m.w; }
+  p.edited=false; p.status='pending';
+  aiRefreshCard(i);
+}
+function aiConfirmAll(){
+  Object.values(aiProposals).forEach(p=>{ if(p.status!=='rejected') p.status='confirmed'; });
+  renderAIHub();
+}
+function aiResetAll(){ aiBuildProposals(); renderAIHub(); }
+
+function aiFootResults(){
+  return `
+    <div class="ai-foot-info" id="ai-foot-info"></div>
+    <button class="ai-btn primary" id="ai-apply-btn" onclick="aiApplyToQuestionnaire()">
+      <i class="fa-solid fa-file-import"></i> Applica al questionario
+    </button>`;
+}
+function aiUpdateResultsBar(){
+  const all = Object.values(aiProposals);
+  const conf = all.filter(p=>p.status==='confirmed').length;
+  const rej  = all.filter(p=>p.status==='rejected').length;
+  const info = document.getElementById('ai-foot-info');
+  const btn  = document.getElementById('ai-apply-btn');
+  if(info) info.innerHTML = `<strong>${conf}</strong> confermate · ${all.length-conf-rej} da confermare · ${rej} scartate`;
+  if(btn){
+    btn.disabled = conf===0;
+    btn.innerHTML = `<i class="fa-solid fa-file-import"></i> Applica al questionario${conf?` (${conf})`:''}`;
+  }
+}
+
+/*  ── APPLICAZIONE AL QUESTIONARIO ─────────────────────────────────────── */
+function aiApplyToQuestionnaire(){
+  let n=0;
+  Object.values(aiProposals).forEach(p=>{
+    if(p.status!=='confirmed') return;
+    const doc = aiHubDocs.find(x=>x.id===p.docId);
+    if(!ownerAnswers[p.idx]) ownerAnswers[p.idx]={};
+    ownerAnswers[p.idx].cmmi   = p.cmmi;
+    ownerAnswers[p.idx].answer = p.note;
+    ownerAnswers[p.idx].aiAssisted = true;
+    ownerAnswers[p.idx].aiEdited   = p.edited;
+    if(doc) uploadedFiles[p.idx] = { name:doc.name, size:doc.size, aiDoc:true };
+    p.applied = true;
+    n++;
+  });
+
+  // riallinea il pannello di risposta attualmente aperto senza sovrascriverlo
+  const cur = ownerAnswers[ownerCurQ];
+  const ta  = document.getElementById('owner-a-ev');
+  if(ta && cur){
+    ta.value = cur.answer || '';
+    document.querySelectorAll('.cmmi-r').forEach(b=>b.classList.toggle('on', b.getAttribute('data-v')===(cur.cmmi||'')));
+  }
+  ownerResetPdfZ();
+  if(uploadedFiles[ownerCurQ]) ownerShowPdfFile(uploadedFiles[ownerCurQ].name, uploadedFiles[ownerCurQ].size);
+
+  renderOwnerList(); updateOwnerProg(); updateOwnerAIChip(); aiUpdateOwnerBar();
+  closeAIHub();
+
+  const banner = document.getElementById('area-notif-banner');
+  document.getElementById('anb-title').textContent = `🤖  ${n} risposte compilate dall'AI`;
+  document.getElementById('anb-sub').textContent   = `Area GOVERN — puoi ancora modificare livello, nota e allegato di ogni domanda`;
+  banner.classList.add('show');
+  clearTimeout(window._bannerTimer);
+  window._bannerTimer = setTimeout(()=>banner.classList.remove('show'), 5200);
+}
+
+/*  ── CHIP "COMPILATA CON AI" NEL PANNELLO RISPOSTA ────────────────────── */
+function updateOwnerAIChip(){
+  const chip = document.getElementById('owner-ai-chip');
+  if(!chip) return;
+  const a = ownerAnswers[ownerCurQ];
+  if(a && a.aiAssisted){
+    chip.style.display='inline-flex';
+    chip.innerHTML = a.aiEdited
+      ? '<i class="fa-solid fa-user-pen"></i> Compilata con AI · modificata da te'
+      : '<i class="fa-solid fa-robot"></i> Compilata con AI · modificabile';
+  } else {
+    chip.style.display='none';
+  }
 }
 
 
