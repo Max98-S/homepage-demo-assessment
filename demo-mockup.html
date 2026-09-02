@@ -1180,25 +1180,69 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .btn-gemini-dl:hover { transform: translateY(-1px); }
 
 /* ══════════════════════════════════════════════════════════
-   AI OWNER · HUB DOCUMENTALE
+   AI OWNER · COMPILAZIONE AUTOMATICA (AI-TOTALE)
    ══════════════════════════════════════════════════════════ */
 
-/* barra di ingresso nella fase Owner */
-.ai-owner-bar{display:none;align-items:center;gap:14px;padding:13px 16px;margin-bottom:12px;border-radius:var(--r);
+/* ── VALIDAZIONE AI MASSIVA (Auditor) ──────────────────── */
+.aud-ai-bulk{display:none;align-items:center;gap:14px;padding:14px 16px;margin-bottom:12px;border-radius:var(--r);
   background:linear-gradient(120deg,rgba(0,198,255,.10),rgba(26,42,108,.06));
   border:1.5px solid rgba(0,198,255,.28);box-shadow:0 2px 14px rgba(0,198,255,.10)}
-.ai-owner-bar-ic{width:40px;height:40px;border-radius:11px;background:var(--grad);color:#fff;display:flex;
-  align-items:center;justify-content:center;font-size:17px;flex-shrink:0;box-shadow:0 3px 14px rgba(0,198,255,.4)}
-.ai-owner-bar-tx{flex:1;min-width:0}
-.ai-owner-bar-t{font-size:13px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.ai-owner-bar-pill{font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;padding:2px 8px;
-  border-radius:99px;background:rgba(0,198,255,.14);color:var(--accent);border:1px solid rgba(0,198,255,.3)}
-.ai-owner-bar-s{font-size:11px;color:var(--muted);line-height:1.5;margin-top:3px}
-.btn-ai-hub{padding:10px 18px;border:none;border-radius:9px;background:var(--grad);color:#fff;font-size:12.5px;
+.aud-ai-bulk.show{display:flex}
+.aab-ic{width:42px;height:42px;border-radius:12px;background:var(--grad);color:#fff;display:flex;
+  align-items:center;justify-content:center;font-size:18px;flex-shrink:0;box-shadow:0 3px 14px rgba(0,198,255,.4)}
+.aab-tx{flex:1;min-width:0}
+.aab-t{font-size:14px;font-weight:800;color:var(--text)}
+.aab-s{font-size:11.5px;color:var(--muted);line-height:1.55;margin-top:3px}
+.aab-s strong{color:var(--text)}
+.aab-bar{height:5px;border-radius:99px;background:rgba(26,42,108,.12);overflow:hidden;margin-top:9px}
+.aab-fill{height:100%;width:0;background:var(--grad);border-radius:99px;transition:width .3s cubic-bezier(.4,0,.2,1)}
+.aab-btn{padding:11px 20px;border:none;border-radius:10px;background:var(--grad);color:#fff;font-size:12.5px;
   font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;display:inline-flex;align-items:center;
-  gap:8px;white-space:nowrap;box-shadow:0 4px 16px rgba(0,198,255,.34);transition:all .2s;flex-shrink:0}
-.btn-ai-hub:hover{transform:translateY(-1px);box-shadow:0 7px 22px rgba(0,198,255,.5)}
-@media(max-width:640px){.ai-owner-bar{flex-wrap:wrap}.btn-ai-hub{width:100%;justify-content:center}}
+  gap:8px;white-space:nowrap;box-shadow:0 4px 16px rgba(0,198,255,.34);transition:all .2s;flex-shrink:0;min-height:44px}
+.aab-btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 7px 22px rgba(0,198,255,.5)}
+.aab-btn:disabled{background:#c9d0e4;box-shadow:none;cursor:not-allowed;transform:none;opacity:.8}
+.aab-btn.done{background:rgba(29,158,117,.12);color:var(--green);box-shadow:none}
+@media(max-width:640px){.aud-ai-bulk{flex-wrap:wrap}.aab-btn{width:100%;justify-content:center}}
+
+/* ── PANNELLO INLINE "AI-TOTALE" (nessuna modale) ─────── */
+.ai-total-panel{display:none;flex-direction:column;gap:14px;padding:16px 18px;margin-bottom:12px;border-radius:var(--r);
+  background:linear-gradient(120deg,rgba(0,198,255,.10),rgba(26,42,108,.06));
+  border:1.5px solid rgba(0,198,255,.28);box-shadow:0 2px 14px rgba(0,198,255,.10)}
+.ai-total-panel.show{display:flex}
+.ai-tp-head{display:flex;align-items:center;gap:13px}
+.ai-tp-ic{width:42px;height:42px;border-radius:12px;background:var(--grad);color:#fff;display:flex;
+  align-items:center;justify-content:center;font-size:18px;flex-shrink:0;box-shadow:0 3px 14px rgba(0,198,255,.4)}
+.ai-tp-tx{flex:1;min-width:0}
+.ai-tp-t{font-size:14px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ai-tp-pill{font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;padding:2px 8px;
+  border-radius:99px;background:rgba(0,198,255,.14);color:var(--accent);border:1px solid rgba(0,198,255,.3)}
+.ai-tp-s{font-size:11.5px;color:var(--muted);line-height:1.55;margin-top:3px}
+.ai-tp-s strong{color:var(--text)}
+.ai-tp-body{background:#fff;border:1.5px solid rgba(0,198,255,.18);border-radius:13px;padding:16px}
+
+/* CTA principale con "immagine AI" */
+.ai-tot-cta{width:100%;display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:13px;cursor:pointer;
+  border:2px dashed rgba(0,198,255,.4);background:rgba(0,198,255,.05);transition:all .22s;text-align:left;
+  font-family:'Plus Jakarta Sans',sans-serif}
+.ai-tot-cta:hover,.ai-tot-cta.over{border-color:var(--accent);background:rgba(0,198,255,.11);transform:translateY(-1px)}
+.ai-tot-cta-ic{width:52px;height:52px;border-radius:14px;background:var(--grad);color:#fff;display:flex;
+  align-items:center;justify-content:center;font-size:23px;flex-shrink:0;box-shadow:0 4px 18px rgba(0,198,255,.42)}
+.ai-tot-cta-t{font-size:14.5px;font-weight:800;color:var(--text)}
+.ai-tot-cta-s{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.5}
+.ai-tot-run{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  margin-top:16px;padding-top:14px;border-top:1.5px solid var(--border)}
+.ai-tot-run-info{font-size:11.5px;color:var(--muted)}
+.ai-tot-run-info strong{color:var(--text)}
+.ai-btn.big{padding:12px 22px;font-size:13px}
+
+/* stato finale */
+.ai-tot-done{display:flex;align-items:center;gap:14px}
+.ai-tot-done-ic{width:46px;height:46px;border-radius:13px;background:rgba(29,158,117,.12);color:var(--green);
+  display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0;border:1.5px solid rgba(29,158,117,.3)}
+.ai-tot-done-t{font-size:14px;font-weight:800;color:var(--text)}
+.ai-tot-done-s{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.55}
+.ai-tot-done-s strong{color:var(--text)}
+@media(max-width:640px){.ai-tot-cta{flex-direction:column;text-align:center}.ai-tot-run .ai-btn{width:100%;justify-content:center}}
 
 /* chip nel pannello risposta */
 .owner-ai-chip{display:none;align-items:center;gap:6px;font-size:9.5px;font-weight:800;letter-spacing:.4px;
@@ -1208,40 +1252,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 /* badge robot nella lista domande */
 .q-ai-badge{display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:800;padding:2px 7px;
   border-radius:99px;background:rgba(0,198,255,.13);color:#00c6ff;border:1px solid rgba(0,198,255,.28)}
-
-/* ── OVERLAY HUB ───────────────────────────────────────── */
-.ai-hub-ov{display:none;position:fixed;inset:0;z-index:700;background:rgba(6,14,31,.72);backdrop-filter:blur(6px);
-  align-items:center;justify-content:center;padding:16px}
-.ai-hub-ov.open{display:flex}
-.ai-hub-box{position:relative;background:var(--bg);border-radius:18px;width:100%;max-width:900px;height:min(88vh,860px);display:flex;
-  flex-direction:column;overflow:hidden;box-shadow:0 30px 80px rgba(6,14,31,.5);animation:aiIn .26s cubic-bezier(.4,0,.2,1)}
-@keyframes aiIn{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
-.ai-hub-hd{background:var(--top);padding:15px 20px;display:flex;align-items:center;gap:13px;flex-shrink:0}
-.ai-hub-hd-ic{width:40px;height:40px;border-radius:11px;background:rgba(0,198,255,.18);border:1px solid rgba(0,198,255,.35);
-  display:flex;align-items:center;justify-content:center;color:#00c6ff;font-size:17px;flex-shrink:0}
-.ai-hub-hd-tx{flex:1;min-width:0}
-.ai-hub-hd-t{font-size:14.5px;font-weight:800;color:#fff}
-.ai-hub-hd-s{font-size:10.5px;color:rgba(255,255,255,.55);margin-top:2px}
-.ai-hub-crumb{font-size:10px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;padding:4px 10px;
-  border-radius:99px;background:rgba(0,198,255,.14);color:#00c6ff;border:1px solid rgba(0,198,255,.3);white-space:nowrap}
-.ai-hub-x{width:34px;height:34px;border-radius:9px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);
-  color:rgba(255,255,255,.7);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;transition:all .18s}
-.ai-hub-x:hover{background:rgba(216,90,48,.25);color:#fff}
-.ai-hub-body{flex:1;overflow-y:auto;padding:18px 20px 22px;scrollbar-width:thin}
-.ai-hub-body::-webkit-scrollbar{width:7px}
-.ai-hub-body::-webkit-scrollbar-thumb{background:rgba(26,42,108,.2);border-radius:7px}
-.ai-hub-foot{flex-shrink:0;padding:12px 20px;border-top:1px solid var(--border);background:var(--surface);
-  display:flex;align-items:center;gap:12px}
-.ai-hub-foot:empty{display:none}
-.ai-foot-info{flex:1;font-size:11.5px;color:var(--muted)}
-.ai-foot-info strong{color:var(--text)}
-
-/* toast */
-.ai-hub-toast{position:absolute;bottom:78px;left:50%;transform:translate(-50%,14px);opacity:0;pointer-events:none;
-  background:#060e1f;color:#fff;font-size:11.5px;font-weight:600;padding:9px 16px;border-radius:99px;
-  border:1px solid rgba(0,198,255,.3);transition:all .25s;z-index:5;display:flex;align-items:center;gap:8px}
-.ai-hub-toast.show{opacity:1;transform:translate(-50%,0)}
 
 /* ── BOTTONI ───────────────────────────────────────────── */
 .ai-btn{padding:9px 16px;border-radius:9px;font-size:12px;font-weight:700;cursor:pointer;
@@ -1258,49 +1268,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .ai-btn.ok{background:rgba(29,158,117,.1);border-color:rgba(29,158,117,.35);color:var(--green);font-weight:800}
 .ai-btn.ok:hover{background:var(--green);color:#fff;border-color:var(--green)}
 
-/* ── HERO + AREE ───────────────────────────────────────── */
-.ai-hero{display:flex;gap:14px;padding:15px 16px;border-radius:13px;margin-bottom:16px;
-  background:linear-gradient(120deg,rgba(0,198,255,.09),rgba(26,42,108,.05));border:1.5px solid rgba(0,198,255,.22)}
-.ai-hero-ico{width:42px;height:42px;border-radius:12px;background:var(--grad);color:#fff;display:flex;align-items:center;
-  justify-content:center;font-size:18px;flex-shrink:0;box-shadow:0 4px 16px rgba(0,198,255,.4)}
-.ai-hero-t{font-size:14px;font-weight:800;color:var(--text);margin-bottom:4px}
-.ai-hero-s{font-size:11.5px;color:var(--muted);line-height:1.65}
-.ai-hero-s strong{color:var(--text)}
-
-.ai-area-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
-.ai-area-card{background:var(--surface);border:1.5px solid var(--border);border-radius:13px;padding:14px;cursor:pointer;
-  transition:all .2s;border-top:3px solid var(--ac);position:relative;overflow:hidden}
-.ai-area-card:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(26,42,108,.13);border-color:var(--ac)}
-.ai-area-card.locked{cursor:not-allowed;opacity:.62;background:#f7f8fc}
-.ai-area-card.locked:hover{transform:none;box-shadow:none;border-color:var(--border);border-top-color:var(--ac)}
-.ai-area-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
-.ai-area-ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px}
-.ai-area-pill{font-size:9px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;padding:3px 9px;border-radius:99px;
-  background:rgba(123,138,184,.12);color:var(--muted);display:inline-flex;align-items:center;gap:4px}
-.ai-area-pill.open{background:rgba(29,158,117,.12);color:var(--green)}
-.ai-area-name{font-size:14px;font-weight:800;color:var(--text);letter-spacing:-.2px}
-.ai-area-meta{font-size:10.5px;color:var(--muted);margin-top:2px}
-.ai-area-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:11px;padding-top:10px;
-  border-top:1px dashed var(--border)}
-.ai-area-stat{font-size:10.5px;font-weight:700;color:var(--text);display:inline-flex;align-items:center;gap:5px}
-.ai-area-stat.done{color:var(--green)}
-.ai-area-stat.muted{color:var(--muted);font-weight:600}
-.ai-area-arrow{font-size:11px;color:var(--accent)}
-.ai-mock-note{margin-top:14px;padding:10px 13px;border-radius:9px;font-size:11px;color:var(--muted);line-height:1.6;
-  background:rgba(0,198,255,.05);border:1px dashed rgba(0,198,255,.3)}
-.ai-mock-note strong{color:var(--accent)}
-
-/* ── UPLOAD ────────────────────────────────────────────── */
-.ai-up-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-.ai-up-badge{font-size:12px;font-weight:800;padding:7px 13px;border-radius:9px;white-space:nowrap}
-.ai-up-t{font-size:14px;font-weight:800;color:var(--text)}
-.ai-up-s{font-size:11px;color:var(--muted);margin-top:2px}
-.ai-drop{border:2px dashed rgba(0,198,255,.35);border-radius:13px;padding:26px 18px;text-align:center;cursor:pointer;
-  background:rgba(0,198,255,.03);transition:all .2s}
-.ai-drop:hover,.ai-drop.over{border-color:var(--accent);background:rgba(0,198,255,.08)}
-.ai-drop-ic{font-size:28px;color:var(--accent);margin-bottom:8px}
-.ai-drop-t{font-size:13px;font-weight:800;color:var(--text)}
-.ai-drop-s{font-size:11px;color:var(--muted);margin-top:3px}
 .ai-demo-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
 .ai-doc-list-h{margin-top:18px;margin-bottom:8px;font-size:10px;font-weight:800;letter-spacing:.7px;text-transform:uppercase;
   color:var(--muted);display:flex;align-items:center;gap:6px}
@@ -1339,77 +1306,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .ai-ps-st{font-size:13px;color:var(--muted)}
 .ai-proc-step.done .ai-ps-st{color:var(--green)}
 
-/* ── RISULTATI ─────────────────────────────────────────── */
-.ai-res-head{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:13px;margin-bottom:12px;
-  background:linear-gradient(120deg,rgba(0,198,255,.09),rgba(26,42,108,.05));border:1.5px solid rgba(0,198,255,.22)}
-.ai-res-h-l{flex:1;min-width:0}
-.ai-res-h-t{font-size:13.5px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:8px}
-.ai-res-h-t i{color:var(--accent)}
-.ai-res-h-s{font-size:11px;color:var(--muted);line-height:1.6;margin-top:4px}
-.ai-res-h-r{text-align:center;flex-shrink:0;padding-left:14px;border-left:1px solid rgba(0,198,255,.25)}
-.ai-conf-big{font-size:24px;font-weight:800;color:var(--accent);line-height:1}
-.ai-conf-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-top:3px}
-.ai-res-actions{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:14px}
-.ai-res-list{display:flex;flex-direction:column;gap:12px}
-
-.ai-qcard{background:var(--surface);border:1.5px solid var(--border);border-radius:13px;padding:14px;
-  border-left:4px solid var(--accent);transition:all .2s}
-.ai-qcard.confirmed{border-left-color:var(--green);background:rgba(29,158,117,.035)}
-.ai-qcard.rejected{border-left-color:var(--red);opacity:.66}
-.ai-qc-head{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:8px}
-.ai-qc-spacer{flex:1}
-.ai-qc-id{font-family:monospace;font-size:10.5px;font-weight:800;padding:3px 9px;border-radius:99px}
-.ai-qc-sub{font-size:9.5px;font-weight:700;color:var(--muted);padding:3px 8px;border-radius:99px;background:rgba(123,138,184,.1)}
-.ai-qc-obbl{font-size:9px;font-weight:800;padding:3px 8px;border-radius:99px}
-.ai-qc-conf{font-size:10px;font-weight:800;padding:3px 9px;border-radius:99px;border:1px solid;display:inline-flex;align-items:center;gap:4px}
-.ai-chip{font-size:9.5px;font-weight:800;padding:3px 9px;border-radius:99px;display:inline-flex;align-items:center;gap:4px}
-.ai-chip.ok{background:rgba(29,158,117,.12);color:var(--green)}
-.ai-chip.ko{background:rgba(216,90,48,.12);color:var(--red)}
-.ai-chip.pend{background:rgba(212,160,23,.12);color:var(--yellow)}
-.ai-qc-q{font-size:12.5px;font-weight:700;color:var(--text);line-height:1.55;margin-bottom:12px}
-
-.ai-qc-block{margin-bottom:11px}
-.ai-qc-lbl{font-size:9.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);
-  margin-bottom:7px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.ai-lbl-hint{text-transform:none;letter-spacing:0;font-weight:600;font-size:9.5px;opacity:.85}
-.ai-tag{font-size:9px;font-weight:800;padding:2px 8px;border-radius:99px;display:inline-flex;align-items:center;gap:4px;letter-spacing:.2px}
-.ai-tag.ai{background:rgba(0,198,255,.12);color:var(--accent)}
-.ai-tag.edit{background:rgba(124,58,237,.12);color:#7c3aed}
-
-.ai-att{display:flex;align-items:center;gap:11px;background:rgba(0,198,255,.04);border:1.5px solid rgba(0,198,255,.2);
-  border-radius:10px;padding:9px 11px}
-.ai-att-ic{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
-.ai-att-info{flex:1;min-width:0}
-.ai-att-nm{font-size:11.5px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ai-att-sub{font-size:10px;color:var(--muted);margin-top:2px}
-.ai-att-sel{max-width:150px;padding:6px 8px;border-radius:8px;border:1.5px solid var(--border);background:var(--surface);
-  font-size:10.5px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;flex-shrink:0}
-.ai-att-sel:focus{outline:none;border-color:var(--accent)}
-
-.ai-lvl-row{display:flex;gap:6px;flex-wrap:wrap}
-.ai-lvl{position:relative;padding:7px 13px;border-radius:99px;border:1.5px solid var(--border);background:var(--surface);
-  font-size:11px;font-weight:700;color:var(--muted);cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .16s}
-.ai-lvl:hover{border-color:var(--accent);color:var(--accent)}
-.ai-lvl.on{border-color:var(--accent);background:rgba(0,198,255,.12);color:var(--accent);font-weight:800;
-  box-shadow:0 0 0 3px rgba(0,198,255,.12)}
-.ai-lvl.na.on{border-color:#7c3aed;background:rgba(124,58,237,.1);color:#7c3aed;box-shadow:0 0 0 3px rgba(124,58,237,.12)}
-.ai-lvl-bot{font-size:8.5px;margin-right:5px;color:var(--accent);opacity:.8}
-.ai-why{margin-top:9px;font-size:11px;color:var(--text);line-height:1.6;background:rgba(212,160,23,.06);
-  border:1px solid rgba(212,160,23,.22);border-radius:9px;padding:8px 11px;display:flex;gap:8px}
-.ai-why i{color:var(--yellow);margin-top:2px;flex-shrink:0}
-
-.ai-note{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:10px 12px;font-size:11.5px;
-  color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;resize:vertical;background:var(--surface)}
-.ai-note:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,198,255,.1)}
-
-.ai-qc-foot{display:flex;align-items:center;gap:8px;padding-top:11px;border-top:1px solid var(--border)}
-
-@media(max-width:640px){
-  .ai-hub-box{height:94vh;max-width:100%}
-  .ai-hub-hd-s,.ai-hub-crumb{display:none}
-  .ai-res-h-r{display:none}
-  .ai-att-sel{max-width:110px}
-}
 
 </style>
 </head>
@@ -1432,25 +1328,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
     </div>
   </div>
 </div>
-<!-- ══════ AI OWNER · HUB DOCUMENTALE ══════ -->
-<div class="ai-hub-ov" id="ai-hub-ov">
-  <div class="ai-hub-box">
-    <div class="ai-hub-hd">
-      <div class="ai-hub-hd-ic"><i class="fa-solid fa-robot"></i></div>
-      <div class="ai-hub-hd-tx">
-        <div class="ai-hub-hd-t">Hub Documentale AI &mdash; Owner</div>
-        <div class="ai-hub-hd-s">Carica i documenti per area: l'AI li associa alle domande e propone le risposte</div>
-      </div>
-      <span class="ai-hub-crumb" id="ai-hub-crumb"></span>
-      <button class="ai-hub-x" onclick="aiHubBack()" title="Indietro"><i class="fa-solid fa-arrow-left"></i></button>
-      <button class="ai-hub-x" onclick="closeAIHub()" title="Chiudi"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-    <div class="ai-hub-body" id="ai-hub-body"></div>
-    <div class="ai-hub-foot" id="ai-hub-foot"></div>
-    <div class="ai-hub-toast" id="ai-hub-toast"></div>
-  </div>
-</div>
-
 <div class="area-notif-banner" id="area-notif-banner">
   <div class="anb-icon">✅</div>
   <div class="anb-text">
@@ -1676,18 +1553,22 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
     <!--  OWNER STEP  -->
     <div id="step-owner" style="display:none">
 
-      <!-- AI OWNER: visibile solo se l'Admin ha abilitato il flag AI sull'utenza Owner -->
-      <div class="ai-owner-bar" id="ai-owner-bar">
-        <div class="ai-owner-bar-ic"><i class="fa-solid fa-robot"></i></div>
-        <div class="ai-owner-bar-tx">
-          <div class="ai-owner-bar-t">Hub Documentale AI
-            <span class="ai-owner-bar-pill">AI attiva sull'Owner</span></div>
-          <div class="ai-owner-bar-s" id="ai-owner-bar-sub"></div>
+      <!-- AI OWNER · AI-TOTALE: visibile solo se l'Admin ha scelto la modalità "AI-Totale" -->
+      <div class="ai-total-panel" id="ai-total-panel">
+        <div class="ai-tp-head">
+          <div class="ai-tp-ic"><i class="fa-solid fa-robot"></i></div>
+          <div class="ai-tp-tx">
+            <div class="ai-tp-t">Compilazione automatica AI
+              <span class="ai-tp-pill">AI-Totale attiva</span></div>
+            <div class="ai-tp-s" id="ai-tp-sub"></div>
+          </div>
         </div>
-        <button class="btn-ai-hub" onclick="openAIHub()">
-          <i class="fa-solid fa-folder-open"></i> Apri Hub Documentale
-        </button>
+        <div class="ai-tp-body" id="ai-tp-body"></div>
+        <input type="file" id="ai-tot-inp" multiple style="display:none" onchange="aiTotFilesPicked(event)">
       </div>
+
+      <!-- QUESTIONARIO OWNER — in modalità AI-Totale compare solo dopo la generazione -->
+      <div id="owner-questionnaire">
 
       <div class="prog-sum">
         <div class="ps-s"><div class="ps-v" id="ps-a">0</div><div class="ps-l">Risposte</div></div>
@@ -1762,10 +1643,26 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
           </div>
         </div>
       </div>
+
+      </div><!-- /owner-questionnaire -->
     </div><!-- /step-owner -->
 
     <!--  AUDITOR STEP  -->
     <div id="step-auditor" style="display:none">
+
+      <!-- VALIDAZIONE AI MASSIVA — visibile solo se l'Admin ha attivato una modalità AI -->
+      <div class="aud-ai-bulk" id="aud-ai-bulk">
+        <div class="aab-ic"><i class="fa-solid fa-robot"></i></div>
+        <div class="aab-tx">
+          <div class="aab-t">Validazione AI massiva</div>
+          <div class="aab-s" id="aab-sub">Analizza in un'unica passata tutte le risposte dell'Owner e proponi l'esito di conformità per ogni domanda.</div>
+          <div class="aab-bar" id="aab-bar" style="display:none"><div class="aab-fill" id="aab-fill"></div></div>
+        </div>
+        <button class="aab-btn" id="aab-btn" onclick="doValAIAll()">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> Valida tutte con AI
+        </button>
+      </div>
+
       <div class="aud-prog-sum">
         <div class="ps-s"><div class="ps-v" id="aud-ps-v">0</div><div class="ps-l">Validate</div></div>
         <div class="ps-d"></div>
@@ -3889,7 +3786,7 @@ function goToAuditor(){
   document.getElementById('tb-uname').textContent='Silvia Verdi';
   document.getElementById('tb-urole').textContent='Auditor';
   setupAuditor();
-  setTimeout(() => { startTour(TOUR_AUDITOR); }, 700);
+  setTimeout(() => { startTour(buildAuditorTour()); }, 700);
 }
 function backToOwner(){
   document.getElementById('step-auditor').style.display='none';
@@ -3905,6 +3802,7 @@ function backToOwner(){
 //  AUDITOR 
 function setupAuditor(){
   auditorCurQ=0;
+  applyAuditorAIMode();
   document.getElementById('aud-ps-t').textContent=ownerQs.length;
   document.getElementById('aud-q-panel-title').textContent=ownerQs.length+' domande da validare';
   renderAuditorList();
@@ -5252,28 +5150,36 @@ function buildRelazionePanelHTML(areaScores, acc, wrn, rej, done, tot) {
     </div>`;
 }
 
-/*  Tour Owner con lo step dedicato all'Hub Documentale AI  */
+/*  Tour Auditor — lo step sulla Validazione AI compare solo se una modalità AI è attiva  */
+function buildAuditorTour(){
+  return (aiMode === 'none')
+    ? TOUR_AUDITOR.filter(s => s.target !== '.val-row')
+    : TOUR_AUDITOR;
+}
+
+/*  Tour Owner con lo step dedicato alla compilazione automatica AI  */
 function buildOwnerAITour(){
   const aiStep = {
-    target: '#ai-owner-bar', variant: 'light', position: 'bottom', arrow: false,
+    target: '#ai-total-panel', variant: 'light', position: 'bottom', arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
       <div class="tc-icon-row">
         <div class="tc-icon-wrap" style="background:rgba(0,198,255,.1)"><i class="fa-solid fa-robot" style="color:#00c6ff"></i></div>
-        <span class="tc-step-label">AI Assistenza Owner</span>
+        <span class="tc-step-label">AI-Totale</span>
       </div>
-      <div class="tc-title">Hub Documentale AI</div>
+      <div class="tc-title">Compilazione automatica AI</div>
       <div class="tc-body">
-        L'Admin ha abilitato l'<strong>AI sull'Owner</strong>. Invece di rispondere domanda per domanda,
-        puoi caricare <strong>tutti i documenti di un'area NIS2</strong> in un colpo solo:
-        l'AI li legge, li <strong>associa alla domanda di pertinenza</strong>, imposta il
-        <strong>livello di risposta</strong> e scrive una nota motivata.<br><br>
-        Nulla viene salvato senza il tuo via libera: <strong>l'ultima parola è sempre tua</strong>.
+        L'Admin ha scelto la modalità <strong>AI-Totale</strong>. Non devi rispondere domanda per domanda:
+        carica i <strong>documenti a tua disposizione</strong> e premi <strong>Avvia AI</strong>.<br><br>
+        L'AI compila da sola <strong>livello, evidenza e allegato</strong> di tutte le domande:
+        il questionario comparirà qui sotto già completo, pronto per l'<strong>Auditor</strong>.
       </div>
       ${footerLight(step, total)}
     `
   };
-  return [TOUR_OWNER[0], aiStep].concat(TOUR_OWNER.slice(1));
+  /*  In AI-Totale il questionario non è ancora a schermo: il tour si ferma
+      al pannello di caricamento (gli step successivi puntano a elementi nascosti). */
+  return [TOUR_OWNER[0], TOUR_OWNER[1], aiStep];
 }
 
 /*  ══════════════════════════════════════════════════════════════════════════
@@ -5449,7 +5355,6 @@ const AI_GOV_MAP = {
 };
 
 const AI_CMMI_LEVELS = ['N/A','Iniziale','Ripetibile','Definito','Gestito','Ottimizzato'];
-const AI_UNLOCKED_AREAS = new Set(['GOVERN']);
 
 /*  ── STATO ────────────────────────────────────────────────────────────── */
 let aiOwnerEnabled = false;
@@ -5457,8 +5362,6 @@ let aiHubDocs      = [];      // [{id,name,size,profile}]
 let aiDocSeq       = 0;
 let aiProposals    = {};      // idx domanda → proposta
 let aiAnalysisDone = false;
-let aiHubView      = 'areas'; // areas | upload | processing | results
-let aiHubArea      = 'GOVERN';
 
 /*  ── UTILITY ──────────────────────────────────────────────────────────── */
 function aiFmtSize(b){ const kb=b/1024; return kb>1024 ? (kb/1024).toFixed(1)+' MB' : Math.round(kb)+' KB'; }
@@ -5480,118 +5383,152 @@ function aiQuestionsOfArea(area){
   return out;
 }
 
+/*  ── MODALITÀ AI SCELTA DALL'ADMIN ────────────────────────────────────── */
+/*  'none'   → tutto manuale (Owner e Auditor) · nessun pulsante AI
+    'assist' → AI a supporto del solo Auditor · l'Owner compila a mano
+    'total'  → l'AI compila da sola le risposte dell'Owner                   */
+let aiMode = 'none';
+
+function readAIMode(){
+  const p = new URLSearchParams(window.location.search);
+  let m = p.get('aiMode');
+  if(!m){ try{ m = sessionStorage.getItem('3af_ai_mode'); }catch(e){} }
+  if(m === 'total' || m === 'assist' || m === 'none') return m;
+  // fallback sui vecchi parametri
+  let own = p.get('aiOwn') === '1', aud = p.get('aiAud') === '1';
+  if(!own){ try{ own = sessionStorage.getItem('3af_ai_own') === '1'; }catch(e){} }
+  if(!aud){ try{ aud = sessionStorage.getItem('3af_ai_aud') === '1'; }catch(e){} }
+  return own ? 'total' : (aud ? 'assist' : 'none');
+}
+
+/*  Nasconde il pulsante di validazione AI dell'Auditor quando non è stata
+    scelta nessuna modalità AI (compilazione interamente manuale).           */
+function applyAuditorAIMode(){
+  const btn = document.getElementById('aud-btn-val-ai');
+  if(btn){
+    const row = btn.closest('.val-row') || btn;
+    row.style.display = (aiMode === 'none') ? 'none' : '';
+  }
+  const bulk = document.getElementById('aud-ai-bulk');
+  if(bulk) bulk.classList.toggle('show', aiMode !== 'none');
+}
+
+/*  ── VALIDAZIONE AI SU TUTTE LE DOMANDE ───────────────────────────────── */
+let audBulkRunning = false;
+
+function doValAIAll(){
+  if(audBulkRunning || !ownerQs.length) return;
+
+  const pending = ownerQs.map((d,i)=>({d,i})).filter(({i}) => !auditorValidations[i]);
+  const btn  = document.getElementById('aab-btn');
+  const sub  = document.getElementById('aab-sub');
+  const bar  = document.getElementById('aab-bar');
+  const fill = document.getElementById('aab-fill');
+
+  if(!pending.length){
+    sub.innerHTML = `Tutte le <strong>${ownerQs.length}</strong> domande risultano già validate.`;
+    return;
+  }
+
+  audBulkRunning = true;
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Analisi in corso...';
+  bar.style.display = 'block';
+  fill.style.width = '0%';
+
+  // blocca anche la validazione singola durante l'elaborazione
+  const single = document.getElementById('aud-btn-val-ai');
+  if(single) single.disabled = true;
+
+  const step = Math.max(70, Math.min(220, 4200 / pending.length));
+
+  pending.forEach(({d,i}, k) => {
+    setTimeout(() => {
+      const aiAns = MOCK_ANS[d.id] || getMockAns();
+      auditorValidations[i] = { status: aiAns.status, source: 'ai', _aiData: aiAns };
+
+      fill.style.width = Math.round((k+1)/pending.length*100) + '%';
+      sub.innerHTML = `Analisi in corso — <strong>${k+1}</strong> di <strong>${pending.length}</strong> risposte valutate…`;
+
+      if(k === pending.length - 1) setTimeout(finishBulk, 260);
+    }, step*(k+1));
+  });
+
+  function finishBulk(){
+    audBulkRunning = false;
+    const all = ownerQs.length;
+    const acc = Object.values(auditorValidations).filter(v=>v.status==='accepted').length;
+    const rej = Object.values(auditorValidations).filter(v=>v.status==='rejected').length;
+    const war = Object.values(auditorValidations).filter(v=>v.status==='warning').length;
+
+    btn.classList.add('done');
+    btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Validazione AI completata';
+    sub.innerHTML = `<strong>${all}</strong> domande validate dall'AI · ${acc} conformi · ${war} parziali · ${rej} non conformi.
+      Puoi sempre sovrascrivere il singolo esito con la validazione manuale.`;
+    fill.style.width = '100%';
+
+    // tutte le aree risultano validate
+    ownerQs.forEach(d => completedAreas.add(d.area));
+
+    updateAuditorProg();
+    renderAuditorList();
+    auditorSelectQ(auditorCurQ);   // mostra subito l'esito sulla domanda aperta
+
+    const banner = document.getElementById('area-notif-banner');
+    document.getElementById('anb-title').textContent = `🤖  ${all} domande validate dall'AI`;
+    document.getElementById('anb-sub').textContent   = `Esito e abstract sono disponibili su ogni domanda — il report si aggiorna automaticamente`;
+    banner.classList.add('show');
+    clearTimeout(window._bannerTimer);
+    window._bannerTimer = setTimeout(()=>banner.classList.remove('show'), 5200);
+  }
+}
+
 /*  ── ATTIVAZIONE ──────────────────────────────────────────────────────── */
 function initAIOwner(){
-  const p = new URLSearchParams(window.location.search);
-  let flag = p.get('aiOwn') === '1';
-  if(!flag){ try{ flag = sessionStorage.getItem('3af_ai_own') === '1'; }catch(e){} }
-  aiOwnerEnabled = flag;
+  aiMode = readAIMode();
+  aiOwnerEnabled = (aiMode === 'total');
+  applyAuditorAIMode();
 
-  const bar = document.getElementById('ai-owner-bar');
-  if(!bar) return;
-  bar.style.display = aiOwnerEnabled ? 'flex' : 'none';
-  if(aiOwnerEnabled) aiUpdateOwnerBar();
-}
-function aiUpdateOwnerBar(){
-  const gov = aiQuestionsOfArea('GOVERN').length;
-  const done = Object.keys(aiProposals).filter(k=>aiProposals[k].applied).length;
-  const el = document.getElementById('ai-owner-bar-sub');
-  if(!el) return;
-  el.innerHTML = done > 0
-    ? `<strong>${done}</strong> risposte precompilate dall'AI · sempre modificabili dalla tua postazione`
-    : `Carica i documenti per area NIS2: l'AI li associa alle domande, propone il livello e scrive la nota. <strong>${gov}</strong> domande GOVERN in attesa.`;
+  const panel = document.getElementById('ai-total-panel');
+  if(!panel) return;
+  panel.classList.toggle('show', aiOwnerEnabled);
+  if(aiOwnerEnabled){ aiTotView = aiAnalysisDone ? 'done' : 'upload'; aiTotRender(); }
+  aiTotShowQuestionnaire(!aiOwnerEnabled || aiAnalysisDone);
 }
 
-/*  ── APERTURA / CHIUSURA HUB ──────────────────────────────────────────── */
-function openAIHub(){
-  if(!aiOwnerEnabled) return;
-  aiHubView = aiAnalysisDone ? 'results' : 'areas';
-  document.getElementById('ai-hub-ov').classList.add('open');
-  renderAIHub();
-}
-function closeAIHub(){ document.getElementById('ai-hub-ov').classList.remove('open'); }
-function aiHubBack(){
-  if(aiHubView==='results'){ aiHubView='upload'; }
-  else if(aiHubView==='upload'){ aiHubView='areas'; }
-  else { closeAIHub(); return; }
-  renderAIHub();
+/*  In AI-Totale l'Owner vede prima solo il pannello di caricamento:
+    il questionario compare come "seconda pagina", già compilato dall'AI.   */
+function aiTotShowQuestionnaire(show){
+  const q = document.getElementById('owner-questionnaire');
+  if(q) q.style.display = show ? '' : 'none';
 }
 
-function renderAIHub(){
-  const body = document.getElementById('ai-hub-body');
-  const foot = document.getElementById('ai-hub-foot');
-  const crumb= document.getElementById('ai-hub-crumb');
-  const map  = { areas:'Aree NIS2', upload:'GOVERN · Documenti', processing:'Analisi in corso', results:'GOVERN · Proposte AI' };
-  crumb.textContent = map[aiHubView] || '';
-  if(aiHubView==='areas')      { body.innerHTML = aiViewAreas();  foot.innerHTML = ''; }
-  else if(aiHubView==='upload'){ body.innerHTML = aiViewUpload();  foot.innerHTML = aiFootUpload(); }
-  else if(aiHubView==='processing'){ body.innerHTML = aiViewProcessing(); foot.innerHTML = ''; }
-  else                          { body.innerHTML = aiViewResults(); foot.innerHTML = aiFootResults(); aiUpdateResultsBar(); }
-  body.scrollTop = 0;
+/*  ══════════════════════════════════════════════════════════════════════════
+    AI-TOTALE · FLUSSO INLINE (senza modale)
+    Carica documenti → Avvia AI → loading → risposte, evidenze e allegati
+    già compilati: l'Owner non deve fare nulla, si passa direttamente all'Auditor
+    ══════════════════════════════════════════════════════════════════════════ */
+let aiTotView = 'upload';   // upload | processing | done
+
+function aiTotRender(){
+  const body = document.getElementById('ai-tp-body');
+  const sub  = document.getElementById('ai-tp-sub');
+  if(!body) return;
+  if(aiTotView === 'upload'){
+    sub.innerHTML = `Carica i documenti a tua disposizione: l'AI leggerà gli allegati e compilerà
+      <strong>livello, evidenza e file</strong> di tutte le ${ownerQs.length} domande dell'assessment.`;
+    body.innerHTML = aiTotViewUpload();
+  } else if(aiTotView === 'processing'){
+    sub.innerHTML = `Analisi in corso — non chiudere la pagina.`;
+    body.innerHTML = aiViewProcessing();
+  } else {
+    const n = Object.values(aiProposals).filter(p=>p.applied).length;
+    sub.innerHTML = `<strong>${n}</strong> risposte compilate dall'AI · restano tutte modificabili dalla tua postazione.`;
+    body.innerHTML = aiTotViewDone(n);
+  }
 }
 
-/*  ── VISTA 1 · AREE ───────────────────────────────────────────────────── */
-function aiViewAreas(){
-  const areas = Object.keys(AREA_CFG);
-  const cards = areas.map(area=>{
-    const cfg = AREA_CFG[area];
-    const qs  = aiQuestionsOfArea(area).length;
-    const unlocked = AI_UNLOCKED_AREAS.has(area);
-    const docs = unlocked ? aiHubDocs.length : 0;
-    const analysed = unlocked && aiAnalysisDone;
-    return `
-      <div class="ai-area-card ${unlocked?'':'locked'}" ${unlocked?`onclick="aiOpenArea('${area}')"`:`onclick="aiLockedToast()"`}
-           style="--ac:${cfg.col}">
-        <div class="ai-area-top">
-          <span class="ai-area-ico" style="background:${cfg.bg}">${cfg.icon}</span>
-          ${unlocked
-            ? `<span class="ai-area-pill open"><i class="fa-solid fa-lock-open"></i> Attiva</span>`
-            : `<span class="ai-area-pill"><i class="fa-solid fa-lock"></i> Bloccata</span>`}
-        </div>
-        <div class="ai-area-name">${area}</div>
-        <div class="ai-area-meta">${qs} domande assegnate dal Reviewer</div>
-        <div class="ai-area-foot">
-          ${unlocked
-            ? (analysed
-                ? `<span class="ai-area-stat done"><i class="fa-solid fa-circle-check"></i> Analisi completata</span>`
-                : `<span class="ai-area-stat"><i class="fa-solid fa-paperclip"></i> ${docs} documenti caricati</span>`)
-            : `<span class="ai-area-stat muted">Disponibile nella versione completa</span>`}
-          ${unlocked?`<i class="fa-solid fa-arrow-right ai-area-arrow"></i>`:''}
-        </div>
-      </div>`;
-  }).join('');
-
-  return `
-    <div class="ai-hero">
-      <div class="ai-hero-ico"><i class="fa-solid fa-robot"></i></div>
-      <div>
-        <div class="ai-hero-t">Carica i documenti per area NIS2</div>
-        <div class="ai-hero-s">Non devi indicare a quale domanda si riferiscono: l'AI legge gli allegati,
-          li associa al controllo di pertinenza, propone il livello di maturità e scrive una nota motivata.
-          <strong>Ogni proposta resta modificabile da te.</strong></div>
-      </div>
-    </div>
-    <div class="ai-area-grid">${cards}</div>
-    <div class="ai-mock-note"><i class="fa-solid fa-circle-info"></i>
-      In questo mockup è attiva la sola area <strong>GOVERN</strong>. Le altre cinque aree seguiranno la stessa logica.</div>`;
-}
-function aiOpenArea(area){
-  if(!AI_UNLOCKED_AREAS.has(area)) return aiLockedToast();
-  aiHubArea = area;
-  aiHubView = aiAnalysisDone ? 'results' : 'upload';
-  renderAIHub();
-}
-function aiLockedToast(){
-  const t = document.getElementById('ai-hub-toast');
-  t.innerHTML = '<i class="fa-solid fa-lock"></i> Area bloccata in questo mockup — è attiva solo GOVERN';
-  t.classList.add('show');
-  clearTimeout(window._aiToastT);
-  window._aiToastT = setTimeout(()=>t.classList.remove('show'), 2600);
-}
-
-/*  ── VISTA 2 · UPLOAD ─────────────────────────────────────────────────── */
-function aiViewUpload(){
-  const qs = aiQuestionsOfArea('GOVERN');
+function aiTotViewUpload(){
   const docs = aiHubDocs.map(f=>{
     const ic = aiFileIcon(f.name);
     const pr = AI_DOC_PROFILES[f.profile];
@@ -5602,51 +5539,155 @@ function aiViewUpload(){
           <div class="ai-doc-nm">${f.name}</div>
           <div class="ai-doc-sub">${aiFmtSize(f.size)}${pr?` · riconosciuto come <strong style="color:${pr.col}">${pr.label}</strong>`:''}</div>
         </div>
-        <button class="ai-doc-rm" onclick="aiRemoveDoc('${f.id}')" title="Rimuovi"><i class="fa-solid fa-xmark"></i></button>
+        <button class="ai-doc-rm" onclick="aiTotRemoveDoc('${f.id}')" title="Rimuovi"><i class="fa-solid fa-xmark"></i></button>
       </div>`;
   }).join('');
 
+  const n = aiHubDocs.length;
   return `
-    <div class="ai-up-head">
-      <span class="ai-up-badge" style="background:${AREA_CFG.GOVERN.bg};color:${AREA_CFG.GOVERN.col}">${AREA_CFG.GOVERN.icon} GOVERN</span>
-      <div>
-        <div class="ai-up-t">Documenti dell'area GOVERN</div>
-        <div class="ai-up-s">${qs.length} domande assegnate dal Reviewer per quest'area</div>
-      </div>
-    </div>
-
-    <div class="ai-drop" id="ai-drop"
-         ondragover="aiDragOver(event)" ondragleave="aiDragLeave(event)" ondrop="aiDrop(event)"
-         onclick="document.getElementById('ai-file-inp').click()">
-      <input type="file" id="ai-file-inp" multiple style="display:none" onchange="aiFilesPicked(event)">
-      <div class="ai-drop-ic"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-      <div class="ai-drop-t">Trascina qui i documenti o fai click</div>
-      <div class="ai-drop-s">Policy, piani, registri, verbali, inventari — PDF, DOCX, XLSX, immagini</div>
-    </div>
+    <button class="ai-tot-cta" id="ai-tot-cta"
+            ondragover="aiTotDragOver(event)" ondragleave="aiTotDragLeave(event)" ondrop="aiTotDrop(event)"
+            onclick="document.getElementById('ai-tot-inp').click()">
+      <span class="ai-tot-cta-ic"><i class="fa-solid fa-robot"></i></span>
+      <span>
+        <span class="ai-tot-cta-t">Carica i documenti a tua disposizione</span>
+        <span class="ai-tot-cta-s">PDF, DOCX</span>
+      </span>
+    </button>
 
     <div class="ai-demo-row">
-      <button class="ai-btn ghost" onclick="aiLoadDemoDocs()"><i class="fa-solid fa-wand-magic-sparkles"></i> Carica set documentale di esempio</button>
-      ${aiHubDocs.length?`<button class="ai-btn ghost danger" onclick="aiClearDocs()"><i class="fa-solid fa-trash"></i> Svuota</button>`:''}
+      <button class="ai-btn ghost" onclick="aiTotLoadDemo()"><i class="fa-solid fa-wand-magic-sparkles"></i> Carica set documentale di esempio</button>
+      ${n?`<button class="ai-btn ghost danger" onclick="aiTotClearDocs()"><i class="fa-solid fa-trash"></i> Svuota</button>`:''}
     </div>
 
-    ${aiHubDocs.length ? `
-      <div class="ai-doc-list-h"><i class="fa-solid fa-paperclip"></i> ${aiHubDocs.length} documenti pronti per l'analisi</div>
+    ${n ? `
+      <div class="ai-doc-list-h"><i class="fa-solid fa-paperclip"></i> ${n} documenti pronti per l'analisi</div>
       <div class="ai-doc-list">${docs}</div>` : `
-      <div class="ai-empty"><i class="fa-solid fa-folder-open"></i> Nessun documento caricato per quest'area</div>`}`;
+      <div class="ai-empty" style="margin-top:14px"><i class="fa-solid fa-folder-open"></i> Nessun documento caricato</div>`}
+
+    <div class="ai-tot-run">
+      <div class="ai-tot-run-info">${n
+        ? `<strong>${n}</strong> documenti · <strong>${ownerQs.length}</strong> domande da compilare`
+        : `Carica almeno un documento per avviare l'AI`}</div>
+      <button class="ai-btn primary big" ${n?'':'disabled'} onclick="aiTotStart()">
+        <i class="fa-solid fa-robot"></i> Avvia AI
+      </button>
+    </div>`;
 }
-function aiFootUpload(){
-  const n = aiHubDocs.length;
-  const q = aiQuestionsOfArea('GOVERN').length;
+
+function aiTotViewDone(n){
   return `
-    <div class="ai-foot-info">${n?`<strong>${n}</strong> documenti · <strong>${q}</strong> domande GOVERN da coprire`:'Carica almeno un documento per avviare l\'analisi'}</div>
-    <button class="ai-btn primary" ${n?'':'disabled'} onclick="aiStartAnalysis()">
-      <i class="fa-solid fa-robot"></i> Avvia analisi AI
-    </button>`;
+    <div class="ai-tot-done">
+      <div class="ai-tot-done-ic"><i class="fa-solid fa-circle-check"></i></div>
+      <div style="flex:1;min-width:0">
+        <div class="ai-tot-done-t">Assessment compilato dall'AI</div>
+        <div class="ai-tot-done-s">L'AI ha impostato il <strong>livello di risposta</strong>, scritto l'<strong>evidenza</strong>
+          e associato l'<strong>allegato</strong> a tutte le ${n} domande. Non devi fare altro:
+          puoi rivedere le risposte e passare all'Auditor.</div>
+      </div>
+      <button class="ai-btn ghost" onclick="aiTotReset()"><i class="fa-solid fa-rotate-left"></i> Rifai</button>
+    </div>`;
 }
-function aiDragOver(e){ e.preventDefault(); document.getElementById('ai-drop').classList.add('over'); }
-function aiDragLeave(e){ document.getElementById('ai-drop').classList.remove('over'); }
-function aiDrop(e){ e.preventDefault(); document.getElementById('ai-drop').classList.remove('over'); aiAddFiles(e.dataTransfer.files); }
-function aiFilesPicked(e){ aiAddFiles(e.target.files); e.target.value=''; }
+
+/*  ── UPLOAD ───────────────────────────────────────────────────────────── */
+function aiTotDragOver(e){ e.preventDefault(); const el=document.getElementById('ai-tot-cta'); if(el) el.classList.add('over'); }
+function aiTotDragLeave(e){ const el=document.getElementById('ai-tot-cta'); if(el) el.classList.remove('over'); }
+function aiTotDrop(e){ e.preventDefault(); aiTotDragLeave(e); aiTotAddFiles(e.dataTransfer.files); }
+function aiTotFilesPicked(e){ aiTotAddFiles(e.target.files); e.target.value=''; }
+function aiTotAddFiles(fileList){
+  Array.from(fileList||[]).forEach(f=>{
+    aiHubDocs.push({ id:'d'+(++aiDocSeq), name:f.name, size:f.size, profile:aiDetectProfile(f.name) });
+  });
+  aiTotRender();
+}
+function aiTotLoadDemo(){
+  Object.entries(AI_DOC_PROFILES).forEach(([key,p])=>{
+    if(aiHubDocs.some(d=>d.name===p.demo)) return;
+    aiHubDocs.push({ id:'d'+(++aiDocSeq), name:p.demo, size:p.size, profile:key });
+  });
+  aiTotRender();
+}
+function aiTotRemoveDoc(id){ aiHubDocs = aiHubDocs.filter(d=>d.id!==id); aiTotRender(); }
+function aiTotClearDocs(){ aiHubDocs = []; aiTotRender(); }
+
+/*  ── ANALISI (stesso loading di prima) ────────────────────────────────── */
+function aiTotStart(){
+  if(!aiHubDocs.length) return;
+  aiTotView = 'processing';
+  aiTotRender();
+
+  const per = 620;
+  AI_STEPS.forEach((s,i)=>{
+    setTimeout(()=>{
+      const li = document.getElementById('ai-ps-'+i); if(!li) return;
+      li.classList.add('done');
+      li.querySelector('.ai-ps-st').innerHTML='<i class="fa-solid fa-circle-check"></i>';
+      const nx = document.getElementById('ai-ps-'+(i+1));
+      if(nx) nx.classList.add('run');
+      const fill = document.getElementById('ai-proc-fill');
+      if(fill) fill.style.width = Math.round((i+1)/AI_STEPS.length*100)+'%';
+    }, per*(i+1));
+  });
+
+  setTimeout(()=>{
+    aiBuildProposals(true);       // proposte per TUTTE le domande dell'assessment
+    aiTotApplyAll();              // applicate subito: l'Owner non deve confermare nulla
+    aiAnalysisDone = true;
+    aiTotView = 'done';
+    aiTotRender();
+    aiTotShowQuestionnaire(true); // seconda "pagina": il questionario già compilato
+    const q = document.getElementById('owner-questionnaire');
+    if(q && q.scrollIntoView) q.scrollIntoView({ behavior:'smooth', block:'start' });
+  }, per*(AI_STEPS.length+1));
+}
+
+/*  ── APPLICAZIONE AUTOMATICA AL QUESTIONARIO ──────────────────────────── */
+function aiTotApplyAll(){
+  let n = 0;
+  Object.values(aiProposals).forEach(p=>{
+    const doc = aiHubDocs.find(x=>x.id===p.docId);
+    if(!ownerAnswers[p.idx]) ownerAnswers[p.idx] = {};
+    ownerAnswers[p.idx].cmmi       = p.cmmi;
+    ownerAnswers[p.idx].answer     = p.note;
+    ownerAnswers[p.idx].aiAssisted = true;
+    ownerAnswers[p.idx].aiEdited   = false;
+    if(doc) uploadedFiles[p.idx] = { name:doc.name, size:doc.size, aiDoc:true };
+    p.status  = 'confirmed';
+    p.applied = true;
+    n++;
+  });
+
+  // riallinea il pannello di risposta attualmente aperto
+  const cur = ownerAnswers[ownerCurQ];
+  const ta  = document.getElementById('owner-a-ev');
+  if(ta && cur){
+    ta.value = cur.answer || '';
+    document.querySelectorAll('.cmmi-r').forEach(b=>b.classList.toggle('on', b.getAttribute('data-v')===(cur.cmmi||'')));
+  }
+  ownerResetPdfZ();
+  if(uploadedFiles[ownerCurQ]) ownerShowPdfFile(uploadedFiles[ownerCurQ].name, uploadedFiles[ownerCurQ].size);
+
+  // l'Owner non deve fare nulla: tutte le aree risultano già completate
+  ownerQs.forEach(d => completedAreas.add(d.area));
+
+  renderOwnerList(); updateOwnerProg(); updateOwnerAIChip();
+
+  const banner = document.getElementById('area-notif-banner');
+  document.getElementById('anb-title').textContent = `🤖  ${n} risposte compilate dall'AI`;
+  document.getElementById('anb-sub').textContent   = `Livello, evidenza e allegato sono già impostati — puoi passare all'Auditor`;
+  banner.classList.add('show');
+  clearTimeout(window._bannerTimer);
+  window._bannerTimer = setTimeout(()=>banner.classList.remove('show'), 5200);
+  return n;
+}
+
+function aiTotReset(){
+  aiProposals = {};
+  aiAnalysisDone = false;
+  aiTotView = 'upload';
+  aiTotRender();
+  aiTotShowQuestionnaire(false);
+}
 
 function aiDetectProfile(name){
   const n = aiNorm(name);
@@ -5655,27 +5696,11 @@ function aiDetectProfile(name){
   }
   return null;
 }
-function aiAddFiles(fileList){
-  Array.from(fileList||[]).forEach(f=>{
-    aiHubDocs.push({ id:'d'+(++aiDocSeq), name:f.name, size:f.size, profile:aiDetectProfile(f.name) });
-  });
-  renderAIHub();
-}
-function aiLoadDemoDocs(){
-  Object.entries(AI_DOC_PROFILES).forEach(([key,p])=>{
-    if(aiHubDocs.some(d=>d.name===p.demo)) return;
-    aiHubDocs.push({ id:'d'+(++aiDocSeq), name:p.demo, size:p.size, profile:key });
-  });
-  renderAIHub();
-}
-function aiRemoveDoc(id){ aiHubDocs = aiHubDocs.filter(d=>d.id!==id); renderAIHub(); }
-function aiClearDocs(){ aiHubDocs = []; renderAIHub(); }
-
 /*  ── VISTA 3 · ANALISI SIMULATA ───────────────────────────────────────── */
 const AI_STEPS = [
   { i:'fa-file-lines',    t:'Lettura e OCR dei documenti caricati' },
   { i:'fa-align-left',    t:'Estrazione di paragrafi, tabelle e riferimenti' },
-  { i:'fa-diagram-project',t:'Mappatura dei contenuti sui controlli NIS2 dell\'area GOVERN' },
+  { i:'fa-diagram-project',t:'Mappatura dei contenuti sui controlli NIS2 dell\'assessment' },
   { i:'fa-paperclip',     t:'Associazione di ogni allegato alla domanda di pertinenza' },
   { i:'fa-gauge-high',    t:'Assegnazione del livello di maturità proposto' },
   { i:'fa-pen-nib',       t:'Redazione delle note di risposta' }
@@ -5685,7 +5710,7 @@ function aiViewProcessing(){
     <div class="ai-proc">
       <div class="ai-proc-orb"><i class="fa-solid fa-robot"></i></div>
       <div class="ai-proc-t">Analisi documentale in corso</div>
-      <div class="ai-proc-s">${aiHubDocs.length} documenti · ${aiQuestionsOfArea('GOVERN').length} controlli GOVERN</div>
+      <div class="ai-proc-s">${aiHubDocs.length} documenti · ${ownerQs.length} controlli NIS2</div>
       <div class="ai-proc-bar"><div class="ai-proc-fill" id="ai-proc-fill"></div></div>
       <ul class="ai-proc-steps" id="ai-proc-steps">
         ${AI_STEPS.map((s,i)=>`
@@ -5697,24 +5722,6 @@ function aiViewProcessing(){
       </ul>
     </div>`;
 }
-function aiStartAnalysis(){
-  if(!aiHubDocs.length) return;
-  aiHubView='processing'; renderAIHub();
-  const per = 620;
-  AI_STEPS.forEach((s,i)=>{
-    setTimeout(()=>{
-      const li = document.getElementById('ai-ps-'+i); if(!li) return;
-      li.classList.add('done');
-      li.querySelector('.ai-ps-st').innerHTML='<i class="fa-solid fa-circle-check"></i>';
-      const prev = document.getElementById('ai-ps-'+(i+1));
-      if(prev) prev.classList.add('run');
-      const fill = document.getElementById('ai-proc-fill');
-      if(fill) fill.style.width = Math.round((i+1)/AI_STEPS.length*100)+'%';
-    }, per*(i+1));
-  });
-  setTimeout(()=>{ aiBuildProposals(); aiAnalysisDone=true; aiHubView='results'; renderAIHub(); }, per*(AI_STEPS.length+1));
-}
-
 /*  ── COSTRUZIONE PROPOSTE ─────────────────────────────────────────────── */
 function aiPickDoc(profileKey, idx){
   if(!aiHubDocs.length) return null;
@@ -5724,9 +5731,12 @@ function aiPickDoc(profileKey, idx){
   if(untyped.length) return untyped[idx % untyped.length];
   return aiHubDocs[idx % aiHubDocs.length];
 }
-function aiBuildProposals(){
+/*  all = true  → proposte per TUTTE le domande selezionate dal Reviewer
+    all = false → solo area GOVERN (comportamento storico)                   */
+function aiBuildProposals(all){
   aiProposals = {};
-  aiQuestionsOfArea('GOVERN').forEach(({d,i},k)=>{
+  const items = all ? ownerQs.map((d,i)=>({d,i})) : aiQuestionsOfArea('GOVERN');
+  items.forEach(({d,i},k)=>{
     const m = AI_GOV_MAP[d.id] || {
       d:'policy', l:'Definito', c:80,
       n:"L'evidenza documentale caricata copre il controllo richiesto; il processo risulta descritto e applicato in modo coerente con quanto previsto dalla normativa di riferimento.",
@@ -5750,202 +5760,6 @@ function aiBuildProposals(){
   });
 }
 
-/*  ── VISTA 4 · RISULTATI ──────────────────────────────────────────────── */
-function aiViewResults(){
-  const items = aiQuestionsOfArea('GOVERN');
-  if(!items.length){
-    return `<div class="ai-empty"><i class="fa-solid fa-circle-info"></i>
-      Il Reviewer non ha selezionato domande dell'area GOVERN per questo assessment.</div>`;
-  }
-  const avg = Math.round(items.reduce((s,{i})=>s+(aiProposals[i]?.conf||0),0)/items.length);
-  const head = `
-    <div class="ai-res-head">
-      <div class="ai-res-h-l">
-        <div class="ai-res-h-t"><i class="fa-solid fa-robot"></i> ${items.length} proposte generate per l'area GOVERN</div>
-        <div class="ai-res-h-s">Per ogni domanda l'AI ha scelto l'allegato, impostato il livello e scritto la nota.
-          Modifica quello che non ti convince, poi conferma.</div>
-      </div>
-      <div class="ai-res-h-r">
-        <div class="ai-conf-big">${avg}%</div>
-        <div class="ai-conf-lbl">confidenza media</div>
-      </div>
-    </div>
-    <div class="ai-res-actions">
-      <button class="ai-btn ghost" onclick="aiConfirmAll()"><i class="fa-solid fa-check-double"></i> Conferma tutte</button>
-      <button class="ai-btn ghost" onclick="aiResetAll()"><i class="fa-solid fa-rotate-left"></i> Ripristina proposte AI</button>
-    </div>`;
-
-  return head + `<div class="ai-res-list" id="ai-res-list">` +
-    items.map(({d,i})=>aiCardHTML(i,d)).join('') + `</div>`;
-}
-
-function aiCardHTML(i, d){
-  d = d || ownerQs[i];
-  const p = aiProposals[i]; if(!p) return '';
-  const doc = aiHubDocs.find(x=>x.id===p.docId);
-  const ic  = doc ? aiFileIcon(doc.name) : {i:'fa-file-circle-question',c:'#7b8ab8'};
-  const cfg = AREA_CFG[d.area] || {col:'#00c6ff'};
-  const isObbl = d.obbligatorio !== false;
-
-  const confCol = p.conf>=88 ? '#1D9E75' : p.conf>=75 ? '#D4A017' : '#D85A30';
-
-  const levels = AI_CMMI_LEVELS.map(l=>{
-    const on = p.cmmi===l;
-    const isAi = p.aiCmmi===l;
-    return `<button class="ai-lvl${on?' on':''}${l==='N/A'?' na':''}" onclick="aiSetLevel(${i},'${l}')">
-              ${isAi?'<i class="fa-solid fa-robot ai-lvl-bot" title="Proposto dall&apos;AI"></i>':''}${l}
-            </button>`;
-  }).join('');
-
-  const docOpts = aiHubDocs.map(f=>
-    `<option value="${f.id}"${f.id===p.docId?' selected':''}>${f.name}</option>`).join('');
-
-  let stateChip = '';
-  if(p.status==='confirmed') stateChip = `<span class="ai-chip ok"><i class="fa-solid fa-circle-check"></i> Confermata</span>`;
-  else if(p.status==='rejected') stateChip = `<span class="ai-chip ko"><i class="fa-solid fa-circle-xmark"></i> Scartata</span>`;
-  else stateChip = `<span class="ai-chip pend"><i class="fa-solid fa-hourglass-half"></i> Da confermare</span>`;
-
-  return `
-  <div class="ai-qcard ${p.status}" id="aiq-${i}">
-    <div class="ai-qc-head">
-      <span class="ai-qc-id" style="background:${cfg.col}14;color:${cfg.col}">${d.id}</span>
-      ${d.sub?`<span class="ai-qc-sub">${d.sub}</span>`:''}
-      <span class="ai-qc-obbl" style="background:${isObbl?'#1D9E7515':'#D85A3015'};color:${isObbl?'#1D9E75':'#D85A30'}">${isObbl?'Obbligatoria':'Non obbl.'}</span>
-      <span class="ai-qc-spacer"></span>
-      <span class="ai-qc-conf" style="color:${confCol};background:${confCol}12;border-color:${confCol}33">
-        <i class="fa-solid fa-bullseye"></i> ${p.conf}%
-      </span>
-      ${stateChip}
-    </div>
-    <div class="ai-qc-q">${d.domanda}</div>
-
-    <div class="ai-qc-block">
-      <div class="ai-qc-lbl"><i class="fa-solid fa-paperclip"></i> Allegato associato dall'AI</div>
-      <div class="ai-att">
-        <div class="ai-att-ic" style="color:${ic.c};background:${ic.c}14"><i class="fa-solid ${ic.i}"></i></div>
-        <div class="ai-att-info">
-          <div class="ai-att-nm">${doc? doc.name : 'Nessun documento disponibile'}</div>
-          <div class="ai-att-sub">${doc? aiFmtSize(doc.size)+' · rif. '+p.ref : 'Carica un documento per l\'associazione'}</div>
-        </div>
-        ${aiHubDocs.length?`<select class="ai-att-sel" onchange="aiSetDoc(${i},this.value)" title="Cambia allegato">${docOpts}</select>`:''}
-      </div>
-    </div>
-
-    <div class="ai-qc-block">
-      <div class="ai-qc-lbl">
-        <i class="fa-solid fa-gauge-high"></i> Livello di risposta
-        ${p.edited
-          ? '<span class="ai-tag edit"><i class="fa-solid fa-user-pen"></i> modificato da te</span>'
-          : '<span class="ai-tag ai"><i class="fa-solid fa-robot"></i> impostato dall\'AI</span>'}
-      </div>
-      <div class="ai-lvl-row">${levels}</div>
-      <div class="ai-why"><i class="fa-solid fa-lightbulb"></i> <span>${p.why}</span></div>
-    </div>
-
-    <div class="ai-qc-block">
-      <div class="ai-qc-lbl"><i class="fa-solid fa-pen-nib"></i> Nota di risposta <span class="ai-lbl-hint">(modificabile — finirà nel campo Evidenza)</span></div>
-      <textarea class="ai-note" oninput="aiSetNote(${i},this.value)" rows="3">${p.note}</textarea>
-    </div>
-
-    <div class="ai-qc-foot">
-      <button class="ai-btn mini ghost" onclick="aiResetOne(${i})" title="Ripristina la proposta originale dell'AI"><i class="fa-solid fa-rotate-left"></i></button>
-      <span class="ai-qc-spacer"></span>
-      <button class="ai-btn mini danger" onclick="aiReject(${i})"><i class="fa-solid fa-xmark"></i> Scarta</button>
-      <button class="ai-btn mini ok" onclick="aiConfirm(${i})"><i class="fa-solid fa-check"></i> Conferma</button>
-    </div>
-  </div>`;
-}
-
-function aiRefreshCard(i){
-  const el = document.getElementById('aiq-'+i);
-  if(!el) return;
-  el.outerHTML = aiCardHTML(i);
-  aiUpdateResultsBar();
-}
-function aiSetLevel(i,l){
-  const p=aiProposals[i]; if(!p) return;
-  p.cmmi=l; p.edited = (l!==p.aiCmmi);
-  if(p.status==='rejected') p.status='pending';
-  aiRefreshCard(i);
-}
-function aiSetDoc(i,docId){
-  const p=aiProposals[i]; if(!p) return;
-  p.docId=docId; p.edited=true;
-  aiRefreshCard(i);
-}
-function aiSetNote(i,v){ if(aiProposals[i]) aiProposals[i].note=v; }
-function aiConfirm(i){ const p=aiProposals[i]; if(!p) return; p.status='confirmed'; aiRefreshCard(i); }
-function aiReject(i){  const p=aiProposals[i]; if(!p) return; p.status='rejected';  aiRefreshCard(i); }
-function aiResetOne(i){
-  const p=aiProposals[i]; if(!p) return;
-  const m=AI_GOV_MAP[p.qid];
-  if(m){ p.cmmi=m.l; p.note=m.n; p.why=m.w; }
-  p.edited=false; p.status='pending';
-  aiRefreshCard(i);
-}
-function aiConfirmAll(){
-  Object.values(aiProposals).forEach(p=>{ if(p.status!=='rejected') p.status='confirmed'; });
-  renderAIHub();
-}
-function aiResetAll(){ aiBuildProposals(); renderAIHub(); }
-
-function aiFootResults(){
-  return `
-    <div class="ai-foot-info" id="ai-foot-info"></div>
-    <button class="ai-btn primary" id="ai-apply-btn" onclick="aiApplyToQuestionnaire()">
-      <i class="fa-solid fa-file-import"></i> Applica al questionario
-    </button>`;
-}
-function aiUpdateResultsBar(){
-  const all = Object.values(aiProposals);
-  const conf = all.filter(p=>p.status==='confirmed').length;
-  const rej  = all.filter(p=>p.status==='rejected').length;
-  const info = document.getElementById('ai-foot-info');
-  const btn  = document.getElementById('ai-apply-btn');
-  if(info) info.innerHTML = `<strong>${conf}</strong> confermate · ${all.length-conf-rej} da confermare · ${rej} scartate`;
-  if(btn){
-    btn.disabled = conf===0;
-    btn.innerHTML = `<i class="fa-solid fa-file-import"></i> Applica al questionario${conf?` (${conf})`:''}`;
-  }
-}
-
-/*  ── APPLICAZIONE AL QUESTIONARIO ─────────────────────────────────────── */
-function aiApplyToQuestionnaire(){
-  let n=0;
-  Object.values(aiProposals).forEach(p=>{
-    if(p.status!=='confirmed') return;
-    const doc = aiHubDocs.find(x=>x.id===p.docId);
-    if(!ownerAnswers[p.idx]) ownerAnswers[p.idx]={};
-    ownerAnswers[p.idx].cmmi   = p.cmmi;
-    ownerAnswers[p.idx].answer = p.note;
-    ownerAnswers[p.idx].aiAssisted = true;
-    ownerAnswers[p.idx].aiEdited   = p.edited;
-    if(doc) uploadedFiles[p.idx] = { name:doc.name, size:doc.size, aiDoc:true };
-    p.applied = true;
-    n++;
-  });
-
-  // riallinea il pannello di risposta attualmente aperto senza sovrascriverlo
-  const cur = ownerAnswers[ownerCurQ];
-  const ta  = document.getElementById('owner-a-ev');
-  if(ta && cur){
-    ta.value = cur.answer || '';
-    document.querySelectorAll('.cmmi-r').forEach(b=>b.classList.toggle('on', b.getAttribute('data-v')===(cur.cmmi||'')));
-  }
-  ownerResetPdfZ();
-  if(uploadedFiles[ownerCurQ]) ownerShowPdfFile(uploadedFiles[ownerCurQ].name, uploadedFiles[ownerCurQ].size);
-
-  renderOwnerList(); updateOwnerProg(); updateOwnerAIChip(); aiUpdateOwnerBar();
-  closeAIHub();
-
-  const banner = document.getElementById('area-notif-banner');
-  document.getElementById('anb-title').textContent = `🤖  ${n} risposte compilate dall'AI`;
-  document.getElementById('anb-sub').textContent   = `Area GOVERN — puoi ancora modificare livello, nota e allegato di ogni domanda`;
-  banner.classList.add('show');
-  clearTimeout(window._bannerTimer);
-  window._bannerTimer = setTimeout(()=>banner.classList.remove('show'), 5200);
-}
-
 /*  ── CHIP "COMPILATA CON AI" NEL PANNELLO RISPOSTA ────────────────────── */
 function updateOwnerAIChip(){
   const chip = document.getElementById('owner-ai-chip');
@@ -5965,4 +5779,3 @@ function updateOwnerAIChip(){
 </script>
 </body>
 </html>
-```

@@ -139,17 +139,33 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   background:var(--accent);color:#fff;border-color:var(--accent);
 }
 .add-email-box{
-  margin-top:14px;padding:14px 16px;
-  background:linear-gradient(135deg,rgba(0,198,255,.04),rgba(26,42,108,.03));
-  border:1.5px dashed rgba(0,198,255,.28);
-  border-radius:12px;
+  margin-top:16px;
 }
 .add-email-box-header{
-  display:flex;align-items:center;gap:7px;
-  font-size:10px;font-weight:800;text-transform:uppercase;
-  letter-spacing:.9px;color:var(--accent);margin-bottom:10px;
+  display:flex;align-items:center;gap:6px;
+  font-size:10px;font-weight:700;text-transform:uppercase;
+  letter-spacing:1px;color:var(--muted);margin-bottom:6px;
 }
-.add-email-box-header i{font-size:11px;}
+.add-email-box-header i{font-size:10px;color:var(--muted)}
+/* campo email: rettangolo grigio chiaro arrotondato, come i menu a tendina */
+.add-email-box .ca-input-btn input{
+  background:#f4f6fb;
+  border:1.5px solid transparent;
+  border-radius:10px;
+}
+.add-email-box .ca-input-btn input:focus{
+  background:#fff;
+  border-color:var(--accent);
+}
+.add-email-box .ca-input-btn button{
+  background:#f4f6fb;
+  border:1.5px solid transparent;
+  border-radius:10px;
+  color:var(--muted);
+}
+.add-email-box .ca-input-btn button:hover{
+  background:var(--accent);color:#fff;border-color:var(--accent);
+}
 /* TAGS */
 .ca-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
 .ca-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(26,42,108,.07);color:var(--text);font-size:12px;font-weight:600;padding:4px 10px;border-radius:20px}
@@ -190,6 +206,19 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .ca-ai-flag.on i{color:var(--accent);filter:drop-shadow(0 0 6px rgba(0,198,255,.7))}
 .ai-flag-desc{font-size:11px;color:var(--muted);line-height:1.5}
 .ai-flag-desc strong{color:var(--text)}
+/* AI MODE — due modalità mutuamente esclusive (Auditor) */
+.ai-flag-wrap{flex-direction:column;align-items:stretch}
+.ai-mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ai-mode-card{display:flex;flex-direction:column;gap:9px;padding:14px;border-radius:11px;
+  background:#fff;border:1.5px solid var(--border);cursor:pointer;transition:all .22s}
+.ai-mode-card:hover{border-color:rgba(0,198,255,.45);box-shadow:0 3px 14px rgba(0,198,255,.12)}
+.ai-mode-card.on{border-color:var(--accent);background:rgba(0,198,255,.05);box-shadow:0 0 18px rgba(0,198,255,.18)}
+.ai-mode-card .ca-ai-flag{justify-content:center;pointer-events:none}
+.ai-mode-hint{display:flex;align-items:flex-start;gap:8px;margin-top:12px;font-size:10.5px;
+  color:var(--muted);line-height:1.55}
+.ai-mode-hint i{color:var(--accent);font-size:11px;margin-top:2px;flex-shrink:0}
+.ai-mode-hint strong{color:var(--text)}
+@media(max-width:640px){.ai-mode-grid{grid-template-columns:1fr}}
 
 /* TABLE */
 .ca-table{width:100%;border-collapse:collapse;font-size:13px}
@@ -248,6 +277,9 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .tour-card{position:fixed;z-index:10003;width:320px;max-width:calc(100vw - 32px);border-radius:14px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.07);font-family:'Plus Jakarta Sans',sans-serif;display:none;animation:tour-card-in .3s cubic-bezier(.34,1.56,.64,1)}
 .tour-card.visible{display:block}
 @keyframes tour-card-in{from{opacity:0;transform:scale(.94) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+/* step centrale (es. "Demo interattiva"): sempre al centro esatto della pagina */
+.tour-card.centered{top:50%;left:50%;transform:translate(-50%,-50%);animation:tour-card-in-c .3s cubic-bezier(.34,1.56,.64,1)}
+@keyframes tour-card-in-c{from{opacity:0;transform:translate(-50%,-50%) scale(.94)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
 .tour-card.var-dark{background:linear-gradient(145deg,#0a1628 0%,#0d1f4e 100%);border:1px solid rgba(0,198,255,.25)}
 .tour-card.var-dark .tc-header{padding:16px 18px 0;display:flex;align-items:center;gap:10px}
 .tour-card.var-dark .tc-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:99px;font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;background:rgba(0,198,255,.12);color:#00c6ff;border:1px solid rgba(0,198,255,.25)}
@@ -448,13 +480,10 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
             </div>
             <div class="ca-field">
               <label>Monitoraggio</label>
-                <select id="f-monit" disabled>
-                  <option value="no" selected>Senza Monitoraggio</option>
-                </select>
-
-                <input type="hidden" name="monitoraggio" value="no">
-                <option value="no">Senza Monitoraggio</option>
+              <select id="f-monit" disabled>
+                <option value="no" selected>Senza Monitoraggio</option>
               </select>
+              <input type="hidden" name="monitoraggio" value="no">
             </div>
           </div>
           <div class="ca-checkbox-row">
@@ -545,16 +574,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
               <div class="email-pool-header"><i class="fa-solid fa-users"></i> Email disponibili</div>
               <div class="email-pool-list" id="pool-list-own"></div>
             </div>
-            <div class="ai-flag-wrap" id="ai-flag-wrap-own">
-              <div class="ca-ai-flag" id="ai-own" onclick="toggleAI('own')">
-                <i class="fa-solid fa-robot"></i> AI Assistenza
-              </div>
-              <div class="ai-flag-desc">
-                <strong>Abilita AI per l'Owner</strong><br>
-                L'AI analizzer&agrave; gli allegati dell'Owner associandoli automaticamente
-                alla domanda di pertinenza e impostando il livello di risposta.
-              </div>
-            </div>
           </div>
 
           <!-- PANE AUDITOR -->
@@ -588,12 +607,35 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
               <div class="email-pool-list" id="pool-list-aud"></div>
             </div>
             <div class="ai-flag-wrap" id="ai-flag-wrap-aud">
-              <div class="ca-ai-flag" id="ai-aud" onclick="toggleAI('aud')">
-                <i class="fa-solid fa-robot"></i> AI Assistenza
+              <div class="ai-mode-grid">
+
+                <!-- SINISTRA — AI ASSISTENZA -->
+                <div class="ai-mode-card" id="ai-card-assist" onclick="selectAI('assist')">
+                  <div class="ca-ai-flag" id="ai-assist">
+                    <i class="fa-solid fa-robot"></i> AI-Assistenza
+                  </div>
+                  <div class="ai-flag-desc">
+                    L'AI analizzer&agrave; gli allegati dell'Owner associandoli automaticamente
+                    alla domanda di pertinenza e impostando il livello di risposta.
+                  </div>
+                </div>
+
+                <!-- DESTRA — AI TOTALE -->
+                <div class="ai-mode-card" id="ai-card-total" onclick="selectAI('total')">
+                  <div class="ca-ai-flag" id="ai-total">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> AI-Totale
+                  </div>
+                  <div class="ai-flag-desc">
+                    L'AI analizzer&agrave; automaticamente le risposte dell'Owner
+                    durante la fase di assessment.
+                  </div>
+                </div>
+
               </div>
-              <div class="ai-flag-desc">
-                <strong>Abilita AI per l'Auditor</strong><br>
-                L'AI analizzerà automaticamente le risposte dell'Owner durante la fase di audit.
+              <div class="ai-mode-hint" id="ai-mode-hint">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>&Egrave; selezionabile <strong>una sola</strong> modalit&agrave; AI. Se non ne selezioni nessuna,
+                  l'intero applicativo (Owner e Auditor) verr&agrave; compilato <strong>manualmente</strong>.</span>
               </div>
             </div>
           </div>
@@ -672,7 +714,11 @@ const msSelected = {
   'fp-aud': 'silvia.verdi@3ainformatica.it',  'del-aud': ''
 };
 
-const aiEnabled = { own: false, aud: false };
+/*  Modalità AI dell'assessment — una sola alla volta:
+    'none'   → compilazione manuale di tutto l'applicativo (Owner + Auditor)
+    'assist' → AI a supporto del solo Auditor, l'Owner compila a mano
+    'total'  → l'AI compila le risposte dell'Owner in fase di assessment      */
+let aiMode = 'none';
 let curRole = 'rev';
 
 //  ROLE OF 
@@ -806,24 +852,34 @@ function checkFormValid() {
   btn.disabled = !valid;
 }
 
-//  AI FLAG 
-function toggleAI(tipo) {
-  aiEnabled[tipo] = !aiEnabled[tipo];
-  const el = document.getElementById('ai-' + tipo);
-  el.classList.toggle('on', aiEnabled[tipo]);
-  const wrap = el.closest('.ai-flag-wrap');
+//  AI MODE  — selezione esclusiva (click sulla card già attiva = disattiva)
+function selectAI(mode) {
+  aiMode = (aiMode === mode) ? 'none' : mode;
+
+  const cards = { assist: 'ai-card-assist', total: 'ai-card-total' };
+  const flags = { assist: 'ai-assist',      total: 'ai-total'      };
+  Object.keys(cards).forEach(k => {
+    const on = (aiMode === k);
+    document.getElementById(cards[k]).classList.toggle('on', on);
+    document.getElementById(flags[k]).classList.toggle('on', on);
+  });
+
+  const wrap = document.getElementById('ai-flag-wrap-aud');
   if (wrap) {
-    wrap.style.borderColor = aiEnabled[tipo] ? 'rgba(0,198,255,.5)'  : 'rgba(0,198,255,.15)';
-    wrap.style.background  = aiEnabled[tipo] ? 'rgba(0,198,255,.08)' : 'rgba(0,198,255,.04)';
+    const on = aiMode !== 'none';
+    wrap.style.borderColor = on ? 'rgba(0,198,255,.5)'  : 'rgba(0,198,255,.15)';
+    wrap.style.background  = on ? 'rgba(0,198,255,.08)' : 'rgba(0,198,255,.04)';
   }
   persistAIFlags();
 }
 
-// Rende disponibili i flag AI alla demo (demo-mockup.html)
+// Rende disponibile la modalità AI alla demo (demo-mockup.html)
 function persistAIFlags() {
   try {
-    sessionStorage.setItem('3af_ai_own', aiEnabled.own ? '1' : '0');
-    sessionStorage.setItem('3af_ai_aud', aiEnabled.aud ? '1' : '0');
+    sessionStorage.setItem('3af_ai_mode', aiMode);
+    // compatibilità con la vecchia demo
+    sessionStorage.setItem('3af_ai_own', aiMode === 'total'  ? '1' : '0');
+    sessionStorage.setItem('3af_ai_aud', aiMode !== 'none'   ? '1' : '0');
   } catch (e) { /* file:// senza storage: si usano i parametri in querystring */ }
 }
 
@@ -836,9 +892,9 @@ function procediRitorno() { window.location.href = 'demo-mockup.html'; }
 function completaFase() {
   if (countCompiled() < 8) return;
   persistAIFlags();
-  const q = ['fromAdmin=1'];
-  if (aiEnabled.own) q.push('aiOwn=1');
-  if (aiEnabled.aud) q.push('aiAud=1');
+  const q = ['fromAdmin=1', 'aiMode=' + aiMode];
+  if (aiMode === 'total')  q.push('aiOwn=1');
+  if (aiMode !== 'none')   q.push('aiAud=1');
   window.location.href = 'demo-mockup.html?' + q.join('&');
 }
 
@@ -895,26 +951,15 @@ const TOUR_STEPS = [
       ${footerLight(step, total)}`
   },
   {
-    target: '#ai-flag-wrap-own', variant: 'light', position: 'top', arrow: false,
-    render: (step, total) => `
-      <div class="tc-accent-bar"></div>
-      <div class="tc-icon-row"><div class="tc-icon-wrap" style="background:rgba(0,198,255,.1)"><i class="fa-solid fa-robot" style="color:#00c6ff"></i></div><span class="tc-step-label">AI — Owner</span></div>
-      <div class="tc-title">Flag AI per l'Owner</div>
-      <div class="tc-body">Attivando <strong>AI Assistenza</strong> sull'Owner, in fase di compilazione comparirà
-        l'<strong>Hub Documentale AI</strong>: l'Owner carica i documenti per area NIS2 e l'AI li associa
-        alla domanda di pertinenza, propone il <strong>livello di risposta</strong> e scrive una nota motivata.</div>
-      <div class="tc-tip"><i class="fa-solid fa-user-check"></i> L'ultima parola resta sempre all'Owner: ogni proposta è modificabile.</div>
-      ${footerLight(step, total)}`
-  },
-  {
     target: '#ai-flag-wrap-aud', variant: 'light', position: 'top', arrow: false,
     render: (step, total) => `
       <div class="tc-accent-bar"></div>
-      <div class="tc-icon-row"><div class="tc-icon-wrap" style="background:rgba(0,198,255,.1)"><i class="fa-solid fa-robot" style="color:#00c6ff"></i></div><span class="tc-step-label">AI — Auditor</span></div>
-      <div class="tc-title">Flag AI per l'Auditor</div>
-      <div class="tc-body">Il flag <strong>AI Assistenza</strong> è disponibile anche per l'<strong>Auditor</strong>:
-        in fase di validazione l'AI analizza le risposte dell'Owner e propone l'esito di conformità.</div>
-      <div class="tc-tip"><i class="fa-solid fa-lightbulb"></i> Clicca per attivarlo — si illumina quando abilitato.</div>
+      <div class="tc-icon-row"><div class="tc-icon-wrap" style="background:rgba(0,198,255,.1)"><i class="fa-solid fa-robot" style="color:#00c6ff"></i></div><span class="tc-step-label">Modalità AI</span></div>
+      <div class="tc-title">AI-Assistenza o AI-Totale</div>
+      <div class="tc-body"><strong>AI-Assistenza</strong>: l'AI analizza gli allegati dell'Owner, li associa alla
+        domanda di pertinenza e imposta il livello di risposta.<br><br>
+        <strong>AI-Totale</strong>: l'AI analizza automaticamente le risposte dell'Owner durante la fase di assessment.</div>
+      <div class="tc-tip"><i class="fa-solid fa-lightbulb"></i> Se ne sceglie <strong>una sola</strong>. Nessuna selezione = compilazione manuale di tutto l'applicativo.</div>
       ${footerLight(step, total)}`
   },
   {
@@ -984,14 +1029,23 @@ function tourPositionCard(card, targetRect, position) {
 function tourRenderStep() {
   const s = TOUR_STEPS[guideStep];
   const card = document.getElementById('tour-card');
-  card.className = `tour-card var-${s.variant}`;
+  const isCenter = !s.target || s.position === 'center';
+  card.className = `tour-card var-${s.variant}${isCenter ? ' centered' : ''}`;
   card.innerHTML = s.render(guideStep, TOUR_STEPS.length);
   card.classList.add('visible');
-  if (s.target === '#ai-flag-wrap-own') switchRole('own');
   if (s.target === '#ai-flag-wrap-aud') switchRole('aud');
+
+  // step centrale: nessun target da illuminare, la card è già al centro via CSS
+  if (isCenter) {
+    card.style.top = ''; card.style.left = ''; card.style.width = '';
+    tourSpotlight(null);
+    document.getElementById('tour-arrow').classList.remove('active');
+    return;
+  }
+
   if (s.target) {
     const el = document.querySelector(s.target);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (el && el.scrollIntoView) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
   setTimeout(() => {
     const tRect = tourSpotlight(s.target, 10);
